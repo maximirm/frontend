@@ -1,7 +1,7 @@
 
 <template>
   <div class="landing-page">
-    <h1>Willkommen auf unserer Landingpage!</h1>
+    <h1>Beispielanwendung Bachelorarbeit Maxim Irmscher</h1>
 
     <button @click="redirectToLogin" class="btn">Login</button>
     <button @click="redirectToRegister" class="btn">Register</button>
