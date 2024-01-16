@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LandingPage from '@/components/LandingPage.vue'
-import RegistrationPage from '@/components/RegistrationPage.vue';
-import AdminPage from "@/components/AdminPage.vue";
-import EditorPage from "@/components/EditorPage.vue";
-import LoginPage from "@/components/LoginPage.vue";
-import RespondentPage from "@/components/RespondentPage.vue";
+import LandingPage from '@/pages/LandingPage.vue'
+import RegistrationPage from '@/pages/RegistrationPage.vue';
+import AdminPage from "@/pages/AdminPage.vue";
+import EditorPage from "@/pages/EditorPage.vue";
+import LoginPage from "@/pages/LoginPage.vue";
+import RespondentPage from "@/pages/RespondentPage.vue";
+import CreateSurveyPage from "@/pages/CreateSurveyPage.vue";
+import AnalyseSurveyPage from "@/pages/AnalyseSurveyPage.vue";
+import CreateQuestionPage from "@/pages/CreateQuestionPage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -38,6 +41,21 @@ const router = createRouter({
             path: '/login',
             name: 'LoginPage',
             component: LoginPage,
+        },
+        {
+            path: '/createSurvey',
+            name: 'CreateSurveyPage',
+            component: CreateSurveyPage,
+        },
+        {
+            path: '/analyseSurvey',
+            name: 'AnalyseSurveyPage',
+            component: AnalyseSurveyPage,
+        },
+        {
+            path: '/createQuestion',
+            name: 'CreateQuestionPage',
+            component: CreateQuestionPage,
         },
     ]
 })

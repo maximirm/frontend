@@ -125,7 +125,7 @@ export default {
 
 .user-list-box {
   max-height: 600px;
-  overflow-y: auto; /* Scrollen nur, wenn die Liste zu groß ist */
+  overflow-y: auto;
   margin-top: 20px;
 }
 

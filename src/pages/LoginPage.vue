@@ -44,14 +44,15 @@ export default {
         });
 
         if (response.status === 200) {
-          // Speichere den Token im Local Storage
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem("user-id", response.data.id);
+          console.log(response.data.id)
 
           this.loginSuccess = true;
 
           setTimeout(() => {
             this.redirectBasedOnRole(response.data.role);
-          }, 2000);
+          }, 1000);
         }
       } catch (error) {
         if (error.response && error.response.data && error.response.data.detail) {
