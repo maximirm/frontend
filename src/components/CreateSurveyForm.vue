@@ -2,8 +2,8 @@
   <div class="create-survey-page">
     <h2>Survey Erstellen</h2>
 
-    <InputLabel label="Titel:" :model="title" input-id="title" />
-    <InputLabel label="Beschreibung:" :model="description" input-id="description" />
+    <InputLabel label="Titel:" :model="title" input-id="title" @update:model="updateTitle"/>
+    <InputLabel label="Beschreibung:" :model="description" input-id="description" @update:model="updateDescription"/>
 
     <BaseButton :clickHandler="emitCreateSurveyEvent" :button-text="'Survey erstellen'" />
 
@@ -27,6 +27,12 @@ export default {
     };
   },
   methods: {
+    updateTitle(newVal) {
+      this.title = newVal
+    },
+    updateDescription(newVal) {
+      this.description = newVal
+    },
     goToEditorPage() {
       this.$router.push({ name: 'EditorPage' });
     },

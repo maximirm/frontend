@@ -17,8 +17,8 @@ export default {
   computed: {
     buttons() {
       return [
-        {text: 'Survey Erstellen', clickHandler: this.goToCreateSurveyPage},
-        {text: 'Survey Analyse', clickHandler: this.goToAnalyseSurveyPage},
+        {text: 'Umfrage Erstellen', clickHandler: this.goToCreateSurveyPage},
+        {text: 'Meine Umfragen', clickHandler: this.goToAnalyseSurveyPage},
         {text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage},
       ];
     },

@@ -1,22 +1,14 @@
 <template>
-  <div :class="{ 'selected-user': isSelected }" @click="selectUser">
-    <div class="user-item">
-      <div class="user-info">
+  <div :class="{ 'selected-survey': isSelected }" @click="selectSurvey">
+    <div class="survey-item">
+      <div class="survey-info">
         <div class="key-value-pair">
-          <p>Name:</p>
-          <p>{{ user.name }}</p>
+          <p>Title:</p>
+          <p>{{ survey.title }}</p>
         </div>
         <div class="key-value-pair">
-          <p>Rolle:</p>
-          <p>{{ user.role }}</p>
-        </div>
-        <div class="key-value-pair">
-          <p>Anzahl der Umfragen:</p>
-          <p>{{ user.numberOfSurveys }}</p>
-        </div>
-        <div class="key-value-pair">
-          <p>ID:</p>
-          <p>{{ user.id }}</p>
+          <p>Beschreibung:</p>
+          <p>{{ survey.description }}</p>
         </div>
       </div>
     </div>
@@ -24,12 +16,10 @@
 </template>
 
 
-
-
 <script>
 export default {
   props: {
-    user: {
+    survey: {
       type: Object,
       required: true,
     },
@@ -40,28 +30,28 @@ export default {
     },
   },
   methods: {
-    selectUser() {
-      this.$emit('userSelected', this.user);
+    selectSurvey() {
+      this.$emit('surveySelected', this.survey);
     },
   },
 };
 </script>
 <style scoped>
 .key-value-pair p {
-  margin: 1px 0; /* Verringern Sie den vertikalen Abstand zwischen den Zeilen */
-  padding: 2px; /* Optional können Sie auch das Padding anpassen */
+  margin: 1px 0;
+  padding: 2px;
   color: #ccc;
   text-overflow: ellipsis;
 }
 
-.user-item {
+.survey-item {
   border: 2px solid #666;
   padding: 10px;
   cursor: pointer;
   transition: border-color 0.3s;
 }
 
-.user-info {
+.survey-info {
   display: flex;
   justify-content: flex-start;
 }
@@ -75,7 +65,7 @@ export default {
 }
 
 
-.selected-user {
+.selected-survey {
   background-color: #2e2e2e;
   color: #4CAF50;
   border-left: 4px solid #4CAF50;
