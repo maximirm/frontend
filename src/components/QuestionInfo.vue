@@ -14,7 +14,7 @@
           <p v-else-if="question.type === 3">Checkbox</p>
         </div>
         <div class="key-value-pair" v-if="question.options.length > 0">
-
+          <p>Options:</p>
           <ul>
             <li v-for="(option, index) in question.options" :key="index">{{ option }}</li>
           </ul>

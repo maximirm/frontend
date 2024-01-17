@@ -109,6 +109,8 @@ export default {
 
       this.$emit("create-question", questionData);
       this.creationSuccess = `Frage erfolgreich erstellt`;
+      setTimeout(() => this.creationSuccess = '', 3000); // Meldung nach 3 Sekunden ausblenden
+
     },
     updateQuestionType(selectedOption) {
       this.selectedQuestionType = selectedOption;
