@@ -18,7 +18,7 @@
     <BaseButton
         :buttonText="'Delete Selected User'"
         :clickHandler="deleteSelectedUser"
-        :isDisabled="!selectedUser"
+        :isDisabled="!selectedUser || selfSelected"
         class="delete-btn"
     />
   </div>
@@ -36,7 +36,8 @@ export default {
     return {
       users: [],
       selectedUser: null,
-      message: ''
+      message: '',
+      selfSelected: false,
     };
   },
   computed: {
@@ -73,7 +74,15 @@ export default {
     },
 
     selectUser(user) {
+      this.checkIfSelfSelected(user.id)
       this.selectedUser = user;
+    },
+    checkIfSelfSelected(id){
+      this.selfSelected = false
+      const selfId = localStorage.getItem("user-id")
+      if(selfId === id) {
+        this.selfSelected = true
+      }
     },
 
     async deleteSelectedUser() {
