@@ -2,22 +2,12 @@
   <div class="login-page">
     <h2>Registrierung</h2>
 
-    <label for="username">Benutzername:</label>
-    <input v-model="username" type="text" id="username" />
+    <InputLabel label="Benutzername:" :model="username" inputId="username" :inputType="'text'" @update:model="updateName" />
+    <InputLabel label="Passwort:" :model="password" inputId="password" :inputType="'password'" @update:model="updatePassword" />
+    <RadioButtonGroup :group-title="radioGroupTitle" :options="radioButtonOptions" :selectedOption="role" @update:selectedOption="handleRoleChange" />
 
-    <label for="password">Passwort:</label>
-    <input v-model="password" type="password" id="password" />
 
-    <div class="radio-group">
-      <label for="admin">Admin</label>
-      <input type="radio" id="admin" v-model="role" value="admin" />
 
-      <label for="editor">Editor</label>
-      <input type="radio" id="editor" v-model="role" value="editor" />
-
-      <label for="respondent">Respondent</label>
-      <input type="radio" id="respondent" v-model="role" value="respondent" />
-    </div>
     <ButtonGroup :buttons="buttons" />
 
 
@@ -34,19 +24,31 @@
 <script>
 import axios from 'axios';
 import ButtonGroup from "@/components/ButtonGroup.vue";
+import InputLabel from "@/components/InputLabel.vue";
+import RadioButtonGroup from "@/components/RadioButtonGroup.vue";
 
 export default {
-  components: {ButtonGroup},
+  components: {RadioButtonGroup, InputLabel, ButtonGroup},
   data() {
     return {
       username: '',
       password: '',
-      role: 'respondent',
+      role: 'admin',
       registrationSuccess: false,
       registrationError: null,
     };
   },
   computed: {
+    radioGroupTitle() {
+      return 'Benutzerrolle auswählen:'
+    },
+    radioButtonOptions() {
+      return [
+        { label: 'Admin', value: 'admin', id: 'admin' },
+        { label: 'Editor', value: 'editor', id: 'editor' },
+        { label: 'Respondent', value: 'respondent', id: 'respondent' },
+      ];
+    },
     buttons() {
       return [
         {text: 'Registrieren', clickHandler: this.register},
@@ -55,6 +57,15 @@ export default {
     },
   },
   methods: {
+    handleRoleChange(newRole) {
+      this.role = newRole;
+    },
+    updateName(newVal){
+      this.name = newVal
+    },
+    updatePassword(newVal) {
+      this.password = newVal
+    },
     async register() {
       this.registrationError = null;
       try {
@@ -113,12 +124,6 @@ label {
 input {
   margin: 5px 0;
   padding: 8px;
-}
-
-.radio-group {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 input[type="radio"] {

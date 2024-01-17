@@ -102,7 +102,6 @@ export default {
 </script>
 
 <style scoped>
-/* Hier ist das minimalistische Styling für die Login-Seite */
 .error-message {
   color: red;
   margin-top: 10px;
