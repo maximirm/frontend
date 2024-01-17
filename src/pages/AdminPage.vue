@@ -94,7 +94,6 @@ export default {
           setTimeout(() => this.message = '', 3000); // Meldung nach 3 Sekunden ausblenden
         }
       } catch (error) {
-        console.error(`Fehler beim Löschen des Benutzers mit ID ${this.selectedUser.id}:`, error);
         this.message = "Fehler beim Löschen des Benutzers"; // Meldung im Fehlerfall
       }
     },
