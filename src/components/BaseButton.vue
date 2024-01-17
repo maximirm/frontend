@@ -1,5 +1,5 @@
 <template>
-  <button @click="handleClick" class="button">{{ buttonText }}</button>
+  <button @click="handleClick" class="button" :disabled="isDisabled">{{ buttonText }}</button>
 </template>
 
 <script>
@@ -13,10 +13,16 @@ export default {
       type: Function,
       required: true,
     },
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     handleClick() {
-      this.clickHandler();
+      if (!this.isDisabled) {
+        this.clickHandler();
+      }
     },
   },
 };
@@ -36,9 +42,15 @@ export default {
   align-items: center;
   justify-content: center;
   width: 200px;
+  transition: background-color 0.3s;
 }
 
 .button:hover {
   background-color: #444;
+}
+
+.button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
 }
 </style>

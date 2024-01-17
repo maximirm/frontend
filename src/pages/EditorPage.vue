@@ -2,16 +2,29 @@
   <div class="editor-page">
     <h2>Editor</h2>
 
-    <button @click="goToHomePage" class="btn">Zurück zur Startseite</button>
-    <button @click="goToCreateSurveyPage" class="btn">Create Survey</button>
-    <button @click="goToAnalyseSurveyPage" class="btn">Analyse Survey</button>
+
+    <ButtonGroup :buttons="buttons" />
+
+
   </div>
 </template>
 
 <script>
+import ButtonGroup from "@/components/ButtonGroup.vue";
+
 export default {
+  components: {ButtonGroup},
+  computed: {
+    buttons() {
+      return [
+        {text: 'Survey Erstellen', clickHandler: this.goToCreateSurveyPage},
+        {text: 'Survey Analyse', clickHandler: this.goToAnalyseSurveyPage},
+        {text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage},
+      ];
+    },
+  },
   methods: {
-    goToHomePage() {
+    redirectToHomePage() {
       this.$router.push({ name: 'LandingPage' });
     },
 
@@ -37,14 +50,4 @@ export default {
   color: #fff;
 }
 
-.btn {
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #555;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
 </style>

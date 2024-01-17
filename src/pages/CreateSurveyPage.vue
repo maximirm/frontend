@@ -1,46 +1,55 @@
 <template>
   <div class="create-survey-page">
-    <h2>Create Survey</h2>
-
-    <div>
-      <label for="title">Titel:</label>
-      <input v-model="title" type="text" id="title" />
-
-      <label for="description">Beschreibung:</label>
-      <textarea v-model="description" id="description"></textarea>
-
-      <button @click="createSurvey" class="btn">Survey erstellen</button>
+    <!-- Anzeigen des CreateSurveyForm, wenn surveyFormVisible true ist -->
+    <div v-if="surveyFormVisible">
+      <CreateSurveyForm
+          :title="title"
+          :description="description"
+          @create-survey="createSurvey"
+      />
     </div>
 
-
+    <!-- Anzeigen des CreateQuestionForm, wenn surveyFormVisible false ist -->
+    <div v-else>
+      <CreateQuestionForm
+          @create-question="createQuestion"
+      />
+    </div>
 
     <button @click="goToEditorPage" class="btn go-back-btn">Zurück zur Editorseite</button>
   </div>
 </template>
 
 <script>
+import CreateSurveyForm from "@/components/CreateSurveyForm.vue";
+import CreateQuestionForm from "@/components/CreateQuestionForm.vue";
 import axios from 'axios';
 
 export default {
+  components: {
+    CreateSurveyForm,
+    CreateQuestionForm,
+  },
   data() {
     return {
       title: '',
       description: '',
+      surveyFormVisible: true, // Diese Variable steuert die Anzeige der Formulare
     };
   },
   methods: {
     goToEditorPage() {
-      this.$router.push({name: 'EditorPage'});
+      this.$router.push({ name: 'EditorPage' });
     },
 
-    async createSurvey() {
+    async createSurvey(data) {
       try {
         const token = localStorage.getItem('token');
         const creator_id = localStorage.getItem('user-id');
 
         const response = await axios.post('http://127.0.0.1:8002/surveys/', {
-          title: this.title,
-          description: this.description,
+          title: data.title,
+          description: data.description,
           creator_id: creator_id,
         }, {
           headers: {
@@ -49,12 +58,20 @@ export default {
         });
 
         if (response.status === 200) {
-          localStorage.setItem('survey-created-id', response.data.id)
-          this.$router.push({ name: 'CreateQuestionPage' });
+          localStorage.setItem('survey-created-id', response.data.id);
+
+          // Survey-Form ausblenden und Question-Form einblenden
+          this.surveyFormVisible = false;
         }
       } catch (error) {
         console.error('Fehler beim Erstellen der Umfrage:', error);
       }
+    },
+
+    // Diese Methode verarbeitet die erstellte Frage
+    createQuestion(questionData) {
+      // Fügen Sie hier die Logik zur Verarbeitung der Frage ein
+      console.log('Frage erstellt:', questionData);
     },
   }
 };
@@ -71,40 +88,7 @@ export default {
   color: #fff;
 }
 
-label {
-  margin: 10px 0;
-}
-
-input,
-textarea {
-  margin-bottom: 10px;
-  padding: 8px;
-  width: 100%;
-}
-
-.survey-info p {
-  margin-bottom: 10px;
-}
-
-
-
-input[type="radio"] {
-  margin-right: 5px;
-}
-
 .btn {
-  margin-top: 15px;
-  margin-left: 2px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #555;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.go-back-btn {
   margin-top: 20px;
 }
 </style>

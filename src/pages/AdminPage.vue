@@ -15,9 +15,12 @@
       />
     </div>
 
-    <button @click="deleteSelectedUser" :disabled="!selectedUser" class="btn delete-btn">
-      Delete Selected User
-    </button>
+    <BaseButton
+        :buttonText="'Delete Selected User'"
+        :clickHandler="deleteSelectedUser"
+        :isDisabled="!selectedUser"
+        class="delete-btn"
+    />
   </div>
 </template>
 
@@ -25,9 +28,10 @@
 import axios from 'axios';
 import ButtonGroup from "@/components/ButtonGroup.vue";
 import UserInfo from "@/components/UserInfo.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 export default {
-  components: { ButtonGroup, UserInfo },
+  components: {BaseButton, ButtonGroup, UserInfo },
   data() {
     return {
       users: [],
@@ -141,21 +145,7 @@ export default {
   border: 1px solid #444; /* Subtile Grenze */
 }
 
-.btn {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #444; /* Dunkler Button-Hintergrund */
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s; /* Sanfter Übergang für Button */
-}
 
-.btn:hover {
-  background-color: #555; /* Hover-Effekt */
-}
 
 .delete-btn {
   background-color: #d32f2f; /* Lebendige rote Farbe für Löschen-Button */
