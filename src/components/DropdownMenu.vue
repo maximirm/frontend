@@ -48,7 +48,6 @@ select {
   width: 100%;
   padding: 5px;
   font-size: 14px;
-  border: 1px solid #ccc;
   border-radius: 4px;
 }
 </style>

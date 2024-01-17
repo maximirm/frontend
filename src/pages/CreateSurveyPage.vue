@@ -202,8 +202,23 @@ export default {
 
 .question-list-box {
   max-height: 600px;
+  width: 600px;
   overflow-y: auto;
-  border: 1px solid #444;
+  margin-top: 20px;
+  scrollbar-width: thin; /* Breite der Scrollleiste festlegen */
+  scrollbar-color: #555 #444; /* Farbe der Scrollleiste festlegen */
+}
+
+.question-list-box::-webkit-scrollbar {
+  width: 8px; /* Breite der Webkit-Scrollleiste festlegen */
+}
+
+.question-list-box::-webkit-scrollbar-thumb {
+  background-color: #555; /* Farbe des Scrollbalken-Daumens festlegen */
+}
+
+.question-list-box::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Farbe des Scrollbalken-Daumens bei Hover festlegen */
 }
 
 .delete-btn {

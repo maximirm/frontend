@@ -4,14 +4,25 @@
     <!-- Button, um zu "Meine Umfragen" zurückzukehren -->
     <ButtonGroup :buttons="buttons"/>
     <div v-if="message" class="success-message">{{ message }}</div>
-    <div class="survey-list-box">
-      <SurveyInfo
-          v-for="(survey, index) in surveys"
-          :key="index"
-          :survey="survey"
-          :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
-          @surveySelected="selectSurvey"
-      />
+    <div class="list-container">
+      <div class="survey-list-box">
+        <SurveyInfo
+            v-for="(survey, index) in surveys"
+            :key="index"
+            :survey="survey"
+            :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
+            @surveySelected="selectSurvey"
+        />
+      </div>
+      <div class="question-list-box">
+        <QuestionInfo
+            v-for="(question, index) in questions"
+            :key="index"
+            :question="question"
+            :isSelected="selectedQuestion && selectedQuestion.id === question.id"
+            @questionSelected="selectQuestion"
+        />
+      </div>
     </div>
     <div v-if="selectedSurvey" class="button-container">
       <BaseButton
@@ -21,9 +32,9 @@
           class="delete-btn"
       />
       <BaseButton
-          :buttonText="'Fragen anzeigen'"
-          :clickHandler="showSurveyQuestions"
-          :isDisabled="!selectedSurvey"
+          :buttonText="'Frage analysieren'"
+          :clickHandler="analyseQuestion"
+          :isDisabled="!selectedQuestion"
           class="show-questions-btn"
       />
     </div>
@@ -35,9 +46,11 @@ import axios from "axios";
 import ButtonGroup from "@/components/ButtonGroup.vue";
 import SurveyInfo from "@/components/SurveyInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import QuestionInfo from "@/components/QuestionInfo.vue";
 
 export default {
   components: {
+    QuestionInfo,
     BaseButton,
     SurveyInfo,
     ButtonGroup,
@@ -46,7 +59,9 @@ export default {
     return {
       surveys: [],
       selectedSurvey: null,
-      message: ''
+      message: '',
+      questions: [],
+      selectedQuestion: null,
     };
   },
   computed: {
@@ -62,13 +77,17 @@ export default {
       try {
         const creatorId = localStorage.getItem("user-id");// Setzen Sie die Creator-ID
         this.surveys = await this.getSurveysByCreatorId(creatorId);
-        console.log(this.surveys[0])
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfragen:', error);
       }
     },
+    selectQuestion(question) {
+      this.selectedQuestion = question;
+    },
     selectSurvey(survey) {
       this.selectedSurvey = survey;
+      this.questions = this.selectedSurvey.questions
+
     },
     goToEditorPage() {
       this.$router.push({name: 'EditorPage'});
@@ -88,8 +107,9 @@ export default {
         return [];
       }
     },
-    showSurveyQuestions() {
+    analyseQuestion() {
       if (!this.selectedSurvey) return;
+
 
       // Führen Sie hier die gewünschten Aktionen aus, um die Fragen für die ausgewählte Umfrage anzuzeigen.
       // Zum Beispiel, Sie könnten die Fragen in einer neuen Ansicht anzeigen oder eine Modaldialogbox öffnen.
@@ -140,11 +160,29 @@ h2 {
   margin-top: 10px;
 }
 
-.survey-list-box {
+.survey-list-box,
+.question-list-box {
   max-height: 600px;
+  width: 600px;
   overflow-y: auto;
   margin-top: 20px;
-  border: 1px solid #444;
+  scrollbar-width: thin; /* Breite der Scrollleiste festlegen */
+  scrollbar-color: #555 #444; /* Farbe der Scrollleiste festlegen */
+}
+
+.survey-list-box::-webkit-scrollbar,
+.question-list-box::-webkit-scrollbar {
+  width: 8px; /* Breite der Webkit-Scrollleiste festlegen */
+}
+
+.survey-list-box::-webkit-scrollbar-thumb,
+.question-list-box::-webkit-scrollbar-thumb {
+  background-color: #555; /* Farbe des Scrollbalken-Daumens festlegen */
+}
+
+.survey-list-box::-webkit-scrollbar-thumb:hover,
+.question-list-box::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Farbe des Scrollbalken-Daumens bei Hover festlegen */
 }
 
 .delete-btn {
@@ -159,6 +197,10 @@ h2 {
   cursor: not-allowed;
 }
 .button-container {
+  display: flex;
+  gap: 10px; /* Abstand zwischen den Buttons anpassen, wie gewünscht */
+}
+.list-container {
   display: flex;
   gap: 10px; /* Abstand zwischen den Buttons anpassen, wie gewünscht */
 }

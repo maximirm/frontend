@@ -146,11 +146,27 @@ export default {
   color: #fff;
 }
 
+
+
 .user-list-box {
   max-height: 600px;
+  width: 600px;
   overflow-y: auto;
   margin-top: 20px;
-  border: 1px solid #444; /* Subtile Grenze */
+  scrollbar-width: thin; /* Breite der Scrollleiste festlegen */
+  scrollbar-color: #555 #444; /* Farbe der Scrollleiste festlegen */
+}
+
+.user-list-box::-webkit-scrollbar {
+  width: 8px; /* Breite der Webkit-Scrollleiste festlegen */
+}
+
+.user-list-box::-webkit-scrollbar-thumb {
+  background-color: #555; /* Farbe des Scrollbalken-Daumens festlegen */
+}
+
+.user-list-box::-webkit-scrollbar-thumb:hover {
+  background-color: #777; /* Farbe des Scrollbalken-Daumens bei Hover festlegen */
 }
 
 

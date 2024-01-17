@@ -1,4 +1,3 @@
-<!-- InputLabel.vue -->
 <template>
   <div class="input-label-container">
     <label :for="inputId">{{ label }}</label>
