@@ -1,16 +1,16 @@
 <template>
   <div class="create-question-form">
     <h2>Frage Erstellen</h2>
-    <RadioButtonGroup
-        groupTitle="Art der Frage"
-        :options="questionTypes"
-        :selectedOption="selectedQuestionType"
+    <DropdownMenu
+        :title="'Art'"
+        :options="dropdownOptions"
+        :selectedOption="questionType"
         @update:selectedOption="updateQuestionType"
     />
 
     <InputLabel label="Fragestellung:" :model="questionText" input-id="questionText" @update:model="updateText" />
 
-    <div v-if="selectedQuestionType === 2 || selectedQuestionType === 3">
+    <div v-if="questionType === 2 || questionType === 3">
       <InputLabel label="Option 1:" :model="option1" input-id="option1" @update:model="updateO1"/>
       <InputLabel label="Option 2:" :model="option2" input-id="option2" @update:model="updateO2"/>
       <InputLabel label="Option 3:" :model="option3" input-id="option3" @update:model="updateO3"/>
@@ -32,22 +32,22 @@
 <script>
 import InputLabel from "@/components/InputLabel.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import RadioButtonGroup from "@/components/RadioButtonGroup.vue";
+import DropdownMenu from "@/components/DropdownMenu.vue";
 
 export default {
   components: {
-    RadioButtonGroup,
+    DropdownMenu,
     InputLabel,
     BaseButton,
   },
   data() {
     return {
-      questionTypes: [
-        { label: "Freitext", value: 1 },
-        { label: "RadioButton", value: 2 },
-        { label: "Checkbox", value: 3 },
+      dropdownOptions: [
+        { label: "Freitext", value: 1, id: 1 },
+        { label: "Dropdown", value: 2, id: 2 },
+        { label: "Checkbox", value: 3, id: 3 },
       ],
-      selectedQuestionType: 1,
+      questionType: 2,
       questionText: "",
       option1: "",
       option2: "",
@@ -84,11 +84,11 @@ export default {
 
     },
     emitCreateQuestionEvent() {
-      if (this.selectedQuestionType === 1 && this.questionText.trim() === "") {
+      if (this.questionType === 1 && this.questionText.trim() === "") {
         this.creationError = `Bitte alle Felder ausfüllen`;
         return
       }
-      if (this.selectedQuestionType === 2 || this.selectedQuestionType === 3) {
+      if (this.questionType === 2 || this.questionType === 3) {
         if (this.questionText.trim() === "" ||
             this.option1.trim() === "" ||
             this.option2.trim() === "" ||
@@ -98,12 +98,12 @@ export default {
         }
       }
       const questionData = {
-        questionType: this.selectedQuestionType,
+        questionType: this.questionType,
         questionText: this.questionText,
         options: [],
       };
 
-      if (this.selectedQuestionType === 2 || this.selectedQuestionType === 3) {
+      if (this.questionType === 2 || this.questionType === 3) {
         questionData.options.push(this.option1, this.option2, this.option3);
       }
 
@@ -113,7 +113,7 @@ export default {
 
     },
     updateQuestionType(selectedOption) {
-      this.selectedQuestionType = selectedOption;
+      this.questionType = parseInt(selectedOption);
     },
   },
 };

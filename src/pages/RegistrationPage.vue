@@ -4,7 +4,7 @@
 
     <InputLabel label="Benutzername:" :model="username" inputId="username" :inputType="'text'" @update:model="updateName" />
     <InputLabel label="Passwort:" :model="password" inputId="password" :inputType="'password'" @update:model="updatePassword" />
-    <RadioButtonGroup :group-title="radioGroupTitle" :options="radioButtonOptions" :selectedOption="role" @update:selectedOption="handleRoleChange" />
+    <DropdownMenu :title="dropdownTitle" :options="dropdownOptions" :selectedOption="role" @update:selectedOption="handleRoleChange" />
 
 
 
@@ -25,10 +25,10 @@
 import axios from 'axios';
 import ButtonGroup from "@/components/ButtonGroup.vue";
 import InputLabel from "@/components/InputLabel.vue";
-import RadioButtonGroup from "@/components/RadioButtonGroup.vue";
+import DropdownMenu from "@/components/DropdownMenu.vue";
 
 export default {
-  components: {RadioButtonGroup, InputLabel, ButtonGroup},
+  components: {DropdownMenu, InputLabel, ButtonGroup},
   data() {
     return {
       username: '',
@@ -39,10 +39,10 @@ export default {
     };
   },
   computed: {
-    radioGroupTitle() {
+    dropdownTitle() {
       return 'Benutzerrolle auswählen:'
     },
-    radioButtonOptions() {
+    dropdownOptions() {
       return [
         { label: 'Admin', value: 'admin', id: 'admin' },
         { label: 'Editor', value: 'editor', id: 'editor' },

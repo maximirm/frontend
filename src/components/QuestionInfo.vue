@@ -10,7 +10,7 @@
         <div class="key-value-pair">
           <p>Art der Frage:</p>
           <p v-if="question.type === 1">Freitext</p>
-          <p v-else-if="question.type === 2">RadioButton</p>
+          <p v-else-if="question.type === 2">Dropdown</p>
           <p v-else-if="question.type === 3">Checkbox</p>
         </div>
         <div class="key-value-pair" v-if="question.options.length > 0">
