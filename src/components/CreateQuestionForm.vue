@@ -20,6 +20,8 @@
     <div v-if="creationError" class="error-message">
       {{ creationError }}
     </div>
+    <BaseButton :clickHandler="goToEditorPage" :button-text="'Zurück zur Editorseite'" />
+
 
   </div>
 </template>
@@ -51,6 +53,9 @@ export default {
     };
   },
   methods: {
+    goToEditorPage() {
+      this.$router.push({ name: 'EditorPage' });
+    },
     updateText(newVal) {
       this.questionText = newVal
       this.creationError = null

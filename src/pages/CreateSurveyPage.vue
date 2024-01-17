@@ -16,7 +16,6 @@
       />
     </div>
 
-    <button @click="goToEditorPage" class="btn go-back-btn">Zurück zur Editorseite</button>
   </div>
 </template>
 
@@ -35,14 +34,10 @@ export default {
       title: '',
       description: '',
       surveyFormVisible: true,
-      questionOrder: 1, // Anfangsorder-Wert
+      questionOrder: 1,
     };
   },
   methods: {
-    goToEditorPage() {
-      this.$router.push({ name: 'EditorPage' });
-    },
-
     async createSurvey(data) {
       try {
         const token = localStorage.getItem('token');
@@ -116,7 +111,4 @@ export default {
   color: #fff;
 }
 
-.btn {
-  margin-top: 20px;
-}
 </style>
