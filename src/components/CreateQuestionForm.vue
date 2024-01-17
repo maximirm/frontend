@@ -47,7 +47,7 @@ export default {
         { label: "Dropdown", value: 2, id: 2 },
         { label: "Checkbox", value: 3, id: 3 },
       ],
-      questionType: 2,
+      questionType: 1,
       questionText: "",
       option1: "",
       option2: "",

@@ -82,6 +82,9 @@ export default {
 
         if (response.status === 200) {
           this.registrationSuccess = true;
+          setTimeout(() => {
+            this.redirectToHomePage();
+          }, 1000);
         }
       } catch (error) {
         if (error.response && error.response.data && error.response.data.detail) {

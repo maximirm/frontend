@@ -28,12 +28,14 @@
         />
       </div>
       <div v-if="message" class="success-message">{{ message }}</div>
+      <div v-if="selectedQuestion">
       <BaseButton
           :buttonText="'Frage löschen'"
           :clickHandler="deleteSelectedQuestion"
           :isDisabled="!selectedQuestion"
           class="delete-btn"
       />
+      </div>
     </div>
   </div>
 </template>

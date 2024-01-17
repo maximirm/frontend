@@ -13,13 +13,20 @@
           @surveySelected="selectSurvey"
       />
     </div>
-    <BaseButton
-        :buttonText="'Umfrage löschen'"
-        :clickHandler="deleteSelectedSurvey"
-        :isDisabled="!selectedSurvey"
-        class="delete-btn"
-    />
-    <!-- Hier können Sie die Umfrage-Analyse hinzufügen -->
+    <div v-if="selectedSurvey" class="button-container">
+      <BaseButton
+          :buttonText="'Umfrage löschen'"
+          :clickHandler="deleteSelectedSurvey"
+          :isDisabled="!selectedSurvey"
+          class="delete-btn"
+      />
+      <BaseButton
+          :buttonText="'Fragen anzeigen'"
+          :clickHandler="showSurveyQuestions"
+          :isDisabled="!selectedSurvey"
+          class="show-questions-btn"
+      />
+    </div>
   </div>
 </template>
 
@@ -81,6 +88,13 @@ export default {
         return [];
       }
     },
+    showSurveyQuestions() {
+      if (!this.selectedSurvey) return;
+
+      // Führen Sie hier die gewünschten Aktionen aus, um die Fragen für die ausgewählte Umfrage anzuzeigen.
+      // Zum Beispiel, Sie könnten die Fragen in einer neuen Ansicht anzeigen oder eine Modaldialogbox öffnen.
+      // Hier sollte Ihre Logik für die Anzeige der Fragen stehen.
+    },
     async deleteSelectedSurvey() {
       if (!this.selectedSurvey) return;
 
@@ -136,9 +150,16 @@ h2 {
 .delete-btn {
   background-color: #d32f2f; /* Lebendige rote Farbe für Löschen-Button */
 }
+.show-questions-btn{
+  background-color: #4CAF50;
+}
 
 .delete-btn:disabled {
   background-color: #999;
   cursor: not-allowed;
+}
+.button-container {
+  display: flex;
+  gap: 10px; /* Abstand zwischen den Buttons anpassen, wie gewünscht */
 }
 </style>

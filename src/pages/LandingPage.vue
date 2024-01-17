@@ -29,6 +29,7 @@ export default {
       this.$router.push({ name: 'RegisterPage' });
     },
     respondAnonymous() {
+      localStorage.clear()
       alert('Anonymous response functionality will be implemented here.');
     },
   },

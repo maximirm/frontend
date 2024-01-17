@@ -14,13 +14,14 @@
           @userSelected="selectUser"
       />
     </div>
-
+    <div v-if="selectedUser">
     <BaseButton
         :buttonText="'Delete Selected User'"
         :clickHandler="deleteSelectedUser"
         :isDisabled="!selectedUser || selfSelected"
         class="delete-btn"
     />
+    </div>
   </div>
 </template>
 
