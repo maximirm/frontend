@@ -20,13 +20,20 @@
       </div>
       <div class="question-list-box">
         <QuestionInfo
-            v-for="(question, index) in surveyQuestions"
+            v-for="(question, index) in questions"
             :key="index"
-            :question-text="question.question_text"
-            :question-type="question.type"
-            :options="question.options"
+            :question="question"
+            :isSelected="selectedQuestion && selectedQuestion.id === question.id"
+            @questionSelected="selectQuestion"
         />
       </div>
+      <div v-if="message" class="success-message">{{ message }}</div>
+      <BaseButton
+          :buttonText="'Frage löschen'"
+          :clickHandler="deleteSelectedQuestion"
+          :isDisabled="!selectedQuestion"
+          class="delete-btn"
+      />
     </div>
   </div>
 </template>
@@ -36,9 +43,11 @@ import CreateSurveyForm from "@/components/CreateSurveyForm.vue";
 import CreateQuestionForm from "@/components/CreateQuestionForm.vue";
 import axios from 'axios';
 import QuestionInfo from "@/components/QuestionInfo.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 export default {
   components: {
+    BaseButton,
     QuestionInfo,
     CreateSurveyForm,
     CreateQuestionForm,
@@ -51,7 +60,9 @@ export default {
       questionOrder: 1,
       surveyTitle: "",
       surveyDescription: "",
-      surveyQuestions: [],
+      questions: [],
+      selectedQuestion: null,
+      message: ''
     };
   },
   methods: {
@@ -107,6 +118,30 @@ export default {
         console.error('Fehler beim Erstellen der Frage:', error);
       }
     },
+    selectQuestion(question) {
+      this.selectedQuestion = question;
+    },
+    async deleteSelectedQuestion() {
+      if (!this.selectedQuestion) return;
+
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.delete(`http://127.0.0.1:8002/questions/${this.selectedQuestion.id}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          this.selectedQuestion = null;
+          await this.getSurvey();
+          this.message = "Frage erfolgreich gelöscht"; // Setzen der Meldung
+          setTimeout(() => this.message = '', 3000); // Meldung nach 3 Sekunden ausblenden
+        }
+      } catch (error) {
+        this.message = "Fehler beim Löschen der Frage"; // Meldung im Fehlerfall
+      }
+    },
 
     async getSurvey() {
       try {
@@ -123,7 +158,8 @@ export default {
           const surveyData = response.data;
           this.surveyTitle = surveyData.title;
           this.surveyDescription = surveyData.description;
-          this.surveyQuestions = surveyData.questions;
+          console.log(surveyData.questions)
+          this.questions = surveyData.questions;
         }
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfrage:', error);
@@ -166,5 +202,18 @@ export default {
   max-height: 600px;
   overflow-y: auto;
   border: 1px solid #444;
+}
+
+.delete-btn {
+  background-color: #d32f2f; /* Lebendige rote Farbe für Löschen-Button */
+}
+
+.delete-btn:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+.success-message {
+  color: green;
+  margin-top: 10px;
 }
 </style>

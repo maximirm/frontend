@@ -1,22 +1,22 @@
 <template>
-  <div>
+  <div :class="{ 'selected-question': isSelected }" @click="selectQuestion">
+
     <div class="question-item">
       <div class="question-info">
-        <!-- Key-Value Paar für jeden Eintrag -->
         <div class="key-value-pair">
           <p>Frage:</p>
-          <p>{{ questionText }}</p>
+          <p>{{ question.question_text }}</p>
         </div>
         <div class="key-value-pair">
-          <p>Frageart:</p>
-          <p v-if="questionType === 1">Freitext</p>
-          <p v-else-if="questionType === 2">RadioButton</p>
-          <p v-else-if="questionType === 3">Checkbox</p>
+          <p>Art der Frage:</p>
+          <p v-if="question.type === 1">Freitext</p>
+          <p v-else-if="question.type === 2">RadioButton</p>
+          <p v-else-if="question.type === 3">Checkbox</p>
         </div>
-        <div class="key-value-pair" v-if="options.length > 0">
-          <p>Antwortmöglichkeiten:</p>
+        <div class="key-value-pair" v-if="question.options.length > 0">
+
           <ul>
-            <li v-for="(option, index) in options" :key="index">{{ option }}</li>
+            <li v-for="(option, index) in question.options" :key="index">{{ option }}</li>
           </ul>
         </div>
       </div>
@@ -27,19 +27,21 @@
 <script>
 export default {
   props: {
-    questionText: {
-      type: String,
+    question: {
+      type: Object,
       required: true,
     },
-    questionType: {
-      type: Number,
-      required: true,
-    },
-    options: {
-      type: Array,
-      default: () => [],
+    isSelected: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
+  methods: {
+    selectQuestion() {
+      this.$emit('questionSelected', this.question);
+    },
+  }
 };
 </script>
 
@@ -68,5 +70,10 @@ export default {
   align-items: flex-start;
   margin-right: 5px;
   width: 200px;
+}
+.selected-question {
+  background-color: #2e2e2e;
+  color: #4CAF50;
+  border-left: 4px solid #4CAF50;
 }
 </style>

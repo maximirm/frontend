@@ -11,16 +11,19 @@
     <InputLabel label="Fragestellung:" :model="questionText" input-id="questionText" @update:model="updateText" />
 
     <div v-if="selectedQuestionType === 2 || selectedQuestionType === 3">
-      <InputLabel label="Antwortmöglichkeit 1:" :model="option1" input-id="option1" @update:model="updateO1"/>
-      <InputLabel label="Antwortmöglichkeit 2:" :model="option2" input-id="option2" @update:model="updateO2"/>
-      <InputLabel label="Antwortmöglichkeit 3:" :model="option3" input-id="option3" @update:model="updateO3"/>
+      <InputLabel label="Option 1:" :model="option1" input-id="option1" @update:model="updateO1"/>
+      <InputLabel label="Option 2:" :model="option2" input-id="option2" @update:model="updateO2"/>
+      <InputLabel label="Option 3:" :model="option3" input-id="option3" @update:model="updateO3"/>
     </div>
 
-    <BaseButton :clickHandler="emitCreateQuestionEvent" :button-text="'Create Question'" />
+    <BaseButton :clickHandler="emitCreateQuestionEvent" :button-text="'Frage erstellen'" />
     <div v-if="creationError" class="error-message">
       {{ creationError }}
     </div>
-    <BaseButton :clickHandler="goToEditorPage" :button-text="'Erstellung abschließen'" />
+    <div v-if="creationSuccess" class="success-message">
+      Frage erfolgreich erstellt!
+    </div>
+    <BaseButton :clickHandler="goToEditorPage" :button-text="'Erstellung der Umfrage abschließen'" />
 
 
   </div>
@@ -50,6 +53,7 @@ export default {
       option2: "",
       option3: "",
       creationError: null,
+      creationSuccess: null,
     };
   },
   methods: {
@@ -59,18 +63,25 @@ export default {
     updateText(newVal) {
       this.questionText = newVal
       this.creationError = null
+      this.creationSuccess = null
     },
     updateO1(newVal) {
       this.option1 = newVal
       this.creationError = null
+      this.creationSuccess = null
+
     },
     updateO2(newVal) {
       this.option2 = newVal
       this.creationError = null
+      this.creationSuccess = null
+
     },
     updateO3(newVal) {
       this.option3 = newVal
       this.creationError = null
+      this.creationSuccess = null
+
     },
     emitCreateQuestionEvent() {
       if (this.selectedQuestionType === 1 && this.questionText.trim() === "") {
@@ -97,6 +108,7 @@ export default {
       }
 
       this.$emit("create-question", questionData);
+      this.creationSuccess = `Frage erfolgreich erstellt`;
     },
     updateQuestionType(selectedOption) {
       this.selectedQuestionType = selectedOption;
@@ -117,5 +129,8 @@ export default {
   color: red;
   margin-top: 10px;
 }
-
+.success-message {
+  color: green;
+  margin-top: 10px;
+}
 </style>

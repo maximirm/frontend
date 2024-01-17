@@ -1,11 +1,11 @@
 <template>
   <div class="create-survey-page">
-    <h2>Survey Erstellen</h2>
+    <h2>Umfrage Erstellen</h2>
 
     <InputLabel label="Titel:" :model="title" input-id="title" @update:model="updateTitle"/>
     <InputLabel label="Beschreibung:" :model="description" input-id="description" @update:model="updateDescription"/>
 
-    <BaseButton :clickHandler="emitCreateSurveyEvent" :button-text="'Survey erstellen'" />
+    <BaseButton :clickHandler="emitCreateSurveyEvent" :button-text="'Umfrage erstellen'" />
 
 
   </div>
