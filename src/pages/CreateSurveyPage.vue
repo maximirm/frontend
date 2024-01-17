@@ -34,7 +34,8 @@ export default {
     return {
       title: '',
       description: '',
-      surveyFormVisible: true, // Diese Variable steuert die Anzeige der Formulare
+      surveyFormVisible: true,
+      questionOrder: 1, // Anfangsorder-Wert
     };
   },
   methods: {
@@ -68,10 +69,37 @@ export default {
       }
     },
 
-    // Diese Methode verarbeitet die erstellte Frage
-    createQuestion(questionData) {
-      // Fügen Sie hier die Logik zur Verarbeitung der Frage ein
-      console.log('Frage erstellt:', questionData);
+    async createQuestion(questionData) {
+      try {
+        const token = localStorage.getItem('token');
+        const surveyId = localStorage.getItem('survey-created-id');
+
+        const question = {
+          survey_id: surveyId,
+          order: this.questionOrder,
+          question_text: questionData.questionText,
+          type: questionData.questionType, // Wandeln Sie den Wert in einen Integer um
+          options: questionData.questionType === 1 ? [] : questionData.options,
+        };
+
+        const response = await axios.post('http://127.0.0.1:8002/questions/', question, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          // Erhöhen Sie die questionOrder für die nächste Frage
+          this.questionOrder++;
+
+          // Konsolenausgabe zur Bestätigung (kann entfernt werden)
+          console.log('Frage erstellt:', question);
+
+          // Setzen Sie hier die Logik fort, um mit der neu erstellten Frage zu arbeiten
+        }
+      } catch (error) {
+        console.error('Fehler beim Erstellen der Frage:', error);
+      }
     },
   }
 };
