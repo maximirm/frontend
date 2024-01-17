@@ -1,8 +1,7 @@
 
 <template>
   <div class="landing-page">
-    <h1>Beispielanwendung Bachelorarbeit Maxim Irmscher</h1>
-
+    <h1>Bachelorarbeit Maxim Irmscher</h1>
     <ButtonGroup :buttons="buttons" />
 
   </div>

@@ -1,47 +1,50 @@
-<!-- src/views/AdminPage.vue -->
-
 <template>
   <div class="admin-page">
     <h2>Admin</h2>
 
-    <button @click="showAllUsers" class="btn">Show All Users</button>
-    <button @click="redirectToHomePage" class="btn">Zurück zur Startseite</button>
+    <ButtonGroup :buttons="buttons" />
+    <div v-if="message" class="success-message">{{ message }}</div>
 
-
-    <div v-if="users.length > 0" class="user-list-box">
-      <div v-for="user in users" :key="user.id" class="user-item">
-        <div class="user-info">
-          <p>Name: {{ user.name }}</p>
-          <p>Rolle: {{ user.role }}</p>
-          <p>Anzahl der Umfragen: {{ user.numberOfSurveys }}</p>
-          <p>ID: {{ user.id }}</p>
-        </div>
-        <button
-            @click="deleteUser(user.id, user.name)"
-            :disabled="user.token === currentUserToken"
-            class="btn delete-btn"
-        >
-          Delete User and Surveys
-        </button>
-      </div>
+    <div class="user-list-box">
+      <UserInfo
+          v-for="user in users"
+          :key="user.id"
+          :user="user"
+          :isSelected="selectedUser && user.id === selectedUser.id"
+          @userSelected="selectUser"
+      />
     </div>
 
-
+    <button @click="deleteSelectedUser" :disabled="!selectedUser" class="btn delete-btn">
+      Delete Selected User
+    </button>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import ButtonGroup from "@/components/ButtonGroup.vue";
+import UserInfo from "@/components/UserInfo.vue";
 
 export default {
+  components: { ButtonGroup, UserInfo },
   data() {
     return {
       users: [],
-      deletedUser: '',
-      currentUserToken: '',
+      selectedUser: null,
+      message: ''
     };
   },
+  computed: {
+    buttons() {
+      return [
+        { text: 'Benutzer anzeigen', clickHandler: this.showAllUsers },
+        { text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage },
+      ];
+    },
+  },
   methods: {
+
     async showAllUsers() {
       try {
         const token = localStorage.getItem('token');
@@ -60,35 +63,38 @@ export default {
               };
             })
         );
-        this.currentUserToken = token;
       } catch (error) {
         console.error('Fehler beim Abrufen aller Benutzer:', error);
       }
     },
 
-    async deleteUser(userId, userName) {
+    selectUser(user) {
+      this.selectedUser = user;
+    },
+
+    async deleteSelectedUser() {
+      if (!this.selectedUser) return;
+
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.delete(`http://127.0.0.1:8002/users/${userId}/`, {
+        const response = await axios.delete(`http://127.0.0.1:8002/users/${this.selectedUser.id}/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
         if (response.status === 200) {
-          this.deletedUser = userName;
-
-
-
-          setTimeout(() => {
-            this.deletedUser = '';
-          }, 5000);
+          this.selectedUser = null;
+          await this.showAllUsers();
+          this.message = "Benutzer erfolgreich gelöscht"; // Setzen der Meldung
+          setTimeout(() => this.message = '', 3000); // Meldung nach 3 Sekunden ausblenden
         }
       } catch (error) {
-        console.error(`Fehler beim Löschen des Benutzers mit ID ${userId}:`, error);
+        console.error(`Fehler beim Löschen des Benutzers mit ID ${this.selectedUser.id}:`, error);
+        this.message = "Fehler beim Löschen des Benutzers"; // Meldung im Fehlerfall
       }
-      await this.showAllUsers();
     },
+
     async getSurveysByCreatorId(creatorId) {
       try {
         const token = localStorage.getItem('token');
@@ -104,6 +110,7 @@ export default {
         return [];
       }
     },
+
     redirectToHomePage() {
       this.$router.push({ name: 'LandingPage' });
     },
@@ -113,13 +120,17 @@ export default {
 
 <style scoped>
 
+.success-message {
+  color: green;
+  margin-top: 10px;
+}
 .admin-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #333;
+  background-color: #1c1c1c; /* Dunkles Anthrazit */
   color: #fff;
 }
 
@@ -127,47 +138,31 @@ export default {
   max-height: 600px;
   overflow-y: auto;
   margin-top: 20px;
-}
-
-.user-item {
-  border: 1px solid #555;
-  padding: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-
-}
-
-.user-info p {
-  margin-bottom: 1px;
-  margin-top: 1px;
-  padding: 1px;
+  border: 1px solid #444; /* Subtile Grenze */
 }
 
 .btn {
   margin: 10px;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #555;
+  background-color: #444; /* Dunkler Button-Hintergrund */
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  transition: background-color 0.3s; /* Sanfter Übergang für Button */
+}
+
+.btn:hover {
+  background-color: #555; /* Hover-Effekt */
 }
 
 .delete-btn {
-  background-color: red;
+  background-color: #d32f2f; /* Lebendige rote Farbe für Löschen-Button */
 }
 
-
 .delete-btn:disabled {
-  background-color: #999; /* Hintergrundfarbe für deaktivierte Buttons */
+  background-color: #999;
   cursor: not-allowed;
 }
 </style>

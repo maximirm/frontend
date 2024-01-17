@@ -61,13 +61,18 @@ export default {
       this.role = newRole;
     },
     updateName(newVal){
-      this.name = newVal
+      this.username = newVal
     },
     updatePassword(newVal) {
       this.password = newVal
     },
     async register() {
       this.registrationError = null;
+      if (this.username === '' && this.password === ''){
+
+        this.registrationError = `Fehler bei der Registrierung: Bitte Benutzername und Passwort eingeben`;
+        return
+      }
       try {
         const response = await axios.post('http://127.0.0.1:8002/users/register/', {
           name: this.username,
