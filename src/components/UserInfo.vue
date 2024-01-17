@@ -2,7 +2,6 @@
   <div :class="{ 'selected-user': isSelected }" @click="selectUser">
     <div class="user-item">
       <div class="user-info">
-        <!-- Key-Value Paar für jeden Eintrag -->
         <div class="key-value-pair">
           <p>Name:</p>
           <p>{{ user.name }}</p>
@@ -76,13 +75,6 @@ export default {
   width: 200px; /* Feste Breite für jedes Paar */
 }
 
-.key-value-pair {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-right: 5px;
-  width: 200px; /* Erhöhen Sie die Breite, je nach Bedarf */
-}
 
 .selected-user {
   background-color: #2e2e2e;

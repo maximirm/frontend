@@ -1,5 +1,5 @@
 <template>
-  <div class="question" :class="{ 'selected-question': isSelected }" @click="selectQuestion">
+  <div>
     <div class="question-item">
       <div class="question-info">
         <!-- Key-Value Paar für jeden Eintrag -->
@@ -39,32 +39,21 @@ export default {
       type: Array,
       default: () => [],
     },
-    isSelected: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-  },
-  methods: {
-    selectQuestion() {
-      this.$emit('questionSelected', this.questionText);
-    },
   },
 };
 </script>
 
 <style scoped>
 .key-value-pair p {
-  margin: 1px 0; /* Verringern Sie den vertikalen Abstand zwischen den Zeilen */
-  padding: 2px; /* Optional können Sie auch das Padding anpassen */
+  margin: 1px 0;
+  padding: 2px;
   color: #ccc;
   text-overflow: ellipsis;
 }
 
 .question-item {
   border: 2px solid #666;
-  padding: 10px;
-  cursor: pointer;
+  padding: 5px;
   transition: border-color 0.3s;
 }
 
@@ -77,21 +66,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right: 15px;
-  width: 200px; /* Feste Breite für jedes Paar */
-}
-
-.key-value-pair {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   margin-right: 5px;
-  width: 200px; /* Erhöhen Sie die Breite, je nach Bedarf */
-}
-
-.selected-question {
-  background-color: #2e2e2e;
-  color: #4CAF50;
-  border-left: 4px solid #4CAF50;
+  width: 200px;
 }
 </style>

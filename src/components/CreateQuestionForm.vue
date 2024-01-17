@@ -20,7 +20,7 @@
     <div v-if="creationError" class="error-message">
       {{ creationError }}
     </div>
-    <BaseButton :clickHandler="goToEditorPage" :button-text="'Zurück zur Editorseite'" />
+    <BaseButton :clickHandler="goToEditorPage" :button-text="'Erstellung abschließen'" />
 
 
   </div>

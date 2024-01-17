@@ -6,7 +6,6 @@
     <InputLabel label="Beschreibung:" :model="description" input-id="description" />
 
     <BaseButton :clickHandler="emitCreateSurveyEvent" :button-text="'Survey erstellen'" />
-    <BaseButton :clickHandler="goToEditorPage" :button-text="'Zurück zur Editorseite'" />
 
 
   </div>

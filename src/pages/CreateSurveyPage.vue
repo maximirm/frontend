@@ -9,13 +9,15 @@
         />
       </div>
       <div v-else>
-        <CreateQuestionForm @create-question="createQuestion" />
+        <CreateQuestionForm @create-question="createQuestion"/>
       </div>
     </div>
     <!-- Anzeigen der Umfrage-Fragen -->
     <div class="question-list-container">
-      <h3>{{ surveyTitle }}</h3>
-      <p>{{ surveyDescription }}</p>
+      <div class="survey-info">
+        <h3>{{ surveyTitle }}</h3>
+        <p>{{ surveyDescription }}</p>
+      </div>
       <div class="question-list-box">
         <QuestionInfo
             v-for="(question, index) in surveyQuestions"
@@ -25,12 +27,6 @@
             :options="question.options"
         />
       </div>
-      <BaseButton
-          :buttonText="'Delete Selected Question'"
-          :clickHandler="deleteSelectedQuestion"
-          :isDisabled="!selectedQuestion"
-          class="delete-btn"
-      />
     </div>
   </div>
 </template>
@@ -40,11 +36,9 @@ import CreateSurveyForm from "@/components/CreateSurveyForm.vue";
 import CreateQuestionForm from "@/components/CreateQuestionForm.vue";
 import axios from 'axios';
 import QuestionInfo from "@/components/QuestionInfo.vue";
-import BaseButton from "@/components/BaseButton.vue";
 
 export default {
   components: {
-    BaseButton,
     QuestionInfo,
     CreateSurveyForm,
     CreateQuestionForm,
@@ -58,7 +52,6 @@ export default {
       surveyTitle: "",
       surveyDescription: "",
       surveyQuestions: [],
-      selectedQuestion: null,
     };
   },
   methods: {
@@ -79,7 +72,6 @@ export default {
 
         if (response.status === 200) {
           localStorage.setItem('survey-created-id', response.data.id);
-
           this.surveyFormVisible = false;
         }
       } catch (error) {
@@ -96,7 +88,7 @@ export default {
           survey_id: surveyId,
           order: this.questionOrder,
           question_text: questionData.questionText,
-          type: questionData.questionType, // Wandeln Sie den Wert in einen Integer um
+          type: questionData.questionType,
           options: questionData.questionType === 1 ? [] : questionData.options,
         };
 
@@ -115,9 +107,7 @@ export default {
         console.error('Fehler beim Erstellen der Frage:', error);
       }
     },
-    async deleteSelectedQuestion() {
 
-    },
     async getSurvey() {
       try {
         const token = localStorage.getItem('token');
@@ -131,9 +121,9 @@ export default {
 
         if (response.status === 200) {
           const surveyData = response.data;
-          this.surveyTitle = surveyData.title; // Setzen Sie den Umfrage-Titel
-          this.surveyDescription = surveyData.description; // Setzen Sie die Umfrage-Beschreibung
-          this.surveyQuestions = surveyData.questions; // Setzen Sie die Umfrage-Fragen
+          this.surveyTitle = surveyData.title;
+          this.surveyDescription = surveyData.description;
+          this.surveyQuestions = surveyData.questions;
         }
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfrage:', error);
@@ -147,7 +137,7 @@ export default {
 .create-survey-page {
   display: flex;
   justify-content: center;
-  align-items: center; /* In der Mitte des Bildschirms ausrichten */
+  align-items: center;
   height: 100vh;
   background-color: #333;
   color: #fff;
@@ -157,29 +147,24 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 20px; /* Abstand zwischen den Formularen und der Liste */
+  margin-right: 20px;
 }
 
 .question-list-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 20px; /* Abstand zwischen den Formularen und der Liste */
+  margin-left: 20px;
+}
+
+.survey-info {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .question-list-box {
   max-height: 600px;
   overflow-y: auto;
-  margin-top: 20px;
   border: 1px solid #444;
-}
-
-.delete-btn {
-  background-color: #d32f2f;
-}
-
-.delete-btn:disabled {
-  background-color: #999;
-  cursor: not-allowed;
 }
 </style>
