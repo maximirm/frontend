@@ -18,9 +18,8 @@
       <label for="respondent">Respondent</label>
       <input type="radio" id="respondent" v-model="role" value="respondent" />
     </div>
+    <ButtonGroup :buttons="buttons" />
 
-    <button @click="register" class="btn">Registrieren</button>
-    <button @click="redirectToHomePage" class="btn">Zurück zur Startseite</button>
 
     <div v-if="registrationError" class="error-message">
       {{ registrationError }}
@@ -34,8 +33,10 @@
 
 <script>
 import axios from 'axios';
+import ButtonGroup from "@/components/ButtonGroup.vue";
 
 export default {
+  components: {ButtonGroup},
   data() {
     return {
       username: '',
@@ -44,6 +45,14 @@ export default {
       registrationSuccess: false,
       registrationError: null,
     };
+  },
+  computed: {
+    buttons() {
+      return [
+        {text: 'Registrieren', clickHandler: this.register},
+        {text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage},
+      ];
+    },
   },
   methods: {
     async register() {
@@ -116,14 +125,4 @@ input[type="radio"] {
   margin-right: 5px;
 }
 
-.btn {
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #555;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
 </style>

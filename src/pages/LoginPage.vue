@@ -1,16 +1,11 @@
-
 <template>
   <div class="login-page">
     <h2>Login</h2>
 
-    <label for="name">Benutzername:</label>
-    <input v-model="name" type="text" id="name" />
+    <InputLabel label="Benutzername:" :model="name" inputId="name" @update:model="updateName" />
+    <InputLabel label="Passwort:" :model="password" inputId="password" :inputType="'password'" @update:model="updatePassword" />
 
-    <label for="password">Passwort:</label>
-    <input v-model="password" type="password" id="password" />
-
-    <button @click="login" class="btn">Login</button>
-    <button @click="redirectToHomePage" class="btn">Zurück zur Startseite</button>
+    <ButtonGroup :buttons="buttons" />
 
     <div v-if="loginError" class="error-message">
       {{ loginError }}
@@ -24,8 +19,14 @@
 
 <script>
 import axios from 'axios';
+import ButtonGroup from "@/components/ButtonGroup.vue";
+import InputLabel from "@/components/InputLabel.vue";
 
 export default {
+  components: {
+    InputLabel,
+    ButtonGroup,
+  },
   data() {
     return {
       name: '',
@@ -34,9 +35,23 @@ export default {
       loginSuccess: false,
     };
   },
+  computed: {
+    buttons() {
+      return [
+        {text: 'Login', clickHandler: this.login},
+        {text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage},
+      ];
+    },
+  },
   methods: {
+    updateName(newVal){
+      this.name = newVal
+    },
+    updatePassword(newVal) {
+      this.password = newVal
+    },
     async login() {
-      this.loginError=null;
+      this.loginError = null;
       try {
         const response = await axios.post('http://127.0.0.1:8002/users/login/', {
           name: this.name,
@@ -46,7 +61,6 @@ export default {
         if (response.status === 200) {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem("user-id", response.data.id);
-          console.log(response.data.id)
 
           this.loginSuccess = true;
 
@@ -109,23 +123,5 @@ export default {
   color: #fff;
 }
 
-label {
-  margin: 10px 0;
-}
 
-input {
-  margin: 5px 0;
-  padding: 8px;
-}
-
-.btn {
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #555;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
 </style>

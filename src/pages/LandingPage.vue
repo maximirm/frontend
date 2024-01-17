@@ -3,14 +3,25 @@
   <div class="landing-page">
     <h1>Beispielanwendung Bachelorarbeit Maxim Irmscher</h1>
 
-    <button @click="redirectToLogin" class="btn">Login</button>
-    <button @click="redirectToRegister" class="btn">Register</button>
-    <button @click="respondAnonymous" class="btn">Respond Anonymous</button>
+    <ButtonGroup :buttons="buttons" />
+
   </div>
 </template>
 
 <script>
+import ButtonGroup from "@/components/ButtonGroup.vue";
+
 export default {
+  components: {ButtonGroup},
+  computed: {
+    buttons() {
+      return [
+        {text: 'Login', clickHandler: this.redirectToLogin},
+        {text: 'Register', clickHandler: this.redirectToRegister},
+        {text: 'Respond Anonymous', clickHandler: this.respondAnonymous},
+      ];
+    },
+  },
   methods: {
     redirectToLogin() {
       this.$router.push({ name: 'LoginPage' });
@@ -40,14 +51,5 @@ export default {
   margin: 0;
 }
 
-.btn {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #555;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
+
 </style>
