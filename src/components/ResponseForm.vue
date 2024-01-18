@@ -29,6 +29,7 @@ import InputLabel from "@/components/InputLabel.vue";
 import DropdownMenu from "@/components/DropdownMenu.vue";
 import CheckBox from "@/components/CheckBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -60,10 +61,20 @@ export default {
     },
     submitResponse() {
       console.log("submit: ", this.responseText)
-      this.$emit("responseTextSubmitted", {
-        responseText: this.responseText,
-      });
+      this.saveResponse()
+      this.$emit("responseTextSubmitted");
       this.responseText = [];
+    },
+    async saveResponse() {
+      console.log(this.question)
+      const response ={
+        question_id: this.question.id,
+        respondent_id: this.isAnonymous ? null : this.$store.state.userId,
+        response_text: this.responseText
+      }
+      await axios.post('http://127.0.0.1:8002/responses/', response)
+
+
     },
   },
 };
@@ -75,7 +86,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
 
