@@ -3,12 +3,13 @@
     <div class="survey-item">
       <div class="survey-info">
         <div class="key-value-pair">
-          <p>Title:</p>
           <p>{{ survey.title }}</p>
         </div>
         <div class="key-value-pair">
-          <p>Beschreibung:</p>
           <p>{{ survey.description }}</p>
+        </div>
+        <div class="key-value-pair">
+          <p>{{ survey.questions.length }} Fragen</p>
         </div>
       </div>
     </div>

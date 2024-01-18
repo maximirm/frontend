@@ -7,6 +7,7 @@ import LoginPage from "@/pages/LoginPage.vue";
 import RespondentPage from "@/pages/RespondentPage.vue";
 import CreateSurveyPage from "@/pages/CreateSurveyPage.vue";
 import AnalyseSurveyPage from "@/pages/AnalyseSurveyPage.vue";
+import ResponsePage from "@/pages/ResponsePage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -32,11 +33,6 @@ const router = createRouter({
             component: EditorPage,
         },
         {
-            path: '/respondent',
-            name: 'RespondentPage',
-            component: RespondentPage,
-        },
-        {
             path: '/login',
             name: 'LoginPage',
             component: LoginPage,
@@ -50,6 +46,16 @@ const router = createRouter({
             path: '/analyseSurvey',
             name: 'AnalyseSurveyPage',
             component: AnalyseSurveyPage,
+        },
+        {
+            path: '/respondent/:isAnonymous',
+            name: 'RespondentPage',
+            component: RespondentPage,
+        },
+        {
+            path: '/response/:surveyId/:isAnonymous',
+            name: 'ResponsePage',
+            component: ResponsePage,
         },
     ]
 })

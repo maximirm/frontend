@@ -4,21 +4,22 @@
     <div class="question-item">
       <div class="question-info">
         <div class="key-value-pair">
-          <p>Frage:</p>
+
           <p>{{ question.question_text }}</p>
         </div>
         <div class="key-value-pair">
-          <p>Art der Frage:</p>
           <p v-if="question.type === 1">Freitext</p>
           <p v-else-if="question.type === 2">Dropdown</p>
           <p v-else-if="question.type === 3">Checkbox</p>
+          <p>{{ question.responses.length }} Antworten</p>
         </div>
         <div class="key-value-pair" v-if="question.options.length > 0">
-          <p>Options:</p>
-          <ul>
-            <li v-for="(option, index) in question.options" :key="index">{{ option }}</li>
-          </ul>
+          <p>1. {{ question.options[0] }}</p>
+          <p>2. {{ question.options[1] }}</p>
+          <p>3. {{ question.options[2] }}</p>
+
         </div>
+
       </div>
     </div>
   </div>
@@ -39,6 +40,7 @@ export default {
   },
   methods: {
     selectQuestion() {
+      console.log(this.question.responses.length)
       this.$emit('questionSelected', this.question);
     },
   }
@@ -76,4 +78,7 @@ export default {
   color: #4CAF50;
   border-left: 4px solid #4CAF50;
 }
+
+
+
 </style>
