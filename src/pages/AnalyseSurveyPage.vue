@@ -27,6 +27,8 @@
         <AnalysePanel
         :analysis-responses="responseAnalysis"
         :analysis-responses-label="'Antworten'"
+        :analysis-respondents="respondentsAnalysis"
+        :analysis-respondents-label="'Respondents'"
         :analysis-complete="analysisComplete"
         />
       </div>
@@ -75,6 +77,7 @@ export default {
       selectedQuestion: null,
       analysisComplete: false,
       responseAnalysis: [],
+      respondentsAnalysis: [],
     };
   },
   computed: {
@@ -137,6 +140,7 @@ export default {
         });
         if (response.status === 200) {
           this.responseAnalysis = response.data.analysis_responses
+          this.respondentsAnalysis = response.data.analysis_respondents
           this.analysisComplete = true;
         }
       } catch (error) {
