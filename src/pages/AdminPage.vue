@@ -53,7 +53,7 @@ export default {
 
     async showAllUsers() {
       try {
-        const token = localStorage.getItem('token');
+        const token = this.$store.state.userToken;
         const response = await axios.get('http://127.0.0.1:8002/users/all/', {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -80,7 +80,7 @@ export default {
     },
     checkIfSelfSelected(id){
       this.selfSelected = false
-      const selfId = localStorage.getItem("user-id")
+      const selfId = this.$store.state.userId;
       if(selfId === id) {
         this.selfSelected = true
       }
@@ -90,7 +90,7 @@ export default {
       if (!this.selectedUser) return;
 
       try {
-        const token = localStorage.getItem('token');
+        const token = this.$store.state.userToken;
         const response = await axios.delete(`http://127.0.0.1:8002/users/${this.selectedUser.id}/`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -110,7 +110,7 @@ export default {
 
     async getSurveysByCreatorId(creatorId) {
       try {
-        const token = localStorage.getItem('token');
+        const token = this.$store.state.userToken;
         const response = await axios.get(`http://127.0.0.1:8002/surveys/by_creator/${creatorId}/`, {
           headers: {
             Authorization: `Bearer ${token}`,

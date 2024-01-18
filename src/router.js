@@ -53,7 +53,7 @@ const router = createRouter({
             component: RespondentPage,
         },
         {
-            path: '/response/:surveyId/:isAnonymous',
+            path: '/response/:isAnonymous',
             name: 'ResponsePage',
             component: ResponsePage,
         },

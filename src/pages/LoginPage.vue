@@ -59,9 +59,8 @@ export default {
         });
 
         if (response.status === 200) {
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem("user-id", response.data.id);
-
+          this.$store.commit('setUserToken', response.data.token);
+          this.$store.commit('setUserId', response.data.id);
           this.loginSuccess = true;
 
           setTimeout(() => {

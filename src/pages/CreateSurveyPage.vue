@@ -29,12 +29,12 @@
       </div>
       <div v-if="message" class="success-message">{{ message }}</div>
       <div v-if="selectedQuestion">
-      <BaseButton
-          :buttonText="'Frage löschen'"
-          :clickHandler="deleteSelectedQuestion"
-          :isDisabled="!selectedQuestion"
-          class="delete-btn"
-      />
+        <BaseButton
+            :buttonText="'Frage löschen'"
+            :clickHandler="deleteSelectedQuestion"
+            :isDisabled="!selectedQuestion"
+            class="delete-btn"
+        />
       </div>
     </div>
   </div>
@@ -64,19 +64,20 @@ export default {
       surveyDescription: "",
       questions: [],
       selectedQuestion: null,
-      message: ''
+      message: '',
+      createdSurveyId: null,
     };
   },
   methods: {
     async createSurvey(data) {
       try {
-        const token = localStorage.getItem('token');
-        const creator_id = localStorage.getItem('user-id');
+        const token = this.$store.state.userToken;
+        const creatorId = this.$store.state.userId;
 
         const response = await axios.post('http://127.0.0.1:8002/surveys/', {
           title: data.title,
           description: data.description,
-          creator_id: creator_id,
+          creator_id: creatorId,
         }, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +85,7 @@ export default {
         });
 
         if (response.status === 200) {
-          localStorage.setItem('survey-created-id', response.data.id);
+          this.createdSurveyId = response.data.id;
           this.surveyFormVisible = false;
         }
       } catch (error) {
@@ -94,8 +95,8 @@ export default {
 
     async createQuestion(questionData) {
       try {
-        const token = localStorage.getItem('token');
-        const surveyId = localStorage.getItem('survey-created-id');
+        const token = this.$store.state.userToken;
+        const surveyId = this.createdSurveyId;
 
         const question = {
           survey_id: surveyId,
@@ -127,7 +128,7 @@ export default {
       if (!this.selectedQuestion) return;
 
       try {
-        const token = localStorage.getItem('token');
+        const token = this.$store.state.userToken;
         const response = await axios.delete(`http://127.0.0.1:8002/questions/${this.selectedQuestion.id}/`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -147,8 +148,8 @@ export default {
 
     async getSurvey() {
       try {
-        const token = localStorage.getItem('token');
-        const surveyId = localStorage.getItem('survey-created-id');
+        const token = this.$store.state.userToken;
+        const surveyId = this.createdSurveyId;
 
         const response = await axios.get(`http://127.0.0.1:8002/surveys/${surveyId}/`, {
           headers: {
@@ -229,6 +230,7 @@ export default {
   background-color: #999;
   cursor: not-allowed;
 }
+
 .success-message {
   color: green;
   margin-top: 10px;

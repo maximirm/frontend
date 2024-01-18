@@ -45,8 +45,7 @@ export default {
   created(){
     this.isAnonymous = this.$route.params.isAnonymous;
   },
-
-  mounted() {
+  mounted(){
     this.getAllSurveys()
   },
   computed: {
@@ -74,7 +73,12 @@ export default {
       this.$router.push({name: 'LandingPage'});
     },
     respondToSurvey() {
-      this.$router.push({ name: 'ResponsePage', params: { surveyId: this.selectedSurvey.id, isAnonymous: this.isAnonymous}});
+      const selectedSurvey = this.selectedSurvey;
+      this.$store.commit('setSelectedSurvey', selectedSurvey);
+      this.$router.push({
+        name: 'ResponsePage',
+        params: { isAnonymous: this.isAnonymous},
+      });
     }
   }
 }

@@ -29,8 +29,7 @@ export default {
       this.$router.push({ name: 'RegisterPage' });
     },
     respondAnonymous() {
-      this.$router.push({ name: 'RespondentPage' });
-
+      this.$router.push({ name: 'RespondentPage', params: {isAnonymous: true} });
     },
   },
 };

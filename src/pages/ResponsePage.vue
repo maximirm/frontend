@@ -1,17 +1,20 @@
 <script>
 export default {
-  data(){
-    return{
-      surveyId: null,
+  data() {
+    return {
+      selectedSurvey: null,
+      questions: [],
     }
   },
-  created() {
-    this.surveyId = this.$route.params.surveyId;
+  mounted() {
+    this.selectedSurvey = this.$store.state.selectedSurvey;
   },
+  methods: {},
+
 };
 </script>
 <template>
-<div><p></p></div>
+  <div><p></p></div>
 </template>
 
 <style scoped>

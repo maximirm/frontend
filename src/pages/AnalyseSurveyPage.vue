@@ -75,7 +75,7 @@ export default {
   methods: {
     async showMySurveys() {
       try {
-        const creatorId = localStorage.getItem("user-id");// Setzen Sie die Creator-ID
+        const creatorId = this.$store.state.userId;
         this.surveys = await this.getSurveysByCreatorId(creatorId);
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfragen:', error);
@@ -94,7 +94,7 @@ export default {
     },
     async getSurveysByCreatorId(creatorId) {
       try {
-        const token = localStorage.getItem('token');
+        const token = this.$store.state.userToken;
         const response = await axios.get(`http://127.0.0.1:8002/surveys/by_creator/${creatorId}/`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -119,7 +119,7 @@ export default {
       if (!this.selectedSurvey) return;
 
       try {
-        const token = localStorage.getItem('token');
+        const token = this.$store.state.userToken;
         const response = await axios.delete(`http://127.0.0.1:8002/surveys/${this.selectedSurvey.id}/`, {
           headers: {
             Authorization: `Bearer ${token}`,
