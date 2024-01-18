@@ -23,6 +23,13 @@
             @questionSelected="selectQuestion"
         />
       </div>
+      <div v-if="analysisComplete" class="analyze-box">
+        <AnalysePanel
+        :analysis-responses="responseAnalysis"
+        :analysis-responses-label="'Antworten'"
+        :analysis-complete="analysisComplete"
+        />
+      </div>
     </div>
     <div v-if="selectedSurvey" class="button-container">
       <BaseButton
@@ -34,7 +41,9 @@
       <BaseButton
           :buttonText="'Frage analysieren'"
           :clickHandler="analyseQuestion"
-          :isDisabled="!selectedQuestion"
+          :isDisabled="!selectedQuestion
+          || this.selectedQuestion.type === 1
+          || this.selectedQuestion.responses.length === 0"
           class="show-questions-btn"
       />
     </div>
@@ -47,9 +56,11 @@ import ButtonGroup from "@/components/ButtonGroup.vue";
 import SurveyInfo from "@/components/SurveyInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import QuestionInfo from "@/components/QuestionInfo.vue";
+import AnalysePanel from "@/components/AnalysePanel.vue";
 
 export default {
   components: {
+    AnalysePanel,
     QuestionInfo,
     BaseButton,
     SurveyInfo,
@@ -62,6 +73,8 @@ export default {
       message: '',
       questions: [],
       selectedQuestion: null,
+      analysisComplete: false,
+      responseAnalysis: [],
     };
   },
   computed: {
@@ -82,6 +95,7 @@ export default {
       }
     },
     selectQuestion(question) {
+
       this.selectedQuestion = question;
     },
     selectSurvey(survey) {
@@ -107,14 +121,32 @@ export default {
         return [];
       }
     },
-    analyseQuestion() {
-      if (!this.selectedSurvey) return;
+    async analyseQuestion() {
 
+      if (!this.selectedQuestion){
+        return;
+      }
+      this.analysisComplete = false;
 
-      // Führen Sie hier die gewünschten Aktionen aus, um die Fragen für die ausgewählte Umfrage anzuzeigen.
-      // Zum Beispiel, Sie könnten die Fragen in einer neuen Ansicht anzeigen oder eine Modaldialogbox öffnen.
-      // Hier sollte Ihre Logik für die Anzeige der Fragen stehen.
+      try {
+        const token = this.$store.state.userToken;
+        const response = await axios.get(`http://127.0.0.1:8002/analyze/question/${this.selectedQuestion.id}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.status === 200) {
+          this.responseAnalysis = response.data.analysis_responses
+          this.analysisComplete = true;
+        }
+      } catch (error) {
+        this.analysisComplete = false;
+
+        console.error(error);
+      }
+
     },
+
     async deleteSelectedSurvey() {
       if (!this.selectedSurvey) return;
 
@@ -161,9 +193,10 @@ h2 {
 }
 
 .survey-list-box,
-.question-list-box {
+.question-list-box,
+.analyze-box {
   max-height: 600px;
-  width: 600px;
+  width: 500px;
   overflow-y: auto;
   margin-top: 20px;
   scrollbar-width: thin; /* Breite der Scrollleiste festlegen */
@@ -188,7 +221,8 @@ h2 {
 .delete-btn {
   background-color: #d32f2f; /* Lebendige rote Farbe für Löschen-Button */
 }
-.show-questions-btn{
+
+.show-questions-btn {
   background-color: #4CAF50;
 }
 
@@ -196,10 +230,12 @@ h2 {
   background-color: #999;
   cursor: not-allowed;
 }
+
 .button-container {
   display: flex;
   gap: 10px; /* Abstand zwischen den Buttons anpassen, wie gewünscht */
 }
+
 .list-container {
   display: flex;
   gap: 10px; /* Abstand zwischen den Buttons anpassen, wie gewünscht */

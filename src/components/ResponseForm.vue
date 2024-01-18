@@ -3,15 +3,18 @@
     <div class="form-container">
       <template v-if="question.type === 1">
         <!-- Frage mit Typ 1 (Input) -->
-        <InputLabel :label="question.question_text" :model="response" :inputId="question.id" @update:model="updateFreeTextResponse" />
+        <InputLabel :label="question.question_text" :model="response" :inputId="question.id"
+                    @update:model="updateFreeTextResponse"/>
       </template>
       <template v-else-if="question.type === 2">
         <!-- Frage mit Typ 2 (Dropdown) -->
-        <DropdownMenu :title="question.question_text" :options="question.options" :selectedOption="responseText" @update:selectedOption="updateDropdownResponse" />
+        <DropdownMenu :title="question.question_text" :options="question.options" :selectedOption="responseText"
+                      @update:selectedOption="updateDropdownResponse"/>
       </template>
       <template v-else-if="question.type === 3">
         <!-- Frage mit Typ 3 (Checkbox) -->
-        <CheckBox :title="question.question_text" :options="question.options"  :selectedOptions="responseText" @update:selectedOptions="handleCheckBoxResponse" />
+        <CheckBox :title="question.question_text" :options="question.options" :selectedOptions="responseText"
+                  @update:selectedOptions="handleCheckBoxResponse"/>
       </template>
 
       <BaseButton
@@ -50,10 +53,10 @@ export default {
     };
   },
   methods: {
-    updateFreeTextResponse(newResponse){
+    updateFreeTextResponse(newResponse) {
       this.responseText = [newResponse]
     },
-    updateDropdownResponse(newResponse){
+    updateDropdownResponse(newResponse) {
       this.responseText = [newResponse]
     },
     handleCheckBoxResponse(newResponse) {
@@ -66,15 +69,16 @@ export default {
       this.responseText = [];
     },
     async saveResponse() {
-      console.log(this.question)
-      const response ={
-        question_id: this.question.id,
-        respondent_id: this.isAnonymous ? null : this.$store.state.userId,
-        response_text: this.responseText
+      try {
+        const response = {
+          question_id: this.question.id,
+          respondent_id: this.isAnonymous ? null : this.$store.state.userId,
+          response_text: this.responseText
+        };
+        await axios.post('http://127.0.0.1:8002/responses/', response);
+      } catch (error) {
+        console.log(error)
       }
-      await axios.post('http://127.0.0.1:8002/responses/', response)
-
-
     },
   },
 };
@@ -87,7 +91,6 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
 
 
 .respond-btn {
