@@ -2,7 +2,8 @@
   <div class="dropdown">
     <label class="dropdown-label">{{ title }}</label>
     <select :value="selectedOption" @input="handleChange">
-      <option v-for="option in options" :key="option.value" :value="option.value">{{ option.label }}</option>
+      <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
+
     </select>
   </div>
 </template>

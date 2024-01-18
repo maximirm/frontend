@@ -31,6 +31,7 @@ export default {
   },
   watch: {
     localModel(newVal) {
+
       this.$emit('update:model', newVal);
     },
   },

@@ -138,11 +138,11 @@ export default {
         if (response.status === 200) {
           this.selectedQuestion = null;
           await this.getSurvey();
-          this.message = "Frage erfolgreich gelöscht"; // Setzen der Meldung
-          setTimeout(() => this.message = '', 3000); // Meldung nach 3 Sekunden ausblenden
+          this.message = "Frage erfolgreich gelöscht";
+          setTimeout(() => this.message = '', 3000);
         }
       } catch (error) {
-        this.message = "Fehler beim Löschen der Frage"; // Meldung im Fehlerfall
+        this.message = "Fehler beim Löschen der Frage";
       }
     },
 

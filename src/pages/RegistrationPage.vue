@@ -43,11 +43,7 @@ export default {
       return 'Benutzerrolle auswählen:'
     },
     dropdownOptions() {
-      return [
-        { label: 'Admin', value: 'admin', id: 'admin' },
-        { label: 'Editor', value: 'editor', id: 'editor' },
-        { label: 'Respondent', value: 'respondent', id: 'respondent' },
-      ];
+      return ['Admin', 'Editor', 'Respondent']
     },
     buttons() {
       return [
