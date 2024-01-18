@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     handleChange(event) {
+      console.log(this.selectedOption)
       this.$emit('update:selectedOption', event.target.value);
     },
   },

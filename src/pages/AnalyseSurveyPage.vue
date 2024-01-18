@@ -23,17 +23,19 @@
             @questionSelected="selectQuestion"
         />
       </div>
-      <div v-if="analysisComplete" class="analyze-box">
+      <div class="fixed-panel">
+        <!-- Fixiertes AnalysePanel -->
         <AnalysePanel
-        :analysis-responses="responseAnalysis"
-        :analysis-responses-label="'Antworten'"
-        :analysis-respondents="respondentsAnalysis"
-        :analysis-respondents-label="'Respondents'"
-        :analysis-complete="analysisComplete"
+            v-if="selectedSurvey"
+            :analysis-responses="responseAnalysis"
+            :analysis-responses-label="'Antworten'"
+            :analysis-respondents="respondentsAnalysis"
+            :analysis-respondents-label="'Respondents'"
+            :analysis-complete="analysisComplete"
         />
       </div>
     </div>
-    <div v-if="selectedSurvey" class="button-container">
+    <div class="button-container">
       <BaseButton
           :buttonText="'Umfrage löschen'"
           :clickHandler="deleteSelectedSurvey"
@@ -98,7 +100,9 @@ export default {
       }
     },
     selectQuestion(question) {
-
+      this.responseAnalysis = [];
+      this.respondentsAnalysis = [];
+      this.analysisComplete = false;
       this.selectedQuestion = question;
     },
     selectSurvey(survey) {
@@ -129,7 +133,6 @@ export default {
       if (!this.selectedQuestion){
         return;
       }
-      this.analysisComplete = false;
 
       try {
         const token = this.$store.state.userToken;
@@ -196,34 +199,50 @@ h2 {
   margin-top: 10px;
 }
 
+.list-container {
+  display: flex;
+  gap: 10px;
+}
+
 .survey-list-box,
-.question-list-box,
-.analyze-box {
-  max-height: 600px;
-  width: 500px;
+.question-list-box {
+  width: 500px; /* Setzen Sie die Breite nach Bedarf */
   overflow-y: auto;
-  margin-top: 20px;
-  scrollbar-width: thin; /* Breite der Scrollleiste festlegen */
-  scrollbar-color: #555 #444; /* Farbe der Scrollleiste festlegen */
+  height: 600px; /* Setzen Sie die maximale Höhe nach Bedarf */
+  scrollbar-width: thin;
+  scrollbar-color: #555 #444;
 }
 
 .survey-list-box::-webkit-scrollbar,
 .question-list-box::-webkit-scrollbar {
-  width: 8px; /* Breite der Webkit-Scrollleiste festlegen */
+  width: 8px;
 }
 
 .survey-list-box::-webkit-scrollbar-thumb,
 .question-list-box::-webkit-scrollbar-thumb {
-  background-color: #555; /* Farbe des Scrollbalken-Daumens festlegen */
+  background-color: #555;
 }
 
 .survey-list-box::-webkit-scrollbar-thumb:hover,
 .question-list-box::-webkit-scrollbar-thumb:hover {
-  background-color: #777; /* Farbe des Scrollbalken-Daumens bei Hover festlegen */
+  background-color: #777;
+}
+
+.fixed-panel {
+  /* Fixieren Sie das AnalysePanel auf der rechten Seite */
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: 500px; /* Setzen Sie die Breite nach Bedarf */
+  height: 600px; /* Setzen Sie die maximale Höhe nach Bedarf */
+  overflow-y: auto;
+  background-color: #333;
+
+  z-index: 1;
 }
 
 .delete-btn {
-  background-color: #d32f2f; /* Lebendige rote Farbe für Löschen-Button */
+  background-color: #d32f2f;
 }
 
 .show-questions-btn {
@@ -237,11 +256,6 @@ h2 {
 
 .button-container {
   display: flex;
-  gap: 10px; /* Abstand zwischen den Buttons anpassen, wie gewünscht */
-}
-
-.list-container {
-  display: flex;
-  gap: 10px; /* Abstand zwischen den Buttons anpassen, wie gewünscht */
+  gap: 10px;
 }
 </style>

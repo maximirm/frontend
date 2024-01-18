@@ -1,5 +1,5 @@
 <template>
-  <div v-if="analysisComplete">
+  <div v-if="analysisComplete" >
 
     <BarChart
         :analysisResponses="analysisResponses"

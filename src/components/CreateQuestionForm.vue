@@ -4,11 +4,11 @@
     <DropdownMenu
         :title="'Art'"
         :options="dropdownOptions"
-        :selectedOption="questionType"
+        :selectedOption="questionTypeText"
         @update:selectedOption="updateQuestionType"
     />
 
-    <InputLabel label="Fragestellung:" :model="questionText" input-id="questionText" @update:model="updateText" />
+    <InputLabel label="Fragestellung:" :model="questionText" input-id="questionText" @update:model="updateText"/>
 
     <div v-if="questionType === 2 || questionType === 3">
       <InputLabel label="Option 1:" :model="option1" input-id="option1" @update:model="updateO1"/>
@@ -16,14 +16,14 @@
       <InputLabel label="Option 3:" :model="option3" input-id="option3" @update:model="updateO3"/>
     </div>
 
-    <BaseButton :clickHandler="emitCreateQuestionEvent" :button-text="'Frage erstellen'" />
+    <BaseButton :clickHandler="emitCreateQuestionEvent" :button-text="'Frage erstellen'"/>
     <div v-if="creationError" class="error-message">
       {{ creationError }}
     </div>
     <div v-if="creationSuccess" class="success-message">
       Frage erfolgreich erstellt!
     </div>
-    <BaseButton :clickHandler="goToEditorPage" :button-text="'Erstellung der Umfrage abschließen'" />
+    <BaseButton :clickHandler="goToEditorPage" :button-text="'Erstellung der Umfrage abschließen'"/>
 
 
   </div>
@@ -40,14 +40,15 @@ export default {
     InputLabel,
     BaseButton,
   },
+  computed: {
+    dropdownOptions() {
+      return ['Freitext', 'Dropdown', 'Checkbox']
+    },
+  },
   data() {
     return {
-      dropdownOptions: [
-        { label: "Freitext", value: 1, id: 1 },
-        { label: "Dropdown", value: 2, id: 2 },
-        { label: "Checkbox", value: 3, id: 3 },
-      ],
       questionType: 1,
+      questionTypeText: 'Freitext',
       questionText: "",
       option1: "",
       option2: "",
@@ -58,7 +59,7 @@ export default {
   },
   methods: {
     goToEditorPage() {
-      this.$router.push({ name: 'EditorPage' });
+      this.$router.push({name: 'EditorPage'});
     },
     updateText(newVal) {
       this.questionText = newVal
@@ -113,7 +114,22 @@ export default {
 
     },
     updateQuestionType(selectedOption) {
-      this.questionType = parseInt(selectedOption);
+      this.questionTypeText = selectedOption;
+      switch (selectedOption) {
+        case "Freitext":
+          this.questionType = 1;
+          break;
+        case "Dropdown":
+          this.questionType = 2;
+          break;
+        case "Checkbox":
+          this.questionType = 3;
+          break;
+        default:
+          console.log('error updating question type')
+      }
+
+
     },
   },
 };
@@ -131,6 +147,7 @@ export default {
   color: red;
   margin-top: 10px;
 }
+
 .success-message {
   color: green;
   margin-top: 10px;
