@@ -18,7 +18,7 @@
       <BaseButton
           :buttonText="'Umfrage beantworten'"
           :clickHandler="respondToSurvey"
-          :isDisabled="!selectedSurvey"
+          :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
           class="respond-survey-btn"
       />
     </div>

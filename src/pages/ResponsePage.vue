@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="response-page">
     <div v-if="currentQuestionIndex < questions.length">
       <ResponseForm
           :question="questions[currentQuestionIndex]"
@@ -54,5 +54,12 @@ export default {
 </script>
 
 <style scoped>
-/* Stile für deine Komponente */
+.response-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #fff;
+}
 </style>
