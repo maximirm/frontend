@@ -8,6 +8,7 @@
           :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
           @surveySelected="selectSurvey(survey)"/>
     </div>
+
     <div class="file-export-container">
       <FileExport
           :pdfData="mappedDataForExport"

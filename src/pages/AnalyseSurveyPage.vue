@@ -12,12 +12,14 @@
 
     <div class="list-container">
       <SurveyList
-          :pdf-columns="pdfColumns"
-          :list-title="listTitle"
+          :pdf-columns="surveyPdfColumns"
+          :list-title="surveyListTitle"
           :surveys="surveys"
           :selectedSurvey="selectedSurvey"
           @surveySelected="selectSurvey"/>
       <QuestionList
+          :pdf-columns="questionPdfColumns"
+          :list-title="questionListTitle"
           :questions="questions"
           :selectedQuestion="selectedQuestion"
           @questionSelected="selectQuestion"/>
@@ -79,12 +81,18 @@ export default {
       analysisComplete: false,
       responseAnalysis: [],
       respondentsAnalysis: [],
-      pdfColumns: [
+      surveyListTitle: "Umfragenliste",
+      surveyPdfColumns: [
         {header: "Titel", dataKey: "title", width: 40},
         {header: "Beschreibung", dataKey: "description", width: 30},
         {header: "Anzahl der Fragen", dataKey: "numberOfQuestions", width: 50}
       ],
-      listTitle: "Umfragenliste"
+      questionListTitle: "Umfragenliste",
+      questionPdfColumns: [
+        {header: "Fragestellung", dataKey: "questionText", width: 40},
+        {header: "Optionen", dataKey: "options", width: 30},
+        {header: "Anzahl der Antworten", dataKey: "numberOfResponses", width: 50}
+      ]
     };
   },
   mounted() {
@@ -116,9 +124,10 @@ export default {
       this.analysisComplete = false;
       this.selectedQuestion = question;
     },
-    selectSurvey(survey) {
+    async selectSurvey(survey) {
       this.selectedSurvey = survey;
-      this.questions = this.selectedSurvey.questions;
+      this.questions = this.selectedSurvey.questions
+
     },
 
     async analyseQuestion() {

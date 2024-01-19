@@ -1,29 +1,61 @@
 <template>
+  <div class="question-list-container">
   <div class="question-list-box">
     <QuestionInfo
         v-for="(question, index) in questions"
         :key="index"
         :question="question"
         :isSelected="selectedQuestion && selectedQuestion.id === question.id"
-        @questionSelected="selectQuestion"
-    />
+        @questionSelected="selectQuestion(question)"/>
+  </div>
+
+  <div class="file-export-container">
+    <FileExport
+        :pdfData="mappedDataForExport"
+        :csvData="mappedDataForExport"
+        :pdfColumns="pdfColumns"
+        :fileName="listTitle"/>
+  </div>
   </div>
 </template>
 
 <script>
 import QuestionInfo from "@/components/QuestionInfo.vue";
+import FileExport from "@/components/FileExport.vue";
 
 export default {
   components: {
+    FileExport,
     QuestionInfo,
   },
   props: {
-    questions: Array, // Die Liste der Fragen, die von der übergeordneten Komponente übergeben wird
-    selectedQuestion: Object, // Das ausgewählte Frage-Objekt von der übergeordneten Komponente
+    questions: Array,
+    selectedQuestion: Object,
+    pdfColumns: {
+      type: Array,
+      required: true
+    },
+    listTitle: {
+      type: String,
+      required: true
+    },
+  },
+  computed: {
+    mappedDataForExport() {
+      const data = [];
+      this.questions.forEach((question) => {
+        const questionData = {
+          questionText: question.question_text,
+          options: question.options.join(" "),
+          numberOfResponses: question.responses.length,
+        };
+        data.push(questionData);
+      });
+      return data;
+    },
   },
   methods: {
     selectQuestion(question) {
-      // Die Methode zum Auswählen einer Frage wird von der übergeordneten Komponente aufgerufen
       this.$emit("questionSelected", question);
     },
   },
@@ -34,6 +66,17 @@ export default {
 
 h2 {
   margin-bottom: 20px;
+}
+
+.question-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-export-container {
+  margin-top: 20px;
+  flex-grow: 0;
 }
 
 .question-list-box {
