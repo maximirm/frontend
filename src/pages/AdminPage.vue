@@ -14,6 +14,7 @@
         v-if="message"
         :message-class="'success'"
         :message="message"/>
+
     <div class="user-list-box">
       <UserInfo
           v-for="user in users"
@@ -22,6 +23,7 @@
           :isSelected="selectedUser && user.id === selectedUser.id"
           @userSelected="selectUser"/>
     </div>
+
     <div v-if="selectedUser">
       <BaseButton
           :buttonText="'Delete Selected User'"
@@ -30,6 +32,7 @@
           class="delete-btn"/>
     </div>
   </div>
+
 </template>
 
 <script>
