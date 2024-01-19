@@ -3,44 +3,45 @@
     <h2>Admin</h2>
     <BaseButton
         :click-handler="displayListOfUsers"
-        :button-text="listTitle + buttonAction"
-    />
+        :button-text="listTitle + buttonAction"/>
     <FileExport
         :pdfData="mappedDataForExport"
         :csvData="mappedDataForExport"
         :pdfColumns="pdfColumns"
-        :fileName="listTitle"
-    />
+        :fileName="listTitle"/>
     <LogoutButton/>
-    <div v-if="message" class="success-message">{{ message }}</div>
+    <FeedbackMessage
+        v-if="message"
+        :message-class="'success'"
+        :message="message"/>
     <div class="user-list-box">
       <UserInfo
           v-for="user in users"
           :key="user.id"
           :user="user"
           :isSelected="selectedUser && user.id === selectedUser.id"
-          @userSelected="selectUser"
-      />
+          @userSelected="selectUser"/>
     </div>
     <div v-if="selectedUser">
       <BaseButton
           :buttonText="'Delete Selected User'"
           :clickHandler="deleteSelectedUser"
           :isDisabled="!selectedUser || selfSelected"
-          class="delete-btn"
-      />
+          class="delete-btn"/>
     </div>
   </div>
 </template>
+
 <script>
 import UserInfo from "@/components/UserInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import {deleteUser, fetchAllUsers, fetchSurveysByCreatorId} from "@/api/api";
 import FileExport from "@/components/FileExport.vue";
 import LogoutButton from "@/components/LogoutButton.vue";
+import FeedbackMessage from "@/components/FeedbackMessage.vue";
 
 export default {
-  components: {LogoutButton, FileExport, BaseButton, UserInfo},
+  components: {FeedbackMessage, LogoutButton, FileExport, BaseButton, UserInfo},
   data() {
     return {
       users: [],
@@ -105,7 +106,8 @@ export default {
       }
     },
     async deleteSelectedUser() {
-      await deleteUser(this.selectedUser.id)
+      const token = this.$store.state.userToken;
+      await deleteUser(token, this.selectedUser.id)
       this.message = "Benutzer erfolgreich gelöscht";
       setTimeout(() => this.message = '', 3000);
       this.selectedUser = null;
@@ -144,11 +146,6 @@ export default {
 
 .user-list-box::-webkit-scrollbar-thumb:hover {
   background-color: #777;
-}
-
-.success-message {
-  color: green;
-  margin-top: 10px;
 }
 
 .delete-btn {

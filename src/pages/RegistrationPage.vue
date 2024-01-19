@@ -1,34 +1,46 @@
 <template>
   <div class="login-page">
     <h2>Registrierung</h2>
-
-    <InputLabel label="Benutzername:" :model="username" inputId="username" :inputType="'text'" @update:model="updateName" />
-    <InputLabel label="Passwort:" :model="password" inputId="password" :inputType="'password'" @update:model="updatePassword" />
-    <DropdownMenu :title="dropdownTitle" :options="dropdownOptions" :selectedOption="role" @update:selectedOption="handleRoleChange" />
-
-
-
-    <ButtonGroup :buttons="buttons" />
-
-
-    <div v-if="registrationError" class="error-message">
-      {{ registrationError }}
-    </div>
-
-    <div v-if="registrationSuccess" class="success-message">
-      Erfolgreich registriert!
-    </div>
+    <InputLabel
+        :label="'Benutzername:'"
+        :model="username"
+        :inputId="'username'"
+        :inputType="'text'"
+        @update:model="updateName"/>
+    <InputLabel
+        :label="'Passwort:'"
+        :model="password"
+        :inputId="'password'"
+        :inputType="'password'"
+        @update:model="updatePassword"/>
+    <DropdownMenu
+        :title="dropdownTitle"
+        :options="dropdownOptions"
+        :selectedOption="role"
+        @update:selectedOption="handleRoleChange"/>
+    <BaseButton
+        :click-handler="register"
+        :button-text="'Registrieren'"
+        :is-disabled="username === '' || password===''"/>
+    <LogoutButton
+        :button-text="'Zurück zur Startseite'"/>
+    <FeedbackMessage
+        v-if="registrationAttempted"
+        :message="registrationError ? registrationError : 'Registrierung Erfolgreich'"
+        :message-class="registrationError ? 'error' : 'success'"/>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import ButtonGroup from "@/components/ButtonGroup.vue";
 import InputLabel from "@/components/InputLabel.vue";
 import DropdownMenu from "@/components/DropdownMenu.vue";
+import {registerUser} from "@/api/api";
+import BaseButton from "@/components/BaseButton.vue";
+import LogoutButton from "@/components/LogoutButton.vue";
+import FeedbackMessage from "@/components/FeedbackMessage.vue";
 
 export default {
-  components: {DropdownMenu, InputLabel, ButtonGroup},
+  components: {FeedbackMessage, LogoutButton, BaseButton, DropdownMenu, InputLabel},
   data() {
     return {
       username: '',
@@ -36,6 +48,7 @@ export default {
       role: 'admin',
       registrationSuccess: false,
       registrationError: null,
+      registrationAttempted: false,
     };
   },
   computed: {
@@ -45,71 +58,46 @@ export default {
     dropdownOptions() {
       return ['admin', 'editor', 'respondent']
     },
-    buttons() {
-      return [
-        {text: 'Registrieren', clickHandler: this.register},
-        {text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage},
-      ];
-    },
   },
   methods: {
     handleRoleChange(newRole) {
       this.role = newRole;
     },
-    updateName(newVal){
+    updateName(newVal) {
       this.username = newVal
     },
     updatePassword(newVal) {
       this.password = newVal
     },
     async register() {
+      this.registrationAttempted = true;
       this.registrationError = null;
-      if (this.username === '' && this.password === ''){
-
+      if (this.username === '' && this.password === '') {
         this.registrationError = `Fehler bei der Registrierung: Bitte Benutzername und Passwort eingeben`;
         return
       }
       try {
-        const response = await axios.post('http://127.0.0.1:8002/users/register/', {
-          name: this.username,
-          password: this.password,
-          role: this.role,
-        });
+        await registerUser(this.username, this.password, this.role)
+        this.registrationSuccess = true;
+        setTimeout(() => {
+          this.redirectToLandingPage();
+        }, 1000);
 
-        if (response.status === 200) {
-          this.registrationSuccess = true;
-          setTimeout(() => {
-            this.redirectToHomePage();
-          }, 1000);
-        }
       } catch (error) {
         if (error.response && error.response.data && error.response.data.detail) {
           this.registrationError = `Fehler bei der Registrierung: ${error.response.status} - ${error.response.data.detail}`;
-        } else {
-          this.registrationError = `Fehler bei der Registrierung: ${error.response.status} - ${JSON.stringify(error.response.data)}`;
         }
-
         this.registrationSuccess = false;
       }
     },
-
-    redirectToHomePage() {
-      this.$router.push({ name: 'LandingPage' });
+    redirectToLandingPage() {
+      this.$router.push({name: 'LandingPage'});
     },
   },
 };
 </script>
 
 <style scoped>
-.error-message {
-  color: red;
-  margin-top: 10px;
-}
-
-.success-message {
-  color: green;
-  margin-top: 10px;
-}
 
 .login-page {
   display: flex;

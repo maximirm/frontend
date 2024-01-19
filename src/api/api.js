@@ -13,9 +13,8 @@ export const fetchAllUsers = async (token) => {
     }
 }
 
-export async function deleteUser(userId) {
+export async function deleteUser(token, userId) {
     try {
-        const token = this.$store.state.userToken;
         await axios.delete(`${baseUrl}/users/${userId}/`, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -57,5 +56,26 @@ export const login = async (name, password) => {
         console.log("Error with login", error)
         throw error
     }
+}
+
+export async function registerUser(name, password, role) {
+
+    try {
+        await axios.post(
+            `${baseUrl}/users/register/`,
+            {
+                name: name,
+                password: password,
+                role: role
+            }
+        );
+
+
+    } catch (error) {
+        console.log("Error with registration", error);
+        throw error;
+    }
+
+
 }
 

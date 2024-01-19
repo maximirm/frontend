@@ -5,27 +5,23 @@
         :label="'Benutzername: '"
         :model="name"
         :inputId="'name'"
-        @update:model="updateName"
-    />
+        @update:model="updateName"/>
     <InputLabel
         :label="'Passwort:'"
         :model="password"
         :inputId="'password'"
         :inputType="'password'"
-        @update:model="updatePassword"
-    />
+        @update:model="updatePassword"/>
     <BaseButton
         :click-handler="login"
         :button-text="'Login'"
-        :is-disabled="name === '' || password === ''"
-    />
+        :is-disabled="name === '' || password === ''"/>
     <LogoutButton
       :button-text="'Zur Startseite'"/>
     <FeedbackMessage
         v-if="loginAttempted"
         :message="loginError ? loginError : 'Login erfolgreich!'"
-        :message-class="loginError ? 'error' : 'success'"
-    />
+        :message-class="loginError ? 'error' : 'success'"/>
   </div>
 </template>
 
