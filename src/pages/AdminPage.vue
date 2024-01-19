@@ -1,10 +1,8 @@
 <template>
   <div class="admin-page">
     <h2>Admin</h2>
-
-    <ButtonGroup :buttons="buttons" />
+    <ButtonGroup :buttons="buttons"/>
     <div v-if="message" class="success-message">{{ message }}</div>
-
     <div class="user-list-box">
       <UserInfo
           v-for="user in users"
@@ -15,24 +13,23 @@
       />
     </div>
     <div v-if="selectedUser">
-    <BaseButton
-        :buttonText="'Delete Selected User'"
-        :clickHandler="deleteSelectedUser"
-        :isDisabled="!selectedUser || selfSelected"
-        class="delete-btn"
-    />
+      <BaseButton
+          :buttonText="'Delete Selected User'"
+          :clickHandler="deleteSelectedUser"
+          :isDisabled="!selectedUser || selfSelected"
+          class="delete-btn"
+      />
     </div>
   </div>
 </template>
-
 <script>
-import axios from 'axios';
 import ButtonGroup from "@/components/ButtonGroup.vue";
 import UserInfo from "@/components/UserInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import {deleteUser, fetchAllUsers, fetchSurveysByCreatorId} from "@/api/api";
 
 export default {
-  components: {BaseButton, ButtonGroup, UserInfo },
+  components: {BaseButton, ButtonGroup, UserInfo},
   data() {
     return {
       users: [],
@@ -44,99 +41,51 @@ export default {
   computed: {
     buttons() {
       return [
-        { text: 'Benutzer anzeigen', clickHandler: this.showAllUsers },
-        { text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage },
+        {text: 'Benutzer anzeigen', clickHandler: this.displayListOfUsers},
+        {text: 'Zurück zur Startseite', clickHandler: this.redirectToLandingPage},
       ];
     },
   },
   methods: {
-
-    async showAllUsers() {
-      try {
-        const token = this.$store.state.userToken;
-        const response = await axios.get('http://127.0.0.1:8002/users/all/', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        this.users = await Promise.all(
-            response.data.map(async (user) => {
-              const surveys = await this.getSurveysByCreatorId(user.id);
-              return {
-                ...user,
-                numberOfSurveys: surveys.length,
-              };
-            })
-        );
-      } catch (error) {
-        console.error('Fehler beim Abrufen aller Benutzer:', error);
-      }
+    async displayListOfUsers() {
+      const token = this.$store.state.userToken;
+      const allUsers = await fetchAllUsers(token);
+      this.users = await Promise.all(
+          allUsers.map(async (user) => {
+            const surveys = await fetchSurveysByCreatorId(token, user.id)
+            return {
+              ...user,
+              numberOfSurveys: surveys.length,
+            };
+          })
+      );
     },
-
     selectUser(user) {
       this.checkIfSelfSelected(user.id)
       this.selectedUser = user;
     },
-    checkIfSelfSelected(id){
+    checkIfSelfSelected(id) {
       this.selfSelected = false
       const selfId = this.$store.state.userId;
-      if(selfId === id) {
+      if (selfId === id) {
         this.selfSelected = true
       }
     },
-
     async deleteSelectedUser() {
-      if (!this.selectedUser) return;
-
-      try {
-        const token = this.$store.state.userToken;
-        const response = await axios.delete(`http://127.0.0.1:8002/users/${this.selectedUser.id}/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.status === 200) {
-          this.selectedUser = null;
-          await this.showAllUsers();
-          this.message = "Benutzer erfolgreich gelöscht"; // Setzen der Meldung
-          setTimeout(() => this.message = '', 3000); // Meldung nach 3 Sekunden ausblenden
-        }
-      } catch (error) {
-        this.message = "Fehler beim Löschen des Benutzers"; // Meldung im Fehlerfall
-      }
+      await deleteUser(this.selectedUser.id)
+      this.message = "Benutzer erfolgreich gelöscht";
+      setTimeout(() => this.message = '', 3000);
+      this.selectedUser = null;
+      await this.displayListOfUsers();
     },
-
-    async getSurveysByCreatorId(creatorId) {
-      try {
-        const token = this.$store.state.userToken;
-        const response = await axios.get(`http://127.0.0.1:8002/surveys/by_creator/${creatorId}/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        return response.data;
-      } catch (error) {
-        console.error(`Fehler beim Abrufen der Umfragen für Benutzer mit ID ${creatorId}:`, error);
-        return [];
-      }
-    },
-
-    redirectToHomePage() {
-      this.$router.push({ name: 'LandingPage' });
+    redirectToLandingPage() {
+      this.$router.push({name: 'LandingPage'});
     },
   },
 };
 </script>
-
 <style scoped>
 
-.success-message {
-  color: green;
-  margin-top: 10px;
-}
 .admin-page {
   display: flex;
   flex-direction: column;
@@ -146,37 +95,33 @@ export default {
   color: #fff;
 }
 
-
-
 .user-list-box {
   max-height: 600px;
-  width: 600px;
+  width: 1200px;
   overflow-y: auto;
   margin-top: 20px;
-  scrollbar-width: thin; /* Breite der Scrollleiste festlegen */
-  scrollbar-color: #555 #444; /* Farbe der Scrollleiste festlegen */
+  scrollbar-width: thin;
+  scrollbar-color: #555 #444;
 }
 
 .user-list-box::-webkit-scrollbar {
-  width: 8px; /* Breite der Webkit-Scrollleiste festlegen */
+  width: 8px;
 }
 
 .user-list-box::-webkit-scrollbar-thumb {
-  background-color: #555; /* Farbe des Scrollbalken-Daumens festlegen */
+  background-color: #555;
 }
 
 .user-list-box::-webkit-scrollbar-thumb:hover {
-  background-color: #777; /* Farbe des Scrollbalken-Daumens bei Hover festlegen */
+  background-color: #777;
 }
 
-
+.success-message {
+  color: green;
+  margin-top: 10px;
+}
 
 .delete-btn {
-  background-color: #d32f2f; /* Lebendige rote Farbe für Löschen-Button */
-}
-
-.delete-btn:disabled {
-  background-color: #999;
-  cursor: not-allowed;
+  background-color: #d32f2f;
 }
 </style>

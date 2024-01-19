@@ -4,12 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  // Hier kannst du weitere Konfigurationen hinzufügen
-}
-</script>
-
 <style>
 body {
   margin: 0;
@@ -19,4 +13,5 @@ body {
   width: 100%;
   height: 100%;
 }
+
 </style>
