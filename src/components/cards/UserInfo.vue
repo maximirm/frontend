@@ -48,6 +48,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 
 .key-value-pair p {
