@@ -1,13 +1,20 @@
 <template>
   <div class="create-survey-page">
     <h2>Umfrage Erstellen</h2>
-
-    <InputLabel label="Titel:" :model="title" input-id="title" @update:model="updateTitle"/>
-    <InputLabel label="Beschreibung:" :model="description" input-id="description" @update:model="updateDescription"/>
-
-    <BaseButton :clickHandler="emitCreateSurveyEvent" :button-text="'Umfrage erstellen'" />
-
-
+    <InputLabel
+        :label="'Titel:'"
+        :model="title"
+        :input-id="'title'"
+        @update:model="updateTitle"/>
+    <InputLabel
+        :label="'Beschreibung:'"
+        :model="description"
+        :input-id="'description'"
+        @update:model="updateDescription"/>
+    <BaseButton
+        :click-handler="emitCreateSurveyEvent"
+        :button-text="'Umfrage erstellen'"
+        :is-disabled="title === '' || description === ''"/>
   </div>
 </template>
 
@@ -49,14 +56,11 @@ export default {
 
 <style scoped>
 .create-survey-page {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100px;
   background-color: #333;
   color: #fff;
 }
-
-
 </style>
