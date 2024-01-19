@@ -44,3 +44,18 @@ export const fetchSurveysByCreatorId = async (token, creatorId) => {
     }
 }
 
+export const login = async (name, password) => {
+    try {
+        const response = await axios.post(
+            `${baseUrl}/users/login/`,
+            {
+                name: name,
+                password: password,
+            });
+        return response.data;
+    } catch (error) {
+        console.log("Error with login", error)
+        throw error
+    }
+}
+
