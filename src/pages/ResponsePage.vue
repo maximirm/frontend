@@ -9,6 +9,9 @@
       <div class="progress-bar-container">
         <div class="progress-bar" :style="{ width: progressBarWidth }"></div>
       </div>
+      <BaseButton
+          :click-handler="redirectToRespondentPage"
+          :button-text="'Zurück'"/>
 
     </div>
     <div v-else>
@@ -19,9 +22,10 @@
 
 <script>
 import ResponseForm from "@/components/ResponseForm.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 export default {
-  components: { ResponseForm },
+  components: {BaseButton, ResponseForm },
   data() {
     return {
       selectedSurvey: null,
@@ -39,11 +43,6 @@ export default {
     },
   },
 
-  created() {
-    this.selectedSurvey = this.$store.state.selectedSurvey;
-    this.questions = this.selectedSurvey.questions;
-    this.isAnonymous = this.$route.params.isAnonymous;
-  },
   methods: {
     handleResponseSubmitted() {
 
@@ -64,6 +63,15 @@ export default {
       // Du kannst hier den Abschluss der Umfrage behandeln.
       console.log("Umfrage abschließen");
     },
+    redirectToRespondentPage(){
+      this.$router.push({ name: 'RespondentPage', params: {isAnonymous: this.isAnonymous} });
+
+    }
+  },
+  created() {
+    this.selectedSurvey = this.$store.state.selectedSurvey;
+    this.questions = this.selectedSurvey.questions;
+    this.isAnonymous = this.$route.params.isAnonymous;
   },
 };
 </script>

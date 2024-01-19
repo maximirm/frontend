@@ -34,6 +34,13 @@ export default {
 
       this.$emit('update:model', newVal);
     },
+    model: {
+      handler(newVal) {
+        // Wenn sich das Modell von außen ändert (z.B. nach dem emitCreateQuestionEvent), aktualisiere auch die localModel-Daten.
+        this.localModel = newVal;
+      },
+      immediate: true, // Sofortige Ausführung, um die initialen Daten zu setzen
+    },
   },
 };
 </script>

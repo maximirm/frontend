@@ -50,10 +50,12 @@ export default {
   data() {
     return {
       responseText: [],
+      response: '',
     };
   },
   methods: {
     updateFreeTextResponse(newResponse) {
+      this.response = newResponse
       this.responseText = [newResponse]
     },
     updateDropdownResponse(newResponse) {
@@ -67,6 +69,7 @@ export default {
       this.saveResponse()
       this.$emit("responseTextSubmitted");
       this.responseText = [];
+      this.response = '';
     },
     async saveResponse() {
       try {
