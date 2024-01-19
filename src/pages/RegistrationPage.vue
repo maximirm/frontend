@@ -34,13 +34,19 @@
 <script>
 import InputLabel from "@/components/utils/InputLabel.vue";
 import DropdownMenu from "@/components/utils/DropdownMenu.vue";
-import {registerUser} from "@/api/userApi";
 import BaseButton from "@/components/buttons/BaseButton.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import {registerUser} from "@/api/userApi";
 
 export default {
-  components: {FeedbackMessage, LogoutButton, BaseButton, DropdownMenu, InputLabel},
+  components: {
+    FeedbackMessage,
+    LogoutButton,
+    BaseButton,
+    DropdownMenu,
+    InputLabel
+  },
   data() {
     return {
       username: '',
@@ -53,10 +59,10 @@ export default {
   },
   computed: {
     dropdownTitle() {
-      return 'Benutzerrolle auswählen:'
+      return 'Benutzerrolle auswählen:';
     },
     dropdownOptions() {
-      return ['admin', 'editor', 'respondent']
+      return ['admin', 'editor', 'respondent'];
     },
   },
   methods: {
@@ -64,20 +70,20 @@ export default {
       this.role = newRole;
     },
     updateName(newVal) {
-      this.username = newVal
+      this.username = newVal;
     },
     updatePassword(newVal) {
-      this.password = newVal
+      this.password = newVal;
     },
     async register() {
       this.registrationAttempted = true;
       this.registrationError = null;
       if (this.username === '' && this.password === '') {
         this.registrationError = `Fehler bei der Registrierung: Bitte Benutzername und Passwort eingeben`;
-        return
+        return;
       }
       try {
-        await registerUser(this.username, this.password, this.role)
+        await registerUser(this.username, this.password, this.role);
         this.registrationSuccess = true;
         setTimeout(() => {
           this.redirectToLandingPage();

@@ -124,7 +124,6 @@ export default {
           console.log('error updating question type')
       }
     },
-
     isFreetextQuestion() {
       return this.questionType === 1;
     },
@@ -173,6 +172,7 @@ export default {
 </script>
 
 <style scoped>
+
 .create-question-form {
   display: flex;
   flex-direction: column;

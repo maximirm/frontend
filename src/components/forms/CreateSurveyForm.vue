@@ -49,7 +49,6 @@ export default {
     redirectToEditorPage() {
       this.$router.push({ name: 'EditorPage' });
     },
-
     emitCreateSurveyEvent() {
       this.$emit('create-survey', {
         title: this.title,
@@ -61,6 +60,7 @@ export default {
 </script>
 
 <style scoped>
+
 .create-survey-page {
   flex-direction: column;
   align-items: center;
@@ -69,4 +69,5 @@ export default {
   background-color: #333;
   color: #fff;
 }
+
 </style>

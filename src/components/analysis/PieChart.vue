@@ -4,11 +4,11 @@
   </div>
 </template>
 
-<script >
+<script>
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
 import {Pie} from 'vue-chartjs'
 
-ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default {
   name: 'PieChart',
@@ -32,10 +32,6 @@ export default {
   },
   data() {
     return {
-      // analysisRespondents:{
-      //   'total': 3,
-      //   'anonym': 1,
-      // },
       chartData: {
         labels: Object.keys(this.analysisRespondents),
         datasets: [
@@ -49,9 +45,7 @@ export default {
       chartOptions: {
         responsive: true,
         maintainAspectRatio: false
-
       },
-
     }
   },
 }

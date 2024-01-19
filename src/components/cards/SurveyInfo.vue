@@ -1,13 +1,17 @@
 <template>
-  <div :class="{ 'selected-survey': isSelected }" @click="selectSurvey">
+  <div
+      :class="{ 'selected-survey': isSelected }"
+      @click="selectSurvey">
     <div class="survey-item">
       <div class="survey-info">
         <div class="key-value-pair">
           <p>{{ survey.title }}</p>
         </div>
+
         <div class="key-value-pair">
           <p>{{ survey.description }}</p>
         </div>
+
         <div class="key-value-pair">
           <p>{{ survey.questions.length }} Fragen</p>
         </div>
@@ -37,6 +41,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .key-value-pair p {
   margin: 1px 0;
@@ -64,7 +69,6 @@ export default {
   margin-right: 15px;
   width: 200px; /* Feste Breite für jedes Paar */
 }
-
 
 .selected-survey {
   background-color: #2e2e2e;

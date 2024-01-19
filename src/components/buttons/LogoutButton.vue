@@ -1,8 +1,9 @@
 <template>
- <div>
-   <BaseButton :click-handler="logout" :button-text="buttonText"/>
- </div>
+    <BaseButton
+        :click-handler="logout"
+        :button-text="buttonText"/>
 </template>
+
 <script>
 import BaseButton from "@/components/buttons/BaseButton.vue";
 
@@ -12,12 +13,12 @@ export default {
   props: {
     buttonText: {
       type: String,
-      default: 'Logout'
+      default: 'Logout',
     }
   },
   methods: {
     logout() {
-      this.$store.dispatch('resetStore')
+      this.$store.dispatch('resetStore');
       this.$router.push({name: 'LandingPage'});
     },
   }
@@ -25,6 +26,3 @@ export default {
 
 </script>
 
-<style scoped>
-
-</style>

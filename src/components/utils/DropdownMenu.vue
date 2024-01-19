@@ -1,9 +1,18 @@
 <template>
   <div class="dropdown">
-    <label class="dropdown-label">{{ title }}</label>
-    <select :value="selectedOption" @input="handleChange">
-      <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
+    <label class="dropdown-label">
+      {{ title }}
+    </label>
 
+    <select
+        :value="selectedOption"
+        @input="handleChange">
+      <option
+          v-for="option in options"
+          :key="option"
+          :value="option">
+        {{ option }}
+      </option>
     </select>
   </div>
 </template>
@@ -25,7 +34,6 @@ export default {
   },
   methods: {
     handleChange(event) {
-      console.log(this.selectedOption)
       this.$emit('update:selectedOption', event.target.value);
     },
   },
@@ -33,6 +41,7 @@ export default {
 </script>
 
 <style scoped>
+
 .dropdown {
   display: flex;
   flex-direction: column;
@@ -52,4 +61,5 @@ select {
   font-size: 14px;
   border-radius: 4px;
 }
+
 </style>

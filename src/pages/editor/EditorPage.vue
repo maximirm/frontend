@@ -1,7 +1,8 @@
 <template>
   <div class="editor-page">
     <h2>Editor</h2>
-    <ButtonGroup :buttons="buttons" />
+    <ButtonGroup
+        :buttons="buttons"/>
     <LogoutButton/>
   </div>
 </template>
@@ -11,7 +12,10 @@ import ButtonGroup from "@/components/buttons/ButtonGroup.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 
 export default {
-  components: {LogoutButton, ButtonGroup},
+  components: {
+    LogoutButton,
+    ButtonGroup
+  },
   computed: {
     buttons() {
       return [
@@ -22,17 +26,18 @@ export default {
   },
   methods: {
     goToCreateSurveyPage() {
-      this.$router.push({ name: 'CreateSurveyPage' });
+      this.$router.push({name: 'CreateSurveyPage'});
     },
 
     goToAnalyseSurveyPage() {
-      this.$router.push({ name: 'AnalyseSurveyPage' });
+      this.$router.push({name: 'AnalyseSurveyPage'});
     },
   },
 };
 </script>
 
 <style scoped>
+
 .editor-page {
   display: flex;
   flex-direction: column;

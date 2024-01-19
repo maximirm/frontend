@@ -62,18 +62,18 @@ export default {
   },
   methods: {
     updateFreeTextResponse(newResponse) {
-      this.response = newResponse
-      this.responseText = [newResponse]
+      this.response = newResponse;
+      this.responseText = [newResponse];
     },
     updateDropdownResponse(newResponse) {
-      this.responseText = [newResponse]
+      this.responseText = [newResponse];
     },
     handleCheckBoxResponse(newResponse) {
       this.responseText = newResponse;
     },
     submitResponse() {
-      console.log("submit: ", this.responseText)
-      this.saveResponse()
+      console.log("submit: ", this.responseText);
+      this.saveResponse();
       this.$emit("responseTextSubmitted");
       this.responseText = [];
       this.response = '';
@@ -83,11 +83,11 @@ export default {
         const response = {
           question_id: this.question.id,
           respondent_id: this.isAnonymous ? null : this.$store.state.userId,
-          response_text: this.responseText
+          response_text: this.responseText,
         };
-        await postResponse(response)
+        await postResponse(response);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
   },
@@ -111,4 +111,5 @@ export default {
   background-color: #999;
   cursor: not-allowed;
 }
+
 </style>

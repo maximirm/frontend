@@ -18,13 +18,12 @@ const store = createStore({
         },
     },
     actions: {
-        resetStore({ commit }) {
+        resetStore({commit}) {
             commit('setSelectedSurvey', null);
             commit('setUserToken', null);
             commit('setUserId', null);
         },
     }
-
 })
 
 export default store

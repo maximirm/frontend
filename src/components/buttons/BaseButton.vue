@@ -1,5 +1,10 @@
 <template>
-  <button @click="handleClick" class="button" :disabled="isDisabled">{{ buttonText }}</button>
+  <button
+      @click="handleClick"
+      class="button"
+      :disabled="isDisabled">
+    {{ buttonText }}
+  </button>
 </template>
 
 <script>

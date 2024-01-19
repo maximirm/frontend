@@ -1,8 +1,10 @@
 <template>
   <div class="landing-page">
     <h1>Bachelorarbeit Maxim Irmscher</h1>
+    <h2>Matr: 548444</h2>
+
     <ButtonGroup
-        :buttons="buttons" />
+        :buttons="buttons"/>
   </div>
 </template>
 
@@ -10,25 +12,27 @@
 import ButtonGroup from "@/components/buttons/ButtonGroup.vue";
 
 export default {
-  components: {ButtonGroup},
+  components: {
+    ButtonGroup
+  },
   computed: {
     buttons() {
       return [
         {text: 'Login', clickHandler: this.redirectToLogin},
         {text: 'Registrieren', clickHandler: this.redirectToRegister},
-        {text: 'Umfragen anonym beantworten', clickHandler: this.respondAnonymous},
+        {text: 'Umfrage anonym beantworten', clickHandler: this.respondAnonymous},
       ];
     },
   },
   methods: {
     redirectToLogin() {
-      this.$router.push({ name: 'LoginPage' });
+      this.$router.push({name: 'LoginPage'});
     },
     redirectToRegister() {
-      this.$router.push({ name: 'RegisterPage' });
+      this.$router.push({name: 'RegisterPage'});
     },
     respondAnonymous() {
-      this.$router.push({ name: 'RespondentPage', params: {isAnonymous: true} });
+      this.$router.push({name: 'RespondentPage', params: {isAnonymous: true}});
     },
   },
 };

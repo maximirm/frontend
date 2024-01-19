@@ -1,21 +1,22 @@
 <template>
   <div class="question-list-container">
-  <div class="question-list-box">
-    <QuestionInfo
-        v-for="(question, index) in questions"
-        :key="index"
-        :question="question"
-        :isSelected="selectedQuestion && selectedQuestion.id === question.id"
-        @questionSelected="selectQuestion(question)"/>
-  </div>
+    <div class="question-list-box">
+      <QuestionInfo
+          v-for="(question, index) in questions"
+          :key="index"
+          :question="question"
+          :isSelected="selectedQuestion && selectedQuestion.id === question.id"
+          @questionSelected="selectQuestion(question)"/>
+    </div>
 
-  <div class="file-export-container" v-if="showFileExport">
-    <FileExport
-        :pdfData="mappedDataForExport"
-        :csvData="mappedDataForExport"
-        :pdfColumns="pdfColumns"
-        :fileName="listTitle"/>
-  </div>
+    <div class="file-export-container"
+         v-if="showFileExport">
+      <FileExport
+          :pdfData="mappedDataForExport"
+          :csvData="mappedDataForExport"
+          :pdfColumns="pdfColumns"
+          :fileName="listTitle"/>
+    </div>
   </div>
 </template>
 
@@ -63,8 +64,8 @@ export default {
   },
 };
 </script>
-<style scoped>
 
+<style scoped>
 
 h2 {
   margin-bottom: 20px;

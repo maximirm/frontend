@@ -1,7 +1,14 @@
 <template>
   <div class="input-label-container">
-    <label :for="inputId">{{ label }}</label>
-    <input v-model="localModel" :type="inputType" :id="inputId" />
+    <label
+        :for="inputId">
+      {{ label }}
+    </label>
+
+    <input
+        v-model="localModel"
+        :type="inputType"
+        :id="inputId"/>
   </div>
 </template>
 
@@ -31,21 +38,20 @@ export default {
   },
   watch: {
     localModel(newVal) {
-
       this.$emit('update:model', newVal);
     },
     model: {
       handler(newVal) {
-        // Wenn sich das Modell von außen ändert (z.B. nach dem emitCreateQuestionEvent), aktualisiere auch die localModel-Daten.
         this.localModel = newVal;
       },
-      immediate: true, // Sofortige Ausführung, um die initialen Daten zu setzen
+      immediate: true,
     },
   },
 };
 </script>
 
 <style scoped>
+
 .input-label-container {
   display: flex;
   flex-direction: column;
@@ -60,4 +66,5 @@ input {
   padding: 8px;
   width: 180px;
 }
+
 </style>

@@ -1,6 +1,10 @@
 <template>
   <div class="button-group">
-    <BaseButton v-for="button in buttons" :key="button.text" :buttonText="button.text" :clickHandler="button.clickHandler" />
+    <BaseButton
+        v-for="button in buttons"
+        :key="button.text"
+        :buttonText="button.text"
+        :clickHandler="button.clickHandler"/>
   </div>
 </template>
 
@@ -25,7 +29,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start; /* Hier hinzugefügt */
+  justify-content: flex-start;
 }
 
 </style>

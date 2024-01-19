@@ -9,7 +9,8 @@
           @surveySelected="selectSurvey(survey)"/>
     </div>
 
-    <div class="file-export-container" v-if="showFileExport">
+    <div class="file-export-container"
+         v-if="showFileExport">
       <FileExport
           :pdfData="mappedDataForExport"
           :csvData="mappedDataForExport"
@@ -29,8 +30,12 @@ export default {
     SurveyInfo,
   },
   props: {
-    surveys: Array,
-    selectedSurvey: Object,
+    surveys: {
+      type: Array,
+    },
+    selectedSurvey: {
+      type: Object,
+    },
     pdfColumns: {
       type: Array,
     },
@@ -65,6 +70,7 @@ export default {
 </script>
 
 <style scoped>
+
 h2 {
   margin-bottom: 20px;
 }
@@ -100,4 +106,5 @@ h2 {
 .survey-list-box::-webkit-scrollbar-thumb:hover {
   background-color: #777;
 }
+
 </style>

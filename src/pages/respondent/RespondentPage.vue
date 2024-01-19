@@ -20,8 +20,8 @@
 
 <script>
 import BaseButton from "@/components/buttons/BaseButton.vue";
-import {fetchAllSurveys} from "@/api/surveyApi";
 import SurveyList from "@/components/lists/SurveyList.vue";
+import {fetchAllSurveys} from "@/api/surveyApi";
 
 export default {
   name: "RespondentPage",
@@ -38,16 +38,16 @@ export default {
     this.isAnonymous = this.$route.params.isAnonymous;
   },
   mounted() {
-    this.displaySurveys()
+    this.displaySurveys();
   },
   methods: {
     selectSurvey(survey) {
-      this.selectedSurvey = survey
+      this.selectedSurvey = survey;
     },
     async displaySurveys() {
       try {
         this.surveys = await fetchAllSurveys();
-        this.surveys = this.filterSurveysWithNoQuestions(this.surveys)
+        this.surveys = this.filterSurveysWithNoQuestions(this.surveys);
       } catch (error) {
         this.surveys = [];
       }
@@ -95,4 +95,5 @@ export default {
   display: flex;
   gap: 10px;
 }
+
 </style>

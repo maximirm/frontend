@@ -74,16 +74,16 @@ export default {
         const survey = {
           title: data.title,
           description: data.description,
-          creator_id: creatorId
+          creator_id: creatorId,
         }
-        const response = await postSurvey(token, survey)
+        const response = await postSurvey(token, survey);
 
         this.createdSurveyId = response.id;
         this.surveyFormVisible = false;
       } catch (error) {
-        console.log("error", error)
-        alert("Fehler beim Erstellen der Umfrage - Bitte neu einloggen")
-        this.redirectToLandingPage()
+        console.log("error", error);
+        alert("Fehler beim Erstellen der Umfrage - Bitte neu einloggen");
+        this.redirectToLandingPage();
       }
     },
     redirectToLandingPage() {
@@ -104,10 +104,10 @@ export default {
 
         await postQuestion(token, question);
         this.questionOrder++;
-        await this.getSurvey()
+        await this.getSurvey();
       } catch (error) {
-        alert("Fehler beim Erstellen der Frage - Bitte neu einloggen")
-        this.redirectToLandingPage()
+        alert("Fehler beim Erstellen der Frage - Bitte neu einloggen");
+        this.redirectToLandingPage();
       }
     },
     selectQuestion(question) {
@@ -126,17 +126,14 @@ export default {
         setTimeout(() => this.message = '', 3000);
       } catch (error) {
         alert("Fehler beim Löschen der Frage");
-        this.redirectToLandingPage()
+        this.redirectToLandingPage();
 
       }
     },
-
     async getSurvey() {
       try {
         const token = this.$store.state.userToken;
-
-        const surveyData = await fetchSurvey(token, this.createdSurveyId)
-
+        const surveyData = await fetchSurvey(token, this.createdSurveyId);
         this.surveyTitle = surveyData.title;
         this.surveyDescription = surveyData.description;
         this.questions = surveyData.questions;
@@ -149,6 +146,7 @@ export default {
 </script>
 
 <style scoped>
+
 .create-survey-page {
   display: flex;
   justify-content: center;

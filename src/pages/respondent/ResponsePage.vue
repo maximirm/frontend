@@ -1,15 +1,14 @@
 <template>
-  <div class="response-page">
-    <div v-if="currentQuestionIndex < questions.length">
-      <ResponseForm
-          :question="questions[currentQuestionIndex]"
-          @responseTextSubmitted="handleResponseSubmitted"/>
-      <ProgressBar
-          :progressBarWidth="progressBarWidth"/>
-      <BaseButton
-          :click-handler="redirectToRespondentPage"
-          :button-text="'Zurück'"/>
-    </div>
+  <div class="response-page"
+       v-if="currentQuestionIndex < questions.length">
+    <ResponseForm
+        :question="questions[currentQuestionIndex]"
+        @responseTextSubmitted="handleResponseSubmitted"/>
+    <ProgressBar
+        :progressBarWidth="progressBarWidth"/>
+    <BaseButton
+        :click-handler="redirectToRespondentPage"
+        :button-text="'Zurück'"/>
   </div>
 </template>
 
@@ -19,7 +18,11 @@ import BaseButton from "@/components/buttons/BaseButton.vue";
 import ProgressBar from "@/components/utils/ProgressBar.vue";
 
 export default {
-  components: {ProgressBar, BaseButton, ResponseForm},
+  components: {
+    ProgressBar,
+    BaseButton,
+    ResponseForm
+  },
   data() {
     return {
       selectedSurvey: null,
@@ -40,7 +43,7 @@ export default {
       if (this.currentQuestionIndex < this.questions.length - 1) {
         this.currentQuestionIndex++;
       } else {
-        alert("Umfrage abgeschlossen. Vielen Dank")
+        alert("Umfrage abgeschlossen. Vielen Dank");
         this.$router.push({name: 'RespondentPage', params: {isAnonymous: this.isAnonymous}});
       }
     },

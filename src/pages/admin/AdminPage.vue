@@ -13,6 +13,7 @@
         :users="users"
         :selectedUser="selectedUser"
         @userSelected="selectUser"/>
+
     <div v-if="selectedUser">
       <BaseButton
           :buttonText="'Delete Selected User'"
@@ -32,7 +33,12 @@ import {fetchSurveysByCreatorId} from "@/api/surveyApi";
 import UserList from "@/components/lists/UserList.vue";
 
 export default {
-  components: {UserList, FeedbackMessage, LogoutButton, BaseButton},
+  components: {
+    UserList,
+    FeedbackMessage,
+    LogoutButton,
+    BaseButton
+  },
   data() {
     return {
       users: [],
@@ -63,7 +69,7 @@ export default {
         };
         data.push(userData);
       });
-      return data
+      return data;
     },
   },
   methods: {
@@ -73,7 +79,7 @@ export default {
         const allUsers = await fetchAllUsers(token);
         this.users = await Promise.all(
             allUsers.map(async (user) => {
-              const surveys = await fetchSurveysByCreatorId(token, user.id)
+              const surveys = await fetchSurveysByCreatorId(token, user.id);
               return {
                 ...user,
                 numberOfSurveys: surveys.length,
@@ -81,24 +87,24 @@ export default {
             })
         );
       } catch (error) {
-        alert("Fehler im Laden der Nutzer - Bitte neu einloggen")
-        this.redirectToLandingPage()
+        alert("Fehler im Laden der Nutzer - Bitte neu einloggen");
+        this.redirectToLandingPage();
       }
     },
     selectUser(user) {
-      this.checkIfSelfSelected(user.id)
+      this.checkIfSelfSelected(user.id);
       this.selectedUser = user;
     },
     checkIfSelfSelected(id) {
-      this.selfSelected = false
+      this.selfSelected = false;
       const selfId = this.$store.state.userId;
       if (selfId === id) {
-        this.selfSelected = true
+        this.selfSelected = true;
       }
     },
     async deleteSelectedUser() {
       const token = this.$store.state.userToken;
-      await deleteUser(token, this.selectedUser.id)
+      await deleteUser(token, this.selectedUser.id);
       this.message = "Benutzer erfolgreich gelöscht";
       setTimeout(() => this.message = '', 3000);
       this.selectedUser = null;
@@ -125,4 +131,5 @@ export default {
 .delete-btn {
   background-color: #d32f2f;
 }
+
 </style>

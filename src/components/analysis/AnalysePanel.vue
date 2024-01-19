@@ -1,18 +1,13 @@
 <template>
   <div v-if="analysisComplete" >
-
     <BarChart
         :analysisResponses="analysisResponses"
         :label="analysisResponsesLabel"
-        :analysis-complete="analysisComplete"
-    />
+        :analysis-complete="analysisComplete"/>
     <PieChart
         :label="analysisRespondentsLabel"
         :analysis-complete="analysisComplete"
-        :analysis-respondents="analysisRespondents"
-    >
-
-    </PieChart>
+        :analysis-respondents="analysisRespondents"/>
   </div>
 </template>
 
@@ -22,8 +17,10 @@ import PieChart from "@/components/analysis/PieChart.vue";
 
 export default {
   name: "AnalysePanel",
-  components: {PieChart, BarChart},
-
+  components: {
+    PieChart,
+    BarChart
+  },
   props: {
     analysisResponses: {
       type: Object,
@@ -49,8 +46,3 @@ export default {
   }
 }
 </script>
-
-
-<style scoped>
-
-</style>

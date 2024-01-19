@@ -24,7 +24,7 @@ export const fetchAllSurveys = async () => {
             `${baseUrl}/surveys/all/`);
         return response.data;
     } catch (error) {
-        console.log("Error fetching all Surveys", error)
+        console.log("Error fetching all Surveys", error);
         throw (error);
     }
 }
@@ -42,7 +42,7 @@ export const fetchSurveysByCreatorId = async (token, creatorId) => {
             });
         return response.data;
     } catch (error) {
-        console.log("Error fetching Surveys by CreatorId", error)
+        console.log("Error fetching Surveys by CreatorId", error);
         throw (error);
     }
 }
@@ -59,11 +59,11 @@ export const postSurvey = async (token, survey) => {
                 },
             }
         );
-        console.log(response)
-        return response.data
+        console.log(response);
+        return response.data;
 
     } catch (error) {
-        console.log("Error posting Survey", error)
+        console.log("Error posting Survey", error);
         throw error;
     }
 }
@@ -78,7 +78,7 @@ export async function deleteSurvey(token, surveyId) {
             },
         });
     } catch (error) {
-        console.log("Error deleting survey", error)
+        console.log("Error deleting survey", error);
         throw (error);
     }
 }
@@ -98,7 +98,7 @@ export async function postQuestion(token, question) {
         );
 
     } catch (error) {
-        console.log("Error posting Question", error)
+        console.log("Error posting Question", error);
         throw error;
     }
 }
@@ -112,7 +112,7 @@ export async function deleteQuestion(token, questionId) {
             },
         });
     } catch (error) {
-        console.log("Error deleting question", error)
+        console.log("Error deleting question", error);
         throw (error);
     }
 }
@@ -126,7 +126,7 @@ export async function postResponse(response) {
             response
         );
     } catch (error) {
-        console.log("Error posting Response", error)
+        console.log("Error posting Response", error);
         throw error;
     }
 }

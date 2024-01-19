@@ -1,6 +1,9 @@
 <template>
-
-  <div :class="messageClass" v-if="message" >{{ message }}</div>
+  <div
+      :class="messageClass"
+      v-if="message" >
+    {{ message }}
+  </div>
 </template>
 
 <script>
@@ -18,6 +21,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .error{
   color: red;
   margin-top: 10px;

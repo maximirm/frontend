@@ -9,7 +9,8 @@
           @userSelected="selectUser(user)"/>
     </div>
 
-    <div class="user-export-container" v-if="showFileExport">
+    <div class="user-export-container"
+         v-if="showFileExport">
       <FileExport
           :pdfData="mappedDataForExport"
           :csvData="mappedDataForExport"
@@ -70,6 +71,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 
 .user-export-container {

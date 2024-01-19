@@ -8,9 +8,9 @@ export const fetchAllUsers = async (token) => {
         const response = await axios.get(`${baseUrl}/users/all/`, {
             headers: {Authorization: `Bearer ${token}`},
         });
-        return response.data
+        return response.data;
     } catch (error) {
-        console.log("Error fetching all Users", error)
+        console.log("Error fetching all Users", error);
         throw (error);
     }
 }
@@ -24,7 +24,7 @@ export async function deleteUser(token, userId) {
             },
         });
     } catch (error) {
-        console.log("Error deleting user", error)
+        console.log("Error deleting user", error);
         throw (error);
     }
 }
@@ -41,7 +41,7 @@ export const login = async (name, password) => {
             });
         return response.data;
     } catch (error) {
-        console.log("Error with login", error)
+        console.log("Error with login", error);
         throw error
     }
 }

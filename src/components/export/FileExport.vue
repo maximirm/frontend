@@ -3,20 +3,18 @@
     <BaseButton
         :click-handler="exportToPDF"
         :button-text="'PDF Export'"
-        :is-disabled="pdfData.length === 0"
-    />
+        :is-disabled="pdfData.length === 0"/>
     <BaseButton
         :click-handler="exportToCSV"
         :button-text="'CSV Export'"
-        :is-disabled="csvData.length === 0"
-    />
+        :is-disabled="csvData.length === 0"/>
   </div>
 </template>
 
 <script>
 import BaseButton from "@/components/buttons/BaseButton.vue";
-import { exportDataToPDF } from "@/utils/pdfExport";
-import { exportToCSV } from "@/utils/csvExport";
+import {exportDataToPDF} from "@/utils/pdfExport";
+import {exportToCSV} from "@/utils/csvExport";
 
 export default {
   components: {

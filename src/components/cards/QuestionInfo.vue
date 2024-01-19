@@ -1,5 +1,7 @@
 <template>
-  <div :class="{ 'selected-question': isSelected }" @click="selectQuestion">
+  <div
+      :class="{ 'selected-question': isSelected }"
+      @click="selectQuestion">
     <div class="question-item">
       <div class="question-info">
         <div class="key-value-pair">
@@ -8,9 +10,11 @@
           <p v-else-if="question.type === 3">Checkbox</p>
           <p>{{ question.responses.length }} Antworten</p>
         </div>
+
         <div class="key-value-pair">
           <p>{{ question.question_text }}</p>
         </div>
+
         <div class="key-value-pair" v-if="question.options.length > 0">
           <p>1. {{ question.options[0] }}</p>
           <p>2. {{ question.options[1] }}</p>
@@ -69,6 +73,7 @@ export default {
   margin-right: 5px;
   width: 200px;
 }
+
 .selected-question {
   background-color: #2e2e2e;
   color: #4CAF50;

@@ -7,7 +7,7 @@ export const exportDataToPDF = (data, columns, fileName) => {
     doc.autoTable({
         head: [columns.map((col) => col.header)],
         body: data.map((row) => columns.map((col) => row[col.dataKey])),
-        columnStyles: { 0: { cellWidth: "auto" } },
+        columnStyles: {0: {cellWidth: "auto"}},
     });
 
     doc.save(fileName);

@@ -59,10 +59,10 @@ import BaseButton from "@/components/buttons/BaseButton.vue";
 import AnalysePanel from "@/components/analysis/AnalysePanel.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
-import {deleteSurvey, fetchSurveysByCreatorId} from "@/api/surveyApi";
-import {fetchAnalysedQuestion} from "@/api/analysisApi";
 import SurveyList from "@/components/lists/SurveyList.vue";
 import QuestionList from "@/components/lists/QuestionList.vue";
+import {deleteSurvey, fetchSurveysByCreatorId} from "@/api/surveyApi";
+import {fetchAnalysedQuestion} from "@/api/analysisApi";
 
 export default {
   components: {
@@ -83,13 +83,13 @@ export default {
       analysisComplete: false,
       responseAnalysis: [],
       respondentsAnalysis: [],
-      surveyListTitle: "Umfragenliste",
+      surveyListTitle: "Umfrageliste",
       surveyPdfColumns: [
         {header: "Titel", dataKey: "title", width: 40},
         {header: "Beschreibung", dataKey: "description", width: 30},
         {header: "Anzahl der Fragen", dataKey: "numberOfQuestions", width: 50}
       ],
-      questionListTitle: "Umfragenliste",
+      questionListTitle: "Frageliste",
       questionPdfColumns: [
         {header: "Fragestellung", dataKey: "questionText", width: 40},
         {header: "Optionen", dataKey: "options", width: 30},
@@ -108,14 +108,14 @@ export default {
         const token = this.$store.state.userToken;
         const allSurveys = await fetchSurveysByCreatorId(token, creatorId);
         this.surveys = await Promise.all(
-            allSurveys.map(async (survey) =>{
+            allSurveys.map(async (survey) => {
               return {
                 ...survey,
-                numberOfQuestions: survey.questions.length
+                numberOfQuestions: survey.questions.length,
               }
             })
         )
-        console.log(this.surveys)
+        console.log(this.surveys);
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfragen:', error);
       }
@@ -128,7 +128,7 @@ export default {
     },
     async selectSurvey(survey) {
       this.selectedSurvey = survey;
-      this.questions = this.selectedSurvey.questions
+      this.questions = this.selectedSurvey.questions;
 
     },
 
@@ -171,6 +171,7 @@ export default {
 </script>
 
 <style scoped>
+
 .analyze-survey-page {
   display: flex;
   flex-direction: column;
@@ -221,4 +222,5 @@ h2 {
   display: flex;
   gap: 10px;
 }
+
 </style>

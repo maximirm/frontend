@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 import LandingPage from '@/pages/LandingPage.vue'
 import RegistrationPage from '@/pages/RegistrationPage.vue';
 import AdminPage from "@/pages/admin/AdminPage.vue";
@@ -59,6 +59,5 @@ const router = createRouter({
         },
     ]
 })
-
 
 export default router

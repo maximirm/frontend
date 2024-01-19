@@ -17,7 +17,7 @@
         :button-text="'Login'"
         :is-disabled="name === '' || password === ''"/>
     <LogoutButton
-      :button-text="'Zur Startseite'"/>
+        :button-text="'Zur Startseite'"/>
     <FeedbackMessage
         v-if="loginAttempted"
         :message="loginError ? loginError : 'Login erfolgreich!'"
@@ -49,10 +49,10 @@ export default {
   },
   methods: {
     updateName(newVal) {
-      this.name = newVal
+      this.name = newVal;
     },
     updatePassword(newVal) {
-      this.password = newVal
+      this.password = newVal;
     },
     async login() {
       this.loginError = null;
@@ -91,7 +91,6 @@ export default {
 
 <style scoped>
 
-
 .login-page {
   display: flex;
   flex-direction: column;
@@ -101,6 +100,5 @@ export default {
   background-color: #333;
   color: #fff;
 }
-
 
 </style>
