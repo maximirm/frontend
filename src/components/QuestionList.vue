@@ -9,7 +9,7 @@
         @questionSelected="selectQuestion(question)"/>
   </div>
 
-  <div class="file-export-container">
+  <div class="file-export-container" v-if="showFileExport">
     <FileExport
         :pdfData="mappedDataForExport"
         :csvData="mappedDataForExport"
@@ -33,11 +33,13 @@ export default {
     selectedQuestion: Object,
     pdfColumns: {
       type: Array,
-      required: true
     },
     listTitle: {
       type: String,
-      required: true
+    },
+    showFileExport: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

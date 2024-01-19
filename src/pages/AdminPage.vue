@@ -7,6 +7,7 @@
         :message-class="'success'"
         :message="message"/>
     <UserList
+        :show-file-export="true"
         :list-title="listTitle"
         :pdf-columns="pdfColumns"
         :users="users"

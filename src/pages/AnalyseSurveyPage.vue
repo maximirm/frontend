@@ -12,12 +12,14 @@
 
     <div class="list-container">
       <SurveyList
+          :show-file-export="true"
           :pdf-columns="surveyPdfColumns"
           :list-title="surveyListTitle"
           :surveys="surveys"
           :selectedSurvey="selectedSurvey"
           @surveySelected="selectSurvey"/>
       <QuestionList
+          :show-file-export="true"
           :pdf-columns="questionPdfColumns"
           :list-title="questionListTitle"
           :questions="questions"

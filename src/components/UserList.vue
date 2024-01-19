@@ -6,15 +6,17 @@
           :key="user.id"
           :user="user"
           :isSelected="selectedUser && user.id === selectedUser.id"
-          @userSelected="selectUser(user)"
+          @userSelected="selectUser(user)"/>
+    </div>
+
+    <div class="user-export-container" v-if="showFileExport">
+      <FileExport
+          :pdfData="mappedDataForExport"
+          :csvData="mappedDataForExport"
+          :pdfColumns="pdfColumns"
+          :fileName="listTitle"
       />
     </div>
-    <FileExport
-        :pdfData="mappedDataForExport"
-        :csvData="mappedDataForExport"
-        :pdfColumns="pdfColumns"
-        :fileName="listTitle"
-    />
   </div>
 </template>
 
@@ -39,6 +41,10 @@ export default {
     listTitle: {
       type: String,
       required: true
+    },
+    showFileExport: {
+      type: Boolean,
+      default: false,
     },
     selectedUser: Object,
   },
@@ -65,6 +71,11 @@ export default {
 };
 </script>
 <style scoped>
+
+.user-export-container {
+  margin-top: 20px;
+  flex-grow: 0;
+}
 
 .user-list-box {
   height: 500px;
