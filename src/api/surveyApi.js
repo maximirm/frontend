@@ -69,7 +69,7 @@ export const postSurvey = async (token, survey) => {
 }
 
 
-export async function postQuestion (token, question){
+export async function postQuestion(token, question){
 
     try {
         await axios.post(
@@ -99,5 +99,19 @@ export async function deleteQuestion(token, questionId){
     } catch (error) {
         console.log("Error deleting question", error)
         throw (error);
+    }
+}
+
+
+export async function postResponse(response){
+
+    try {
+        await axios.post(
+            `${baseUrl}/responses/`,
+            response
+        );
+    } catch (error) {
+        console.log("Error posting Response", error)
+        throw error;
     }
 }
