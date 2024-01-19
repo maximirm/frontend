@@ -38,10 +38,11 @@
 <script>
 import UserInfo from "@/components/UserInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import {deleteUser, fetchAllUsers, fetchSurveysByCreatorId} from "@/api/api";
 import FileExport from "@/components/FileExport.vue";
 import LogoutButton from "@/components/LogoutButton.vue";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
+import {deleteUser, fetchAllUsers} from "@/api/userApi";
+import {fetchSurveysByCreatorId} from "@/api/surveyApi";
 
 export default {
   components: {FeedbackMessage, LogoutButton, FileExport, BaseButton, UserInfo},

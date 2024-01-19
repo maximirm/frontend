@@ -34,7 +34,7 @@
 <script>
 import InputLabel from "@/components/InputLabel.vue";
 import DropdownMenu from "@/components/DropdownMenu.vue";
-import {registerUser} from "@/api/api";
+import {registerUser} from "@/api/userApi";
 import BaseButton from "@/components/BaseButton.vue";
 import LogoutButton from "@/components/LogoutButton.vue";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";

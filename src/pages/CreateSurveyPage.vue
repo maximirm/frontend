@@ -46,7 +46,7 @@ import CreateQuestionForm from "@/components/CreateQuestionForm.vue";
 import QuestionInfo from "@/components/QuestionInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
-import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/api/api";
+import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/api/surveyApi";
 
 export default {
   components: {
