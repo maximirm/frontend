@@ -15,15 +15,18 @@
         :click-handler="emitCreateSurveyEvent"
         :button-text="'Umfrage erstellen'"
         :is-disabled="title === '' || description === ''"/>
+    <LogoutButton/>
   </div>
 </template>
 
 <script>
 import InputLabel from "@/components/InputLabel.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import LogoutButton from "@/components/LogoutButton.vue";
 
 export default {
   components: {
+    LogoutButton,
     InputLabel,
     BaseButton,
   },
