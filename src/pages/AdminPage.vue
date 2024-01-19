@@ -92,6 +92,7 @@ export default {
         }
       } catch (error) {
         alert("Fehler im Laden der Nutzer - Bitte neu einloggen")
+        this.redirectToLandingPage()
       }
     },
     selectUser(user) {
@@ -112,6 +113,9 @@ export default {
       setTimeout(() => this.message = '', 3000);
       this.selectedUser = null;
       await this.displayListOfUsers();
+    },
+    redirectToLandingPage() {
+      this.$router.push({name: 'LandingPage'});
     },
   },
 };

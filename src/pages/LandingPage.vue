@@ -1,9 +1,8 @@
-
 <template>
   <div class="landing-page">
     <h1>Bachelorarbeit Maxim Irmscher</h1>
-    <ButtonGroup :buttons="buttons" />
-
+    <ButtonGroup
+        :buttons="buttons" />
   </div>
 </template>
 
@@ -37,8 +36,6 @@ export default {
 
 <style scoped>
 
-
-
 .landing-page {
   display: flex;
   flex-direction: column;
@@ -49,6 +46,5 @@ export default {
   color: #fff;
   margin: 0;
 }
-
 
 </style>
