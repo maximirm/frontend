@@ -12,6 +12,8 @@
 
     <div class="list-container">
       <SurveyList
+          :pdf-columns="pdfColumns"
+          :list-title="listTitle"
           :surveys="surveys"
           :selectedSurvey="selectedSurvey"
           @surveySelected="selectSurvey"/>
@@ -77,6 +79,12 @@ export default {
       analysisComplete: false,
       responseAnalysis: [],
       respondentsAnalysis: [],
+      pdfColumns: [
+        {header: "Titel", dataKey: "title", width: 40},
+        {header: "Beschreibung", dataKey: "description", width: 30},
+        {header: "Anzahl der Fragen", dataKey: "numberOfQuestions", width: 50}
+      ],
+      listTitle: "Umfragenliste"
     };
   },
   mounted() {
@@ -88,7 +96,16 @@ export default {
       try {
         const creatorId = this.$store.state.userId;
         const token = this.$store.state.userToken;
-        this.surveys = await fetchSurveysByCreatorId(token, creatorId);
+        const allSurveys = await fetchSurveysByCreatorId(token, creatorId);
+        this.surveys = await Promise.all(
+            allSurveys.map(async (survey) =>{
+              return {
+                ...survey,
+                numberOfQuestions: survey.questions.length
+              }
+            })
+        )
+        console.log(this.surveys)
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfragen:', error);
       }

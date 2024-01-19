@@ -9,7 +9,6 @@
           @userSelected="selectUser(user)"
       />
     </div>
-    <!-- Hier fügen wir den FileExport ein -->
     <FileExport
         :pdfData="mappedDataForExport"
         :csvData="mappedDataForExport"
@@ -21,12 +20,12 @@
 
 <script>
 import UserInfo from "@/components/UserInfo.vue";
-import FileExport from "@/components/FileExport.vue"; // Importiere die FileExport-Komponente
+import FileExport from "@/components/FileExport.vue";
 
 export default {
   components: {
     UserInfo,
-    FileExport, // Füge die FileExport-Komponente hier hinzu
+    FileExport,
   },
   props: {
     users: {
