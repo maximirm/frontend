@@ -1,6 +1,5 @@
 <template>
   <div :class="{ 'selected-question': isSelected }" @click="selectQuestion">
-
     <div class="question-item">
       <div class="question-info">
         <div class="key-value-pair">
@@ -10,18 +9,13 @@
           <p>{{ question.responses.length }} Antworten</p>
         </div>
         <div class="key-value-pair">
-
           <p>{{ question.question_text }}</p>
         </div>
-
         <div class="key-value-pair" v-if="question.options.length > 0">
           <p>1. {{ question.options[0] }}</p>
           <p>2. {{ question.options[1] }}</p>
           <p>3. {{ question.options[2] }}</p>
-
         </div>
-
-
       </div>
     </div>
   </div>
@@ -42,7 +36,6 @@ export default {
   },
   methods: {
     selectQuestion() {
-      console.log(this.question.responses.length)
       this.$emit('questionSelected', this.question);
     },
   }
@@ -50,6 +43,7 @@ export default {
 </script>
 
 <style scoped>
+
 .key-value-pair p {
   margin: 1px 0;
   padding: 2px;
@@ -80,7 +74,5 @@ export default {
   color: #4CAF50;
   border-left: 4px solid #4CAF50;
 }
-
-
 
 </style>
