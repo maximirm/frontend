@@ -16,8 +16,8 @@ export default {
     buttons() {
       return [
         {text: 'Login', clickHandler: this.redirectToLogin},
-        {text: 'Register', clickHandler: this.redirectToRegister},
-        {text: 'Respond Anonymous', clickHandler: this.respondAnonymous},
+        {text: 'Registrieren', clickHandler: this.redirectToRegister},
+        {text: 'Umfragen anonym beantworten', clickHandler: this.respondAnonymous},
       ];
     },
   },

@@ -11,6 +11,7 @@
         :pdfColumns="pdfColumns"
         :fileName="listTitle"
     />
+    <LogoutButton/>
     <div v-if="message" class="success-message">{{ message }}</div>
     <div class="user-list-box">
       <UserInfo
@@ -36,9 +37,10 @@ import UserInfo from "@/components/UserInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import {deleteUser, fetchAllUsers, fetchSurveysByCreatorId} from "@/api/api";
 import FileExport from "@/components/FileExport.vue";
+import LogoutButton from "@/components/LogoutButton.vue";
 
 export default {
-  components: {FileExport, BaseButton, UserInfo},
+  components: {LogoutButton, FileExport, BaseButton, UserInfo},
   data() {
     return {
       users: [],

@@ -19,6 +19,8 @@
         :button-text="'Login'"
         :is-disabled="name === '' || password === ''"
     />
+    <LogoutButton
+      :button-text="'Zur Startseite'"/>
     <FeedbackMessage
         v-if="loginAttempted"
         :message="loginError ? loginError : 'Login erfolgreich!'"
@@ -32,9 +34,11 @@ import InputLabel from "@/components/InputLabel.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import {login} from "@/api/api";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
+import LogoutButton from "@/components/LogoutButton.vue";
 
 export default {
   components: {
+    LogoutButton,
     FeedbackMessage,
     BaseButton,
     InputLabel,
