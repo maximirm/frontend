@@ -12,7 +12,7 @@ export const fetchAllUsers = async (token) => {
     }
 }
 
-export const deleteUser = async (userId) => {
+export async function deleteUser(userId) {
     try {
         const token = this.$store.state.userToken;
         await axios.delete(`${baseUrl}/users/${userId}/`, {
@@ -39,6 +39,5 @@ export const fetchSurveysByCreatorId = async (token, creatorId) => {
     } catch (error) {
         console.log("Error fetching Surveys by CreatorId", error)
     }
-
 }
 
