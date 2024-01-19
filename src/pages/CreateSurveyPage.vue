@@ -1,41 +1,41 @@
 <template>
   <div class="create-survey-page">
     <div class="form-container">
-      <div v-if="surveyFormVisible">
-        <CreateSurveyForm
-            :title="title"
-            :description="description"
-            @create-survey="createSurvey"
-        />
-      </div>
-      <div v-else>
-        <CreateQuestionForm @create-question="createQuestion"/>
-      </div>
+      <CreateSurveyForm
+          v-if="surveyFormVisible"
+          :title="title"
+          :description="description"
+          @create-survey="createSurvey"/>
+      <CreateQuestionForm
+          v-if="!surveyFormVisible"
+          @create-question="createQuestion"/>
     </div>
-    <!-- Anzeigen der Umfrage-Fragen -->
+
     <div class="question-list-container">
       <div class="survey-info">
         <h3>{{ surveyTitle }}</h3>
         <p>{{ surveyDescription }}</p>
       </div>
+
       <div class="question-list-box">
         <QuestionInfo
             v-for="(question, index) in questions"
             :key="index"
             :question="question"
             :isSelected="selectedQuestion && selectedQuestion.id === question.id"
-            @questionSelected="selectQuestion"
-        />
+            @questionSelected="selectQuestion"/>
       </div>
-      <div v-if="message" class="success-message">{{ message }}</div>
-      <div v-if="selectedQuestion">
-        <BaseButton
-            :buttonText="'Frage löschen'"
-            :clickHandler="deleteSelectedQuestion"
-            :isDisabled="!selectedQuestion"
-            class="delete-btn"
-        />
-      </div>
+
+      <FeedbackMessage
+          v-if="message"
+          :message-class="'success'"
+          :message="message"/>
+      <BaseButton
+          v-if="selectedQuestion"
+          :buttonText="'Frage löschen'"
+          :clickHandler="deleteSelectedQuestion"
+          :isDisabled="!selectedQuestion"
+          class="delete-btn"/>
     </div>
   </div>
 </template>
@@ -46,9 +46,12 @@ import CreateQuestionForm from "@/components/CreateQuestionForm.vue";
 import axios from 'axios';
 import QuestionInfo from "@/components/QuestionInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import {postQuestion, postSurvey} from "@/api/api";
+import FeedbackMessage from "@/components/FeedbackMessage.vue";
 
 export default {
   components: {
+    FeedbackMessage,
     BaseButton,
     QuestionInfo,
     CreateSurveyForm,
@@ -73,26 +76,24 @@ export default {
       try {
         const token = this.$store.state.userToken;
         const creatorId = this.$store.state.userId;
-
-        const response = await axios.post('http://127.0.0.1:8002/surveys/', {
+        const survey = {
           title: data.title,
           description: data.description,
-          creator_id: creatorId,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.status === 200) {
-          this.createdSurveyId = response.data.id;
-          this.surveyFormVisible = false;
+          creator_id: creatorId
         }
+        const response = await postSurvey(token, survey)
+
+        this.createdSurveyId = response.id;
+        this.surveyFormVisible = false;
       } catch (error) {
-        console.error('Fehler beim Erstellen der Umfrage:', error);
+        console.log("error", error)
+        alert("Fehler beim Erstellen der Umfrage - Bitte neu einloggen")
+        this.redirectToLandingPage()
       }
     },
-
+    redirectToLandingPage() {
+      this.$router.push({name: 'LandingPage'});
+    },
     async createQuestion(questionData) {
       try {
         const token = this.$store.state.userToken;
@@ -106,19 +107,12 @@ export default {
           options: questionData.questionType === 1 ? [] : questionData.options,
         };
 
-        const response = await axios.post('http://127.0.0.1:8002/questions/', question, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.status === 200) {
-          this.questionOrder++;
-          await this.getSurvey()
-          console.log('Frage erstellt:', question);
-        }
+        await postQuestion(token, question);
+        this.questionOrder++;
+        await this.getSurvey()
       } catch (error) {
-        console.error('Fehler beim Erstellen der Frage:', error);
+        alert("Fehler beim Erstellen der Frage - Bitte neu einloggen")
+        this.redirectToLandingPage()
       }
     },
     selectQuestion(question) {
@@ -231,8 +225,4 @@ export default {
   cursor: not-allowed;
 }
 
-.success-message {
-  color: green;
-  margin-top: 10px;
-}
 </style>

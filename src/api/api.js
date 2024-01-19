@@ -79,26 +79,42 @@ export async function registerUser(name, password, role) {
     }
 }
 
-export const postSurvey = async (token, title, description, creatorId) => {
+export const postSurvey = async (token, survey) => {
 
     try {
         const response = await axios.post(
             `${baseUrl}/surveys/`,
-            {
-                title: title,
-                description: description,
-                creator_id: creatorId
-            },
+            survey,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             }
         );
+        console.log(response)
         return response.data
 
     } catch (error) {
         console.log("Error posting Survey", error)
+        throw error;
+    }
+}
+
+export async function postQuestion (token, question){
+
+    try {
+        await axios.post(
+            `${baseUrl}/questions/`,
+            question,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+    } catch (error) {
+        console.log("Error posting Question", error)
         throw error;
     }
 }
