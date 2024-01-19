@@ -1,7 +1,16 @@
 <template>
   <div class="admin-page">
     <h2>Admin</h2>
-    <ButtonGroup :buttons="buttons"/>
+    <BaseButton
+        :click-handler="displayListOfUsers"
+        :button-text="listTitle + buttonAction"
+    />
+    <FileExport
+        :pdfData="mappedDataForExport"
+        :csvData="mappedDataForExport"
+        :pdfColumns="pdfColumns"
+        :fileName="listTitle"
+    />
     <div v-if="message" class="success-message">{{ message }}</div>
     <div class="user-list-box">
       <UserInfo
@@ -23,42 +32,64 @@
   </div>
 </template>
 <script>
-import ButtonGroup from "@/components/ButtonGroup.vue";
 import UserInfo from "@/components/UserInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import {deleteUser, fetchAllUsers, fetchSurveysByCreatorId} from "@/api/api";
+import FileExport from "@/components/FileExport.vue";
 
 export default {
-  components: {BaseButton, ButtonGroup, UserInfo},
+  components: {FileExport, BaseButton, UserInfo},
   data() {
     return {
       users: [],
       selectedUser: null,
       message: '',
       selfSelected: false,
+      buttonAction: ' anzeigen',
+      pdfColumns: [
+        {header: "ID", dataKey: "id", width: 40},
+        {header: "Name", dataKey: "name", width: 30},
+        {header: "Rolle", dataKey: "role", width: 50},
+        {header: "Anzahl der Umfragen", dataKey: "numberOfSurveys", width: 50}
+      ],
+      listTitle: "Benutzerliste"
     };
   },
   computed: {
-    buttons() {
-      return [
-        {text: 'Benutzer anzeigen', clickHandler: this.displayListOfUsers},
-        {text: 'Zurück zur Startseite', clickHandler: this.redirectToLandingPage},
-      ];
+    mappedDataForExport() {
+      const data = [];
+      this.users.forEach((user) => {
+        const userData = {
+          id: user.id.toString(),
+          name: user.name,
+          role: user.role,
+          numberOfSurveys: user.numberOfSurveys.toString(),
+        };
+        data.push(userData);
+      });
+      return data
     },
   },
   methods: {
     async displayListOfUsers() {
-      const token = this.$store.state.userToken;
-      const allUsers = await fetchAllUsers(token);
-      this.users = await Promise.all(
-          allUsers.map(async (user) => {
-            const surveys = await fetchSurveysByCreatorId(token, user.id)
-            return {
-              ...user,
-              numberOfSurveys: surveys.length,
-            };
-          })
-      );
+      try {
+        const token = this.$store.state.userToken;
+        const allUsers = await fetchAllUsers(token);
+        this.users = await Promise.all(
+            allUsers.map(async (user) => {
+              const surveys = await fetchSurveysByCreatorId(token, user.id)
+              return {
+                ...user,
+                numberOfSurveys: surveys.length,
+              };
+            })
+        );
+        if (this.users.length !== 0) {
+          this.buttonAction = ' aktualisieren'
+        }
+      } catch (error) {
+        alert("Fehler im Laden der Nutzer - Bitte neu einloggen")
+      }
     },
     selectUser(user) {
       this.checkIfSelfSelected(user.id)
@@ -78,9 +109,6 @@ export default {
       this.selectedUser = null;
       await this.displayListOfUsers();
     },
-    redirectToLandingPage() {
-      this.$router.push({name: 'LandingPage'});
-    },
   },
 };
 </script>
@@ -96,8 +124,8 @@ export default {
 }
 
 .user-list-box {
-  max-height: 600px;
-  width: 1200px;
+  height: 500px;
+  width: 800px;
   overflow-y: auto;
   margin-top: 20px;
   scrollbar-width: thin;

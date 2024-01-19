@@ -3,6 +3,10 @@
     <div class="user-item">
       <div class="user-info">
         <div class="key-value-pair">
+          <p>ID: {{ user.id }}</p>
+          <p></p>
+        </div>
+        <div class="key-value-pair">
           <p>Name:</p>
           <p>{{ user.name }}</p>
         </div>
@@ -11,13 +15,9 @@
           <p>{{ user.role }}</p>
         </div>
         <div class="key-value-pair">
-          <p>Anzahl der Umfragen:</p>
-          <p>{{ user.numberOfSurveys }}</p>
+          <p>{{ user.numberOfSurveys }} Umfragen</p>
         </div>
-        <div class="key-value-pair">
-          <p>ID:</p>
-          <p>{{ user.id }}</p>
-        </div>
+
       </div>
     </div>
   </div>

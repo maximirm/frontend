@@ -9,6 +9,7 @@ export const fetchAllUsers = async (token) => {
         return response.data
     } catch (error) {
         console.log("Error fetching all Users", error)
+        throw (error);
     }
 }
 
@@ -22,6 +23,7 @@ export async function deleteUser(userId) {
         });
     } catch (error) {
         console.log("Error deleting user", error)
+        throw (error);
     }
 }
 
@@ -38,6 +40,7 @@ export const fetchSurveysByCreatorId = async (token, creatorId) => {
         return response.data;
     } catch (error) {
         console.log("Error fetching Surveys by CreatorId", error)
+        throw (error);
     }
 }
 

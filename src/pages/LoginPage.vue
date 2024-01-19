@@ -7,13 +7,8 @@
 
     <ButtonGroup :buttons="buttons" />
 
-    <div v-if="loginError" class="error-message">
-      {{ loginError }}
-    </div>
-
-    <div v-if="loginSuccess" class="success-message">
-      Login erfolgreich!
-    </div>
+    <div v-if="loginError" class="error-message">{{ loginError }}</div>
+    <div v-if="loginSuccess" class="success-message">Login erfolgreich!</div>
   </div>
 </template>
 

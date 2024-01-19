@@ -1,9 +1,9 @@
-import { createStore } from 'vuex';
+import {createStore} from 'vuex';
 
 const store = createStore({
     state: {
         selectedSurvey: null,
-        userToken : null,
+        userToken: null,
         userId: null
     },
     mutations: {
@@ -17,6 +17,14 @@ const store = createStore({
             state.userId = userId
         },
     },
+    actions: {
+        resetStore({ commit }) {
+            commit('setSelectedSurvey', null);
+            commit('setUserToken', null);
+            commit('setUserId', null);
+        },
+    }
+
 })
 
 export default store
