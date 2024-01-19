@@ -11,25 +11,14 @@
         :message="message"/>
 
     <div class="list-container">
-      <div class="survey-list-box">
-        <SurveyInfo
-            v-for="(survey, index) in surveys"
-            :key="index"
-            :survey="survey"
-            :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
-            @surveySelected="selectSurvey"
-        />
-      </div>
-
-      <div class="question-list-box">
-        <QuestionInfo
-            v-for="(question, index) in questions"
-            :key="index"
-            :question="question"
-            :isSelected="selectedQuestion && selectedQuestion.id === question.id"
-            @questionSelected="selectQuestion"
-        />
-      </div>
+      <SurveyList
+          :surveys="surveys"
+          :selectedSurvey="selectedSurvey"
+          @surveySelected="selectSurvey"/>
+      <QuestionList
+          :questions="questions"
+          :selectedQuestion="selectedQuestion"
+          @questionSelected="selectQuestion"/>
 
       <div class="fixed-panel">
         <AnalysePanel
@@ -38,8 +27,7 @@
             :analysis-responses-label="'Antworten'"
             :analysis-respondents="respondentsAnalysis"
             :analysis-respondents-label="'Respondents'"
-            :analysis-complete="analysisComplete"
-        />
+            :analysis-complete="analysisComplete"/>
       </div>
     </div>
 
@@ -48,38 +36,36 @@
           :buttonText="'Umfrage löschen'"
           :clickHandler="deleteSelectedSurvey"
           :isDisabled="!selectedSurvey"
-          class="delete-btn"
-      />
+          class="delete-btn"/>
       <BaseButton
           :buttonText="'Frage analysieren'"
           :clickHandler="analyseQuestion"
           :isDisabled="!selectedQuestion
           || this.selectedQuestion.type === 1
           || this.selectedQuestion.responses.length === 0"
-          class="show-questions-btn"
-      />
+          class="show-questions-btn"/>
     </div>
   </div>
 </template>
 
 <script>
-import SurveyInfo from "@/components/SurveyInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import QuestionInfo from "@/components/QuestionInfo.vue";
 import AnalysePanel from "@/components/AnalysePanel.vue";
 import LogoutButton from "@/components/LogoutButton.vue";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
 import {deleteSurvey, fetchSurveysByCreatorId} from "@/api/surveyApi";
 import {fetchAnalysedQuestion} from "@/api/analysisApi";
+import SurveyList from "@/components/SurveyList.vue";
+import QuestionList from "@/components/QuestionList.vue";
 
 export default {
   components: {
+    QuestionList,
+    SurveyList,
     FeedbackMessage,
     LogoutButton,
     AnalysePanel,
-    QuestionInfo,
     BaseButton,
-    SurveyInfo,
   },
   data() {
     return {
@@ -177,29 +163,6 @@ h2 {
   gap: 10px;
 }
 
-.survey-list-box,
-.question-list-box {
-  width: 500px;
-  overflow-y: auto;
-  height: 600px;
-  scrollbar-width: thin;
-  scrollbar-color: #555 #444;
-}
-
-.survey-list-box::-webkit-scrollbar,
-.question-list-box::-webkit-scrollbar {
-  width: 8px;
-}
-
-.survey-list-box::-webkit-scrollbar-thumb,
-.question-list-box::-webkit-scrollbar-thumb {
-  background-color: #555;
-}
-
-.survey-list-box::-webkit-scrollbar-thumb:hover,
-.question-list-box::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
-}
 
 .fixed-panel {
   position: sticky;
