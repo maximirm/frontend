@@ -18,6 +18,18 @@ export const fetchSurvey = async (token, surveyId) => {
     }
 }
 
+export const fetchAllSurveys = async () => {
+    try {
+        const response = await axios.get(
+            `${baseUrl}/surveys/all/`);
+        return response.data;
+    } catch (error) {
+        console.log("Error fetching all Surveys", error)
+        throw (error);
+    }
+}
+
+
 export const fetchSurveysByCreatorId = async (token, creatorId) => {
 
     try {

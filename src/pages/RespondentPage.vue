@@ -1,39 +1,36 @@
 <template>
   <div class="respondent-page">
-    <ButtonGroup :buttons="buttons"/>
+    <BaseButton
+        :click-handler="redirectToHomePage"
+        :button-text="'Zurück zur Startseite'"/>
 
-    <div class="list-container">
-      <div class="survey-list-box">
-        <SurveyInfo
-            v-for="(survey, index) in surveys"
-            :key="index"
-            :survey="survey"
-            :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
-            @surveySelected="selectSurvey"
-        />
-      </div>
+    <div class="survey-list-box">
+      <SurveyInfo
+          v-for="(survey, index) in surveys"
+          :key="index"
+          :survey="survey"
+          :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
+          @surveySelected="selectSurvey"/>
     </div>
-    <div v-if="selectedSurvey" class="button-container">
 
+    <div v-if="selectedSurvey" class="button-container">
       <BaseButton
           :buttonText="'Umfrage beantworten'"
           :clickHandler="respondToSurvey"
           :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
-          class="respond-survey-btn"
-      />
+          class="respond-survey-btn"/>
     </div>
   </div>
 </template>
 
 <script>
 import SurveyInfo from "@/components/SurveyInfo.vue";
-import axios from "axios";
-import ButtonGroup from "@/components/ButtonGroup.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import {fetchAllSurveys} from "@/api/surveyApi";
 
 export default {
   name: "RespondentPage",
-  components: {BaseButton, ButtonGroup, SurveyInfo},
+  components: {BaseButton, SurveyInfo},
   data() {
     return {
       surveys: [],
@@ -42,32 +39,26 @@ export default {
       isAnonymous: true,
     };
   },
-  created(){
+  created() {
     this.isAnonymous = this.$route.params.isAnonymous;
   },
-  mounted(){
-    this.getAllSurveys()
-  },
-  computed: {
-    buttons() {
-      return [
-        {text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage}
-      ];
-    },
+  mounted() {
+    this.displaySurveys()
   },
   methods: {
     selectSurvey(survey) {
       this.selectedSurvey = survey
     },
-    async getAllSurveys() {
+    async displaySurveys() {
       try {
-        const response = await axios.get(`http://127.0.0.1:8002/surveys/all/`);
-        if (response.status === 200) {
-          this.surveys = response.data
-        }
+        this.surveys = await fetchAllSurveys();
+        this.surveys = this.filterSurveysWithNoQuestions(this.surveys)
       } catch (error) {
         this.surveys = [];
       }
+    },
+    filterSurveysWithNoQuestions(surveys) {
+      return surveys.filter(survey => survey.questions.length > 0);
     },
     redirectToHomePage() {
       this.$router.push({name: 'LandingPage'});
@@ -77,13 +68,12 @@ export default {
       this.$store.commit('setSelectedSurvey', selectedSurvey);
       this.$router.push({
         name: 'ResponsePage',
-        params: { isAnonymous: this.isAnonymous},
+        params: {isAnonymous: this.isAnonymous},
       });
     }
   }
 }
 </script>
-
 
 <style scoped>
 
@@ -102,20 +92,20 @@ export default {
   width: 600px;
   overflow-y: auto;
   margin-top: 20px;
-  scrollbar-width: thin; /* Breite der Scrollleiste festlegen */
-  scrollbar-color: #555 #444; /* Farbe der Scrollleiste festlegen */
+  scrollbar-width: thin;
+  scrollbar-color: #555 #444;
 }
 
 .survey-list-box::-webkit-scrollbar {
-  width: 8px; /* Breite der Webkit-Scrollleiste festlegen */
+  width: 8px;
 }
 
 .survey-list-box::-webkit-scrollbar-thumb {
-  background-color: #555; /* Farbe des Scrollbalken-Daumens festlegen */
+  background-color: #555;
 }
 
 .survey-list-box::-webkit-scrollbar-thumb:hover {
-  background-color: #777; /* Farbe des Scrollbalken-Daumens bei Hover festlegen */
+  background-color: #777;
 }
 
 .respond-survey-btn {
@@ -129,6 +119,6 @@ export default {
 
 .button-container {
   display: flex;
-  gap: 10px; /* Abstand zwischen den Buttons anpassen, wie gewünscht */
+  gap: 10px;
 }
 </style>

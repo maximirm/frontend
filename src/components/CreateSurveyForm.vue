@@ -11,7 +11,6 @@
         :model="description"
         :input-id="'description'"
         @update:model="updateDescription"/>
-
     <BaseButton
         :click-handler="emitCreateSurveyEvent"
         :button-text="'Umfrage erstellen'"
