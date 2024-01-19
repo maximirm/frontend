@@ -6,26 +6,61 @@
           :key="user.id"
           :user="user"
           :isSelected="selectedUser && user.id === selectedUser.id"
-          @userSelected="selectUser"
+          @userSelected="selectUser(user)"
       />
     </div>
+    <!-- Hier fügen wir den FileExport ein -->
+    <FileExport
+        :pdfData="mappedDataForExport"
+        :csvData="mappedDataForExport"
+        :pdfColumns="pdfColumns"
+        :fileName="listTitle"
+    />
   </div>
 </template>
 
 <script>
 import UserInfo from "@/components/UserInfo.vue";
+import FileExport from "@/components/FileExport.vue"; // Importiere die FileExport-Komponente
 
 export default {
   components: {
     UserInfo,
+    FileExport, // Füge die FileExport-Komponente hier hinzu
   },
   props: {
-    users: Array,
+    users: {
+      type: Array,
+      required: true
+    },
+    pdfColumns: {
+      type: Array,
+      required: true
+    },
+    listTitle: {
+      type: String,
+      required: true
+    },
     selectedUser: Object,
   },
   methods: {
     selectUser(user) {
       this.$emit("userSelected", user);
+    },
+  },
+  computed: {
+    mappedDataForExport() {
+      const data = [];
+      this.users.forEach((user) => {
+        const userData = {
+          id: user.id.toString(),
+          name: user.name,
+          role: user.role,
+          numberOfSurveys: user.numberOfSurveys.toString(),
+        };
+        data.push(userData);
+      });
+      return data
     },
   },
 };

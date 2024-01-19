@@ -1,17 +1,14 @@
 <template>
   <div class="admin-page">
     <h2>Admin</h2>
-    <FileExport
-        :pdfData="mappedDataForExport"
-        :csvData="mappedDataForExport"
-        :pdfColumns="pdfColumns"
-        :fileName="listTitle"/>
     <LogoutButton/>
     <FeedbackMessage
         v-if="message"
         :message-class="'success'"
         :message="message"/>
     <UserList
+        :list-title="listTitle"
+        :pdf-columns="pdfColumns"
         :users="users"
         :selectedUser="selectedUser"
         @userSelected="selectUser"/>
@@ -23,12 +20,10 @@
           class="delete-btn"/>
     </div>
   </div>
-
 </template>
 
 <script>
 import BaseButton from "@/components/BaseButton.vue";
-import FileExport from "@/components/FileExport.vue";
 import LogoutButton from "@/components/LogoutButton.vue";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
 import {deleteUser, fetchAllUsers} from "@/api/userApi";
@@ -36,14 +31,13 @@ import {fetchSurveysByCreatorId} from "@/api/surveyApi";
 import UserList from "@/components/UserList.vue";
 
 export default {
-  components: {UserList, FeedbackMessage, LogoutButton, FileExport, BaseButton},
+  components: {UserList, FeedbackMessage, LogoutButton, BaseButton},
   data() {
     return {
       users: [],
       selectedUser: null,
       message: '',
       selfSelected: false,
-      buttonAction: ' anzeigen',
       pdfColumns: [
         {header: "ID", dataKey: "id", width: 40},
         {header: "Name", dataKey: "name", width: 30},
@@ -85,9 +79,6 @@ export default {
               };
             })
         );
-        if (this.users.length !== 0) {
-          this.buttonAction = ' aktualisieren'
-        }
       } catch (error) {
         alert("Fehler im Laden der Nutzer - Bitte neu einloggen")
         this.redirectToLandingPage()
@@ -118,6 +109,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 
 .admin-page {

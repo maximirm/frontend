@@ -3,12 +3,10 @@
     <BaseButton
         :click-handler="redirectToHomePage"
         :button-text="'Zurück zur Startseite'"/>
-
     <SurveyList
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
-        @surveySelected="selectSurvey"
-    />
+        @surveySelected="selectSurvey"/>
 
     <div v-if="selectedSurvey" class="button-container">
       <BaseButton
