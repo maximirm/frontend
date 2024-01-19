@@ -124,7 +124,8 @@ export default {
           console.log('error updating question type')
       }
     },
-    isFreetextQuestion(){
+
+    isFreetextQuestion() {
       return this.questionType === 1;
     },
     inputIsValid() {
@@ -135,12 +136,12 @@ export default {
       return !(!this.isFreetextQuestion() &&
           (this.questionTextIsEmpty() || this.optionsAreEmpty()));
     },
-    optionsAreEmpty(){
+    optionsAreEmpty() {
       return this.option1.trim() === "" ||
           this.option2.trim() === "" ||
           this.option3.trim() === "";
     },
-    questionTextIsEmpty(){
+    questionTextIsEmpty() {
       return this.questionText.trim() === "";
     },
     goToEditorPage() {
