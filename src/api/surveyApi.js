@@ -69,7 +69,22 @@ export const postSurvey = async (token, survey) => {
 }
 
 
-export async function postQuestion(token, question){
+export async function deleteSurvey(token, surveyId) {
+
+    try {
+        await axios.delete(`${baseUrl}/surveys/${surveyId}/`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        console.log("Error deleting survey", error)
+        throw (error);
+    }
+}
+
+
+export async function postQuestion(token, question) {
 
     try {
         await axios.post(
@@ -88,7 +103,7 @@ export async function postQuestion(token, question){
     }
 }
 
-export async function deleteQuestion(token, questionId){
+export async function deleteQuestion(token, questionId) {
 
     try {
         await axios.delete(`${baseUrl}/questions/${questionId}/`, {
@@ -103,7 +118,7 @@ export async function deleteQuestion(token, questionId){
 }
 
 
-export async function postResponse(response){
+export async function postResponse(response) {
 
     try {
         await axios.post(

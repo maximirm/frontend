@@ -16,7 +16,7 @@
         :button-text="'Umfrage erstellen'"
         :is-disabled="title === '' || description === ''"/>
     <BaseButton
-        :clickHandler="goToEditorPage"
+        :clickHandler="redirectToEditorPage"
         :button-text="'Zurück'"/>
     <LogoutButton/>
   </div>
@@ -46,7 +46,7 @@ export default {
     updateDescription(newVal) {
       this.description = newVal
     },
-    goToEditorPage() {
+    redirectToEditorPage() {
       this.$router.push({ name: 'EditorPage' });
     },
 

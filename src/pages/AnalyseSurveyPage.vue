@@ -1,9 +1,15 @@
 <template>
   <div class="analyze-survey-page">
     <h2>Meine Umfragen</h2>
-    <!-- Button, um zu "Meine Umfragen" zurückzukehren -->
-    <ButtonGroup :buttons="buttons"/>
-    <div v-if="message" class="success-message">{{ message }}</div>
+    <BaseButton
+        :clickHandler="redirectToEditorPage"
+        :button-text="'Zurück'"/>
+    <LogoutButton/>
+    <FeedbackMessage
+        v-if="message"
+        :message-class="'success'"
+        :message="message"/>
+
     <div class="list-container">
       <div class="survey-list-box">
         <SurveyInfo
@@ -14,6 +20,7 @@
             @surveySelected="selectSurvey"
         />
       </div>
+
       <div class="question-list-box">
         <QuestionInfo
             v-for="(question, index) in questions"
@@ -23,8 +30,8 @@
             @questionSelected="selectQuestion"
         />
       </div>
+
       <div class="fixed-panel">
-        <!-- Fixiertes AnalysePanel -->
         <AnalysePanel
             v-if="selectedSurvey"
             :analysis-responses="responseAnalysis"
@@ -35,6 +42,7 @@
         />
       </div>
     </div>
+
     <div class="button-container">
       <BaseButton
           :buttonText="'Umfrage löschen'"
@@ -55,20 +63,23 @@
 </template>
 
 <script>
-import axios from "axios";
-import ButtonGroup from "@/components/ButtonGroup.vue";
 import SurveyInfo from "@/components/SurveyInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import QuestionInfo from "@/components/QuestionInfo.vue";
 import AnalysePanel from "@/components/AnalysePanel.vue";
+import LogoutButton from "@/components/LogoutButton.vue";
+import FeedbackMessage from "@/components/FeedbackMessage.vue";
+import {deleteSurvey, fetchSurveysByCreatorId} from "@/api/surveyApi";
+import {fetchAnalysedQuestion} from "@/api/analysisApi";
 
 export default {
   components: {
+    FeedbackMessage,
+    LogoutButton,
     AnalysePanel,
     QuestionInfo,
     BaseButton,
     SurveyInfo,
-    ButtonGroup,
   },
   data() {
     return {
@@ -82,19 +93,16 @@ export default {
       respondentsAnalysis: [],
     };
   },
-  computed: {
-    buttons() {
-      return [
-        {text: 'Meine Umfragen anzeigen', clickHandler: this.showMySurveys},
-        {text: 'Zurück zur Editorseite', clickHandler: this.goToEditorPage}
-      ];
-    },
+  mounted() {
+    this.displaySurveys();
   },
+
   methods: {
-    async showMySurveys() {
+    async displaySurveys() {
       try {
         const creatorId = this.$store.state.userId;
-        this.surveys = await this.getSurveysByCreatorId(creatorId);
+        const token = this.$store.state.userToken;
+        this.surveys = await fetchSurveysByCreatorId(token, creatorId);
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfragen:', error);
       }
@@ -107,51 +115,24 @@ export default {
     },
     selectSurvey(survey) {
       this.selectedSurvey = survey;
-      this.questions = this.selectedSurvey.questions
+      this.questions = this.selectedSurvey.questions;
+    },
 
-    },
-    goToEditorPage() {
-      this.$router.push({name: 'EditorPage'});
-    },
-    async getSurveysByCreatorId(creatorId) {
-      try {
-        const token = this.$store.state.userToken;
-        const response = await axios.get(`http://127.0.0.1:8002/surveys/by_creator/${creatorId}/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        return response.data;
-      } catch (error) {
-        console.error(`Fehler beim Abrufen der Umfragen für Benutzer mit ID ${creatorId}:`, error);
-        return [];
-      }
-    },
     async analyseQuestion() {
-
-      if (!this.selectedQuestion){
+      if (!this.selectedQuestion) {
         return;
       }
-
       try {
         const token = this.$store.state.userToken;
-        const response = await axios.get(`http://127.0.0.1:8002/analyze/question/${this.selectedQuestion.id}/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.status === 200) {
-          this.responseAnalysis = response.data.analysis_responses
-          this.respondentsAnalysis = response.data.analysis_respondents
-          this.analysisComplete = true;
-        }
+
+        const response = await fetchAnalysedQuestion(token, this.selectedQuestion.id);
+
+        this.responseAnalysis = response.analysis_responses;
+        this.respondentsAnalysis = response.analysis_respondents;
+        this.analysisComplete = true;
       } catch (error) {
         this.analysisComplete = false;
-
-        console.error(error);
       }
-
     },
 
     async deleteSelectedSurvey() {
@@ -159,21 +140,17 @@ export default {
 
       try {
         const token = this.$store.state.userToken;
-        const response = await axios.delete(`http://127.0.0.1:8002/surveys/${this.selectedSurvey.id}/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.status === 200) {
-          this.selectedSurvey = null;
-          await this.showMySurveys();
-          this.message = "Umfrage erfolgreich gelöscht"
-          setTimeout(() => this.message = '', 3000);
-        }
+        await deleteSurvey(token, this.selectedSurvey.id);
+        await this.displaySurveys();
+        this.selectedSurvey = null;
+        this.message = "Umfrage erfolgreich gelöscht";
+        setTimeout(() => this.message = '', 3000);
       } catch (error) {
         this.message = "Fehler beim Löschen der Umfrage";
       }
+    },
+    redirectToEditorPage() {
+      this.$router.push({name: 'EditorPage'});
     },
   },
 };
@@ -194,10 +171,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-.success-message {
-  color: green;
-  margin-top: 10px;
-}
 
 .list-container {
   display: flex;
@@ -206,9 +179,9 @@ h2 {
 
 .survey-list-box,
 .question-list-box {
-  width: 500px; /* Setzen Sie die Breite nach Bedarf */
+  width: 500px;
   overflow-y: auto;
-  height: 600px; /* Setzen Sie die maximale Höhe nach Bedarf */
+  height: 600px;
   scrollbar-width: thin;
   scrollbar-color: #555 #444;
 }
@@ -229,12 +202,11 @@ h2 {
 }
 
 .fixed-panel {
-  /* Fixieren Sie das AnalysePanel auf der rechten Seite */
   position: sticky;
   top: 0;
   right: 0;
-  width: 500px; /* Setzen Sie die Breite nach Bedarf */
-  height: 600px; /* Setzen Sie die maximale Höhe nach Bedarf */
+  width: 500px;
+  height: 600px;
   overflow-y: auto;
   background-color: #333;
 
