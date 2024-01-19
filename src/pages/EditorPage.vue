@@ -1,33 +1,26 @@
 <template>
   <div class="editor-page">
     <h2>Editor</h2>
-
-
     <ButtonGroup :buttons="buttons" />
-
-
+    <LogoutButton/>
   </div>
 </template>
 
 <script>
 import ButtonGroup from "@/components/ButtonGroup.vue";
+import LogoutButton from "@/components/LogoutButton.vue";
 
 export default {
-  components: {ButtonGroup},
+  components: {LogoutButton, ButtonGroup},
   computed: {
     buttons() {
       return [
         {text: 'Meine Umfragen', clickHandler: this.goToAnalyseSurveyPage},
         {text: 'Umfrage Erstellen', clickHandler: this.goToCreateSurveyPage},
-        {text: 'Zurück zur Startseite', clickHandler: this.redirectToHomePage},
       ];
     },
   },
   methods: {
-    redirectToHomePage() {
-      this.$router.push({ name: 'LandingPage' });
-    },
-
     goToCreateSurveyPage() {
       this.$router.push({ name: 'CreateSurveyPage' });
     },

@@ -11,10 +11,14 @@
         :model="description"
         :input-id="'description'"
         @update:model="updateDescription"/>
+
     <BaseButton
         :click-handler="emitCreateSurveyEvent"
         :button-text="'Umfrage erstellen'"
         :is-disabled="title === '' || description === ''"/>
+    <BaseButton
+        :clickHandler="goToEditorPage"
+        :button-text="'Zurück'"/>
     <LogoutButton/>
   </div>
 </template>
