@@ -43,11 +43,10 @@
 <script>
 import CreateSurveyForm from "@/components/CreateSurveyForm.vue";
 import CreateQuestionForm from "@/components/CreateQuestionForm.vue";
-import axios from 'axios';
 import QuestionInfo from "@/components/QuestionInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import {postQuestion, postSurvey} from "@/api/api";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
+import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/api/api";
 
 export default {
   components: {
@@ -123,41 +122,28 @@ export default {
 
       try {
         const token = this.$store.state.userToken;
-        const response = await axios.delete(`http://127.0.0.1:8002/questions/${this.selectedQuestion.id}/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        await deleteQuestion(token, this.selectedQuestion.id);
+        await this.getSurvey();
 
-        if (response.status === 200) {
-          this.selectedQuestion = null;
-          await this.getSurvey();
-          this.message = "Frage erfolgreich gelöscht";
-          setTimeout(() => this.message = '', 3000);
-        }
+        this.selectedQuestion = null;
+        this.message = "Frage erfolgreich gelöscht";
+        setTimeout(() => this.message = '', 3000);
       } catch (error) {
-        this.message = "Fehler beim Löschen der Frage";
+        alert("Fehler beim Löschen der Frage");
+        this.redirectToLandingPage()
+
       }
     },
 
     async getSurvey() {
       try {
         const token = this.$store.state.userToken;
-        const surveyId = this.createdSurveyId;
 
-        const response = await axios.get(`http://127.0.0.1:8002/surveys/${surveyId}/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const surveyData = await fetchSurvey(token, this.createdSurveyId)
 
-        if (response.status === 200) {
-          const surveyData = response.data;
-          this.surveyTitle = surveyData.title;
-          this.surveyDescription = surveyData.description;
-          console.log(surveyData.questions)
-          this.questions = surveyData.questions;
-        }
+        this.surveyTitle = surveyData.title;
+        this.surveyDescription = surveyData.description;
+        this.questions = surveyData.questions;
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfrage:', error);
       }
@@ -200,24 +186,24 @@ export default {
   width: 600px;
   overflow-y: auto;
   margin-top: 20px;
-  scrollbar-width: thin; /* Breite der Scrollleiste festlegen */
-  scrollbar-color: #555 #444; /* Farbe der Scrollleiste festlegen */
+  scrollbar-width: thin;
+  scrollbar-color: #555 #444;
 }
 
 .question-list-box::-webkit-scrollbar {
-  width: 8px; /* Breite der Webkit-Scrollleiste festlegen */
+  width: 8px;
 }
 
 .question-list-box::-webkit-scrollbar-thumb {
-  background-color: #555; /* Farbe des Scrollbalken-Daumens festlegen */
+  background-color: #555;
 }
 
 .question-list-box::-webkit-scrollbar-thumb:hover {
-  background-color: #777; /* Farbe des Scrollbalken-Daumens bei Hover festlegen */
+  background-color: #777;
 }
 
 .delete-btn {
-  background-color: #d32f2f; /* Lebendige rote Farbe für Löschen-Button */
+  background-color: #d32f2f;
 }
 
 .delete-btn:disabled {

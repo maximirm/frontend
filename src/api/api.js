@@ -119,3 +119,34 @@ export async function postQuestion (token, question){
     }
 }
 
+export async function deleteQuestion(token, questionId){
+
+    try {
+        await axios.delete(`${baseUrl}/questions/${questionId}/`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        console.log("Error deleting question", error)
+        throw (error);
+    }
+}
+
+export const fetchSurvey = async (token, surveyId) => {
+    try {
+        const response = await axios.get(
+            `${baseUrl}/surveys/${surveyId}/`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+        return response.data;
+    } catch (error) {
+        console.log("Error fetching Survey", error)
+        throw (error);
+    }
+
+}
+
