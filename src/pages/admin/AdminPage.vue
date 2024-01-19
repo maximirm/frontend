@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import BaseButton from "@/components/BaseButton.vue";
-import LogoutButton from "@/components/LogoutButton.vue";
-import FeedbackMessage from "@/components/FeedbackMessage.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+import LogoutButton from "@/components/buttons/LogoutButton.vue";
+import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
 import {deleteUser, fetchAllUsers} from "@/api/userApi";
 import {fetchSurveysByCreatorId} from "@/api/surveyApi";
-import UserList from "@/components/UserList.vue";
+import UserList from "@/components/lists/UserList.vue";
 
 export default {
   components: {UserList, FeedbackMessage, LogoutButton, BaseButton},

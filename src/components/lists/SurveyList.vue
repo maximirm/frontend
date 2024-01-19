@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import SurveyInfo from "@/components/SurveyInfo.vue";
-import FileExport from "@/components/FileExport.vue";
+import SurveyInfo from "@/components/cards/SurveyInfo.vue";
+import FileExport from "@/components/export/FileExport.vue";
 
 export default {
   components: {

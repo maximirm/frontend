@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import InputLabel from "@/components/InputLabel.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import InputLabel from "@/components/utils/InputLabel.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
 import {login} from "@/api/userApi";
-import FeedbackMessage from "@/components/FeedbackMessage.vue";
-import LogoutButton from "@/components/LogoutButton.vue";
+import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import LogoutButton from "@/components/buttons/LogoutButton.vue";
 
 export default {
   components: {

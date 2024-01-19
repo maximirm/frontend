@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import ResponseForm from "@/components/ResponseForm.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import ProgressBar from "@/components/ProgressBar.vue";
+import ResponseForm from "@/components/forms/ResponseForm.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+import ProgressBar from "@/components/utils/ProgressBar.vue";
 
 export default {
   components: {ProgressBar, BaseButton, ResponseForm},

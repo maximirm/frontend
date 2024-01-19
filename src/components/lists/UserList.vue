@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import UserInfo from "@/components/UserInfo.vue";
-import FileExport from "@/components/FileExport.vue";
+import UserInfo from "@/components/cards/UserInfo.vue";
+import FileExport from "@/components/export/FileExport.vue";
 
 export default {
   components: {

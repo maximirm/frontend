@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import LandingPage from '@/pages/LandingPage.vue'
 import RegistrationPage from '@/pages/RegistrationPage.vue';
-import AdminPage from "@/pages/AdminPage.vue";
-import EditorPage from "@/pages/EditorPage.vue";
+import AdminPage from "@/pages/admin/AdminPage.vue";
+import EditorPage from "@/pages/editor/EditorPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
-import RespondentPage from "@/pages/RespondentPage.vue";
-import CreateSurveyPage from "@/pages/CreateSurveyPage.vue";
-import AnalyseSurveyPage from "@/pages/AnalyseSurveyPage.vue";
-import ResponsePage from "@/pages/ResponsePage.vue";
+import RespondentPage from "@/pages/respondent/RespondentPage.vue";
+import CreateSurveyPage from "@/pages/editor/CreateSurveyPage.vue";
+import AnalyseSurveyPage from "@/pages/editor/AnalyseSurveyPage.vue";
+import ResponsePage from "@/pages/respondent/ResponsePage.vue";
 
 const router = createRouter({
     history: createWebHistory(),

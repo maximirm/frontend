@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import InputLabel from "@/components/InputLabel.vue";
-import DropdownMenu from "@/components/DropdownMenu.vue";
-import CheckBox from "@/components/CheckBox.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import InputLabel from "@/components/utils/InputLabel.vue";
+import DropdownMenu from "@/components/utils/DropdownMenu.vue";
+import CheckBox from "@/components/utils/CheckBox.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
 import {postResponse} from "@/api/surveyApi";
 
 export default {

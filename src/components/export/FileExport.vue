@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
 import { exportDataToPDF } from "@/utils/pdfExport";
 import { exportToCSV } from "@/utils/csvExport";
 

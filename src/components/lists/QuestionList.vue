@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import QuestionInfo from "@/components/QuestionInfo.vue";
-import FileExport from "@/components/FileExport.vue";
+import QuestionInfo from "@/components/cards/QuestionInfo.vue";
+import FileExport from "@/components/export/FileExport.vue";
 
 export default {
   components: {

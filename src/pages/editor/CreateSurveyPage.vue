@@ -37,12 +37,12 @@
 </template>
 
 <script>
-import CreateSurveyForm from "@/components/CreateSurveyForm.vue";
-import CreateQuestionForm from "@/components/CreateQuestionForm.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import FeedbackMessage from "@/components/FeedbackMessage.vue";
+import CreateSurveyForm from "@/components/forms/CreateSurveyForm.vue";
+import CreateQuestionForm from "@/components/forms/CreateQuestionForm.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
 import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/api/surveyApi";
-import QuestionList from "@/components/QuestionList.vue";
+import QuestionList from "@/components/lists/QuestionList.vue";
 
 export default {
   components: {

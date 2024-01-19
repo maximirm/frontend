@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ButtonGroup from "@/components/ButtonGroup.vue";
+import ButtonGroup from "@/components/buttons/ButtonGroup.vue";
 
 export default {
   components: {ButtonGroup},

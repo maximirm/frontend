@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import InputLabel from "@/components/InputLabel.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import LogoutButton from "@/components/LogoutButton.vue";
+import InputLabel from "@/components/utils/InputLabel.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+import LogoutButton from "@/components/buttons/LogoutButton.vue";
 
 export default {
   components: {

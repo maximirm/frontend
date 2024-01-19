@@ -55,14 +55,14 @@
 </template>
 
 <script>
-import BaseButton from "@/components/BaseButton.vue";
-import AnalysePanel from "@/components/AnalysePanel.vue";
-import LogoutButton from "@/components/LogoutButton.vue";
-import FeedbackMessage from "@/components/FeedbackMessage.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+import AnalysePanel from "@/components/analysis/AnalysePanel.vue";
+import LogoutButton from "@/components/buttons/LogoutButton.vue";
+import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
 import {deleteSurvey, fetchSurveysByCreatorId} from "@/api/surveyApi";
 import {fetchAnalysedQuestion} from "@/api/analysisApi";
-import SurveyList from "@/components/SurveyList.vue";
-import QuestionList from "@/components/QuestionList.vue";
+import SurveyList from "@/components/lists/SurveyList.vue";
+import QuestionList from "@/components/lists/QuestionList.vue";
 
 export default {
   components: {

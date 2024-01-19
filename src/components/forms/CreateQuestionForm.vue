@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import InputLabel from "@/components/InputLabel.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import DropdownMenu from "@/components/DropdownMenu.vue";
-import FeedbackMessage from "@/components/FeedbackMessage.vue";
-import LogoutButton from "@/components/LogoutButton.vue";
+import InputLabel from "@/components/utils/InputLabel.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
+import DropdownMenu from "@/components/utils/DropdownMenu.vue";
+import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import LogoutButton from "@/components/buttons/LogoutButton.vue";
 
 export default {
   components: {

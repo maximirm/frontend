@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/buttons/BaseButton.vue";
 import {fetchAllSurveys} from "@/api/surveyApi";
-import SurveyList from "@/components/SurveyList.vue";
+import SurveyList from "@/components/lists/SurveyList.vue";
 
 export default {
   name: "RespondentPage",
