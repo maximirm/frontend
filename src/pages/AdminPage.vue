@@ -1,9 +1,6 @@
 <template>
   <div class="admin-page">
     <h2>Admin</h2>
-    <BaseButton
-        :click-handler="displayListOfUsers"
-        :button-text="listTitle + buttonAction"/>
     <FileExport
         :pdfData="mappedDataForExport"
         :csvData="mappedDataForExport"
@@ -14,16 +11,10 @@
         v-if="message"
         :message-class="'success'"
         :message="message"/>
-
-    <div class="user-list-box">
-      <UserInfo
-          v-for="user in users"
-          :key="user.id"
-          :user="user"
-          :isSelected="selectedUser && user.id === selectedUser.id"
-          @userSelected="selectUser"/>
-    </div>
-
+    <UserList
+        :users="users"
+        :selectedUser="selectedUser"
+        @userSelected="selectUser"/>
     <div v-if="selectedUser">
       <BaseButton
           :buttonText="'Delete Selected User'"
@@ -36,16 +27,16 @@
 </template>
 
 <script>
-import UserInfo from "@/components/UserInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import FileExport from "@/components/FileExport.vue";
 import LogoutButton from "@/components/LogoutButton.vue";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
 import {deleteUser, fetchAllUsers} from "@/api/userApi";
 import {fetchSurveysByCreatorId} from "@/api/surveyApi";
+import UserList from "@/components/UserList.vue";
 
 export default {
-  components: {FeedbackMessage, LogoutButton, FileExport, BaseButton, UserInfo},
+  components: {UserList, FeedbackMessage, LogoutButton, FileExport, BaseButton},
   data() {
     return {
       users: [],
@@ -61,6 +52,9 @@ export default {
       ],
       listTitle: "Benutzerliste"
     };
+  },
+  mounted() {
+    this.displayListOfUsers();
   },
   computed: {
     mappedDataForExport() {
@@ -133,27 +127,6 @@ export default {
   justify-content: center;
   height: 100vh;
   color: #fff;
-}
-
-.user-list-box {
-  height: 500px;
-  width: 800px;
-  overflow-y: auto;
-  margin-top: 20px;
-  scrollbar-width: thin;
-  scrollbar-color: #555 #444;
-}
-
-.user-list-box::-webkit-scrollbar {
-  width: 8px;
-}
-
-.user-list-box::-webkit-scrollbar-thumb {
-  background-color: #555;
-}
-
-.user-list-box::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
 }
 
 .delete-btn {

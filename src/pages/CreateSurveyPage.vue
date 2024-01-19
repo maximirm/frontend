@@ -17,14 +17,10 @@
         <p>{{ surveyDescription }}</p>
       </div>
 
-      <div class="question-list-box">
-        <QuestionInfo
-            v-for="(question, index) in questions"
-            :key="index"
-            :question="question"
-            :isSelected="selectedQuestion && selectedQuestion.id === question.id"
-            @questionSelected="selectQuestion"/>
-      </div>
+      <QuestionList
+          :questions="questions"
+          :selectedQuestion="selectedQuestion"
+          @questionSelected="selectQuestion"/>
 
       <FeedbackMessage
           v-if="message"
@@ -43,16 +39,16 @@
 <script>
 import CreateSurveyForm from "@/components/CreateSurveyForm.vue";
 import CreateQuestionForm from "@/components/CreateQuestionForm.vue";
-import QuestionInfo from "@/components/QuestionInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import FeedbackMessage from "@/components/FeedbackMessage.vue";
 import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/api/surveyApi";
+import QuestionList from "@/components/QuestionList.vue";
 
 export default {
   components: {
+    QuestionList,
     FeedbackMessage,
     BaseButton,
-    QuestionInfo,
     CreateSurveyForm,
     CreateQuestionForm,
   },
@@ -181,26 +177,6 @@ export default {
   margin-bottom: 20px;
 }
 
-.question-list-box {
-  max-height: 600px;
-  width: 600px;
-  overflow-y: auto;
-  margin-top: 20px;
-  scrollbar-width: thin;
-  scrollbar-color: #555 #444;
-}
-
-.question-list-box::-webkit-scrollbar {
-  width: 8px;
-}
-
-.question-list-box::-webkit-scrollbar-thumb {
-  background-color: #555;
-}
-
-.question-list-box::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
-}
 
 .delete-btn {
   background-color: #d32f2f;

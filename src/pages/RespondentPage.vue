@@ -4,14 +4,11 @@
         :click-handler="redirectToHomePage"
         :button-text="'Zurück zur Startseite'"/>
 
-    <div class="survey-list-box">
-      <SurveyInfo
-          v-for="(survey, index) in surveys"
-          :key="index"
-          :survey="survey"
-          :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
-          @surveySelected="selectSurvey"/>
-    </div>
+    <SurveyList
+        :surveys="surveys"
+        :selectedSurvey="selectedSurvey"
+        @surveySelected="selectSurvey"
+    />
 
     <div v-if="selectedSurvey" class="button-container">
       <BaseButton
@@ -24,13 +21,13 @@
 </template>
 
 <script>
-import SurveyInfo from "@/components/SurveyInfo.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import {fetchAllSurveys} from "@/api/surveyApi";
+import SurveyList from "@/components/SurveyList.vue";
 
 export default {
   name: "RespondentPage",
-  components: {BaseButton, SurveyInfo},
+  components: {SurveyList, BaseButton},
   data() {
     return {
       surveys: [],
@@ -85,27 +82,6 @@ export default {
   height: 100vh;
   background-color: #333;
   color: #fff;
-}
-
-.survey-list-box {
-  max-height: 600px;
-  width: 600px;
-  overflow-y: auto;
-  margin-top: 20px;
-  scrollbar-width: thin;
-  scrollbar-color: #555 #444;
-}
-
-.survey-list-box::-webkit-scrollbar {
-  width: 8px;
-}
-
-.survey-list-box::-webkit-scrollbar-thumb {
-  background-color: #555;
-}
-
-.survey-list-box::-webkit-scrollbar-thumb:hover {
-  background-color: #777;
 }
 
 .respond-survey-btn {

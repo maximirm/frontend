@@ -29,3 +29,31 @@ export default {
   },
 };
 </script>
+<style scoped>
+
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.question-list-box {
+  width: 500px;
+  overflow-y: auto;
+  height: 600px;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #444;
+}
+
+.question-list-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.question-list-box::-webkit-scrollbar-thumb {
+  background-color: #555;
+}
+
+.question-list-box::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+</style>
