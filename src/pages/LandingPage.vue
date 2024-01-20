@@ -3,17 +3,17 @@
     <h1>Bachelorarbeit Maxim Irmscher</h1>
     <h2>Matr: 548444</h2>
 
-    <ButtonGroup
+    <GroupedButtons
         :buttons="buttons"/>
   </div>
 </template>
 
 <script>
-import ButtonGroup from "@/components/buttons/ButtonGroup.vue";
+import GroupedButtons from "@/components/buttons/GroupedButtons.vue";
 
 export default {
   components: {
-    ButtonGroup
+    GroupedButtons,
   },
   computed: {
     buttons() {
@@ -32,7 +32,7 @@ export default {
       this.$router.push({name: 'RegisterPage'});
     },
     respondAnonymous() {
-      this.$router.push({name: 'RespondentPage', params: {isAnonymous: true}});
+      this.$router.push({name: 'RespondentPage', params: {respondentIsAnonymous: true}});
     },
   },
 };
