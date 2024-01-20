@@ -1,41 +1,42 @@
 <template>
   <div class="respondent-page">
-    <BaseButton
-        :click-handler="redirectToHomePage"
-        :button-text="'Zurück zur Startseite'"/>
-    <SurveyList
+    <StyledButton
+        :onClickMethod="redirectToLandingPage"
+        :label="'Zurück zur Startseite'"/>
+    <SurveyCatalog
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
         @surveySelected="selectSurvey"/>
-
     <div v-if="selectedSurvey" class="button-container">
-      <BaseButton
-          :buttonText="'Umfrage beantworten'"
-          :clickHandler="respondToSurvey"
-          :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
-          class="respond-survey-btn"/>
+      <StyledButton
+          :label="'Umfrage beantworten'"
+          :onClickMethod="respondToSurvey"
+          :isDisabled="selectedSurvey.questions.length === 0"
+          :class="'respond-survey-btn'"/>
     </div>
   </div>
 </template>
 
 <script>
-import BaseButton from "@/components/buttons/BaseButton.vue";
-import SurveyList from "@/components/lists/SurveyList.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
+import SurveyCatalog from "@/components/catalogs/SurveyCatalog.vue";
 import {fetchAllSurveys} from "@/api/surveyApi";
 
 export default {
   name: "RespondentPage",
-  components: {SurveyList, BaseButton},
+  components: {
+    SurveyCatalog,
+    StyledButton,
+  },
   data() {
     return {
       surveys: [],
       selectedSurvey: null,
-      message: '',
-      isAnonymous: true,
+      respondentIsAnonymous: true,
     };
   },
   created() {
-    this.isAnonymous = this.$route.params.isAnonymous;
+    this.respondentIsAnonymous = this.$route.params.respondentIsAnonymous;
   },
   mounted() {
     this.displaySurveys();
@@ -47,15 +48,15 @@ export default {
     async displaySurveys() {
       try {
         this.surveys = await fetchAllSurveys();
-        this.surveys = this.filterSurveysWithNoQuestions(this.surveys);
+        this.surveys = this.filterSurveysWithQuestions(this.surveys);
       } catch (error) {
         this.surveys = [];
       }
     },
-    filterSurveysWithNoQuestions(surveys) {
+    filterSurveysWithQuestions(surveys) {
       return surveys.filter(survey => survey.questions.length > 0);
     },
-    redirectToHomePage() {
+    redirectToLandingPage() {
       this.$router.push({name: 'LandingPage'});
     },
     respondToSurvey() {
@@ -63,7 +64,7 @@ export default {
       this.$store.commit('setSelectedSurvey', selectedSurvey);
       this.$router.push({
         name: 'ResponsePage',
-        params: {isAnonymous: this.isAnonymous},
+        params: {isAnonymous: this.respondentIsAnonymous},
       });
     }
   }
@@ -82,14 +83,7 @@ export default {
   color: #fff;
 }
 
-.respond-survey-btn {
-  background-color: #4CAF50;
-}
 
-.respond-survey-btn:disabled {
-  background-color: #999;
-  cursor: not-allowed;
-}
 
 .button-container {
   display: flex;
