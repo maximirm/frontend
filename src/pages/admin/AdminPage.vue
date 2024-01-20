@@ -2,48 +2,45 @@
   <div class="admin-page">
     <h2>Admin</h2>
     <LogoutButton/>
-    <FeedbackMessage
-        v-if="message"
-        :message-class="'success'"
-        :message="message"/>
-    <UserList
-        :show-file-export="true"
-        :list-title="listTitle"
+    <UserCatalogWithExport
+        :label="catalogLabel"
+        :mapped-data-for-export="mappedDataForExport"
         :pdf-columns="pdfColumns"
-        :users="users"
-        :selectedUser="selectedUser"
-        @userSelected="selectUser"/>
-
-    <div v-if="selectedUser">
-      <BaseButton
-          :buttonText="'Delete Selected User'"
-          :clickHandler="deleteSelectedUser"
-          :isDisabled="!selectedUser || selfSelected"
-          class="delete-btn"/>
-    </div>
+        :select-user="selectUser"
+        :selected-user="selectedUser"
+        :users="users"/>
+    <FeedbackMessage
+        v-if="feedbackMessage"
+        :message-class="'success'"
+        :message="feedbackMessage"/>
+    <StyledButton
+        :label="'Delete Selected User'"
+        :onClickMethod="deleteSelectedUser"
+        :isDisabled="!selectedUser || selfSelected"
+        class="delete-btn"/>
   </div>
 </template>
 
 <script>
-import BaseButton from "@/components/buttons/BaseButton.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
 import {deleteUser, fetchAllUsers} from "@/api/userApi";
 import {fetchSurveysByCreatorId} from "@/api/surveyApi";
-import UserList from "@/components/lists/UserList.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
+import UserCatalogWithExport from "@/components/catalogs/UserCatalogWithExport.vue";
 
 export default {
   components: {
-    UserList,
+    StyledButton,
     FeedbackMessage,
     LogoutButton,
-    BaseButton
+    UserCatalogWithExport
   },
   data() {
     return {
       users: [],
       selectedUser: null,
-      message: '',
+      feedbackMessage: '',
       selfSelected: false,
       pdfColumns: [
         {header: "ID", dataKey: "id", width: 40},
@@ -51,7 +48,7 @@ export default {
         {header: "Rolle", dataKey: "role", width: 50},
         {header: "Anzahl der Umfragen", dataKey: "numberOfSurveys", width: 50}
       ],
-      listTitle: "Benutzerliste"
+      catalogLabel: "Benutzerliste"
     };
   },
   mounted() {
@@ -105,8 +102,8 @@ export default {
     async deleteSelectedUser() {
       const token = this.$store.state.userToken;
       await deleteUser(token, this.selectedUser.id);
-      this.message = "Benutzer erfolgreich gelöscht";
-      setTimeout(() => this.message = '', 3000);
+      this.feedbackMessage = "Benutzer erfolgreich gelöscht";
+      setTimeout(() => this.feedbackMessage = '', 3000);
       this.selectedUser = null;
       await this.displayListOfUsers();
     },
