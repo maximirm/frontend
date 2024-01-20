@@ -1,5 +1,5 @@
 <template>
-  <div class="button-group">
+  <div class="grouped-buttons">
     <StyledButton
         v-for="button in buttons"
         :key="button.text"
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.button-group {
+.grouped-buttons {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

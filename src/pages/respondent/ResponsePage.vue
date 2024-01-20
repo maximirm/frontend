@@ -1,6 +1,6 @@
 <template>
-  <div class="response-page"
-       v-if="currentQuestionIndex < questions.length">
+  <div class="response-page">
+       <div v-if="currentQuestionIndex < questions.length">
     <ResponseForm
         :question="questions[currentQuestionIndex]"
         @responseTextSubmitted="handleResponseSubmitted"/>
@@ -9,6 +9,7 @@
     <StyledButton
         :onClickMethod="redirectToRespondentPage"
         :label="'Zurück'"/>
+       </div>
   </div>
 </template>
 

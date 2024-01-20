@@ -33,9 +33,11 @@ export default {
 </script>
 
 <style scoped>
+
 .catalog-export {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 </style>
