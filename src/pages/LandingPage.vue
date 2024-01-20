@@ -18,9 +18,9 @@ export default {
   computed: {
     buttons() {
       return [
-        {text: 'Login', clickHandler: this.redirectToLogin},
-        {text: 'Registrieren', clickHandler: this.redirectToRegister},
-        {text: 'Umfrage anonym beantworten', clickHandler: this.respondAnonymous},
+        {text: 'Login', clickHandler: this.redirectToLogin, class: 'green-btn'},
+        {text: 'Registrieren', clickHandler: this.redirectToRegister, class: 'green-btn'},
+        {text: 'Umfrage anonym beantworten', clickHandler: this.respondAnonymous, class: 'green-btn'},
       ];
     },
   },

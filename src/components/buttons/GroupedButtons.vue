@@ -4,7 +4,8 @@
         v-for="button in buttons"
         :key="button.text"
         :label="button.text"
-        :onClickMethod="button.clickHandler"/>
+        :onClickMethod="button.clickHandler"
+        :class="button.class"/>
   </div>
 </template>
 

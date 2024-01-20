@@ -19,8 +19,8 @@ export default {
   computed: {
     buttons() {
       return [
-        {text: 'Meine Umfragen', clickHandler: this.redirectToAnalyseSurveyPage},
-        {text: 'Umfrage Erstellen', clickHandler: this.redirectToCreateSurveyPage},
+        {text: 'Meine Umfragen', clickHandler: this.redirectToAnalyseSurveyPage, class: 'green-btn'},
+        {text: 'Umfrage Erstellen', clickHandler: this.redirectToCreateSurveyPage, class: 'green-btn'},
       ];
     },
   },

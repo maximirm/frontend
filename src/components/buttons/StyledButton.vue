@@ -61,7 +61,7 @@ export default {
 }
 
 .green-btn {
-  background-color: #4CAF50;
+  background-color: #508a53;
   margin-top: 10px;
 }
 
@@ -71,7 +71,7 @@ export default {
 }
 
 .red-btn {
-  background-color: #d32f2f;
+  background-color: #c74545;
 }
 
 .red-btn:disabled {

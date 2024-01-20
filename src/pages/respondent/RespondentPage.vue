@@ -2,7 +2,8 @@
   <div class="respondent-page">
     <StyledButton
         :onClickMethod="redirectToLandingPage"
-        :label="'Zurück zur Startseite'"/>
+        :label="'Zurück zur Startseite'"
+        :class="'red-btn'" />
     <SurveyCatalog
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
