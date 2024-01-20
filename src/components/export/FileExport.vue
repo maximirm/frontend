@@ -24,11 +24,11 @@ export default {
     },
     fileName: {
       type: String,
-      required: true,Array
+      required: true,
     },
     pdfColumnDefinition: {
       type: Array,
-      required: true,Array
+      required: true,
     },
   },
 };
