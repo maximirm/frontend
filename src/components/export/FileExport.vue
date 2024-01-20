@@ -1,10 +1,10 @@
 <template>
     <PDFExport
-        :pdfData="pdfData"
+        :pdfData="exportData"
         :fileName="fileName"
         :columnDefinition="pdfColumnDefinition"/>
     <CSVExport
-        :csvData="csvData"
+        :csvData="exportData"
         :fileName="fileName"/>
 </template>
 
@@ -18,11 +18,7 @@ export default {
     PDFExport
   },
   props: {
-    pdfData: {
-      type: Array,
-      required: true,
-    },
-    csvData: {
+    exportData: {
       type: Array,
       required: true,
     },
