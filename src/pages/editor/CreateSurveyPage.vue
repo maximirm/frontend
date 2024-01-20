@@ -5,10 +5,10 @@
           v-if="surveyFormVisible"
           :title="title"
           :description="description"
-          @create-survey="createSurvey"/>
+          @createSurvey="createSurvey"/>
       <CreateQuestionForm
           v-if="!surveyFormVisible"
-          @create-question="createQuestion"/>
+          @createQuestion="createQuestion"/>
     </div>
 
     <div class="question-list-container">
@@ -17,21 +17,20 @@
         <p>{{ surveyDescription }}</p>
       </div>
 
-      <QuestionList
+      <QuestionCatalog
           :questions="questions"
           :selectedQuestion="selectedQuestion"
           @questionSelected="selectQuestion"/>
-
       <FeedbackMessage
-          v-if="message"
-          :message-class="'success'"
-          :message="message"/>
-      <BaseButton
+          v-if="feedbackMessage"
+          :messageType="'success'"
+          :message="feedbackMessage"/>
+      <StyledButton
           v-if="selectedQuestion"
-          :buttonText="'Frage löschen'"
-          :clickHandler="deleteSelectedQuestion"
+          :label="'Frage löschen'"
+          :onClickMethod="deleteSelectedQuestion"
           :isDisabled="!selectedQuestion"
-          class="delete-btn"/>
+          :class="'delete-btn'"/>
     </div>
   </div>
 </template>
@@ -39,16 +38,16 @@
 <script>
 import CreateSurveyForm from "@/components/forms/CreateSurveyForm.vue";
 import CreateQuestionForm from "@/components/forms/CreateQuestionForm.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import QuestionCatalog from "@/components/catalogs/QuestionCatalog.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/api/surveyApi";
-import QuestionList from "@/components/lists/QuestionList.vue";
 
 export default {
   components: {
-    QuestionList,
+    StyledButton,
+    QuestionCatalog,
     FeedbackMessage,
-    BaseButton,
     CreateSurveyForm,
     CreateQuestionForm,
   },
@@ -62,7 +61,7 @@ export default {
       surveyDescription: "",
       questions: [],
       selectedQuestion: null,
-      message: '',
+      feedbackMessage: '',
       createdSurveyId: null,
     };
   },
@@ -85,9 +84,6 @@ export default {
         alert("Fehler beim Erstellen der Umfrage - Bitte neu einloggen");
         this.redirectToLandingPage();
       }
-    },
-    redirectToLandingPage() {
-      this.$router.push({name: 'LandingPage'});
     },
     async createQuestion(questionData) {
       try {
@@ -122,12 +118,11 @@ export default {
         await this.getSurvey();
 
         this.selectedQuestion = null;
-        this.message = "Frage erfolgreich gelöscht";
-        setTimeout(() => this.message = '', 3000);
+        this.feedbackMessage = "Frage erfolgreich gelöscht";
+        setTimeout(() => this.feedbackMessage = '', 3000);
       } catch (error) {
         alert("Fehler beim Löschen der Frage");
         this.redirectToLandingPage();
-
       }
     },
     async getSurvey() {
@@ -140,6 +135,9 @@ export default {
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfrage:', error);
       }
+    },
+    redirectToLandingPage() {
+      this.$router.push({name: 'LandingPage'});
     },
   }
 };
@@ -173,16 +171,6 @@ export default {
 .survey-info {
   text-align: center;
   margin-bottom: 20px;
-}
-
-
-.delete-btn {
-  background-color: #d32f2f;
-}
-
-.delete-btn:disabled {
-  background-color: #999;
-  cursor: not-allowed;
 }
 
 </style>
