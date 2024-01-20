@@ -1,5 +1,5 @@
 <template>
-  <CatalogExport
+  <FileExportCatalog
       :exportData="mappedUserData"
       :label="label"
       :pdfColumnDefinition="pdfColumnDefinition">
@@ -7,16 +7,16 @@
         :users="users"
         :selectedUser="selectedUser"
         @userSelected="selectFunction"/>
-  </CatalogExport>
+  </FileExportCatalog>
 </template>
 
 <script>
-import CatalogExport from "@/components/catalogs/CatalogExport.vue"
 import UserCatalog from "@/components/catalogs/UserCatalog.vue"
+import FileExportCatalog from "@/components/general/FileExportCatalog.vue";
 
 export default {
   components: {
-    CatalogExport,
+    FileExportCatalog,
     UserCatalog
   },
   props: {

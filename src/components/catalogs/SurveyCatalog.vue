@@ -12,7 +12,7 @@
 
 <script>
 import SurveyCard from "@/components/cards/SurveyCard.vue";
-import StyledCatalog from "@/components/catalogs/StyledCatalog.vue";
+import StyledCatalog from "@/components/general/StyledCatalog.vue";
 
 export default {
   components: {
