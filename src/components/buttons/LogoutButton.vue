@@ -1,25 +1,29 @@
 <template>
-    <BaseButton
-        :click-handler="logout"
-        :button-text="buttonText"/>
+    <StyledButton
+        :onClickMethod="logoutUser"
+        :label="label"/>
 </template>
 
 <script>
-import BaseButton from "@/components/buttons/BaseButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 
 export default {
   name: "LogoutButton",
-  components: {BaseButton},
+  components: {
+    StyledButton
+  },
   props: {
-    buttonText: {
+    label: {
       type: String,
       default: 'Logout',
     }
   },
   methods: {
-    logout() {
+    logoutUser() {
       this.$store.dispatch('resetStore');
-      this.$router.push({name: 'LandingPage'});
+      this.$router.push({
+        name: 'LandingPage'
+      });
     },
   }
 }
