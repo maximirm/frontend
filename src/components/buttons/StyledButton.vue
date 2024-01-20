@@ -60,31 +60,23 @@ export default {
   cursor: not-allowed;
 }
 
-.respond-survey-btn {
-  background-color: #4CAF50;
-}
-
-.respond-survey-btn:disabled {
-  background-color: #999;
-  cursor: not-allowed;
-}
-
-.delete-btn {
-  background-color: #d32f2f;
-}
-
-.delete-btn:disabled {
-  background-color: #999;
-  cursor: not-allowed;
-}
-
-.respond-btn {
+.green-btn {
   background-color: #4CAF50;
   margin-top: 10px;
 }
 
-.respond-btn:disabled {
+.green-btn:disabled {
   background-color: #999;
   cursor: not-allowed;
 }
+
+.red-btn {
+  background-color: #d32f2f;
+}
+
+.red-btn:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
 </style>

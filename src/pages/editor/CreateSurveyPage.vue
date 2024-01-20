@@ -30,7 +30,7 @@
           :label="'Frage löschen'"
           :onClickMethod="deleteSelectedQuestion"
           :isDisabled="!selectedQuestion"
-          :class="'delete-btn'"/>
+          :class="'red-btn'"/>
     </div>
   </div>
 </template>

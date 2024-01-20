@@ -35,14 +35,14 @@
           :label="'Umfrage löschen'"
           :onClickMethod="deleteSelectedSurvey"
           :isDisabled="!selectedSurvey"
-          class="delete-btn"/>
+          :class="'red-btn'"/>
       <StyledButton
           :label="'Frage analysieren'"
           :onClickMethod="analyseQuestion"
           :isDisabled="!selectedQuestion
           || this.selectedQuestion.type === 1
           || this.selectedQuestion.responses.length === 0"
-          class="show-questions-btn"/>
+          :class="'green-btn'"/>
     </div>
   </div>
 </template>
@@ -183,19 +183,6 @@ h2 {
   background-color: #333;
 
   z-index: 1;
-}
-
-.delete-btn {
-  background-color: #d32f2f;
-}
-
-.show-questions-btn {
-  background-color: #4CAF50;
-}
-
-.delete-btn:disabled {
-  background-color: #999;
-  cursor: not-allowed;
 }
 
 .button-container {

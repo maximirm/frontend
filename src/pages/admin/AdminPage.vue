@@ -17,7 +17,7 @@
         :label="'Delete Selected User'"
         :onClickMethod="deleteSelectedUser"
         :isDisabled="!selectedUser || selfSelected"
-        class="delete-btn"/>
+        :class="'red-btn'"/>
   </div>
 </template>
 

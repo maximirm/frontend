@@ -4,7 +4,7 @@
         :onClickMethod="exportToCSV"
         :label="'CSV Export'"
         :isDisabled="csvData.length === 0"
-    />
+        :class="'green-btn'"/>
   </div>
 </template>
 

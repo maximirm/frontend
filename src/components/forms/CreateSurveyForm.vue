@@ -14,7 +14,8 @@
     <StyledButton
         :onClickMethod="emitCreateSurveyEvent"
         :label="'Umfrage erstellen'"
-        :isDisabled="title === '' || description === ''"/>
+        :isDisabled="title === '' || description === ''"
+        :class="'green-btn'"/>
     <StyledButton
         :onClickMethod="redirectToEditorPage"
         :label="'Zurück'"/>

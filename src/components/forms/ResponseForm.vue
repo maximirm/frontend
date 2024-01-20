@@ -29,7 +29,7 @@
           :label="'Antwort speichern'"
           :onClickMethod="submitResponse"
           :isDisabled="responseText.length === 0"
-          :class="'respond-btn'"/>
+          :class="'green-btn'"/>
     </div>
   </div>
 </template>

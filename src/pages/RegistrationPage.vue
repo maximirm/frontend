@@ -21,7 +21,8 @@
     <StyledButton
         :onClickMethod="register"
         :label="'Registrieren'"
-        :isDisabled="username === '' || password===''"/>
+        :isDisabled="username === '' || password===''"
+        :class="'green-btn'"/>
     <LogoutButton
         :label="'Zurück zur Startseite'"/>
     <FeedbackMessage

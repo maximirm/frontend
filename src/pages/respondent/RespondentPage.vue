@@ -12,7 +12,7 @@
           :label="'Umfrage beantworten'"
           :onClickMethod="respondToSurvey"
           :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
-          :class="'respond-survey-btn'"/>
+          :class="'green-btn'"/>
     </div>
   </div>
 </template>

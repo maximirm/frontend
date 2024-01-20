@@ -32,14 +32,17 @@
 
     <StyledButton
         :onClickMethod="emitCreateQuestionEvent"
-        :label="'Frage erstellen'"/>
+        :label="'Frage erstellen'"
+        :class="'green-btn'"/>
     <FeedbackMessage
         v-if="creationAttempted"
         :messageType="creationError ? 'error' : 'success'"
         :message="creationError ? creationError : 'Frage erfolgreich erstellt!'"/>
     <StyledButton
         :onClickMethod="goToEditorPage"
-        :label="'Umfrageerstellung abschließen'"/>
+        :label="'Umfrageerstellung abschließen'"
+        :class="'green-btn'"/>
+
     <LogoutButton/>
   </div>
 </template>

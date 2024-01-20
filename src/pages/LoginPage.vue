@@ -15,7 +15,8 @@
     <StyledButton
         :on-click-method="login"
         :label="'Login'"
-        :isDisabled="name === '' || password === ''"/>
+        :isDisabled="name === '' || password === ''"
+        :class="'green-btn'"/>
     <LogoutButton
         :label="'Zur Startseite'"/>
     <FeedbackMessage

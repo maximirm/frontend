@@ -2,7 +2,8 @@
     <StyledButton
         :onClickMethod="exportToPDF"
         :label="'PDF Export'"
-        :isDisabled="pdfData.length === 0"/>
+        :isDisabled="pdfData.length === 0"
+        :class="'green-btn'"/>
 </template>
 
 <script>
