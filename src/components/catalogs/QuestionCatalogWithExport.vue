@@ -1,6 +1,6 @@
 <template>
   <CatalogExport
-      :exportData="mappedQuestionData"
+      :exportData="mappedQuestionDataForExport"
       :label="label"
       :pdfColumnDefinition="pdfColumnDefinition">
     <QuestionCatalog
@@ -20,18 +20,6 @@ export default {
     CatalogExport,
   },
   props: {
-    label: {
-      type: String,
-      required: true,
-    },
-    mappedQuestionData: {
-      type: Array,
-      required: true,
-    },
-    pdfColumnDefinition: {
-      type: Array,
-      required: true,
-    },
     selectFunction: {
       type: Function,
       required: true,
@@ -44,6 +32,30 @@ export default {
       type: Array,
       required: true,
     }
-  }
+  },
+  data(){
+    return {
+      label: "Frageliste",
+      pdfColumnDefinition: [
+        {header: "Fragestellung", dataKey: "questionText", width: 40},
+        {header: "Optionen", dataKey: "options", width: 30},
+        {header: "Anzahl der Antworten", dataKey: "numberOfResponses", width: 50}
+      ]
+    }
+  },
+  computed: {
+    mappedQuestionDataForExport() {
+      const data = [];
+      this.questions.forEach((question) => {
+        const questionData = {
+          questionText: question.question_text,
+          options: question.options.join(" "),
+          numberOfResponses: question.responses.length,
+        };
+        data.push(questionData);
+      });
+      return data;
+    },
+  },
 }
 </script>

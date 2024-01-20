@@ -14,17 +14,11 @@
       <SurveyCatalogWithExport
           :surveys="surveys"
           :selectedSurvey="selectedSurvey"
-          :selectFunction="selectSurvey"
-          :pdfColumnDefinition="surveyPdfColumnDefinition"
-          :mappedSurveyData="mappedSurveyDataForExport"
-          :label="surveyLabel"/>
+          :selectFunction="selectSurvey"/>
       <QuestionCatalogWithExport
           :questions="questions"
           :selectedQuestion="selectedQuestion"
-          :selectFunction="selectQuestion"
-          :pdfColumnDefinition="questionPdfColumndefinition"
-          :mappedQuestionData="mappedQuestionDataForExport"
-          :label="questionLabel"/>
+          :selectFunction="selectQuestion"/>
       <div class="fixed-panel">
         <AnalysePanel
             v-if="selectedSurvey"
@@ -82,48 +76,10 @@ export default {
       analysisComplete: false,
       responseAnalysis: [],
       respondentsAnalysis: [],
-      surveyLabel: "Umfrageliste",
-      surveyPdfColumnDefinition: [
-        {header: "Titel", dataKey: "title", width: 40},
-        {header: "Beschreibung", dataKey: "description", width: 30},
-        {header: "Anzahl der Fragen", dataKey: "numberOfQuestions", width: 50}
-      ],
-      questionLabel: "Frageliste",
-      questionPdfColumndefinition: [
-        {header: "Fragestellung", dataKey: "questionText", width: 40},
-        {header: "Optionen", dataKey: "options", width: 30},
-        {header: "Anzahl der Antworten", dataKey: "numberOfResponses", width: 50}
-      ]
     };
   },
   mounted() {
     this.displaySurveys();
-  },
-  computed: {
-    mappedSurveyDataForExport() {
-      const data = [];
-      this.surveys.forEach((survey) => {
-        const surveyData = {
-          title: survey.title,
-          description: survey.description,
-          numberOfQuestions: survey.numberOfQuestions,
-        };
-        data.push(surveyData);
-      });
-      return data;
-    },
-    mappedQuestionDataForExport() {
-      const data = [];
-      this.questions.forEach((question) => {
-        const questionData = {
-          questionText: question.question_text,
-          options: question.options.join(" "),
-          numberOfResponses: question.responses.length,
-        };
-        data.push(questionData);
-      });
-      return data;
-    },
   },
   methods: {
     async displaySurveys() {

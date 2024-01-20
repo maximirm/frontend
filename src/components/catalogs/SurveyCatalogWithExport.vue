@@ -1,6 +1,6 @@
 <template>
   <CatalogExport
-      :exportData="mappedSurveyData"
+      :exportData="mappedSurveyDataForExport"
       :label="label"
       :pdfColumnDefinition="pdfColumnDefinition">
     <SurveyCatalog
@@ -20,18 +20,6 @@ export default {
     CatalogExport
   },
   props: {
-    label: {
-      type: String,
-      required: true,
-    },
-    mappedSurveyData: {
-      type: Array,
-      required: true,
-    },
-    pdfColumnDefinition: {
-      type: Array,
-      required: true,
-    },
     selectFunction: {
       type: Function,
       required: true,
@@ -45,5 +33,29 @@ export default {
       required: true,
     }
   },
+  data() {
+    return {
+      label: "Umfrageliste",
+      pdfColumnDefinition: [
+        {header: "Titel", dataKey: "title", width: 40},
+        {header: "Beschreibung", dataKey: "description", width: 30},
+        {header: "Anzahl der Fragen", dataKey: "numberOfQuestions", width: 50}
+      ],
+    }
+  },
+  computed: {
+    mappedSurveyDataForExport() {
+      const data = [];
+      this.surveys.forEach((survey) => {
+        const surveyData = {
+          title: survey.title,
+          description: survey.description,
+          numberOfQuestions: survey.numberOfQuestions,
+        };
+        data.push(surveyData);
+      });
+      return data;
+    },
+  }
 }
 </script>
