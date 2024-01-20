@@ -48,12 +48,12 @@ const router = createRouter({
             component: AnalyseSurveyPage,
         },
         {
-            path: '/respondent/:isAnonymous',
+            path: '/respondent/:respondentIsAnonymous',
             name: 'RespondentPage',
             component: RespondentPage,
         },
         {
-            path: '/response/:isAnonymous',
+            path: '/response/:respondentIsAnonymous',
             name: 'ResponsePage',
             component: ResponsePage,
         },

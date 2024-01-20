@@ -6,21 +6,21 @@
         @responseTextSubmitted="handleResponseSubmitted"/>
     <ProgressBar
         :progressBarWidth="progressBarWidth"/>
-    <BaseButton
-        :click-handler="redirectToRespondentPage"
-        :button-text="'Zurück'"/>
+    <StyledButton
+        :onClickMethod="redirectToRespondentPage"
+        :label="'Zurück'"/>
   </div>
 </template>
 
 <script>
 import ResponseForm from "@/components/forms/ResponseForm.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
 import ProgressBar from "@/components/utils/ProgressBar.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 
 export default {
   components: {
+    StyledButton,
     ProgressBar,
-    BaseButton,
     ResponseForm
   },
   data() {
@@ -28,7 +28,7 @@ export default {
       selectedSurvey: null,
       questions: [],
       currentQuestionIndex: 0,
-      isAnonymous: true,
+      respondentIsAnonymous: true,
     };
   },
   computed: {
@@ -44,18 +44,18 @@ export default {
         this.currentQuestionIndex++;
       } else {
         alert("Umfrage abgeschlossen. Vielen Dank");
-        this.$router.push({name: 'RespondentPage', params: {isAnonymous: this.isAnonymous}});
+        this.$router.push({name: 'RespondentPage', params: {respondentIsAnonymous: this.respondentIsAnonymous}});
       }
     },
 
     redirectToRespondentPage() {
-      this.$router.push({name: 'RespondentPage', params: {isAnonymous: this.isAnonymous}});
+      this.$router.push({name: 'RespondentPage', params: {respondentIsAnonymous: this.respondentIsAnonymous}});
     }
   },
   created() {
     this.selectedSurvey = this.$store.state.selectedSurvey;
     this.questions = this.selectedSurvey.questions;
-    this.isAnonymous = this.$route.params.isAnonymous;
+    this.respondentIsAnonymous = this.$route.params.respondentIsAnonymous;
   },
 };
 </script>

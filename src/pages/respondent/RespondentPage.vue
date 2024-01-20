@@ -64,7 +64,7 @@ export default {
       this.$store.commit('setSelectedSurvey', selectedSurvey);
       this.$router.push({
         name: 'ResponsePage',
-        params: {isAnonymous: this.respondentIsAnonymous},
+        params: {respondentIsAnonymous: this.respondentIsAnonymous},
       });
     }
   }
