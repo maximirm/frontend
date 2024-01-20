@@ -18,32 +18,32 @@
         :options="dropdownOptions"
         :selectedOption="role"
         @update:selectedOption="handleRoleChange"/>
-    <BaseButton
-        :click-handler="register"
-        :button-text="'Registrieren'"
-        :is-disabled="username === '' || password===''"/>
+    <StyledButton
+        :onClickMethod="register"
+        :label="'Registrieren'"
+        :isDisabled="username === '' || password===''"/>
     <LogoutButton
-        :button-text="'Zurück zur Startseite'"/>
+        :label="'Zurück zur Startseite'"/>
     <FeedbackMessage
         v-if="registrationAttempted"
         :message="registrationError ? registrationError : 'Registrierung Erfolgreich'"
-        :message-class="registrationError ? 'error' : 'success'"/>
+        :messageType="registrationError ? 'error' : 'success'"/>
   </div>
 </template>
 
 <script>
 import InputLabel from "@/components/utils/InputLabel.vue";
 import DropdownMenu from "@/components/utils/DropdownMenu.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 import {registerUser} from "@/api/userApi";
 
 export default {
   components: {
+    StyledButton,
     FeedbackMessage,
     LogoutButton,
-    BaseButton,
     DropdownMenu,
     InputLabel
   },
