@@ -1,4 +1,5 @@
 <template>
+  <h3>{{ label }}</h3>
   <div class="styled-catalog">
     <slot></slot>
   </div>
@@ -6,6 +7,12 @@
 
 <script>
 export default {
+  props:{
+    label: {
+      Type: String,
+      required: true
+    }
+  }
 };
 </script>
 
@@ -13,7 +20,7 @@ export default {
 .styled-catalog {
   width: 500px;
   overflow-y: auto;
-  height: 600px;
+  height: 500px;
   scrollbar-width: thin;
   scrollbar-color: #555 #444;
   flex-grow: 1;

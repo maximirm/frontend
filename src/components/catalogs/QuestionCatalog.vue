@@ -1,5 +1,6 @@
 <template>
-  <StyledCatalog>
+  <StyledCatalog
+      :label="'Fragestellungen'">
     <QuestionCard
         v-for="(question, index) in questions"
         :key="index"

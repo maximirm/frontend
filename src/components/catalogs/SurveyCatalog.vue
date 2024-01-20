@@ -1,5 +1,6 @@
 <template>
-  <StyledCatalog>
+  <StyledCatalog
+      :label="'Umfragen'">
     <SurveyCard
         v-for="(survey, index) in surveys"
         :key="index"

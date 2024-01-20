@@ -1,27 +1,25 @@
 <template>
-  <div
-      :class="{ 'selected-survey': isSelected }"
-      @click="selectSurvey">
-    <div class="survey-item">
-      <div class="key-value-pair">
-        <p>{{ survey.title }}</p>
-      </div>
-
-      <div class="key-value-pair">
-        <p>{{ survey.description }}</p>
-      </div>
-
-      <div class="key-value-pair">
-        <p>{{ survey.questions.length }} Fragen</p>
-      </div>
-    </div>
-  </div>
+  <StyledCard
+      @click="selectSurvey"
+      :class="{ 'selected': isSelected }">
+    <InfoPair
+        :label="'Titel:'"
+        :value="survey.title"/>
+    <InfoPair
+        :label="'Beschreibung:'"
+        :value="survey.description"/>
+    <InfoPair
+        :value="survey.questions.length + ' Fragen'"/>
+  </StyledCard>
 </template>
 
-
 <script>
+import StyledCard from "@/components/cards/StyledCard.vue";
+import InfoPair from "@/components/cards/InfoPair.vue";
+
 export default {
   name: 'SurveyCard',
+  components: {InfoPair, StyledCard},
   props: {
     survey: {
       type: Object,
@@ -41,35 +39,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.key-value-pair p {
-  margin: 1px 0;
-  padding: 2px;
-  color: #ccc;
-  text-overflow: ellipsis;
-}
-
-.survey-item {
-  border: 2px solid #666;
-  padding: 10px;
-  cursor: pointer;
-  transition: border-color 0.3s;
-  display: flex;
-  justify-content: flex-start
-}
-
-
-.key-value-pair {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-right: 15px;
-  width: 200px;
-}
-
-.selected-survey {
-  background-color: #2e2e2e;
-  color: #4CAF50;
-  border-left: 4px solid #4CAF50;
-}
-</style>

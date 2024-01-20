@@ -1,31 +1,25 @@
 <template>
-  <div
-      :class="{ 'selected-question': isSelected }"
-      @click="selectQuestion">
-    <div class="question-item">
-      <div class="key-value-pair">
-        <p v-if="question.type === 1">Freitext</p>
-        <p v-else-if="question.type === 2">Dropdown</p>
-        <p v-else-if="question.type === 3">Checkbox</p>
-        <p>{{ question.responses.length }} Antworten</p>
-      </div>
-
-      <div class="key-value-pair">
-        <p>{{ question.question_text }}</p>
-      </div>
-
-      <div class="key-value-pair" v-if="question.options.length > 0">
-        <p>1. {{ question.options[0] }}</p>
-        <p>2. {{ question.options[1] }}</p>
-        <p>3. {{ question.options[2] }}</p>
-      </div>
-    </div>
-  </div>
+  <StyledCard
+      @click="selectQuestion"
+      :class="{ 'selected': isSelected }">
+    <InfoPair
+        :label="'Fragestellung:'"
+        :value="question.question_text"/>
+    <InfoPair
+        :label="'Art:'"
+        :value="questionTypeText"/>
+    <InfoPair
+        :value="question.responses.length + ' Antworten'"/>
+  </StyledCard>
 </template>
 
 <script>
+import InfoPair from "@/components/cards/InfoPair.vue";
+import StyledCard from "@/components/cards/StyledCard.vue";
+
 export default {
   name: 'QuestionCard',
+  components: {StyledCard, InfoPair},
   props: {
     question: {
       type: Object,
@@ -35,6 +29,24 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+  },
+  computed: {
+    questionTypeText() {
+      if (this.question.type === 1) {
+        return "Freitext";
+      } else if (this.question.type === 2) {
+        return "Dropdown";
+      } else if (this.question.type === 3) {
+        return "Checkbox";
+      } else {
+        return "Unbekannt";
+      }
+    },
+    formattedOptions() {
+      return this.question.options.slice(0, 3).map((option, index) => {
+        return `${index + 1}. ${option}`;
+      }).join(', ');
     },
   },
   methods: {

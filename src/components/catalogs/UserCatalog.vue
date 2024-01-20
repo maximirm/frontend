@@ -1,5 +1,6 @@
 <template>
-  <StyledCatalog>
+  <StyledCatalog
+      :label="'Benutzer'">
     <UserCard
         v-for="(user, index) in users"
         :key="index"
