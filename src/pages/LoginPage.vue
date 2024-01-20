@@ -12,31 +12,31 @@
         :inputId="'password'"
         :inputType="'password'"
         @update:model="updatePassword"/>
-    <BaseButton
-        :click-handler="login"
-        :button-text="'Login'"
-        :is-disabled="name === '' || password === ''"/>
+    <StyledButton
+        :on-click-method="login"
+        :label="'Login'"
+        :isDisabled="name === '' || password === ''"/>
     <LogoutButton
-        :button-text="'Zur Startseite'"/>
+        :label="'Zur Startseite'"/>
     <FeedbackMessage
         v-if="loginAttempted"
         :message="loginError ? loginError : 'Login erfolgreich!'"
-        :message-class="loginError ? 'error' : 'success'"/>
+        :messageType="loginError ? 'error' : 'success'"/>
   </div>
 </template>
 
 <script>
 import InputLabel from "@/components/utils/InputLabel.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
-import {login} from "@/api/userApi";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
+import {login} from "@/api/userApi";
 
 export default {
   components: {
+    StyledButton,
     LogoutButton,
     FeedbackMessage,
-    BaseButton,
     InputLabel,
   },
   data() {
@@ -79,7 +79,7 @@ export default {
           this.$router.push({name: 'EditorPage'});
           break;
         case 'respondent':
-          this.$router.push({name: 'RespondentPage', params: {isAnonymous: false}});
+          this.$router.push({name: 'RespondentPage', params: {respondentIsAnonymous: false}});
           break;
         default:
           console.error('Unbekannte Rolle:', role);
