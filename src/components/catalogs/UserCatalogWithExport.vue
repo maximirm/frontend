@@ -17,7 +17,8 @@ import UserCatalog from "@/components/catalogs/UserCatalog.vue"
 export default {
   components: {
     CatalogExport,
-    UserCatalog},
+    UserCatalog
+  },
   props: {
     label: {
       type: String,
