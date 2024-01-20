@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import InputLabel from "@/components/utils/InputLabel.vue";
+import InputLabel from "@/components/general/InputLabel.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import StyledButton from "@/components/buttons/StyledButton.vue";
 

@@ -50,7 +50,7 @@
 <script>
 import AnalysePanel from "@/components/analysis/AnalysisPanel.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
-import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import {deleteSurvey, fetchSurveysByCreatorId} from "@/api/surveyApi";
 import {fetchAnalysedQuestion} from "@/api/analysisApi";
 import StyledButton from "@/components/buttons/StyledButton.vue";

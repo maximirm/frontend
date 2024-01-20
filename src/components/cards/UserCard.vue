@@ -15,7 +15,7 @@
 
 <script>
 import StyledCard from "@/components/cards/StyledCard.vue";
-import InfoPair from "@/components/cards/InfoPair.vue";
+import InfoPair from "@/components/general/InfoPair.vue";
 
 export default {
   name: 'UserCard',

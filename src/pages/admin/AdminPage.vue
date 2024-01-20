@@ -23,7 +23,7 @@
 
 <script>
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
-import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import {deleteUser, fetchAllUsers} from "@/api/userApi";
 import {fetchSurveysByCreatorId} from "@/api/surveyApi";
 import StyledButton from "@/components/buttons/StyledButton.vue";

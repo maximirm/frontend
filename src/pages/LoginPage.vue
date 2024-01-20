@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import InputLabel from "@/components/utils/InputLabel.vue";
-import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import InputLabel from "@/components/general/InputLabel.vue";
+import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import StyledButton from "@/components/buttons/StyledButton.vue";
 import {login} from "@/api/userApi";

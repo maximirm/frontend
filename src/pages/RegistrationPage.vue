@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import InputLabel from "@/components/utils/InputLabel.vue";
-import DropdownMenu from "@/components/utils/DropdownMenu.vue";
+import InputLabel from "@/components/general/InputLabel.vue";
+import DropdownMenu from "@/components/general/DropdownMenu.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
-import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
+import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import StyledButton from "@/components/buttons/StyledButton.vue";
 import {registerUser} from "@/api/userApi";
 

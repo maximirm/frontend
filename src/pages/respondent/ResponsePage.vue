@@ -15,7 +15,7 @@
 
 <script>
 import ResponseForm from "@/components/forms/ResponseForm.vue";
-import ProgressBar from "@/components/utils/ProgressBar.vue";
+import ProgressBar from "@/components/general/ProgressBar.vue";
 import StyledButton from "@/components/buttons/StyledButton.vue";
 
 export default {
