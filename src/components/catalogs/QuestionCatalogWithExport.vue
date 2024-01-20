@@ -4,7 +4,7 @@
       :label="label"
       :pdfColumnDefinition="pdfColumnDefinition">
     <QuestionCatalog
-        :users="questions"
+        :questions="questions"
         :selectedUser="selectedQuestion"
         @userSelected="selectFunction"/>
   </CatalogExport>

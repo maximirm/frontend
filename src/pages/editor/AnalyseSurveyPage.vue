@@ -1,31 +1,30 @@
 <template>
   <div class="analyze-survey-page">
     <h2>Meine Umfragen</h2>
-    <BaseButton
-        :clickHandler="redirectToEditorPage"
-        :button-text="'Zurück'"/>
+    <StyledButton
+        :onClickMethod="redirectToEditorPage"
+        :label="'Zurück'"/>
     <LogoutButton/>
     <FeedbackMessage
         v-if="message"
-        :message-class="'success'"
+        :messageType="'success'"
         :message="message"/>
 
     <div class="list-container">
-      <SurveyList
-          :show-file-export="true"
-          :pdf-columns="surveyPdfColumns"
-          :list-title="surveyListTitle"
+      <SurveyCatalogWithExport
           :surveys="surveys"
           :selectedSurvey="selectedSurvey"
-          @surveySelected="selectSurvey"/>
-      <QuestionList
-          :show-file-export="true"
-          :pdf-columns="questionPdfColumns"
-          :list-title="questionListTitle"
+          :selectFunction="selectSurvey"
+          :pdfColumnDefinition="surveyPdfColumnDefinition"
+          :mappedSurveyData="mappedSurveyDataForExport"
+          :label="surveyLabel"/>
+      <QuestionCatalogWithExport
           :questions="questions"
           :selectedQuestion="selectedQuestion"
-          @questionSelected="selectQuestion"/>
-
+          :selectFunction="selectQuestion"
+          :pdfColumnDefinition="questionPdfColumndefinition"
+          :mappedQuestionData="mappedQuestionDataForExport"
+          :label="questionLabel"/>
       <div class="fixed-panel">
         <AnalysePanel
             v-if="selectedSurvey"
@@ -38,14 +37,14 @@
     </div>
 
     <div class="button-container">
-      <BaseButton
-          :buttonText="'Umfrage löschen'"
-          :clickHandler="deleteSelectedSurvey"
+      <StyledButton
+          :label="'Umfrage löschen'"
+          :onClickMethod="deleteSelectedSurvey"
           :isDisabled="!selectedSurvey"
           class="delete-btn"/>
-      <BaseButton
-          :buttonText="'Frage analysieren'"
-          :clickHandler="analyseQuestion"
+      <StyledButton
+          :label="'Frage analysieren'"
+          :onClickMethod="analyseQuestion"
           :isDisabled="!selectedQuestion
           || this.selectedQuestion.type === 1
           || this.selectedQuestion.responses.length === 0"
@@ -55,23 +54,23 @@
 </template>
 
 <script>
-import BaseButton from "@/components/buttons/BaseButton.vue";
 import AnalysePanel from "@/components/analysis/AnalysisPanel.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
-import SurveyList from "@/components/lists/SurveyList.vue";
-import QuestionList from "@/components/lists/QuestionList.vue";
 import {deleteSurvey, fetchSurveysByCreatorId} from "@/api/surveyApi";
 import {fetchAnalysedQuestion} from "@/api/analysisApi";
+import StyledButton from "@/components/buttons/StyledButton.vue";
+import SurveyCatalogWithExport from "@/components/catalogs/SurveyCatalogWithExport.vue";
+import QuestionCatalogWithExport from "@/components/catalogs/QuestionCatalogWithExport.vue";
 
 export default {
   components: {
-    QuestionList,
-    SurveyList,
+    QuestionCatalogWithExport,
+    SurveyCatalogWithExport,
+    StyledButton,
     FeedbackMessage,
     LogoutButton,
     AnalysePanel,
-    BaseButton,
   },
   data() {
     return {
@@ -83,14 +82,14 @@ export default {
       analysisComplete: false,
       responseAnalysis: [],
       respondentsAnalysis: [],
-      surveyListTitle: "Umfrageliste",
-      surveyPdfColumns: [
+      surveyLabel: "Umfrageliste",
+      surveyPdfColumnDefinition: [
         {header: "Titel", dataKey: "title", width: 40},
         {header: "Beschreibung", dataKey: "description", width: 30},
         {header: "Anzahl der Fragen", dataKey: "numberOfQuestions", width: 50}
       ],
-      questionListTitle: "Frageliste",
-      questionPdfColumns: [
+      questionLabel: "Frageliste",
+      questionPdfColumndefinition: [
         {header: "Fragestellung", dataKey: "questionText", width: 40},
         {header: "Optionen", dataKey: "options", width: 30},
         {header: "Anzahl der Antworten", dataKey: "numberOfResponses", width: 50}
@@ -100,7 +99,32 @@ export default {
   mounted() {
     this.displaySurveys();
   },
-
+  computed: {
+    mappedSurveyDataForExport() {
+      const data = [];
+      this.surveys.forEach((survey) => {
+        const surveyData = {
+          title: survey.title,
+          description: survey.description,
+          numberOfQuestions: survey.numberOfQuestions,
+        };
+        data.push(surveyData);
+      });
+      return data;
+    },
+    mappedQuestionDataForExport() {
+      const data = [];
+      this.questions.forEach((question) => {
+        const questionData = {
+          questionText: question.question_text,
+          options: question.options.join(" "),
+          numberOfResponses: question.responses.length,
+        };
+        data.push(questionData);
+      });
+      return data;
+    },
+  },
   methods: {
     async displaySurveys() {
       try {
