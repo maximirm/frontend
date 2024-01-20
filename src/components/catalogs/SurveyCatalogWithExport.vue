@@ -1,7 +1,7 @@
 <template>
   <CatalogExport
       :exportData="mappedSurveyData"
-      :label="label" :
+      :label="label"
       :pdfColumnDefinition="pdfColumnDefinition">
     <SurveyCatalog
         :surveys="surveys"
