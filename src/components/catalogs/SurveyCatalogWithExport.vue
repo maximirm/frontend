@@ -1,29 +1,30 @@
 <template>
   <CatalogExport
-      :exportData="mappedUserData"
-      :label="label"
+      :exportData="mappedSurveyData"
+      :label="label" :
       :pdfColumnDefinition="pdfColumnDefinition">
-    <UserCatalog
-        :users="users"
-        :selectedUser="selectedUser"
-        @userSelected="selectFunction"/>
+    <SurveyCatalog
+        :surveys="surveys"
+        :selectedSurvey="selectedSurvey"
+        @surveySelected="selectFunction"/>
   </CatalogExport>
 </template>
 
 <script>
-import CatalogExport from "@/components/catalogs/CatalogExport.vue"
-import UserCatalog from "@/components/catalogs/UserCatalog.vue"
+import CatalogExport from "@/components/catalogs/CatalogExport.vue";
+import SurveyCatalog from "@/components/catalogs/SurveyCatalog.vue";
 
 export default {
   components: {
-    CatalogExport,
-    UserCatalog},
+    SurveyCatalog,
+    CatalogExport
+  },
   props: {
     label: {
       type: String,
       required: true,
     },
-    mappedUserData: {
+    mappedSurveyData: {
       type: Array,
       required: true,
     },
@@ -35,14 +36,14 @@ export default {
       type: Function,
       required: true,
     },
-    selectedUser: {
-      type: Array,
+    selectedSurvey: {
+      type: Object,
       required: true,
     },
-    users: {
+    surveys: {
       type: Array,
       required: true,
     }
-  }
+  },
 }
 </script>
