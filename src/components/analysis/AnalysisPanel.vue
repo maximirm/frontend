@@ -5,7 +5,7 @@
         :label="barChartLabel"
         :analysisIsComplete="analysisIsComplete"/>
     <PieChart
-        :analysed-data="pieChartData"
+        :analysedData="pieChartData"
         :label="pieChartLabel"
         :analysisIsComplete="analysisIsComplete"/>
   </div>
