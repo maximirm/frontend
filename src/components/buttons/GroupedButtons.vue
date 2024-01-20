@@ -1,19 +1,20 @@
 <template>
   <div class="button-group">
-    <BaseButton
+    <StyledButton
         v-for="button in buttons"
         :key="button.text"
-        :buttonText="button.text"
-        :clickHandler="button.clickHandler"/>
+        :label="button.text"
+        :onClickMethod="button.clickHandler"/>
   </div>
 </template>
 
 <script>
-import BaseButton from "@/components/buttons/BaseButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 
 export default {
+  name: 'GroupedButtons',
   components: {
-    BaseButton,
+    StyledButton,
   },
   props: {
     buttons: {
