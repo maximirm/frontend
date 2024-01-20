@@ -9,7 +9,7 @@
     <InputLabel
         :label="'Fragestellung:'"
         :model="questionText"
-        :input-id="'questionText'"
+        :inputId="'questionText'"
         @update:model="updateText"/>
 
     <div v-if="questionType === 2 || questionType === 3">
@@ -21,43 +21,43 @@
       <InputLabel
           :label="'Option 2:'"
           :model="option2"
-          :input-id="'option2'"
+          :inputId="'option2'"
           @update:model="updateO2"/>
       <InputLabel
           :label="'Option 3:'"
           :model="option3"
-          :input-id="'option3'"
+          :inputId="'option3'"
           @update:model="updateO3"/>
     </div>
 
-    <BaseButton
-        :clickHandler="emitCreateQuestionEvent"
-        :button-text="'Frage erstellen'"/>
+    <StyledButton
+        :onClickMethod="emitCreateQuestionEvent"
+        :label="'Frage erstellen'"/>
     <FeedbackMessage
         v-if="creationAttempted"
-        :message-class="creationError ? 'error' : 'success'"
+        :messageType="creationError ? 'error' : 'success'"
         :message="creationError ? creationError : 'Frage erfolgreich erstellt!'"/>
-    <BaseButton
-        :clickHandler="goToEditorPage"
-        :button-text="'Umfrageerstellung abschließen'"/>
+    <StyledButton
+        :onClickMethod="goToEditorPage"
+        :label="'Umfrageerstellung abschließen'"/>
     <LogoutButton/>
   </div>
 </template>
 
 <script>
 import InputLabel from "@/components/utils/InputLabel.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
 import DropdownMenu from "@/components/utils/DropdownMenu.vue";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 
 export default {
   components: {
+    StyledButton,
     LogoutButton,
     FeedbackMessage,
     DropdownMenu,
     InputLabel,
-    BaseButton,
   },
   computed: {
     dropdownOptions() {

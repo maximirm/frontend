@@ -1,37 +1,37 @@
 <template>
-  <div class="create-survey-page">
+  <div class="create-survey-form">
     <h2>Umfrage Erstellen</h2>
     <InputLabel
         :label="'Titel:'"
         :model="title"
-        :input-id="'title'"
+        :inputId="'title'"
         @update:model="updateTitle"/>
     <InputLabel
         :label="'Beschreibung:'"
         :model="description"
-        :input-id="'description'"
+        :inputId="'description'"
         @update:model="updateDescription"/>
-    <BaseButton
-        :click-handler="emitCreateSurveyEvent"
-        :button-text="'Umfrage erstellen'"
-        :is-disabled="title === '' || description === ''"/>
-    <BaseButton
-        :clickHandler="redirectToEditorPage"
-        :button-text="'Zurück'"/>
+    <StyledButton
+        :onClickMethod="emitCreateSurveyEvent"
+        :label="'Umfrage erstellen'"
+        :isDisabled="title === '' || description === ''"/>
+    <StyledButton
+        :onClickMethod="redirectToEditorPage"
+        :label="'Zurück'"/>
     <LogoutButton/>
   </div>
 </template>
 
 <script>
 import InputLabel from "@/components/utils/InputLabel.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 
 export default {
   components: {
+    StyledButton,
     LogoutButton,
     InputLabel,
-    BaseButton,
   },
   data() {
     return {
@@ -61,7 +61,7 @@ export default {
 
 <style scoped>
 
-.create-survey-page {
+.create-survey-form {
   flex-direction: column;
   align-items: center;
   justify-content: center;

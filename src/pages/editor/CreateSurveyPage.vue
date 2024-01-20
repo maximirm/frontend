@@ -1,6 +1,6 @@
 <template>
-  <div class="create-survey-page">
-    <div class="form-container">
+  <div class="create-survey-form">
+    <div class="response-form">
       <CreateSurveyForm
           v-if="surveyFormVisible"
           :title="title"
@@ -145,7 +145,7 @@ export default {
 
 <style scoped>
 
-.create-survey-page {
+.create-survey-form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,7 +154,7 @@ export default {
   color: #fff;
 }
 
-.form-container {
+.response-form {
   display: flex;
   flex-direction: column;
   align-items: center;
