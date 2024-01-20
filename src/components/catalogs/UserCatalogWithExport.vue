@@ -12,7 +12,7 @@
 
 <script>
 import UserCatalog from "@/components/catalogs/UserCatalog.vue"
-import FileExportCatalog from "@/components/general/FileExportCatalog.vue";
+import FileExportCatalog from "@/components/general/export/FileExportCatalog.vue";
 
 export default {
   components: {

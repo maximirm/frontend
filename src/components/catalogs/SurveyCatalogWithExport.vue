@@ -12,7 +12,7 @@
 
 <script>
 import SurveyCatalog from "@/components/catalogs/SurveyCatalog.vue";
-import FileExportCatalog from "@/components/general/FileExportCatalog.vue";
+import FileExportCatalog from "@/components/general/export/FileExportCatalog.vue";
 
 export default {
   components: {
