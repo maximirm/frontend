@@ -3,18 +3,18 @@
       @click="handleClick"
       class="button"
       :disabled="isDisabled">
-    {{ buttonText }}
+    {{ label }}
   </button>
 </template>
 
 <script>
 export default {
   props: {
-    buttonText: {
+    label: {
       type: String,
       required: true,
     },
-    clickHandler: {
+    onClickMethod: {
       type: Function,
       required: true,
     },
@@ -26,7 +26,7 @@ export default {
   methods: {
     handleClick() {
       if (!this.isDisabled) {
-        this.clickHandler();
+        this.onClickMethod();
       }
     },
   },
