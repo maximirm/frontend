@@ -1,12 +1,12 @@
 <template>
   <div class="login-page">
     <h2>Login</h2>
-    <InputLabel
+    <InputField
         :label="'Benutzername: '"
         :model="name"
         :inputId="'name'"
         @update:model="updateName"/>
-    <InputLabel
+    <InputField
         :label="'Passwort:'"
         :model="password"
         :inputId="'password'"
@@ -27,18 +27,18 @@
 </template>
 
 <script>
-import InputLabel from "@/components/general/InputLabel.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import InputField from "@/components/general/InputField.vue";
 import {login} from "@/scripts/api/userApi";
 
 export default {
   components: {
+    InputField,
     StyledButton,
     LogoutButton,
     FeedbackMessage,
-    InputLabel,
   },
   data() {
     return {

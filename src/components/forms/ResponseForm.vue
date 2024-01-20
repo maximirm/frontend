@@ -2,7 +2,7 @@
   <div>
     <div class="response-form">
       <template v-if="question.type === 1">
-        <InputLabel
+        <InputField
             :label="question.question_text"
             :model="response"
             :inputId="question.id"
@@ -35,16 +35,16 @@
 </template>
 
 <script>
-import InputLabel from "@/components/general/InputLabel.vue";
 import DropdownMenu from "@/components/general/DropdownMenu.vue";
 import CheckBox from "@/components/general/CheckBox.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import InputField from "@/components/general/InputField.vue";
 import {postResponse} from "@/scripts/api/surveyApi";
 
 export default {
   components: {
+    InputField,
     StyledButton,
-    InputLabel,
     DropdownMenu,
     CheckBox,
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="input-label">
+  <div class="input-field">
     <label
         :for="inputId">
       {{ label }}
@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
 
-.input-label {
+.input-field {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;

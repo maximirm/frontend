@@ -1,12 +1,12 @@
 <template>
   <div class="create-survey-form">
     <h2>Umfrage Erstellen</h2>
-    <InputLabel
+    <InputField
         :label="'Titel:'"
         :model="title"
         :inputId="'title'"
         @update:model="updateTitle"/>
-    <InputLabel
+    <InputField
         :label="'Beschreibung:'"
         :model="description"
         :inputId="'description'"
@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import InputLabel from "@/components/general/InputLabel.vue";
 import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import InputField from "@/components/general/InputField.vue";
 
 export default {
   components: {
+    InputField,
     StyledButton,
     LogoutButton,
-    InputLabel,
   },
   data() {
     return {

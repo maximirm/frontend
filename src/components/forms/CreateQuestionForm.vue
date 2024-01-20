@@ -6,24 +6,24 @@
         :options="dropdownOptions"
         :selectedOption="questionTypeText"
         @update:selectedOption="updateQuestionType"/>
-    <InputLabel
+    <InputField
         :label="'Fragestellung:'"
         :model="questionText"
         :inputId="'questionText'"
         @update:model="updateText"/>
 
     <div v-if="questionType === 2 || questionType === 3">
-      <InputLabel
+      <InputField
           :label="'Option 1:'"
           :model="option1"
           :input-id="'option1'"
           @update:model="updateO1"/>
-      <InputLabel
+      <InputField
           :label="'Option 2:'"
           :model="option2"
           :inputId="'option2'"
           @update:model="updateO2"/>
-      <InputLabel
+      <InputField
           :label="'Option 3:'"
           :model="option3"
           :inputId="'option3'"
@@ -48,19 +48,19 @@
 </template>
 
 <script>
-import InputLabel from "@/components/general/InputLabel.vue";
 import DropdownMenu from "@/components/general/DropdownMenu.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import InputField from "@/components/general/InputField.vue";
 
 export default {
   components: {
+    InputField,
     StyledButton,
     LogoutButton,
     FeedbackMessage,
     DropdownMenu,
-    InputLabel,
   },
   computed: {
     dropdownOptions() {
