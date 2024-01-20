@@ -4,10 +4,10 @@
     <LogoutButton/>
     <UserCatalogWithExport
         :label="catalogLabel"
-        :mapped-data-for-export="mappedDataForExport"
-        :pdf-columns="pdfColumns"
-        :select-user="selectUser"
-        :selected-user="selectedUser"
+        :mappedUserData="mappedUserData"
+        :pdfColumnDefinition="pdfColumnDefinition"
+        :selectFunction="selectUser"
+        :selectedUser="selectedUser"
         :users="users"/>
     <FeedbackMessage
         v-if="feedbackMessage"
@@ -42,7 +42,7 @@ export default {
       selectedUser: null,
       feedbackMessage: '',
       selfSelected: false,
-      pdfColumns: [
+      pdfColumnDefinition: [
         {header: "ID", dataKey: "id", width: 40},
         {header: "Name", dataKey: "name", width: 30},
         {header: "Rolle", dataKey: "role", width: 50},
@@ -55,7 +55,7 @@ export default {
     this.displayListOfUsers();
   },
   computed: {
-    mappedDataForExport() {
+    mappedUserData() {
       const data = [];
       this.users.forEach((user) => {
         const userData = {
