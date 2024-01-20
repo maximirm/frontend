@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import FileExport from "@/components/export/FileExport.vue";
+import FileExport from "@/components/general/export/FileExport.vue";
 
 export default {
   components: {

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import GroupedButtons from "@/components/buttons/GroupedButtons.vue";
+import GroupedButtons from "@/components/general/buttons/GroupedButtons.vue";
 
 export default {
   components: {

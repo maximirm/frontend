@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import LogoutButton from "@/components/buttons/LogoutButton.vue";
-import GroupedButtons from "@/components/buttons/GroupedButtons.vue";
+import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
+import GroupedButtons from "@/components/general/buttons/GroupedButtons.vue";
 
 export default {
   components: {

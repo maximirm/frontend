@@ -40,7 +40,7 @@ import CreateSurveyForm from "@/components/forms/CreateSurveyForm.vue";
 import CreateQuestionForm from "@/components/forms/CreateQuestionForm.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import QuestionCatalog from "@/components/catalogs/QuestionCatalog.vue";
-import StyledButton from "@/components/buttons/StyledButton.vue";
+import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/scripts/api/surveyApi";
 
 export default {

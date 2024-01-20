@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import PDFExport from "@/components/export/PDFExport.vue";
-import CSVExport from "@/components/export/CSVExport.vue";
+import PDFExport from "@/components/general/export/PDFExport.vue";
+import CSVExport from "@/components/general/export/CSVExport.vue";
 
 export default {
   components: {

@@ -29,8 +29,8 @@
 <script>
 import InputLabel from "@/components/general/InputLabel.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
-import LogoutButton from "@/components/buttons/LogoutButton.vue";
-import StyledButton from "@/components/buttons/StyledButton.vue";
+import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
+import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import {login} from "@/scripts/api/userApi";
 
 export default {

@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import LogoutButton from "@/components/buttons/LogoutButton.vue";
+import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import {deleteUser, fetchAllUsers} from "@/scripts/api/userApi";
 import {fetchSurveysByCreatorId} from "@/scripts/api/surveyApi";
-import StyledButton from "@/components/buttons/StyledButton.vue";
+import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import UserCatalogWithExport from "@/components/catalogs/UserCatalogWithExport.vue";
 
 export default {

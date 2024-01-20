@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import StyledCard from "@/components/cards/StyledCard.vue";
+import StyledCard from "@/components/general/StyledCard.vue";
 import InfoPair from "@/components/general/InfoPair.vue";
 
 export default {

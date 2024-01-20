@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import BarChart from "@/components/analysis/BarChart.vue";
-import PieChart from "@/components/analysis/PieChart.vue";
+import BarChart from "@/components/general/analysis/BarChart.vue";
+import PieChart from "@/components/general/analysis/PieChart.vue";
 
 export default {
   name: "AnalysisPanel",
