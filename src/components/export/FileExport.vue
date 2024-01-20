@@ -1,17 +1,14 @@
 <template>
-  <div>
     <PDFExport
         :pdfData="pdfData"
         :fileName="fileName"
-        :columnDefinition="columnDefinition"/>
+        :columnDefinition="pdfColumnDefinition"/>
     <CSVExport
         :csvData="csvData"
         :fileName="fileName"/>
-  </div>
 </template>
 
 <script>
-
 import PDFExport from "@/components/export/PDFExport.vue";
 import CSVExport from "@/components/export/CSVExport.vue";
 
@@ -21,10 +18,22 @@ export default {
     PDFExport
   },
   props: {
-    pdfData: Array,
-    csvData: Array,
-    fileName: String,
-    columnDefinition: Array,
+    pdfData: {
+      type: Array,
+      required: true,
+    },
+    csvData: {
+      type: Array,
+      required: true,
+    },
+    fileName: {
+      type: String,
+      required: true,Array
+    },
+    pdfColumnDefinition: {
+      type: Array,
+      required: true,Array
+    },
   },
 };
 </script>
