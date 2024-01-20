@@ -21,7 +21,7 @@
 <script>
 import StyledButton from "@/components/buttons/StyledButton.vue";
 import SurveyCatalog from "@/components/catalogs/SurveyCatalog.vue";
-import {fetchAllSurveys} from "@/api/surveyApi";
+import {fetchAllSurveys} from "@/scripts/api/surveyApi";
 
 export default {
   name: "RespondentPage",

@@ -31,7 +31,7 @@ import InputLabel from "@/components/general/InputLabel.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import StyledButton from "@/components/buttons/StyledButton.vue";
-import {login} from "@/api/userApi";
+import {login} from "@/scripts/api/userApi";
 
 export default {
   components: {

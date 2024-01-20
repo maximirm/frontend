@@ -24,8 +24,8 @@
 <script>
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
-import {deleteUser, fetchAllUsers} from "@/api/userApi";
-import {fetchSurveysByCreatorId} from "@/api/surveyApi";
+import {deleteUser, fetchAllUsers} from "@/scripts/api/userApi";
+import {fetchSurveysByCreatorId} from "@/scripts/api/surveyApi";
 import StyledButton from "@/components/buttons/StyledButton.vue";
 import UserCatalogWithExport from "@/components/catalogs/UserCatalogWithExport.vue";
 

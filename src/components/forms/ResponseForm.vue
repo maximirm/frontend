@@ -39,7 +39,7 @@ import InputLabel from "@/components/general/InputLabel.vue";
 import DropdownMenu from "@/components/general/DropdownMenu.vue";
 import CheckBox from "@/components/general/CheckBox.vue";
 import StyledButton from "@/components/buttons/StyledButton.vue";
-import {postResponse} from "@/api/surveyApi";
+import {postResponse} from "@/scripts/api/surveyApi";
 
 export default {
   components: {

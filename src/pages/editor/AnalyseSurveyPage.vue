@@ -51,8 +51,8 @@
 import AnalysePanel from "@/components/analysis/AnalysisPanel.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
-import {deleteSurvey, fetchSurveysByCreatorId} from "@/api/surveyApi";
-import {fetchAnalysedQuestion} from "@/api/analysisApi";
+import {deleteSurvey, fetchSurveysByCreatorId} from "@/scripts/api/surveyApi";
+import {fetchAnalysedQuestion} from "@/scripts/api/analysisApi";
 import StyledButton from "@/components/buttons/StyledButton.vue";
 import SurveyCatalogWithExport from "@/components/catalogs/SurveyCatalogWithExport.vue";
 import QuestionCatalogWithExport from "@/components/catalogs/QuestionCatalogWithExport.vue";

@@ -38,7 +38,7 @@ import DropdownMenu from "@/components/general/DropdownMenu.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import StyledButton from "@/components/buttons/StyledButton.vue";
-import {registerUser} from "@/api/userApi";
+import {registerUser} from "@/scripts/api/userApi";
 
 export default {
   components: {
