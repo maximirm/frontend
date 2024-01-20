@@ -7,11 +7,11 @@
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
         @surveySelected="selectSurvey"/>
-    <div v-if="selectedSurvey" class="button-container">
+    <div class="button-container">
       <StyledButton
           :label="'Umfrage beantworten'"
           :onClickMethod="respondToSurvey"
-          :isDisabled="selectedSurvey.questions.length === 0"
+          :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
           :class="'respond-survey-btn'"/>
     </div>
   </div>
