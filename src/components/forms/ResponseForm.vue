@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="form-container">
+    <div class="response-form">
       <template v-if="question.type === 1">
         <InputLabel
             :label="question.question_text"
@@ -25,10 +25,10 @@
             @update:selectedOptions="handleCheckBoxResponse"/>
       </template>
 
-      <BaseButton
-          :buttonText="'Antwort speichern'"
-          :clickHandler="submitResponse"
-          :is-disabled="responseText.length === 0"
+      <StyledButton
+          :label="'Antwort speichern'"
+          :onClickMethod="submitResponse"
+          :isDisabled="responseText.length === 0"
           :class="'respond-btn'"/>
     </div>
   </div>
@@ -38,12 +38,12 @@
 import InputLabel from "@/components/utils/InputLabel.vue";
 import DropdownMenu from "@/components/utils/DropdownMenu.vue";
 import CheckBox from "@/components/utils/CheckBox.vue";
-import BaseButton from "@/components/buttons/BaseButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 import {postResponse} from "@/api/surveyApi";
 
 export default {
   components: {
-    BaseButton,
+    StyledButton,
     InputLabel,
     DropdownMenu,
     CheckBox,
@@ -82,7 +82,7 @@ export default {
       try {
         const response = {
           question_id: this.question.id,
-          respondent_id: this.isAnonymous ? null : this.$store.state.userId,
+          respondent_id: this.respondentIsAnonymous ? null : this.$store.state.userId,
           response_text: this.responseText,
         };
         await postResponse(response);
@@ -95,21 +95,11 @@ export default {
 </script>
 
 <style scoped>
-.form-container {
+.response-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.respond-btn {
-  background-color: #4CAF50;
-  margin-top: 10px;
-}
-
-.respond-btn:disabled {
-  background-color: #999;
-  cursor: not-allowed;
 }
 
 </style>
