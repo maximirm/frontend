@@ -5,8 +5,8 @@
       :pdfColumnDefinition="pdfColumnDefinition">
     <QuestionCatalog
         :questions="questions"
-        :selectedUser="selectedQuestion"
-        @userSelected="selectFunction"/>
+        :selectedQuestion="selectedQuestion"
+        @questionSelected="selectFunction"/>
   </CatalogExport>
 </template>
 
