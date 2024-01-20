@@ -1,11 +1,8 @@
 <template>
-  <div>
     <StyledButton
         :onClickMethod="exportToPDF"
         :label="'PDF Export'"
-        :isDisabled="pdfData.length === 0"
-    />
-  </div>
+        :isDisabled="pdfData.length === 0"/>
 </template>
 
 <script>
@@ -19,7 +16,7 @@ export default {
   props: {
     pdfData: {
       type: Array,
-      default: () => [],
+      required: true,
     },
     fileName: {
       type: String,
@@ -27,7 +24,7 @@ export default {
     },
     columnDefinition: {
       type: Array,
-      default: () => [],
+      required: true,
     },
   },
   methods: {
