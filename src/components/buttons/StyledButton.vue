@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: "StyledButton",
   props: {
     label: {
       type: String,
