@@ -1,14 +1,14 @@
 <template>
-    <StyledButton
-        :onClickMethod="exportToPDF"
-        :label="'PDF Export'"
-        :isDisabled="pdfData.length === 0"
-        :class="'green-btn'"/>
+  <StyledButton
+      :onClickMethod="exportToPDF"
+      :label="'PDF Export'"
+      :isDisabled="pdfData.length === 0"
+      :class="'green-btn'"/>
 </template>
 
 <script>
-import { exportDataToPDF } from "@/scripts/export/pdfExport";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import {exportDataToPDF} from "@/scripts/export/pdfExport";
 
 export default {
   components: {

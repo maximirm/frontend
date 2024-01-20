@@ -1,11 +1,11 @@
 <template>
-    <PDFExport
-        :pdfData="exportData"
-        :fileName="fileName"
-        :columnDefinition="pdfColumnDefinition"/>
-    <CSVExport
-        :csvData="exportData"
-        :fileName="fileName"/>
+  <PDFExport
+      :pdfData="exportData"
+      :fileName="fileName"
+      :columnDefinition="pdfColumnDefinition"/>
+  <CSVExport
+      :csvData="exportData"
+      :fileName="fileName"/>
 </template>
 
 <script>

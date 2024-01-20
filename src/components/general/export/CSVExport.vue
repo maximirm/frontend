@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import { exportToCSV } from "@/scripts/export/csvExport";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import {exportToCSV} from "@/scripts/export/csvExport";
 
 export default {
   components: {

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  props:{
+  props: {
     label: {
       Type: String,
       required: true

@@ -1,15 +1,15 @@
 <template>
   <div class="response-page">
-       <div v-if="currentQuestionIndex < questions.length">
-    <ResponseForm
-        :question="questions[currentQuestionIndex]"
-        @responseTextSubmitted="handleResponseSubmitted"/>
-    <ProgressBar
-        :progressBarWidth="progressBarWidth"/>
-    <StyledButton
-        :onClickMethod="redirectToRespondentPage"
-        :label="'Zurück'"/>
-       </div>
+    <div v-if="currentQuestionIndex < questions.length">
+      <ResponseForm
+          :question="questions[currentQuestionIndex]"
+          @responseTextSubmitted="handleResponseSubmitted"/>
+      <ProgressBar
+          :progressBarWidth="progressBarWidth"/>
+      <StyledButton
+          :onClickMethod="redirectToRespondentPage"
+          :label="'Zurück'"/>
+    </div>
   </div>
 </template>
 

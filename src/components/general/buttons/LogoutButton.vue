@@ -1,8 +1,8 @@
 <template>
-    <StyledButton
-        :onClickMethod="logoutUser"
-        :label="label"
-        :class="'red-btn'"/>
+  <StyledButton
+      :onClickMethod="logoutUser"
+      :label="label"
+      :class="'red-btn'"/>
 </template>
 
 <script>

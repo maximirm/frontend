@@ -1,16 +1,16 @@
 <template>
-    <StyledCard
-        @click="selectUser"
-        :class="{ 'selected': isSelected }">
-      <InfoPair
-          :label="'Name:'"
-          :value="user.name"/>
-      <InfoPair
-          :label="'Rolle:'"
-          :value="user.role"/>
-      <InfoPair
-          :value="user.numberOfSurveys + ' Umfragen'"/>
-    </StyledCard>
+  <StyledCard
+      @click="selectUser"
+      :class="{ 'selected': isSelected }">
+    <InfoPair
+        :label="'Name:'"
+        :value="user.name"/>
+    <InfoPair
+        :label="'Rolle:'"
+        :value="user.role"/>
+    <InfoPair
+        :value="user.numberOfSurveys + ' Umfragen'"/>
+  </StyledCard>
 </template>
 
 <script>

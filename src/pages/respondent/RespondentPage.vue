@@ -3,7 +3,7 @@
     <StyledButton
         :onClickMethod="redirectToLandingPage"
         :label="'Zurück zur Startseite'"
-        :class="'red-btn'" />
+        :class="'red-btn'"/>
     <SurveyCatalog
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
@@ -83,7 +83,6 @@ export default {
   background-color: #333;
   color: #fff;
 }
-
 
 
 .button-container {

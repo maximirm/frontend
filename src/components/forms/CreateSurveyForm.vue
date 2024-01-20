@@ -48,7 +48,7 @@ export default {
       this.description = newVal
     },
     redirectToEditorPage() {
-      this.$router.push({ name: 'EditorPage' });
+      this.$router.push({name: 'EditorPage'});
     },
     emitCreateSurveyEvent() {
       this.$emit('create-survey', {
