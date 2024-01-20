@@ -3,7 +3,6 @@
       :class="{ 'selected-user': isSelected }"
       @click="selectUser">
     <div class="user-item">
-      <div class="user-info">
         <div class="key-value-pair">
           <p>ID: {{ user.id }}</p>
           <p></p>
@@ -22,7 +21,6 @@
         <div class="key-value-pair">
           <p>{{ user.numberOfSurveys }} Umfragen</p>
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -64,9 +62,6 @@ export default {
   padding: 10px;
   cursor: pointer;
   transition: border-color 0.3s;
-}
-
-.user-info {
   display: flex;
   justify-content: flex-start;
 }

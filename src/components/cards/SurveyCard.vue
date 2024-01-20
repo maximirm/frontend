@@ -3,18 +3,16 @@
       :class="{ 'selected-survey': isSelected }"
       @click="selectSurvey">
     <div class="survey-item">
-      <div class="survey-info">
-        <div class="key-value-pair">
-          <p>{{ survey.title }}</p>
-        </div>
+      <div class="key-value-pair">
+        <p>{{ survey.title }}</p>
+      </div>
 
-        <div class="key-value-pair">
-          <p>{{ survey.description }}</p>
-        </div>
+      <div class="key-value-pair">
+        <p>{{ survey.description }}</p>
+      </div>
 
-        <div class="key-value-pair">
-          <p>{{ survey.questions.length }} Fragen</p>
-        </div>
+      <div class="key-value-pair">
+        <p>{{ survey.questions.length }} Fragen</p>
       </div>
     </div>
   </div>
@@ -56,12 +54,10 @@ export default {
   padding: 10px;
   cursor: pointer;
   transition: border-color 0.3s;
+  display: flex;
+  justify-content: flex-start
 }
 
-.survey-info {
-  display: flex;
-  justify-content: flex-start;
-}
 
 .key-value-pair {
   display: flex;
