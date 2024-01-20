@@ -30,6 +30,7 @@
 
 <script>
 export default {
+  name: 'UserCard',
   props: {
     user: {
       type: Object,

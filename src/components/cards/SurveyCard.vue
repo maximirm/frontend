@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'SurveyCard',
   props: {
     survey: {
       type: Object,
@@ -67,7 +68,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   margin-right: 15px;
-  width: 200px; /* Feste Breite für jedes Paar */
+  width: 200px;
 }
 
 .selected-survey {

@@ -27,6 +27,7 @@
 
 <script>
 export default {
+  name: 'QuestionCard',
   props: {
     question: {
       type: Object,
