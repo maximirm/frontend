@@ -5,9 +5,13 @@ const baseUrl = 'http://127.0.0.1:8002';
 export const fetchAllUsers = async (token) => {
 
     try {
-        const response = await axios.get(`${baseUrl}/users/all/`, {
-            headers: {Authorization: `Bearer ${token}`},
-        });
+        const response = await axios.get(
+            `${baseUrl}/users/all/`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
         return response.data;
     } catch (error) {
         console.log("Error fetching all Users", error);
@@ -18,11 +22,13 @@ export const fetchAllUsers = async (token) => {
 export async function deleteUser(token, userId) {
 
     try {
-        await axios.delete(`${baseUrl}/users/${userId}/`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        await axios.delete(
+            `${baseUrl}/users/${userId}/`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
     } catch (error) {
         console.log("Error deleting user", error);
         throw (error);
