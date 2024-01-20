@@ -1,13 +1,13 @@
 <template>
-  <div v-if="analysisComplete" >
+  <div v-if="analysisIsComplete" >
     <BarChart
-        :analysisResponses="analysisResponses"
-        :label="analysisResponsesLabel"
-        :analysis-complete="analysisComplete"/>
+        :analysedData="barChartData"
+        :label="barChartLabel"
+        :analysisIsComplete="analysisIsComplete"/>
     <PieChart
-        :label="analysisRespondentsLabel"
-        :analysis-complete="analysisComplete"
-        :analysis-respondents="analysisRespondents"/>
+        :analysed-data="pieChartData"
+        :label="pieChartLabel"
+        :analysisIsComplete="analysisIsComplete"/>
   </div>
 </template>
 
@@ -16,29 +16,29 @@ import BarChart from "@/components/analysis/BarChart.vue";
 import PieChart from "@/components/analysis/PieChart.vue";
 
 export default {
-  name: "AnalysePanel",
+  name: "AnalysisPanel",
   components: {
     PieChart,
     BarChart
   },
   props: {
-    analysisResponses: {
+    barChartData: {
       type: Object,
       required: true,
     },
-    analysisRespondents: {
+    pieChartData: {
       type: Object,
       required: true,
     },
-    analysisResponsesLabel: {
+    barChartLabel: {
       type: String,
       required: true,
     },
-    analysisRespondentsLabel: {
+    pieChartLabel: {
       type: String,
       required: true,
     },
-    analysisComplete: {
+    analysisIsComplete: {
       type: Boolean,
       required: true,
       default: false

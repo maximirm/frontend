@@ -1,5 +1,5 @@
 <template>
-  <div v-if="analysisComplete">
+  <div v-if="analysisIsComplete">
     <Bar
         id="my-chart-id"
         :options="chartOptions"
@@ -15,9 +15,11 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
   name: 'BarChart',
-  components: {Bar},
+  components: {
+    Bar
+  },
   props: {
-    analysisResponses: {
+    analysedData: {
       type: Object,
       required: true,
     },
@@ -25,7 +27,7 @@ export default {
       type: String,
       required: true,
     },
-    analysisComplete: {
+    analysisIsComplete: {
       type: Boolean,
       required: true,
       default: false
@@ -34,12 +36,12 @@ export default {
   data() {
     return {
       chartData: {
-        labels: Object.keys(this.analysisResponses),
+        labels: Object.keys(this.analysedData),
         datasets: [
           {
             label: this.label,
             backgroundColor: '#4CAF50',
-            data: Object.values(this.analysisResponses),
+            data: Object.values(this.analysedData),
           },
         ],
       },

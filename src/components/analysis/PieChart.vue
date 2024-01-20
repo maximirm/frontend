@@ -1,6 +1,8 @@
 <template>
-  <div v-if="analysisComplete">
-    <Pie :data="chartData" :options="chartOptions"/>
+  <div v-if="analysisIsComplete">
+    <Pie
+        :data="chartData"
+        :options="chartOptions"/>
   </div>
 </template>
 
@@ -16,7 +18,7 @@ export default {
     Pie
   },
   props: {
-    analysisRespondents: {
+    analysedData: {
       type: Object,
       required: true,
     },
@@ -24,7 +26,7 @@ export default {
       type: String,
       required: true,
     },
-    analysisComplete: {
+    analysisIsComplete: {
       type: Boolean,
       required: true,
       default: false
@@ -33,12 +35,12 @@ export default {
   data() {
     return {
       chartData: {
-        labels: Object.keys(this.analysisRespondents),
+        labels: Object.keys(this.analysedData),
         datasets: [
           {
             label: this.label,
             backgroundColor: ['#4CAF50', '#4e5a4f'],
-            data: Object.values(this.analysisRespondents),
+            data: Object.values(this.analysedData),
           },
         ],
       },

@@ -29,11 +29,11 @@
       <div class="fixed-panel">
         <AnalysePanel
             v-if="selectedSurvey"
-            :analysis-responses="responseAnalysis"
-            :analysis-responses-label="'Antworten'"
-            :analysis-respondents="respondentsAnalysis"
-            :analysis-respondents-label="'Respondents'"
-            :analysis-complete="analysisComplete"/>
+            :bar-chart-data="responseAnalysis"
+            :bar-chart-label="'Antworten'"
+            :pie-chart-data="respondentsAnalysis"
+            :pie-chart-label="'Respondents'"
+            :analysis-is-complete="analysisComplete"/>
       </div>
     </div>
 
@@ -56,7 +56,7 @@
 
 <script>
 import BaseButton from "@/components/buttons/BaseButton.vue";
-import AnalysePanel from "@/components/analysis/AnalysePanel.vue";
+import AnalysePanel from "@/components/analysis/AnalysisPanel.vue";
 import LogoutButton from "@/components/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/utils/FeedbackMessage.vue";
 import SurveyList from "@/components/lists/SurveyList.vue";
