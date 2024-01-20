@@ -1,6 +1,6 @@
 <template>
   <div
-      :class="messageClass"
+      :class="messageType"
       v-if="message" >
     {{ message }}
   </div>
@@ -13,7 +13,7 @@ export default {
       type: String,
       required: true
     },
-    messageClass: {
+    messageType: {
       type: String,
       required: true
     }

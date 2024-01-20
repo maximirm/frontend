@@ -11,7 +11,7 @@
         :users="users"/>
     <FeedbackMessage
         v-if="feedbackMessage"
-        :message-class="'success'"
+        :messageType="'success'"
         :message="feedbackMessage"/>
     <StyledButton
         :label="'Delete Selected User'"
