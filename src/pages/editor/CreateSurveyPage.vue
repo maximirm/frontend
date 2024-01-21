@@ -79,6 +79,7 @@ export default {
 
         this.createdSurveyId = response.id;
         this.surveyFormVisible = false;
+        await this.getSurvey();
       } catch (error) {
         console.log("error", error);
         alert("Fehler beim Erstellen der Umfrage - Bitte neu einloggen");

@@ -1,6 +1,6 @@
 <template>
   <StyledCatalog
-      :label="'Benutzer'">
+      :label="label">
     <UserCard
         v-for="(user, index) in users"
         :key="index"
@@ -27,6 +27,11 @@ export default {
     selectedUser: {
       type: Object,
     },
+  },
+  computed:{
+    label() {
+      return this.users.length > 0 ? 'Benutzer' : ''
+    }
   },
   methods: {
     selectUser(user) {

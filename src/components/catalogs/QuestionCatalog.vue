@@ -1,6 +1,6 @@
 <template>
   <StyledCatalog
-      :label="'Fragestellungen'">
+      :label="label">
     <QuestionCard
         v-for="(question, index) in questions"
         :key="index"
@@ -27,6 +27,11 @@ export default {
     selectedQuestion: {
       type: Object,
     },
+  },
+  computed:{
+    label() {
+      return this.questions.length > 0 ? 'Fragestellungen' : ''
+    }
   },
   methods: {
     selectQuestion(question) {

@@ -1,6 +1,6 @@
 <template>
   <StyledCatalog
-      :label="'Umfragen'">
+      :label="label">
     <SurveyCard
         v-for="(survey, index) in surveys"
         :key="index"
@@ -27,6 +27,11 @@ export default {
     selectedSurvey: {
       type: Object,
     },
+  },
+  computed:{
+    label() {
+      return this.surveys.length > 0 ? 'Umfragen' : ''
+    }
   },
   methods: {
     selectSurvey(survey) {

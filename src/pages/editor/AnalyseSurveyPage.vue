@@ -119,10 +119,10 @@ export default {
       try {
         const token = this.$store.state.userToken;
 
-        const response = await fetchAnalysedQuestion(token, this.selectedQuestion.id);
+        const analyzedQuestionResponse = await fetchAnalysedQuestion(token, this.selectedQuestion.id);
 
-        this.responseAnalysis = response.analysis_responses;
-        this.respondentsAnalysis = response.analysis_respondents;
+        this.responseAnalysis = analyzedQuestionResponse.analysis_responses;
+        this.respondentsAnalysis = analyzedQuestionResponse.analysis_respondents;
         this.analysisComplete = true;
       } catch (error) {
         this.analysisComplete = false;
