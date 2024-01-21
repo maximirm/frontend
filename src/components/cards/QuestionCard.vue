@@ -43,11 +43,6 @@ export default {
         return "Unbekannt";
       }
     },
-    formattedOptions() {
-      return this.question.options.slice(0, 3).map((option, index) => {
-        return `${index + 1}. ${option}`;
-      }).join(', ');
-    },
   },
   methods: {
     selectQuestion() {
