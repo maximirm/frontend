@@ -1,16 +1,22 @@
 import axios from "axios";
 
-const baseUrl = 'http://127.0.0.1:8002';
+const BASE_URL = 'http://127.0.0.1:8002';
+const SURVEYS_ENDPOINT = '/surveys';
+const QUESTIONS_ENDPOINT = '/questions';
+const RESPONSES_ENDPOINT = '/responses';
+
+const headers = (token) => ({
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+});
 
 export const fetchSurvey = async (token, surveyId) => {
     try {
         const response = await axios.get(
-            `${baseUrl}/surveys/${surveyId}/`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            `${BASE_URL}${SURVEYS_ENDPOINT}/${surveyId}/`,
+            headers(token)
+        );
         return response.data;
     } catch (error) {
         console.log("Error fetching Survey", error)
@@ -21,7 +27,7 @@ export const fetchSurvey = async (token, surveyId) => {
 export const fetchAllSurveys = async () => {
     try {
         const response = await axios.get(
-            `${baseUrl}/surveys/all/`);
+            `${BASE_URL}${SURVEYS_ENDPOINT}/all/`);
         return response.data;
     } catch (error) {
         console.log("Error fetching all Surveys", error);
@@ -34,12 +40,9 @@ export const fetchSurveysByCreatorId = async (token, creatorId) => {
 
     try {
         const response = await axios.get(
-            `${baseUrl}/surveys/by_creator/${creatorId}/`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            `${BASE_URL}${SURVEYS_ENDPOINT}/by_creator/${creatorId}/`,
+            headers(token)
+        );
         return response.data;
     } catch (error) {
         console.log("Error fetching Surveys by CreatorId", error);
@@ -51,13 +54,9 @@ export const postSurvey = async (token, survey) => {
 
     try {
         const response = await axios.post(
-            `${baseUrl}/surveys/`,
+            `${BASE_URL}${SURVEYS_ENDPOINT}/`,
             survey,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
+            headers(token)
         );
         console.log(response);
         return response.data;
@@ -72,11 +71,11 @@ export const postSurvey = async (token, survey) => {
 export async function deleteSurvey(token, surveyId) {
 
     try {
-        await axios.delete(`${baseUrl}/surveys/${surveyId}/`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        await axios.delete(
+            `${BASE_URL}${SURVEYS_ENDPOINT}/${surveyId}/`,
+            headers(token)
+        );
+
     } catch (error) {
         console.log("Error deleting survey", error);
         throw (error);
@@ -88,13 +87,9 @@ export async function postQuestion(token, question) {
 
     try {
         await axios.post(
-            `${baseUrl}/questions/`,
+            `${BASE_URL}${QUESTIONS_ENDPOINT}/`,
             question,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
+            headers(token)
         );
 
     } catch (error) {
@@ -106,11 +101,10 @@ export async function postQuestion(token, question) {
 export async function deleteQuestion(token, questionId) {
 
     try {
-        await axios.delete(`${baseUrl}/questions/${questionId}/`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        await axios.delete(
+            `${BASE_URL}${QUESTIONS_ENDPOINT}/${questionId}/`,
+            headers(token)
+        );
     } catch (error) {
         console.log("Error deleting question", error);
         throw (error);
@@ -122,7 +116,7 @@ export async function postResponse(response) {
 
     try {
         await axios.post(
-            `${baseUrl}/responses/`,
+            `${BASE_URL}${RESPONSES_ENDPOINT}/`,
             response
         );
     } catch (error) {
