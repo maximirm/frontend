@@ -5,10 +5,6 @@
         :onClickMethod="redirectToEditorPage"
         :label="'Zurück'"/>
     <LogoutButton/>
-    <FeedbackMessage
-        v-if="message"
-        :messageType="'success'"
-        :message="message"/>
 
     <div class="list-container">
       <SurveyCatalogWithExport
@@ -29,6 +25,10 @@
             :analysis-is-complete="analysisComplete"/>
       </div>
     </div>
+    <FeedbackMessage
+        v-if="message"
+        :messageType="'success'"
+        :message="message"/>
 
     <div class="button-container">
       <StyledButton
