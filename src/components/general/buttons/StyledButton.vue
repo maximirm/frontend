@@ -61,6 +61,11 @@ export default {
 }
 
 .green-btn {
+  background-color: #444;
+  margin-top: 10px;
+}
+
+.green-btn:hover {
   background-color: #508a53;
   margin-top: 10px;
 }
@@ -71,6 +76,10 @@ export default {
 }
 
 .red-btn {
+  background-color: #444;
+}
+
+.red-btn:hover {
   background-color: #c74545;
 }
 
