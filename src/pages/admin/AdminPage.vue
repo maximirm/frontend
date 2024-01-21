@@ -125,8 +125,4 @@ export default {
   color: #fff;
 }
 
-.delete-btn {
-  background-color: #d32f2f;
-}
-
 </style>
