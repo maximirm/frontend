@@ -1,5 +1,5 @@
 <template>
-  <div class="file-export-catalog">
+  <div class="file-export-container">
     <slot></slot>
     <FileExport
         :pdfColumnDefinition="pdfColumnDefinition"
@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
 
-.file-export-catalog {
+.file-export-container {
   display: flex;
   flex-direction: column;
   align-items: center;

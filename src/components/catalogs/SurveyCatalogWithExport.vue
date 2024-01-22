@@ -1,5 +1,5 @@
 <template>
-  <FileExportCatalog
+  <FileExportContainer
       :exportData="mappedSurveyDataForExport"
       :label="label"
       :pdfColumnDefinition="pdfColumnDefinition">
@@ -7,16 +7,16 @@
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
         @surveySelected="selectFunction"/>
-  </FileExportCatalog>
+  </FileExportContainer>
 </template>
 
 <script>
 import SurveyCatalog from "@/components/catalogs/SurveyCatalog.vue";
-import FileExportCatalog from "@/components/general/export/FileExportCatalog.vue";
+import FileExportContainer from "@/components/general/export/FileExportContainer.vue";
 
 export default {
   components: {
-    FileExportCatalog,
+    FileExportContainer,
     SurveyCatalog,
   },
   props: {
