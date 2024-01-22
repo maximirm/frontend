@@ -3,11 +3,13 @@
     <BarChart
         :analysedData="barChartData"
         :label="barChartLabel"
-        :analysisIsComplete="analysisIsComplete"/>
+        :analysisIsComplete="analysisIsComplete"
+        :isDisabled="barChartIsDisabled"/>
     <PieChart
         :analysedData="pieChartData"
         :label="pieChartLabel"
-        :analysisIsComplete="analysisIsComplete"/>
+        :analysisIsComplete="analysisIsComplete"
+        :isDisabled="pieChartIsDisabled"/>
   </div>
 </template>
 
@@ -37,6 +39,14 @@ export default {
     pieChartLabel: {
       type: String,
       required: true,
+    },
+    barChartIsDisabled: {
+      type: Boolean,
+      default: false,
+    },
+    pieChartIsDisabled: {
+      type: Boolean,
+      default: false,
     },
     analysisIsComplete: {
       type: Boolean,

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="analysisIsComplete">
+  <div v-if="analysisIsComplete && !isDisabled">
     <Pie
         :data="chartData"
         :options="chartOptions"/>
@@ -30,7 +30,11 @@ export default {
       type: Boolean,
       required: true,
       default: false
-    }
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {

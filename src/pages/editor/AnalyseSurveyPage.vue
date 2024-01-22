@@ -18,11 +18,12 @@
       <div class="fixed-panel">
         <AnalysePanel
             v-if="selectedSurvey"
-            :bar-chart-data="responseAnalysis"
-            :bar-chart-label="'Antworten'"
-            :pie-chart-data="respondentsAnalysis"
-            :pie-chart-label="'Respondents'"
-            :analysis-is-complete="analysisComplete"/>
+            :barChartData="responseAnalysis"
+            :barChartLabel="'Antworten'"
+            :bar-chart-is-disabled="isFreeTextQuestion"
+            :pieChartData="respondentsAnalysis"
+            :pieChartLabel="'Respondents'"
+            :analysisIsComplete="analysisComplete"/>
       </div>
     </div>
     <FeedbackMessage
@@ -39,9 +40,7 @@
       <StyledButton
           :label="'Frage analysieren'"
           :onClickMethod="analyseQuestion"
-          :isDisabled="!selectedQuestion
-          || this.selectedQuestion.type === 1
-          || this.selectedQuestion.responses.length === 0"
+          :isDisabled="!selectedQuestion"
           :class="'green-btn'"/>
     </div>
   </div>
@@ -77,6 +76,11 @@ export default {
       responseAnalysis: [],
       respondentsAnalysis: [],
     };
+  },
+  computed: {
+    isFreeTextQuestion() {
+      return this.selectedQuestion === null || this.selectedQuestion.type === 1;
+    },
   },
   mounted() {
     this.displaySurveys();
