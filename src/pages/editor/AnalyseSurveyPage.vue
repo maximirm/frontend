@@ -38,9 +38,9 @@
           :isDisabled="!selectedSurvey"
           :class="'red-btn'"/>
       <StyledButton
-          :label="'Frage analysieren'"
+          :label="'Diagramme anzeigen'"
           :onClickMethod="analyseQuestion"
-          :isDisabled="!selectedQuestion"
+          :isDisabled="!selectedQuestion || selectedQuestion.responses.length === 0"
           :class="'green-btn'"/>
     </div>
   </div>
@@ -110,10 +110,9 @@ export default {
       this.analysisComplete = false;
       this.selectedQuestion = question;
     },
-    async selectSurvey(survey) {
+    selectSurvey(survey) {
       this.selectedSurvey = survey;
       this.questions = this.selectedSurvey.questions;
-
     },
 
     async analyseQuestion() {

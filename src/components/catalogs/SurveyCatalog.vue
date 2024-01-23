@@ -28,7 +28,7 @@ export default {
       type: Object,
     },
   },
-  computed:{
+  computed: {
     label() {
       return this.surveys.length > 0 ? 'Umfragen' : ''
     }

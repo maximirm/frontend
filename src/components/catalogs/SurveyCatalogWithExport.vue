@@ -37,24 +37,30 @@ export default {
     return {
       label: "Umfrageliste",
       pdfColumnDefinition: [
-        {header: "Titel", dataKey: "title", width: 40},
-        {header: "Beschreibung", dataKey: "description", width: 30},
-        {header: "Anzahl der Fragen", dataKey: "numberOfQuestions", width: 50}
+        {header: "Titel", dataKey: "Titel", width: 40},
+        {header: "Beschreibung", dataKey: "Beschreibung", width: 30},
+        {header: "Fragestellung", dataKey: "Fragestellung", width: 50},
+        {header: "Antwort", dataKey: "Antwort", width: 50},
       ],
     }
   },
   computed: {
     mappedSurveyDataForExport() {
-      const data = [];
-      this.surveys.forEach((survey) => {
-        const surveyData = {
-          title: survey.title,
-          description: survey.description,
-          numberOfQuestions: survey.numberOfQuestions,
-        };
-        data.push(surveyData);
-      });
-      return data;
+      if(this.selectedSurvey) {
+        const data = [];
+        this.selectedSurvey.questions.forEach((question) => {
+          question.responses.forEach((response) => {
+            const responseData = {
+              Titel: this.selectedSurvey.title,
+              Beschreibung: this.selectedSurvey.description,
+              Fragestellung: question.question_text,
+              Antwort: response.response_text,
+            };
+            data.push(responseData);
+          })
+        })
+        return data;
+      }return []
     },
   }
 }
