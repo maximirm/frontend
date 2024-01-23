@@ -54,7 +54,13 @@ export default {
         return []
       }
       if (this.selectedSurvey.questions.length === 0) {
-        return [{Titel: this.selectedSurvey.title}]
+        return [{
+          Titel: this.selectedSurvey.title,
+          Typ: '',
+          Fragestellung: '',
+          Antwort: '',
+
+        }]
       }
       const data = [];
       this.selectedSurvey.questions.forEach((question) => {
@@ -62,14 +68,15 @@ export default {
           data.push({
             Titel: this.selectedSurvey.title,
             Typ: question.type,
-            Fragestellung: question.question_text
+            Fragestellung: question.question_text,
+            Antwort: '',
+
           })
         } else {
           question.responses.forEach((response) => {
             data.push({
               Titel: this.selectedSurvey.title,
               Typ: question.type,
-              Beschreibung: this.selectedSurvey.description,
               Fragestellung: question.question_text,
               Antwort: response.response_text,
             });
