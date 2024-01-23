@@ -23,6 +23,10 @@ export default {
       type: String,
       default: "exported_data",
     },
+    header: {
+      type: String,
+      default: 'PDF Export'
+    },
     columnDefinition: {
       type: Array,
       required: true,
@@ -31,7 +35,7 @@ export default {
   methods: {
     exportToPDF() {
       if (this.pdfData.length > 0) {
-        exportDataToPDF(this.pdfData, this.columnDefinition, this.fileName + ".pdf");
+        exportDataToPDF(this.pdfData, this.columnDefinition, this.fileName + ".pdf", this.header);
       }
     },
   },

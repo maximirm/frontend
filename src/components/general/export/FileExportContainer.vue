@@ -4,7 +4,8 @@
     <FileExport
         :pdfColumnDefinition="pdfColumnDefinition"
         :fileName="label"
-        :exportData="exportData"/>
+        :exportData="exportData"
+        :header="header"/>
   </div>
 </template>
 
@@ -23,6 +24,9 @@ export default {
     label: {
       type: String,
       required: true
+    },
+    header: {
+      type: String
     },
     exportData: {
       type: Array,

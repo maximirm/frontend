@@ -11,10 +11,10 @@
           :surveys="surveys"
           :selectedSurvey="selectedSurvey"
           :selectFunction="selectSurvey"/>
-      <QuestionCatalogWithExport
+      <QuestionCatalog
           :questions="questions"
           :selectedQuestion="selectedQuestion"
-          :selectFunction="selectQuestion"/>
+          @questionSelected="selectQuestion"/>
       <div class="fixed-panel">
         <AnalysePanel
             v-if="selectedSurvey"
@@ -54,11 +54,11 @@ import {deleteSurvey, fetchSurveysByCreatorId} from "@/scripts/api/surveyApi";
 import {fetchAnalysedQuestion} from "@/scripts/api/analysisApi";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import SurveyCatalogWithExport from "@/components/catalogs/SurveyCatalogWithExport.vue";
-import QuestionCatalogWithExport from "@/components/catalogs/QuestionCatalogWithExport.vue";
+import QuestionCatalog from "@/components/catalogs/QuestionCatalog.vue";
 
 export default {
   components: {
-    QuestionCatalogWithExport,
+    QuestionCatalog,
     SurveyCatalogWithExport,
     StyledButton,
     FeedbackMessage,

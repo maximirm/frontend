@@ -2,7 +2,8 @@
   <FileExportContainer
       :exportData="mappedSurveyDataForExport"
       :label="label"
-      :pdfColumnDefinition="pdfColumnDefinition">
+      :pdfColumnDefinition="pdfColumnDefinition"
+      :header="header">
     <SurveyCatalog
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
@@ -37,31 +38,46 @@ export default {
     return {
       label: "Umfrageliste",
       pdfColumnDefinition: [
-        {header: "Titel", dataKey: "Titel", width: 40},
-        {header: "Beschreibung", dataKey: "Beschreibung", width: 30},
+        {header: "Titel", dataKey: "Titel", width: 30},
+        {header: "Typ", dataKey: "Typ", width: 10},
         {header: "Fragestellung", dataKey: "Fragestellung", width: 50},
         {header: "Antwort", dataKey: "Antwort", width: 50},
       ],
     }
   },
   computed: {
+    header() {
+      return this.selectedSurvey ? this.selectedSurvey.title + ': ' + this.selectedSurvey.description : '';
+    },
     mappedSurveyDataForExport() {
-      if(this.selectedSurvey) {
-        const data = [];
-        this.selectedSurvey.questions.forEach((question) => {
+      if (!this.selectedSurvey) {
+        return []
+      }
+      if (this.selectedSurvey.questions.length === 0) {
+        return [{Titel: this.selectedSurvey.title}]
+      }
+      const data = [];
+      this.selectedSurvey.questions.forEach((question) => {
+        if (question.responses.length === 0) {
+          data.push({
+            Titel: this.selectedSurvey.title,
+            Typ: question.type,
+            Fragestellung: question.question_text
+          })
+        } else {
           question.responses.forEach((response) => {
-            const responseData = {
+            data.push({
               Titel: this.selectedSurvey.title,
+              Typ: question.type,
               Beschreibung: this.selectedSurvey.description,
               Fragestellung: question.question_text,
               Antwort: response.response_text,
-            };
-            data.push(responseData);
+            });
           })
-        })
-        return data;
-      }return []
+        }
+      })
+      return data;
     },
-  }
+  },
 }
 </script>

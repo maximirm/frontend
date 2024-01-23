@@ -2,7 +2,8 @@
   <PDFExport
       :pdfData="exportData"
       :fileName="fileName"
-      :columnDefinition="pdfColumnDefinition"/>
+      :columnDefinition="pdfColumnDefinition"
+      :header="header"/>
   <CSVExport
       :csvData="exportData"
       :fileName="fileName"/>
@@ -25,6 +26,9 @@ export default {
     fileName: {
       type: String,
       required: true,
+    },
+    header: {
+      type: String,
     },
     pdfColumnDefinition: {
       type: Array,
