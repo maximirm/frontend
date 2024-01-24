@@ -48,6 +48,9 @@ export default {
       loginAttempted: false,
     };
   },
+  created() {
+    this.name = this.$store.state.username ? this.$store.state.username : '';
+  },
   methods: {
     updateName(newVal) {
       this.name = newVal;

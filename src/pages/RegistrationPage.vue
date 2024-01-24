@@ -87,7 +87,7 @@ export default {
         await registerUser(this.username, this.password, this.role);
         this.registrationSuccess = true;
         setTimeout(() => {
-          this.redirectToLandingPage();
+          this.redirectToLoginPage();
         }, 1000);
 
       } catch (error) {
@@ -97,8 +97,9 @@ export default {
         this.registrationSuccess = false;
       }
     },
-    redirectToLandingPage() {
-      this.$router.push({name: 'LandingPage'});
+    redirectToLoginPage() {
+      this.$store.commit('setUserName', this.username)
+      this.$router.push({name: 'LoginPage'});
     },
   },
 };
