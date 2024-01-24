@@ -22,15 +22,3 @@ export const fetchAnalysedQuestion = async (token, questionId) => {
     }
 }
 
-export const fetchAnalysedSurvey = async (token, surveyId) => {
-    try {
-        const response = await axios.get(
-            `${BASE_URL}${ANALYSIS_ENDPOINT}/survey/${surveyId}/`,
-            headers(token)
-        );
-        return response.data;
-    } catch (error) {
-        console.log("Error fetching analysed Survey", error)
-        throw (error);
-    }
-}
