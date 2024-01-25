@@ -63,6 +63,11 @@ export default {
   cursor: not-allowed;
 }
 
+.green-btn {
+  background-color: rgba(80, 138, 83, 0.3);
+
+}
+
 .red-btn {
   background-color: rgba(199, 69, 69, 0.5);
 }

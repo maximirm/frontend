@@ -1,14 +1,15 @@
 <template>
   <div class="respondent-page">
+
+    <SurveyCatalog
+        :surveys="surveys"
+        :selectedSurvey="selectedSurvey"
+        @surveySelected="selectSurvey"/>
     <StyledButton
         :label="'Umfrage beantworten'"
         :onClickMethod="respondToSurvey"
         :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
         :class="'green-btn'"/>
-    <SurveyCatalog
-        :surveys="surveys"
-        :selectedSurvey="selectedSurvey"
-        @surveySelected="selectSurvey"/>
     <div class="button-container">
 
       <StyledButton
@@ -87,7 +88,10 @@ export default {
 
 .button-container {
   display: flex;
+
   gap: 10px;
+
+
 }
 
 </style>
