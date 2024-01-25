@@ -1,19 +1,20 @@
 <template>
   <div class="respondent-page">
     <StyledButton
-        :onClickMethod="redirectToLandingPage"
-        :label="'Zurück zur Startseite'"
-        :class="'red-btn'"/>
+        :label="'Umfrage beantworten'"
+        :onClickMethod="respondToSurvey"
+        :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
+        :class="'green-btn'"/>
     <SurveyCatalog
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
         @surveySelected="selectSurvey"/>
     <div class="button-container">
+
       <StyledButton
-          :label="'Umfrage beantworten'"
-          :onClickMethod="respondToSurvey"
-          :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
-          :class="'green-btn'"/>
+          :onClickMethod="redirectToLandingPage"
+          :label="'Zur Startseite'"
+          :class="'red-btn'"/>
     </div>
   </div>
 </template>
@@ -80,8 +81,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #333;
-  color: #fff;
+
 }
 
 

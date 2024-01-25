@@ -1,38 +1,42 @@
 <template>
-  <div class="create-survey-form">
-    <div class="response-form">
-      <CreateSurveyForm
-          v-if="surveyFormVisible"
-          :title="title"
-          :description="description"
-          @createSurvey="createSurvey"/>
-      <CreateQuestionForm
-          v-if="!surveyFormVisible"
-          @createQuestion="createQuestion"/>
-    </div>
+  <div class="survey-page">
+      <div class="input-form">
+        <CreateSurveyForm
+            v-if="surveyFormVisible"
+            :title="title"
+            :description="description"
+            @createSurvey="createSurvey"/>
 
-    <div class="question-list-container">
-      <div class="survey-info">
-        <h3>{{ surveyTitle }}</h3>
-        <p>{{ surveyDescription }}</p>
+        <div v-if="!surveyFormVisible">
+          <CreateQuestionForm
+              @createQuestion="createQuestion"/>
+          <StyledButton
+              :label="'Frage löschen'"
+              :onClickMethod="deleteSelectedQuestion"
+              :isDisabled="!selectedQuestion"
+              :class="'red-btn'"/>
+        </div>
+        <div class="fixed-panel">
+        <QuestionCatalog
+
+            :questions="questions"
+            :selectedQuestion="selectedQuestion"
+            @questionSelected="selectQuestion"/>
+        </div>
       </div>
+      <div class="button-container">
+        <FeedbackMessage
+            v-if="feedbackMessage"
+            :messageType="'success'"
+            :message="feedbackMessage"/>
 
-      <QuestionCatalog
-          :questions="questions"
-          :selectedQuestion="selectedQuestion"
-          @questionSelected="selectQuestion"/>
-      <FeedbackMessage
-          v-if="feedbackMessage"
-          :messageType="'success'"
-          :message="feedbackMessage"/>
-      <StyledButton
-          v-if="selectedQuestion"
-          :label="'Frage löschen'"
-          :onClickMethod="deleteSelectedQuestion"
-          :isDisabled="!selectedQuestion"
-          :class="'red-btn'"/>
+        <StyledButton
+            :onClickMethod="redirectToEditorPage"
+            :label="'Zurück'"
+            :class="'red-btn'"/>
+        <LogoutButton/>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -42,9 +46,11 @@ import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import QuestionCatalog from "@/components/catalogs/QuestionCatalog.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/scripts/api/surveyApi";
+import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 
 export default {
   components: {
+    LogoutButton,
     StyledButton,
     QuestionCatalog,
     FeedbackMessage,
@@ -140,38 +146,47 @@ export default {
     redirectToLandingPage() {
       this.$router.push({name: 'LandingPage'});
     },
+    redirectToEditorPage() {
+      this.$router.push({name: 'EditorPage'});
+    },
   }
 };
 </script>
 
 <style scoped>
 
-.create-survey-form {
+.survey-page {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: center;
   height: 100vh;
-  background-color: #333;
-  color: #fff;
+  gap: 10px;
+
 }
 
-.response-form {
+.input-form {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
   align-items: center;
-  margin-right: 20px;
+  justify-content: center;
+
 }
 
-.question-list-container {
+
+.button-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 20px;
+  gap: 10px;
 }
 
-.survey-info {
-  text-align: center;
-  margin-bottom: 20px;
-}
 
+.fixed-panel {
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 600px;
+  overflow-y: auto;
+  z-index: 1;
+}
 </style>

@@ -1,10 +1,13 @@
 <template>
-  <button
+  <v-btn
+      variant="tonal"
+      size="large"
+      width="250"
       @click="handleClick"
       class="button"
       :disabled="isDisabled">
     {{ label }}
-  </button>
+  </v-btn>
 </template>
 
 <script>
@@ -35,24 +38,14 @@ export default {
 </script>
 
 <style scoped>
-.button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #555;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  transition: background-color 0.3s;
-}
 
+
+.button {
+  margin: 5px;
+}
 .button:hover {
   background-color: #444;
+
 }
 
 .button:disabled {
@@ -60,14 +53,9 @@ export default {
   cursor: not-allowed;
 }
 
-.green-btn {
-  background-color: #444;
-  margin-top: 10px;
-}
 
 .green-btn:hover {
   background-color: #508a53;
-  margin-top: 10px;
 }
 
 .green-btn:disabled {
@@ -76,11 +64,12 @@ export default {
 }
 
 .red-btn {
-  background-color: #444;
+  background-color: rgba(199, 69, 69, 0.5);
 }
 
 .red-btn:hover {
   background-color: #c74545;
+
 }
 
 .red-btn:disabled {

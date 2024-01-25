@@ -44,7 +44,7 @@ export default {
         datasets: [
           {
             label: this.label,
-            backgroundColor: '#4CAF50',
+            backgroundColor: '#7897B1',
             data: Object.values(this.analysedData),
           },
         ],
@@ -56,3 +56,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+/* Ändern Sie die Textfarbe */
+.text-color {
+  color: #FF0000; /* Beispiel: Rote Textfarbe */
+}
+
+/* Ändern Sie die Textgröße */
+.text-size {
+  font-size: 20px; /* Beispiel: Schriftgröße von 20 Pixeln */
+}
+</style>

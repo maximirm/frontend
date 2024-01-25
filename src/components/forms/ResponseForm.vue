@@ -5,7 +5,6 @@
         <InputField
             :label="question.question_text"
             :model="response"
-            :inputId="question.id"
             @update:model="updateFreeTextResponse"/>
       </template>
 

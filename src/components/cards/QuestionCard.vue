@@ -1,25 +1,32 @@
 <template>
-  <StyledCard
-      @click="selectQuestion"
-      :class="{ 'selected': isSelected }">
-    <InfoPair
-        :label="'Fragestellung:'"
-        :value="question.question_text"/>
-    <InfoPair
-        :label="'Art:'"
-        :value="questionTypeText"/>
-    <InfoPair
-        :value="question.responses.length + ' Antworten'"/>
-  </StyledCard>
+  <div class="d-flex align-center flex-column">
+    <v-card
+        :class="{ 'selected': isSelected }"
+        @click="selectQuestion"
+        width="500"
+        elevation="20">
+      <v-card-item>
+        <v-card-title>
+          Fragestellung: {{ question.question_text }}
+        </v-card-title>
+      </v-card-item>
+
+      <div class="content">
+        <v-card-text>
+          Art: {{ questionTypeText }}
+        </v-card-text>
+        <v-card-text>
+          Anzahl Antworten: {{ question.responses.length }}
+        </v-card-text>
+
+      </div>
+    </v-card>
+  </div>
 </template>
 
 <script>
-import InfoPair from "@/components/general/InfoPair.vue";
-import StyledCard from "@/components/general/StyledCard.vue";
-
 export default {
   name: 'QuestionCard',
-  components: {StyledCard, InfoPair},
   props: {
     question: {
       type: Object,
@@ -54,33 +61,21 @@ export default {
 
 <style scoped>
 
-.key-value-pair p {
-  margin: 1px 0;
-  padding: 2px;
-  color: #ccc;
-  text-overflow: ellipsis;
-}
+.content {
 
-.question-item {
-  border: 2px solid #666;
-  padding: 5px;
-  transition: border-color 0.3s;
   display: flex;
-  justify-content: flex-start;
+
 }
 
-.key-value-pair {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-right: 5px;
-  width: 200px;
+.v-card {
+  background-color: rgba(124, 139, 152, 0.4); /* Helles, gedämpftes Blau */
+  color: #333333; /* Dunkelgrau für bessere Lesbarkeit */
 }
 
-.selected-question {
-  background-color: #2e2e2e;
-  color: #4CAF50;
-  border-left: 4px solid #4CAF50;
+
+.v-card.selected {
+  background-color: #3E5A71; /* Dunkles Blau */
+  color: #FFFFFF; /* Weiß */
 }
 
 </style>

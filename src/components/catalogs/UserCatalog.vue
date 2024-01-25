@@ -1,22 +1,25 @@
 <template>
-  <StyledCatalog
-      :label="label">
+  <v-card class="mx-auto" max-height="500" style="overflow-y: auto;">
+    <v-list
+        density="compact"
+        style="background: transparent; margin: 0; padding: 0;">
+
     <UserCard
         v-for="(user, index) in users"
         :key="index"
         :user="user"
         :isSelected="selectedUser && user.id === selectedUser.id"
-        @userSelected="selectUser(user)"/>
-  </StyledCatalog>
+        @userSelected="selectUser(user)"
+    />
+    </v-list>
+  </v-card>
 </template>
 
 <script>
 import UserCard from "@/components/cards/UserCard.vue";
-import StyledCatalog from "@/components/general/StyledCatalog.vue";
 
 export default {
   components: {
-    StyledCatalog,
     UserCard,
   },
   props: {
@@ -40,3 +43,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.v-card::-webkit-scrollbar {
+  width: 0; /* Breite der Scrollleiste auf 0 setzen */
+}
+
+.v-card::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Daumen (Thumb) der Scrollleiste transparent machen */
+}
+</style>

@@ -1,21 +1,36 @@
 <template>
-  <div class="dropdown">
-    <label class="dropdown-label">
-      {{ title }}
-    </label>
+  <div class="text-center">
+    <v-menu
+        open-on-hover
+    >
+      <template v-slot:activator="{ props }">
+        <v-btn
+            v-bind="props"
+            ariant="tonal"
+            color="rgba(87, 194, 221, 0.5)"
+            style="color: #F0F8FF;"
+            size="large"
+            width="250"
+            class="button"
+        >
+          {{ selectedOption ? selectedOption : title }}
+        </v-btn>
+      </template>
 
-    <select
-        :value="selectedOption"
-        @input="handleChange">
-      <option
-          v-for="option in options"
-          :key="option"
-          :value="option">
-        {{ option }}
-      </option>
-    </select>
+      <v-list>
+        <v-list-item
+            v-for="(option, index) in options"
+            :key="index"
+            @click="handleChange(option)"
+
+        >
+          <v-list-item-title> {{ option }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -33,8 +48,9 @@ export default {
     },
   },
   methods: {
-    handleChange(event) {
-      this.$emit('update:selectedOption', event.target.value);
+    handleChange(option) {
+      console.log(option)
+      this.$emit('update:selectedOption', option);
     },
   },
 };
@@ -42,18 +58,6 @@ export default {
 
 <style scoped>
 
-.dropdown {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 10px;
-  width: 200px;
-}
-
-.dropdown-label {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
 
 select {
   width: 100%;
@@ -62,4 +66,8 @@ select {
   border-radius: 4px;
 }
 
+
+.text-center {
+  margin: 5px;
+}
 </style>

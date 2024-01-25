@@ -8,7 +8,8 @@
           :progressBarWidth="progressBarWidth"/>
       <StyledButton
           :onClickMethod="redirectToRespondentPage"
-          :label="'Zurück'"/>
+          :label="'Zurück'"
+          :class="'red-btn'"/>
     </div>
   </div>
 </template>
@@ -69,7 +70,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  color: #fff;
+
 }
 
 </style>

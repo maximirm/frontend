@@ -1,10 +1,7 @@
 <template>
   <div class="analyze-survey-page">
     <h2>Meine Umfragen</h2>
-    <StyledButton
-        :onClickMethod="redirectToEditorPage"
-        :label="'Zurück'"/>
-    <LogoutButton/>
+
 
     <div class="list-container">
       <SurveyCatalogWithExport
@@ -43,6 +40,11 @@
           :isDisabled="!selectedQuestion || selectedQuestion.responses.length === 0"
           :class="'green-btn'"/>
     </div>
+    <StyledButton
+        :onClickMethod="redirectToEditorPage"
+        :label="'Zurück'"
+        :class="'red-btn'"/>
+    <LogoutButton/>
   </div>
 </template>
 
@@ -161,8 +163,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #333;
-  color: #fff;
+
 }
 
 h2 {
@@ -183,8 +184,6 @@ h2 {
   width: 500px;
   height: 600px;
   overflow-y: auto;
-  background-color: #333;
-
   z-index: 1;
 }
 

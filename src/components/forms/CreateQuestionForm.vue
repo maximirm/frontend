@@ -9,24 +9,20 @@
     <InputField
         :label="'Fragestellung:'"
         :model="questionText"
-        :inputId="'questionText'"
         @update:model="updateText"/>
 
     <div v-if="questionType === 2 || questionType === 3">
       <InputField
           :label="'Option 1:'"
           :model="option1"
-          :input-id="'option1'"
           @update:model="updateO1"/>
       <InputField
           :label="'Option 2:'"
           :model="option2"
-          :inputId="'option2'"
           @update:model="updateO2"/>
       <InputField
           :label="'Option 3:'"
           :model="option3"
-          :inputId="'option3'"
           @update:model="updateO3"/>
     </div>
 
@@ -34,23 +30,22 @@
         :onClickMethod="emitCreateQuestionEvent"
         :label="'Frage erstellen'"
         :class="'green-btn'"/>
+
     <FeedbackMessage
         v-if="creationAttempted"
         :messageType="creationError ? 'error' : 'success'"
         :message="creationError ? creationError : 'Frage erfolgreich erstellt!'"/>
     <StyledButton
         :onClickMethod="goToEditorPage"
-        :label="'Umfrageerstellung abschließen'"
+        :label="'abschließen'"
         :class="'green-btn'"/>
 
-    <LogoutButton/>
   </div>
 </template>
 
 <script>
 import DropdownMenu from "@/components/general/DropdownMenu.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import InputField from "@/components/general/InputField.vue";
 
@@ -58,7 +53,6 @@ export default {
   components: {
     InputField,
     StyledButton,
-    LogoutButton,
     FeedbackMessage,
     DropdownMenu,
   },
@@ -180,7 +174,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  justify-content: center;
+  text-align: center;
 }
 
 </style>

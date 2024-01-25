@@ -1,7 +1,6 @@
 <template>
   <div class="admin-page">
-    <h2>Admin</h2>
-    <LogoutButton/>
+    <h2>Benutzer</h2>
     <UserCatalogWithExport
         :label="catalogLabel"
         :mappedUserData="mappedUserData"
@@ -18,6 +17,8 @@
         :onClickMethod="deleteSelectedUser"
         :isDisabled="!selectedUser || selfSelected"
         :class="'red-btn'"/>
+    <LogoutButton/>
+
   </div>
 </template>
 
@@ -122,7 +123,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  color: #fff;
+
 }
 
 </style>

@@ -1,30 +1,36 @@
 <template>
   <div class="login-page">
-    <h2>Login</h2>
-    <InputField
-        :label="'Benutzername: '"
-        :model="name"
-        :inputId="'name'"
-        @update:model="updateName"/>
-    <InputField
-        :label="'Passwort:'"
-        :model="password"
-        :inputId="'password'"
-        :inputType="'password'"
-        @update:model="updatePassword"/>
-    <StyledButton
-        :on-click-method="login"
-        :label="'Login'"
-        :isDisabled="name === '' || password === ''"
-        :class="'green-btn'"/>
-    <LogoutButton
-        :label="'Zur Startseite'"/>
-    <FeedbackMessage
-        v-if="loginAttempted"
-        :message="loginError ? loginError : 'Login erfolgreich!'"
-        :messageType="loginError ? 'error' : 'success'"/>
+    <div class="login-form">
+      <h2>Login</h2>
+      <InputField
+          :label="'Benutzername: '"
+          :model="name"
+          @update:model="updateName"
+      />
+      <InputField
+          :label="'Passwort:'"
+          :model="password"
+          :inputType="'password'"
+          @update:model="updatePassword"
+      />
+      <div class="button-container">
+        <StyledButton
+            :on-click-method="login"
+            :label="'Login'"
+            :isDisabled="name === '' || password === ''"
+            :class="'green-btn'"
+        />
+        <LogoutButton :label="'Zur Startseite'" />
+      </div>
+      <FeedbackMessage
+          v-if="loginAttempted"
+          :message="loginError ? loginError : 'Login erfolgreich!'"
+          :messageType="loginError ? 'error' : 'success'"
+      />
+    </div>
   </div>
 </template>
+
 
 <script>
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
@@ -94,15 +100,24 @@ export default {
 </script>
 
 <style scoped>
-
 .login-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #333;
-  color: #fff;
+}
+
+.login-form {
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 </style>

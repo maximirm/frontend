@@ -43,7 +43,7 @@ export default {
         datasets: [
           {
             label: this.label,
-            backgroundColor: ['#4CAF50', '#4e5a4f'],
+            backgroundColor: ['#7897B1', '#3E5A71'],
             data: Object.values(this.analysedData),
           },
         ],

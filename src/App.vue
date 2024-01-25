@@ -4,10 +4,26 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "App",
+};
+</script>
+
+
 <style>
-body {
+body, html {
   margin: 0;
-  background-color: #333;
+  padding: 0;
+  height: 100%;
+}
+
+#app {
+  margin: 0;
+  background-image: url('styling/pattern/denim.webp');
+  background-repeat: repeat;
+  background-position: top left;
+  color: #F0F8FF;
   overflow-x: hidden;
   padding: 0;
   width: 100%;
@@ -15,3 +31,4 @@ body {
 }
 
 </style>
+

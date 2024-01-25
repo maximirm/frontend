@@ -20,7 +20,7 @@ export default {
       return [
         {text: 'Login', clickHandler: this.redirectToLogin, class: 'green-btn'},
         {text: 'Registrieren', clickHandler: this.redirectToRegister, class: 'green-btn'},
-        {text: 'Umfrage anonym beantworten', clickHandler: this.respondAnonymous, class: 'green-btn'},
+        {text: 'Anonym beantworten', clickHandler: this.respondAnonymous, class: 'green-btn'},
       ];
     },
   },
@@ -46,9 +46,6 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #333;
-  color: #fff;
-  margin: 0;
 }
 
 </style>

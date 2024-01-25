@@ -1,30 +1,26 @@
 <template>
   <div class="create-survey-form">
-    <h2>Umfrage Erstellen</h2>
-    <InputField
-        :label="'Titel:'"
-        :model="title"
-        :inputId="'title'"
-        @update:model="updateTitle"/>
-    <InputField
-        :label="'Beschreibung:'"
-        :model="description"
-        :inputId="'description'"
-        @update:model="updateDescription"/>
+    <div class="input">
+      <h2>Umfrage Erstellen</h2>
+      <InputField
+          :label="'Titel:'"
+          :model="title"
+          @update:model="updateTitle"/>
+      <InputField
+          :label="'Beschreibung:'"
+          :model="description"
+          @update:model="updateDescription"/>
+    </div>
     <StyledButton
         :onClickMethod="emitCreateSurveyEvent"
         :label="'Umfrage erstellen'"
         :isDisabled="title === '' || description === ''"
         :class="'green-btn'"/>
-    <StyledButton
-        :onClickMethod="redirectToEditorPage"
-        :label="'Zurück'"/>
-    <LogoutButton/>
+
   </div>
 </template>
 
 <script>
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import InputField from "@/components/general/InputField.vue";
 
@@ -32,7 +28,6 @@ export default {
   components: {
     InputField,
     StyledButton,
-    LogoutButton,
   },
   data() {
     return {
@@ -47,9 +42,7 @@ export default {
     updateDescription(newVal) {
       this.description = newVal
     },
-    redirectToEditorPage() {
-      this.$router.push({name: 'EditorPage'});
-    },
+
     emitCreateSurveyEvent() {
       this.$emit('create-survey', {
         title: this.title,
@@ -62,13 +55,19 @@ export default {
 
 <style scoped>
 
+.input{
+  margin-bottom: 5px;
+}
+
+
+
 .create-survey-form {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100px;
-  background-color: #333;
-  color: #fff;
+  text-align: center;
+
 }
 
 </style>

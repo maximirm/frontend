@@ -1,15 +1,15 @@
-<template>
-  <div class="input-field">
-    <label
-        :for="inputId">
-      {{ label }}
-    </label>
 
-    <input
+<template>
+  <v-responsive
+      class="mx-auto"
+      width="250">
+    <v-text-field
         v-model="localModel"
+        :label="label"
+        hide-details="auto"
         :type="inputType"
-        :id="inputId"/>
-  </div>
+    ></v-text-field>
+  </v-responsive>
 </template>
 
 <script>
@@ -25,10 +25,6 @@ export default {
     inputType: {
       type: String,
       default: 'text',
-    },
-    inputId: {
-      type: String,
-      required: true,
     },
   },
   data() {
@@ -50,21 +46,4 @@ export default {
 };
 </script>
 
-<style scoped>
 
-.input-field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
-
-label {
-  margin-bottom: 10px;
-}
-
-input {
-  padding: 8px;
-  width: 180px;
-}
-
-</style>

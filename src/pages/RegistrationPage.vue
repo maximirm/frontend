@@ -1,16 +1,14 @@
 <template>
   <div class="login-page">
+    <div class="registration-form">
     <h2>Registrierung</h2>
     <InputField
         :label="'Benutzername:'"
         :model="username"
-        :inputId="'username'"
-        :inputType="'text'"
         @update:model="updateName"/>
     <InputField
         :label="'Passwort:'"
         :model="password"
-        :inputId="'password'"
         :inputType="'password'"
         @update:model="updatePassword"/>
     <DropdownMenu
@@ -18,17 +16,20 @@
         :options="dropdownOptions"
         :selectedOption="role"
         @update:selectedOption="handleRoleChange"/>
+      <div class="button-container">
     <StyledButton
         :onClickMethod="register"
         :label="'Registrieren'"
         :isDisabled="username === '' || password===''"
         :class="'green-btn'"/>
     <LogoutButton
-        :label="'Zurück zur Startseite'"/>
+        :label="'Zur Startseite'"/>
+      </div>
     <FeedbackMessage
         v-if="registrationAttempted"
         :message="registrationError ? registrationError : 'Registrierung Erfolgreich'"
         :messageType="registrationError ? 'error' : 'success'"/>
+  </div>
   </div>
 </template>
 
@@ -52,7 +53,7 @@ export default {
     return {
       username: '',
       password: '',
-      role: 'admin',
+      role: '',
       registrationSuccess: false,
       registrationError: null,
       registrationAttempted: false,
@@ -60,7 +61,7 @@ export default {
   },
   computed: {
     dropdownTitle() {
-      return 'Benutzerrolle auswählen:';
+      return 'Benutzerrolle';
     },
     dropdownOptions() {
       return ['admin', 'editor', 'respondent'];
@@ -113,21 +114,17 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #333;
-  color: #fff;
 }
 
-label {
-  margin: 10px 0;
+.registration-form {
+  text-align: center;
 }
 
-input {
-  margin: 5px 0;
-  padding: 8px;
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
-
-input[type="radio"] {
-  margin-right: 5px;
-}
-
 </style>

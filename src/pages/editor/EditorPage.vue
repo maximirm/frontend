@@ -43,8 +43,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #333;
-  color: #fff;
+
 }
 
 </style>
