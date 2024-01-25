@@ -101,7 +101,6 @@ export default {
               }
             })
         )
-        console.log(this.surveys);
       } catch (error) {
         console.error('Fehler beim Abrufen der Umfragen:', error);
       }
@@ -133,7 +132,6 @@ export default {
         this.analysisComplete = false;
       }
     },
-
     async deleteSelectedSurvey() {
       if (!this.selectedSurvey) return;
 

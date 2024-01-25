@@ -3,7 +3,7 @@
     <v-card
         :class="{ 'selected': isSelected }"
         @click="selectSurvey"
-        width="500"
+        width="600"
         elevation="16">
       <v-card-item>
         <v-card-title>
@@ -18,6 +18,11 @@
         <v-card-text>
           Anzahl Fragen: {{ survey.questions.length }}
         </v-card-text>
+        <v-card-text
+            v-if="allInfosVisible">
+          Sichtbarkeit: {{ survey.is_public ? "Öffentlich" : "Angemeldet" }}
+        </v-card-text>
+
 
       </div>
     </v-card>
@@ -38,6 +43,11 @@ export default {
       required: false,
       default: false,
     },
+    allInfosVisible:{
+      type: Boolean,
+      required: false,
+      default: false,
+    }
   },
   methods: {
     selectSurvey() {
@@ -48,6 +58,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 .content {
 

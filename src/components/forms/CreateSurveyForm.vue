@@ -10,11 +10,21 @@
           :label="'Beschreibung:'"
           :model="description"
           @update:model="updateDescription"/>
+
+      <DropdownMenu
+          :label="'Sichtbarkeit'"
+          :options="visibilityOptions"
+          :selectedOption="selectedVisibility"
+          @update:selectedOption="updateVisibility"/>
+
+
+
+
     </div>
     <StyledButton
         :onClickMethod="emitCreateSurveyEvent"
         :label="'Umfrage erstellen'"
-        :isDisabled="title === '' || description === ''"
+        :isDisabled=" !title || !description || !selectedVisibility"
         :class="'green-btn'"/>
 
   </div>
@@ -23,16 +33,21 @@
 <script>
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import InputField from "@/components/general/InputField.vue";
+import DropdownMenu from "@/components/general/DropdownMenu.vue";
 
 export default {
   components: {
+    DropdownMenu,
     InputField,
     StyledButton,
   },
   data() {
     return {
-      title: '',
-      description: '',
+      title: null,
+      description: null,
+      isPublic: false,
+      selectedVisibility: null,
+      visibilityOptions: ['Angemeldete Nutzer', 'Öffentlich']
     };
   },
   methods: {
@@ -42,11 +57,16 @@ export default {
     updateDescription(newVal) {
       this.description = newVal
     },
+    updateVisibility(newVal){
+      this.selectedVisibility = newVal
+      this.isPublic = newVal === 'Öffentlich'
+    },
 
     emitCreateSurveyEvent() {
       this.$emit('create-survey', {
         title: this.title,
         description: this.description,
+        isPublic: this.isPublic
       });
     },
   },

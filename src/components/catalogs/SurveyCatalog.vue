@@ -7,6 +7,7 @@
           v-for="(survey, index) in surveys"
           :key="index"
           :survey="survey"
+          :allInfosVisible="allInfosVisible"
           :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
           @surveySelected="selectSurvey(survey)"/>
     </v-list>
@@ -28,6 +29,10 @@ export default {
     selectedSurvey: {
       type: Object,
     },
+    allInfosVisible: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     label() {

@@ -19,7 +19,7 @@ export const fetchSurvey = async (token, surveyId) => {
         );
         return response.data;
     } catch (error) {
-        console.log("Error fetching Survey", error)
+        console.error("Error fetching Survey", error)
         throw (error);
     }
 }
@@ -30,7 +30,7 @@ export const fetchAllSurveys = async () => {
             `${BASE_URL}${SURVEYS_ENDPOINT}/all/`);
         return response.data;
     } catch (error) {
-        console.log("Error fetching all Surveys", error);
+        console.error("Error fetching all Surveys", error);
         throw (error);
     }
 }
@@ -45,7 +45,7 @@ export const fetchSurveysByCreatorId = async (token, creatorId) => {
         );
         return response.data;
     } catch (error) {
-        console.log("Error fetching Surveys by CreatorId", error);
+        console.error("Error fetching Surveys by CreatorId", error);
         throw (error);
     }
 }
@@ -58,11 +58,10 @@ export const postSurvey = async (token, survey) => {
             survey,
             headers(token)
         );
-        console.log(response);
         return response.data;
 
     } catch (error) {
-        console.log("Error posting Survey", error);
+        console.error("Error posting Survey", error);
         throw error;
     }
 }
@@ -77,7 +76,7 @@ export async function deleteSurvey(token, surveyId) {
         );
 
     } catch (error) {
-        console.log("Error deleting survey", error);
+        console.error("Error deleting survey", error);
         throw (error);
     }
 }
@@ -93,7 +92,7 @@ export async function postQuestion(token, question) {
         );
 
     } catch (error) {
-        console.log("Error posting Question", error);
+        console.error("Error posting Question", error);
         throw error;
     }
 }
@@ -106,7 +105,7 @@ export async function deleteQuestion(token, questionId) {
             headers(token)
         );
     } catch (error) {
-        console.log("Error deleting question", error);
+        console.error("Error deleting question", error);
         throw (error);
     }
 }
@@ -120,7 +119,7 @@ export async function postResponse(response) {
             response
         );
     } catch (error) {
-        console.log("Error posting Response", error);
+        console.error("Error posting Response", error);
         throw error;
     }
 }

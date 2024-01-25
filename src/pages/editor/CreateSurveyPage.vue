@@ -77,9 +77,10 @@ export default {
         const token = this.$store.state.userToken;
         const creatorId = this.$store.state.userId;
         const survey = {
+          creator_id: creatorId,
           title: data.title,
           description: data.description,
-          creator_id: creatorId,
+          is_public: data.isPublic
         }
         const response = await postSurvey(token, survey);
 
@@ -87,7 +88,7 @@ export default {
         this.surveyFormVisible = false;
         await this.getSurvey();
       } catch (error) {
-        console.log("error", error);
+
         alert("Fehler beim Erstellen der Umfrage - Bitte neu einloggen");
         this.redirectToLandingPage();
       }

@@ -19,7 +19,7 @@ export const fetchAllUsers = async (token) => {
             );
         return response.data;
     } catch (error) {
-        console.log("Error fetching all Users", error);
+        console.error("Error fetching all Users", error);
         throw (error);
     }
 }
@@ -32,7 +32,7 @@ export async function deleteUser(token, userId) {
             headers(token)
             );
     } catch (error) {
-        console.log("Error deleting user", error);
+        console.error("Error deleting user", error);
         throw (error);
     }
 }
@@ -49,7 +49,7 @@ export const login = async (name, password) => {
             });
         return response.data;
     } catch (error) {
-        console.log("Error with login", error);
+        console.error("Error with login", error);
         throw error
     }
 }
@@ -66,7 +66,7 @@ export async function registerUser(name, password, role) {
             }
         );
     } catch (error) {
-        console.log("Error with registration", error);
+        console.error("Error with registration", error);
         throw error;
     }
 }

@@ -2,7 +2,7 @@
   <div class="create-question-form">
     <h2>Frage Erstellen</h2>
     <DropdownMenu
-        :title="'Art'"
+        :label="'Art'"
         :options="dropdownOptions"
         :selectedOption="questionTypeText"
         @update:selectedOption="updateQuestionType"/>
@@ -118,7 +118,7 @@ export default {
           this.questionType = 3;
           break;
         default:
-          console.log('error updating question type')
+          console.error('error updating question type')
       }
     },
     isFreetextQuestion() {

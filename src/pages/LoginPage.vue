@@ -89,7 +89,7 @@ export default {
           this.$router.push({name: 'EditorPage'});
           break;
         case 'respondent':
-          this.$router.push({name: 'RespondentPage', params: {respondentIsAnonymous: false}});
+          this.$router.push({name: 'RespondentPage'});
           break;
         default:
           console.error('Unbekannte Rolle:', role);

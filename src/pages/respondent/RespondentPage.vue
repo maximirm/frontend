@@ -11,11 +11,8 @@
         :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
         :class="'green-btn'"/>
     <div class="button-container">
-
-      <StyledButton
-          :onClickMethod="redirectToLandingPage"
-          :label="'Zur Startseite'"
-          :class="'red-btn'"/>
+      <LogoutButton
+          :label="'Zur Startseite'"/>
     </div>
   </div>
 </template>
@@ -24,10 +21,12 @@
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import SurveyCatalog from "@/components/catalogs/SurveyCatalog.vue";
 import {fetchAllSurveys} from "@/scripts/api/surveyApi";
+import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 
 export default {
   name: "RespondentPage",
   components: {
+    LogoutButton,
     SurveyCatalog,
     StyledButton,
   },
@@ -35,11 +34,7 @@ export default {
     return {
       surveys: [],
       selectedSurvey: null,
-      respondentIsAnonymous: true,
     };
-  },
-  created() {
-    this.respondentIsAnonymous = this.$route.params.respondentIsAnonymous;
   },
   mounted() {
     this.displaySurveys();
@@ -50,8 +45,13 @@ export default {
     },
     async displaySurveys() {
       try {
-        this.surveys = await fetchAllSurveys();
-        this.surveys = this.filterSurveysWithQuestions(this.surveys);
+        let surveys = await fetchAllSurveys();
+        surveys = this.filterSurveysWithQuestions(surveys);
+        if (!this.$store.state.userId) {
+          surveys = this.filterSurveysByVisibility(surveys)
+        }
+        this.surveys = surveys
+
       } catch (error) {
         this.surveys = [];
       }
@@ -59,8 +59,8 @@ export default {
     filterSurveysWithQuestions(surveys) {
       return surveys.filter(survey => survey.questions.length > 0);
     },
-    redirectToLandingPage() {
-      this.$router.push({name: 'LandingPage'});
+    filterSurveysByVisibility(surveys) {
+      return surveys.filter(survey => survey.is_public === true);
     },
     respondToSurvey() {
       const selectedSurvey = this.selectedSurvey;

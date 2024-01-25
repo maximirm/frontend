@@ -12,7 +12,7 @@
         :inputType="'password'"
         @update:model="updatePassword"/>
     <DropdownMenu
-        :title="dropdownTitle"
+        :label="dropdownTitle"
         :options="dropdownOptions"
         :selectedOption="role"
         @update:selectedOption="handleRoleChange"/>

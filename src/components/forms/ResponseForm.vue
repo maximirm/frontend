@@ -10,7 +10,7 @@
 
       <template v-else-if="question.type === 2">
         <DropdownMenu
-            :title="question.question_text"
+            :label="question.question_text"
             :options="question.options"
             :selectedOption="responseText"
             @update:selectedOption="updateDropdownResponse"/>
@@ -71,22 +71,24 @@ export default {
       this.responseText = newResponse;
     },
     submitResponse() {
-      console.log("submit: ", this.responseText);
+      console.log(this.$store.state.userId)
       this.saveResponse();
       this.$emit("responseTextSubmitted");
       this.responseText = [];
       this.response = '';
     },
     async saveResponse() {
+
       try {
         const response = {
           question_id: this.question.id,
-          respondent_id: this.respondentIsAnonymous ? null : this.$store.state.userId,
+
+          respondent_id: this.$store.state.userId !== null ? this.$store.state.userId : null,
           response_text: this.responseText,
         };
         await postResponse(response);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
   },

@@ -5,7 +5,7 @@ const store = createStore({
         selectedSurvey: null,
         userToken: null,
         userId: null,
-        userName: null
+        userName: null,
     },
     mutations: {
         setSelectedSurvey(state, survey) {
@@ -19,7 +19,7 @@ const store = createStore({
         },
         setUserName(state, username) {
             state.username = username
-        }
+        },
     },
     actions: {
         resetStore({commit}) {

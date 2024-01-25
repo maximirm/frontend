@@ -5,6 +5,7 @@
       :pdfColumnDefinition="pdfColumnDefinition"
       :header="header">
     <SurveyCatalog
+        :allInfosVisible="true"
         :surveys="surveys"
         :selectedSurvey="selectedSurvey"
         @surveySelected="selectFunction"/>
@@ -39,6 +40,7 @@ export default {
       label: "Umfrageliste",
       pdfColumnDefinition: [
         {header: "Titel", dataKey: "Titel", width: 30},
+        {header: "Sichtbarkeit", dataKey: "Sichtbarkeit", width: 20},
         {header: "Typ", dataKey: "Typ", width: 10},
         {header: "Fragestellung", dataKey: "Fragestellung", width: 50},
         {header: "Antwort", dataKey: "Antwort", width: 50},
@@ -56,6 +58,7 @@ export default {
       if (this.selectedSurvey.questions.length === 0) {
         return [{
           Titel: this.selectedSurvey.title,
+          Sichtbarkeit: this.selectedSurvey.isPublic ? "Öffentlich" : "Angemeldete Nutzer",
           Typ: '',
           Fragestellung: '',
           Antwort: '',
@@ -67,6 +70,7 @@ export default {
         if (question.responses.length === 0) {
           data.push({
             Titel: this.selectedSurvey.title,
+            Sichtbarkeit: this.selectedSurvey.isPublic ? "Öffentlich" : "Angemeldete Nutzer",
             Typ: question.type,
             Fragestellung: question.question_text,
             Antwort: '',
@@ -76,6 +80,7 @@ export default {
           question.responses.forEach((response) => {
             data.push({
               Titel: this.selectedSurvey.title,
+              Sichtbarkeit: this.selectedSurvey.isPublic ? "Öffentlich" : "Angemeldete Nutzer",
               Typ: question.type,
               Fragestellung: question.question_text,
               Antwort: response.response_text,

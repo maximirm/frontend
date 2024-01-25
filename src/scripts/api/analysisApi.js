@@ -17,7 +17,7 @@ export const fetchAnalysedQuestion = async (token, questionId) => {
             );
         return response.data;
     } catch (error) {
-        console.log("Error fetching analysed Question", error)
+        console.error("Error fetching analysed Question", error)
         throw (error);
     }
 }

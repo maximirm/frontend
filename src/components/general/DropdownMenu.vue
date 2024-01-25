@@ -1,41 +1,24 @@
 <template>
-  <div class="text-center">
-    <v-menu
-        open-on-hover
-    >
-      <template v-slot:activator="{ props }">
-        <v-btn
-            v-bind="props"
-            ariant="tonal"
-            color="rgba(87, 194, 221, 0.5)"
-            style="color: #F0F8FF;"
-            size="large"
-            width="250"
-            class="button"
-        >
-          {{ selectedOption ? selectedOption : title }}
-        </v-btn>
-      </template>
 
-      <v-list>
-        <v-list-item
-            v-for="(option, index) in options"
-            :key="index"
-            @click="handleChange(option)"
+  <v-container
 
-        >
-          <v-list-item-title> {{ option }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
-  </div>
+      fluid>
+    <v-select
+        style="width: 250px;"
+        v-model="selectedOption"
+        :items="options"
+        :label="label"
+        @update:modelValue="updateSelectedOption"/>
+
+  </v-container>
+
 </template>
 
 
 <script>
 export default {
   props: {
-    title: {
+    label: {
       type: String,
       default: 'Dropdown',
     },
@@ -43,31 +26,28 @@ export default {
       type: Array,
       required: true,
     },
-    selectedOption: {
-      required: true,
-    },
+  },
+  data() {
+    return {
+      selectedOption: null,
+    }
   },
   methods: {
-    handleChange(option) {
-      console.log(option)
-      this.$emit('update:selectedOption', option);
+    updateSelectedOption(newVal){
+      this.selectedOption = newVal;
+      this.$emit('update:selectedOption', this.selectedOption);
     },
+
   },
 };
 </script>
 
+
+
 <style scoped>
-
-
-select {
-  width: 100%;
-  padding: 5px;
-  font-size: 14px;
-  border-radius: 4px;
+.custom-select .v-select__selection {
+  width: 300px; /* Passen Sie die Breite nach Bedarf an */
 }
 
 
-.text-center {
-  margin: 5px;
-}
 </style>
