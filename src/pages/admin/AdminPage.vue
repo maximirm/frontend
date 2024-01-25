@@ -1,6 +1,6 @@
 <template>
   <div class="admin-page">
-    <h2>Benutzer</h2>
+    <h2>Nutzer</h2>
     <UserCatalogWithExport
         :label="catalogLabel"
         :mappedUserData="mappedUserData"

@@ -4,8 +4,8 @@
       <template v-if="question.type === 1">
         <InputField
             :label="question.question_text"
-            :model="response"
-            @update:model="updateFreeTextResponse"/>
+            :response="response"
+            @update:response="updateFreeTextResponse"/>
       </template>
 
       <template v-else-if="question.type === 2">
@@ -53,6 +53,8 @@ export default {
       required: true,
     },
   },
+
+
   data() {
     return {
       responseText: [],
@@ -71,22 +73,20 @@ export default {
       this.responseText = newResponse;
     },
     submitResponse() {
-      console.log(this.$store.state.userId)
       this.saveResponse();
       this.$emit("responseTextSubmitted");
-      this.responseText = [];
-      this.response = '';
+
     },
     async saveResponse() {
 
       try {
         const response = {
           question_id: this.question.id,
-
           respondent_id: this.$store.state.userId !== null ? this.$store.state.userId : null,
           response_text: this.responseText,
         };
         await postResponse(response);
+
       } catch (error) {
         console.error(error);
       }

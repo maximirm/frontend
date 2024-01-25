@@ -4,14 +4,14 @@
       <h2>Login</h2>
       <InputField
           :label="'Benutzername: '"
-          :model="name"
-          @update:model="updateName"
+          :reponse="name"
+          @update:response="updateName"
       />
       <InputField
           :label="'Passwort:'"
-          :model="password"
+          :reponse="password"
           :inputType="'password'"
-          @update:model="updatePassword"
+          @update:response="updatePassword"
       />
       <div class="button-container">
         <StyledButton

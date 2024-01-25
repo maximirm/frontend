@@ -1,8 +1,14 @@
 <template>
-  <div class="progress-bar-container">
-    <div class="progress-bar"
-         :style="{ width: progressBarWidth }"/>
-  </div>
+
+  <v-progress-linear
+      :model-value="progressBarWidth"
+      bg-color="light-green-darken-4"
+      color="blue-grey"
+      height="25"
+      rounded
+
+  ></v-progress-linear>
+
 </template>
 
 <script>

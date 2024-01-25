@@ -1,13 +1,14 @@
-
 <template>
   <v-responsive
       class="mx-auto"
       width="250">
     <v-text-field
-        v-model="localModel"
+
+        v-model="response"
         :label="label"
         hide-details="auto"
         :type="inputType"
+        @update:modelValue="updateResponse"
     ></v-text-field>
   </v-responsive>
 </template>
@@ -19,9 +20,6 @@ export default {
       type: String,
       required: true,
     },
-    model: {
-      required: true,
-    },
     inputType: {
       type: String,
       default: 'text',
@@ -29,18 +27,13 @@ export default {
   },
   data() {
     return {
-      localModel: this.model,
+      response: '',
     };
   },
-  watch: {
-    localModel(newVal) {
-      this.$emit('update:model', newVal);
-    },
-    model: {
-      handler(newVal) {
-        this.localModel = newVal;
-      },
-      immediate: true,
+  methods: {
+    updateResponse(newVal) {
+      this.response = newVal
+      this.$emit('update:response', this.response);
     },
   },
 };

@@ -4,13 +4,13 @@
     <h2>Registrierung</h2>
     <InputField
         :label="'Benutzername:'"
-        :model="username"
-        @update:model="updateName"/>
+        :response="username"
+        @update:response="updateName"/>
     <InputField
         :label="'Passwort:'"
-        :model="password"
+        :response="password"
         :inputType="'password'"
-        @update:model="updatePassword"/>
+        @update:response="updatePassword"/>
     <DropdownMenu
         :label="dropdownTitle"
         :options="dropdownOptions"

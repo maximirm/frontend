@@ -8,22 +8,22 @@
         @update:selectedOption="updateQuestionType"/>
     <InputField
         :label="'Fragestellung:'"
-        :model="questionText"
-        @update:model="updateText"/>
+        :response="questionText"
+        @update:response="updateText"/>
 
     <div v-if="questionType === 2 || questionType === 3">
       <InputField
           :label="'Option 1:'"
-          :model="option1"
-          @update:model="updateO1"/>
+          :response="option1"
+          @update:response="updateO1"/>
       <InputField
           :label="'Option 2:'"
-          :model="option2"
-          @update:model="updateO2"/>
+          :response="option2"
+          @update:response="updateO2"/>
       <InputField
           :label="'Option 3:'"
-          :model="option3"
-          @update:model="updateO3"/>
+          :response="option3"
+          @update:response="updateO3"/>
     </div>
 
     <StyledButton

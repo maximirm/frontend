@@ -4,12 +4,12 @@
       <h2>Umfrage Erstellen</h2>
       <InputField
           :label="'Titel:'"
-          :model="title"
-          @update:model="updateTitle"/>
+          :response="title"
+          @update:response="updateTitle"/>
       <InputField
           :label="'Beschreibung:'"
-          :model="description"
-          @update:model="updateDescription"/>
+          :response="description"
+          @update:response="updateDescription"/>
 
       <DropdownMenu
           :label="'Sichtbarkeit'"

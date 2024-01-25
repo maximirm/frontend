@@ -13,6 +13,9 @@
 
       <div class="content">
         <v-card-text>
+          ID: {{ user.id }}
+        </v-card-text>
+        <v-card-text>
           Rolle: {{ user.role }}
         </v-card-text>
         <v-card-text>
