@@ -2,7 +2,7 @@
   <v-card class="mx-auto" max-height="500" style="overflow-y: auto;">
     <v-list
         density="compact"
-        style="background: transparent; margin: 0; padding: 0;">
+        style="margin: 0; padding: 0;">
 
     <UserCard
         v-for="(user, index) in users"

@@ -3,7 +3,7 @@
     <v-card
         :class="{ 'selected': isSelected }"
         @click="selectUser"
-        width="500"
+        width="700"
         elevation="16">
       <v-card-item>
         <v-card-title>
@@ -57,7 +57,7 @@ export default {
 }
 
 .v-card {
-  background-color: rgba(124, 139, 152, 0.4); /* Helles, gedämpftes Blau */
+  background-color: rgba(124, 139, 152, 0.6); /* Helles, gedämpftes Blau */
   color: #333333; /* Dunkelgrau für bessere Lesbarkeit */
 }
 
