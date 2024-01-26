@@ -64,7 +64,7 @@ export default {
 }
 
 .green-btn {
-  background-color: rgba(80, 138, 83, 0.3);
+  background-color: rgba(80, 138, 83, 0.5);
 
 }
 

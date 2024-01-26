@@ -1,5 +1,6 @@
 <template>
-  <div v-if="analysisIsComplete">
+  <div class="container" v-if="analysisIsComplete">
+    <h2>Umfrageanalyse</h2>
     <BarChart
         :analysedData="barChartData"
         :label="barChartLabel"
@@ -56,3 +57,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>

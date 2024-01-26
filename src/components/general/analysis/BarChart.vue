@@ -1,23 +1,15 @@
 <template>
-  <div v-if="analysisIsComplete && !isDisabled">
-    <Bar
-        id="my-chart-id"
-        :options="chartOptions"
-        :data="chartData"/>
+  <div>
+    <div v-if="analysisIsComplete && !isDisabled">
+      <div class="chart-container" :ref="chartRef"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import {Bar} from 'vue-chartjs'
-import {Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale} from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+import * as echarts from 'echarts';
 
 export default {
-  name: 'BarChart',
-  components: {
-    Bar
-  },
   props: {
     analysedData: {
       type: Object,
@@ -30,7 +22,7 @@ export default {
     analysisIsComplete: {
       type: Boolean,
       required: true,
-      default: false
+      default: false,
     },
     isDisabled: {
       type: Boolean,
@@ -39,32 +31,83 @@ export default {
   },
   data() {
     return {
-      chartData: {
-        labels: Object.keys(this.analysedData),
-        datasets: [
+      chartRef: 'myChart',
+    };
+  },
+  watch: {
+    analysedData: {
+      handler() {
+        this.renderChart();
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    this.renderChart();
+  },
+  methods: {
+    renderChart() {
+      if(!this.analysisIsComplete || this.isDisabled){
+        return
+      }
+      const chart = echarts.init(this.$refs[this.chartRef]);
+      const xAxisData = Object.keys(this.analysedData);
+      const seriesData = Object.values(this.analysedData);
+
+      const option = {
+        title: {
+          text: this.label,
+          left: 'center',
+          textStyle: {
+            color: '#ffffff', // Ändere die Textfarbe des Titels
+            fontSize: 24,    // Ändere die Textgröße des Titels
+          },
+        },
+        xAxis: {
+          data: xAxisData,
+          axisLabel: {
+            color: '#ffffff',  // Ändere die Textfarbe der Achsentexte
+            fontSize: 20,   // Ändere die Textgröße der Achsentexte
+          },
+        },
+        yAxis: {
+          axisLabel: {
+            color: '#ffffff',  // Ändere die Textfarbe der Achsentexte
+            fontSize: 15,   // Ändere die Textgröße der Achsentexte
+          },
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b}: {c}',
+        },
+        series: [
           {
-            label: this.label,
-            backgroundColor: '#7897B1',
-            data: Object.values(this.analysedData),
+            name: this.label,
+            type: 'bar',
+            data: seriesData,
+            itemStyle: {
+              color: '#3E5A71',
+              show: true,
+              position: 'top',
+
+            },
+            showBackground: true,
+            backgroundStyle: {
+              color: 'rgba(124, 139, 152, 0.6)'
+            }
           },
         ],
-      },
-      chartOptions: {
-        responsive: true,
-      },
-    }
+      };
+
+      chart.setOption(option);
+    },
   },
-}
+};
 </script>
 
 <style scoped>
-/* Ändern Sie die Textfarbe */
-.text-color {
-  color: #FF0000; /* Beispiel: Rote Textfarbe */
-}
-
-/* Ändern Sie die Textgröße */
-.text-size {
-  font-size: 20px; /* Beispiel: Schriftgröße von 20 Pixeln */
+.chart-container {
+  width: 500px;
+  height: 300px;
 }
 </style>

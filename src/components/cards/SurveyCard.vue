@@ -3,7 +3,7 @@
     <v-card
         :class="{ 'selected': isSelected }"
         @click="selectSurvey"
-        width="600"
+        width="500"
         elevation="16">
       <v-card-item>
         <v-card-title>

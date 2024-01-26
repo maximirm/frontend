@@ -10,11 +10,7 @@
         <div v-if="!surveyFormVisible">
           <CreateQuestionForm
               @createQuestion="createQuestion"/>
-          <StyledButton
-              :label="'Frage löschen'"
-              :onClickMethod="deleteSelectedQuestion"
-              :isDisabled="!selectedQuestion"
-              :class="'red-btn'"/>
+
         </div>
         <div class="fixed-panel">
         <QuestionCatalog
@@ -30,6 +26,12 @@
             :messageType="'success'"
             :message="feedbackMessage"/>
 
+        <StyledButton
+            v-if="selectedQuestion"
+            :label="'Frage löschen'"
+            :onClickMethod="deleteSelectedQuestion"
+            :isDisabled="!selectedQuestion"
+            :class="'red-btn'"/>
         <StyledButton
             :onClickMethod="redirectToEditorPage"
             :label="'Zurück'"
@@ -179,6 +181,7 @@ export default {
   display: flex;
   gap: 10px;
 }
+
 
 
 .fixed-panel {

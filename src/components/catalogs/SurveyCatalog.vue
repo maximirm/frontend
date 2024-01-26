@@ -1,5 +1,6 @@
 <template>
-  <v-card class="mx-auto" max-height="500" style="overflow-y: auto;">
+  <h2>Umfragen</h2>
+  <v-card class="mx-auto" max-height="600" style="overflow-y: auto;">
     <v-list
         density="compact"
         style="margin: 0; padding: 0; ">

@@ -1,26 +1,26 @@
 <template>
   <div class="analyze-survey-page">
-    <h2>Meine Umfragen</h2>
-
-
     <div class="list-container">
+
       <SurveyCatalogWithExport
           :surveys="surveys"
           :selectedSurvey="selectedSurvey"
           :selectFunction="selectSurvey"/>
       <QuestionCatalog
+          v-if="selectedSurvey && selectedSurvey.questions.length > 0"
           :questions="questions"
           :selectedQuestion="selectedQuestion"
           @questionSelected="selectQuestion"/>
       <div class="fixed-panel">
         <AnalysePanel
-            v-if="selectedSurvey"
+            v-if="analysisComplete"
             :barChartData="responseAnalysis"
             :barChartLabel="'Antworten'"
             :bar-chart-is-disabled="isFreeTextQuestion"
             :pieChartData="respondentsAnalysis"
-            :pieChartLabel="'Respondents'"
+            :pieChartLabel="'Befragte'"
             :analysisIsComplete="analysisComplete"/>
+
       </div>
     </div>
     <FeedbackMessage
@@ -112,6 +112,7 @@ export default {
       this.selectedQuestion = question;
     },
     selectSurvey(survey) {
+      this.analysisComplete= false;
       this.selectedSurvey = survey;
       this.questions = this.selectedSurvey.questions;
     },
@@ -179,15 +180,15 @@ h2 {
   position: sticky;
   top: 0;
   right: 0;
+
   width: 500px;
-  height: 600px;
+
   overflow-y: auto;
   z-index: 1;
 }
 
 .button-container {
   display: flex;
-  gap: 10px;
 }
 
 </style>
