@@ -27,7 +27,7 @@ const router = createRouter({
             path: '/admin',
             name: 'AdminPage',
             component: AdminPage,
-            meta: { showLogout: true, showGoBack: true },
+            meta: { showLogout: true},
         },
         {
             path: '/editor',
