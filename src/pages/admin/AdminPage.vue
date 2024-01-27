@@ -14,11 +14,14 @@
           :selectFunction="selectUser"
           :selectedUser="selectedUser"
           :users="users"/>
-      <FeedbackMessage
-          v-if="feedbackMessage"
-          :messageType="'success'"
-          :message="feedbackMessage"/>
+
       <div class="button-container">
+        <FeedbackMessageWrapper>
+          <FeedbackMessage
+              v-if="feedbackMessage"
+              :messageType="'success'"
+              :message="feedbackMessage"/>
+        </FeedbackMessageWrapper>
         <StyledButton
             :label="'Delete Selected User'"
             :onClickMethod="deleteSelectedUser"
@@ -38,9 +41,11 @@ import {fetchSurveysByCreatorId} from "@/scripts/api/surveyApi";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import UserCatalogWithExport from "@/components/catalogs/UserCatalogWithExport.vue";
 import BoxWrapper from "@/components/general/BoxWrapper.vue";
+import FeedbackMessageWrapper from "@/components/general/FeedbackMessageWrapper.vue";
 
 export default {
   components: {
+    FeedbackMessageWrapper,
     BoxWrapper,
     StyledButton,
     FeedbackMessage,
