@@ -17,7 +17,6 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-co
-  ntent: center;
+  justify-content: center;
 }
 </style>
