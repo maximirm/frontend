@@ -1,49 +1,50 @@
 <template>
-  <div class="login-page">
-    <div class="login-form">
-      <h2>Login</h2>
-      <InputField
-          :label="'Benutzername: '"
-          :reponse="name"
-          @update:response="updateName"
-      />
-      <InputField
-          :label="'Passwort:'"
-          :reponse="password"
-          :inputType="'password'"
-          @update:response="updatePassword"
-      />
-      <div class="button-container">
-        <StyledButton
-            :on-click-method="login"
-            :label="'Login'"
-            :isDisabled="name === '' || password === ''"
-            :class="'green-btn'"
-        />
-        <LogoutButton :label="'Zur Startseite'" />
+  <BoxWrapper
+      height="400px"
+      width="400px">
+    <div class="login-page">
+      <div class="login-form">
+        <h2>Login</h2>
+        <InputField
+            :label="'Benutzername: '"
+            :reponse="name"
+            @update:response="updateName"/>
+        <InputField
+            :label="'Passwort:'"
+            :reponse="password"
+            :inputType="'password'"
+            @update:response="updatePassword"/>
+
+        <div class="button-container">
+          <StyledButton
+              :on-click-method="login"
+              :label="'Login'"
+              :isDisabled="name === '' || password === ''"
+              :class="'green-btn'"/>
+        </div>
+
+        <FeedbackMessage
+            v-if="loginAttempted"
+            :message="loginError ? loginError : 'Login erfolgreich!'"
+            :messageType="loginError ? 'error' : 'success'"/>
       </div>
-      <FeedbackMessage
-          v-if="loginAttempted"
-          :message="loginError ? loginError : 'Login erfolgreich!'"
-          :messageType="loginError ? 'error' : 'success'"
-      />
     </div>
-  </div>
+  </BoxWrapper>
 </template>
 
 
 <script>
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import InputField from "@/components/general/InputField.vue";
 import {login} from "@/scripts/api/userApi";
+import BoxWrapper from "@/components/general/BoxWrapper.vue";
 
 export default {
   components: {
+    BoxWrapper,
     InputField,
     StyledButton,
-    LogoutButton,
     FeedbackMessage,
   },
   data() {
@@ -100,12 +101,15 @@ export default {
 </script>
 
 <style scoped>
+
 .login-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
+  overflow: hidden;
+
 }
 
 .login-form {
