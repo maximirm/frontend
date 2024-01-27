@@ -53,7 +53,7 @@ body, html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('styling/pattern/mountains.jpg');
+  background-image: url('styling/pics/mountains.jpg');
   background-size: cover;
   overflow: hidden;
 }
