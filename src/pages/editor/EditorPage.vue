@@ -1,28 +1,33 @@
 <template>
-  <div class="editor-page">
-    <h2>Editor</h2>
-    <GroupedButtons
-        :buttons="buttons"/>
-    <LogoutButton/>
-  </div>
+  <BoxWrapper
+      height="400px"
+      width="400px">
+    <div class="editor-page">
+      <h2>Editor</h2>
+
+      <div class="button-container">
+        <StyledButton
+            :on-click-method="redirectToAnalyseSurveyPage"
+            label="Meine Umfragen"
+            class="green-btn"/>
+        <StyledButton
+            :on-click-method="redirectToCreateSurveyPage"
+            label="Umfrage Erstellen"
+            class="green-btn"/>
+      </div>
+    </div>
+  </BoxWrapper>
 </template>
 
 <script>
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
-import GroupedButtons from "@/components/general/buttons/GroupedButtons.vue";
+import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import BoxWrapper from "@/components/general/BoxWrapper.vue";
 
 export default {
   components: {
-    GroupedButtons,
-    LogoutButton,
-  },
-  computed: {
-    buttons() {
-      return [
-        {text: 'Meine Umfragen', clickHandler: this.redirectToAnalyseSurveyPage, class: 'green-btn'},
-        {text: 'Umfrage Erstellen', clickHandler: this.redirectToCreateSurveyPage, class: 'green-btn'},
-      ];
-    },
+    BoxWrapper,
+    StyledButton,
+
   },
   methods: {
     redirectToCreateSurveyPage() {
@@ -42,8 +47,17 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
+  overflow: hidden;
 
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 </style>

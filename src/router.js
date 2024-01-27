@@ -21,41 +21,49 @@ const router = createRouter({
             path: '/register',
             name: 'RegisterPage',
             component: RegistrationPage,
+            meta: { showGoBack: true },
         },
         {
             path: '/admin',
             name: 'AdminPage',
             component: AdminPage,
+            meta: { showLogout: true, showGoBack: true },
         },
         {
             path: '/editor',
             name: 'EditorPage',
             component: EditorPage,
+            meta: { showLogout: true, showGoBack: true },
         },
         {
             path: '/login',
             name: 'LoginPage',
             component: LoginPage,
+            meta: { showGoBack: true },
         },
         {
             path: '/createSurvey',
             name: 'CreateSurveyPage',
             component: CreateSurveyPage,
+            meta: { showLogout: true, showGoBack: true },
         },
         {
             path: '/analyseSurvey',
             name: 'AnalyseSurveyPage',
             component: AnalyseSurveyPage,
+            meta: { showLogout: true, showGoBack: true },
         },
         {
             path: '/respondent/',
             name: 'RespondentPage',
             component: RespondentPage,
+            meta: { showLogout: true},
         },
         {
             path: '/response/',
             name: 'ResponsePage',
             component: ResponsePage,
+            meta: { showLogout: true},
         },
     ]
 })
