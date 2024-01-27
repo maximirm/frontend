@@ -26,20 +26,22 @@
           @update:response="updateO3"/>
     </div>
 
-    <StyledButton
-        :onClickMethod="emitCreateQuestionEvent"
-        :label="'Frage erstellen'"
-        :class="'green-btn'"/>
-
-    <FeedbackMessage
-        v-if="creationAttempted"
-        :messageType="creationError ? 'error' : 'success'"
-        :message="creationError ? creationError : 'Frage erfolgreich erstellt!'"/>
-    <StyledButton
-        :onClickMethod="goToEditorPage"
-        :label="'abschließen'"
-        :class="'green-btn'"/>
-
+    <div class="button-container">
+      <StyledButton
+          :onClickMethod="emitCreateQuestionEvent"
+          :label="'Frage erstellen'"
+          :class="'green-btn'"/>
+      <FeedbackMessageWrapper>
+        <FeedbackMessage
+            v-if="creationAttempted"
+            :messageType="creationError ? 'error' : 'success'"
+            :message="creationError ? creationError : 'Frage erfolgreich erstellt!'"/>
+      </FeedbackMessageWrapper>
+      <StyledButton
+          :onClickMethod="goToEditorPage"
+          :label="'abschließen'"
+          :class="'green-btn'"/>
+    </div>
   </div>
 </template>
 
@@ -48,9 +50,11 @@ import DropdownMenu from "@/components/general/DropdownMenu.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import InputField from "@/components/general/InputField.vue";
+import FeedbackMessageWrapper from "@/components/general/FeedbackMessageWrapper.vue";
 
 export default {
   components: {
+    FeedbackMessageWrapper,
     InputField,
     StyledButton,
     FeedbackMessage,
@@ -176,6 +180,14 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 </style>
