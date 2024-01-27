@@ -1,6 +1,7 @@
 <template>
   <StyledButton
       :onClickMethod="goBack"
+      width="100"
       label="Zurück"
       :class="'logout-btn'"/>
 </template>
@@ -15,13 +16,8 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.back(); // Tut das gleiche wie go(-1)
+      this.$router.back();
     }
   },
-
 }
 </script>
-<style scoped>
-
-
-</style>
