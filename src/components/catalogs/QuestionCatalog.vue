@@ -1,20 +1,16 @@
 <template>
-
-  <div class="container">
-    <h2>Fragestellungen</h2>
-  <v-card class="mx-auto" max-height="600" style="overflow-y: auto;">
-    <v-list
-        density="compact"
-        style="margin: 0; padding: 0;">
-      <QuestionCard
-          v-for="(question, index) in questions"
-          :key="index"
-          :question="question"
-          :isSelected="selectedQuestion && selectedQuestion.id === question.id"
-          @questionSelected="selectQuestion(question)"/>
-    </v-list>
-  </v-card>
-  </div>
+  <v-container>
+    <v-card class="question-catalog" outlined>
+      <v-list class="question-list">
+        <QuestionCard
+            v-for="(question, index) in questions"
+            :key="index"
+            :question="question"
+            :isSelected="selectedQuestion && selectedQuestion.id === question.id"
+            @questionSelected="selectQuestion(question)"/>
+      </v-list>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -47,19 +43,22 @@ export default {
 </script>
 
 <style scoped>
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.question-catalog {
+  max-height: 400px;
+  overflow-y: auto;
 }
 
-.v-card::-webkit-scrollbar {
-  width: 0; /* Breite der Scrollleiste auf 0 setzen */
+.question-list {
+  padding: 0;
 }
 
-.v-card::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Daumen (Thumb) der Scrollleiste transparent machen */
+.question-catalog::-webkit-scrollbar {
+  width: 10px;
+}
+
+.question-catalog::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
 }
 </style>
 
