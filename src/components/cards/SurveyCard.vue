@@ -3,34 +3,21 @@
     <v-card
         :class="{ 'selected': isSelected }"
         @click="selectSurvey"
-        width="500"
-        elevation="16">
-      <v-card-item>
-        <v-card-title>
-          Titel: {{ survey.title }}
-        </v-card-title>
-      </v-card-item>
-
-      <div class="content">
-        <v-card-text>
-          Beschreibung: {{ survey.description }}
-        </v-card-text>
-        <v-card-text>
-          Anzahl Fragen: {{ survey.questions.length }}
-        </v-card-text>
-        <v-card-text
-            v-if="allInfosVisible">
-          Sichtbarkeit: {{ survey.is_public ? "Öffentlich" : "Angemeldet" }}
-        </v-card-text>
-
-
-      </div>
+        class="survey-card"
+        flat>
+      <v-card-text>
+        <div class="card-content">
+          <h2>{{ survey.title }}</h2>
+          <p class="caption">{{ survey.description }}</p>
+          <p class="caption">Sichtbarkeit: {{ survey.is_public ? "Öffentlich" : "Angemeldete Nutzer" }}</p>
+          <p class="caption">Anzahl Fragestellungen: {{ survey.questions.length }}</p>
+        </div>
+      </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'SurveyCard',
   props: {
@@ -43,11 +30,6 @@ export default {
       required: false,
       default: false,
     },
-    allInfosVisible:{
-      type: Boolean,
-      required: false,
-      default: false,
-    }
   },
   methods: {
     selectSurvey() {
@@ -59,22 +41,31 @@ export default {
 
 <style scoped>
 
+.survey-card {
+  width: 400px;
+  height: 80px;
+  transition: background-color 0.3s;
+  background-color: rgba(67, 154, 217, 0.15);
+}
 
-.content {
+.selected {
+  background-color: rgba(67, 154, 217, 0.5);
+  color: #1A237E;
+}
 
+.card-content h2 {
   display: flex;
-
+  justify-content: start;
+  align-items: center;
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-size: 1em;
 }
 
-.v-card {
-  background-color: rgba(124, 139, 152, 0.4); /* Helles, gedämpftes Blau */
-  color: #333333; /* Dunkelgrau für bessere Lesbarkeit */
-}
-
-
-.v-card.selected {
-  background-color: #3E5A71; /* Dunkles Blau */
-  color: #FFFFFF; /* Weiß */
+.caption {
+  font-size: 0.8rem;
+  color: #1A237E;
+  margin: 0;
 }
 
 </style>
