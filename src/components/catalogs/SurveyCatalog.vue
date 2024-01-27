@@ -1,18 +1,16 @@
 <template>
-  <h2>Umfragen</h2>
-  <v-card class="mx-auto" max-height="600" style="overflow-y: auto;">
-    <v-list
-        density="compact"
-        style="margin: 0; padding: 0; ">
-      <SurveyCard
-          v-for="(survey, index) in surveys"
-          :key="index"
-          :survey="survey"
-          :allInfosVisible="allInfosVisible"
-          :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
-          @surveySelected="selectSurvey(survey)"/>
-    </v-list>
-  </v-card>
+  <v-container>
+    <v-card class="survey-catalog" outlined>
+      <v-list class="survey-list">
+        <SurveyCard
+            v-for="(survey, index) in surveys"
+            :key="index"
+            :survey="survey"
+            :isSelected="selectedSurvey && selectedSurvey.id === survey.id"
+            @surveySelected="selectSurvey(survey)"/>
+      </v-list>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -30,10 +28,6 @@ export default {
     selectedSurvey: {
       type: Object,
     },
-    allInfosVisible: {
-      type: Boolean,
-      default: false
-    }
   },
   computed: {
     label() {
@@ -47,13 +41,24 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-.v-card::-webkit-scrollbar {
-  width: 0; /* Breite der Scrollleiste auf 0 setzen */
+
+.survey-catalog {
+  max-height: 400px;
+  overflow-y: auto;
 }
 
-.v-card::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Daumen (Thumb) der Scrollleiste transparent machen */
+.survey-list {
+  padding: 0;
 }
+
+.survey-catalog::-webkit-scrollbar {
+  width: 10px;
+}
+
+.survey-catalog::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
 </style>

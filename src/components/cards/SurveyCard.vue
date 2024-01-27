@@ -9,7 +9,6 @@
         <div class="card-content">
           <h2>{{ survey.title }}</h2>
           <p class="caption">{{ survey.description }}</p>
-          <p class="caption">Sichtbarkeit: {{ survey.is_public ? "Öffentlich" : "Angemeldete Nutzer" }}</p>
           <p class="caption">Anzahl Fragestellungen: {{ survey.questions.length }}</p>
         </div>
       </v-card-text>
