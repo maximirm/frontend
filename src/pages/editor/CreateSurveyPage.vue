@@ -4,39 +4,32 @@
       width="850px">
     <div class="create-survey-page">
       <div class="wrapper">
-
         <div class="input-form">
           <CreateSurveyForm
               v-if="surveyFormVisible"
               :title="title"
               :description="description"
-              @createSurvey="createSurvey"
-          />
+              @createSurvey="createSurvey"/>
+
           <div v-if="!surveyFormVisible">
             <CreateQuestionForm
                 @createQuestion="createQuestion"/>
-
           </div>
-
         </div>
-
-
 
         <div class="fixed-panel">
           <h2 v-if="questions.length > 0">Fragestellungen</h2>
-
           <QuestionCatalog
-
               :questions="questions"
               :selectedQuestion="selectedQuestion"
               @questionSelected="selectQuestion"/>
 
           <div class="button-container">
             <FeedbackMessageWrapper>
-            <FeedbackMessage
-                v-if="feedbackMessage"
-                :messageType="'success'"
-                :message="feedbackMessage"/>
+              <FeedbackMessage
+                  v-if="feedbackMessage"
+                  :messageType="'success'"
+                  :message="feedbackMessage"/>
             </FeedbackMessageWrapper>
             <StyledButton
                 v-if="questions.length > 0"
@@ -46,16 +39,9 @@
                 :class="'red-btn'"/>
           </div>
         </div>
-
       </div>
-
-
     </div>
-
-
   </BoxWrapper>
-
-
 </template>
 
 <script>
