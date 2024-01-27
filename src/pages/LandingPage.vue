@@ -1,28 +1,34 @@
 <template>
-  <div class="landing-page">
-    <h1>Bachelorarbeit Maxim Irmscher</h1>
-    <h2>Matr: 548444</h2>
+  <BoxWrapper
+      height="400px"
+      width="400px">
 
-    <GroupedButtons
-        :buttons="buttons"/>
-  </div>
+    <div class="landing-page">
+    <h2>Willkommen</h2>
+      <StyledButton
+          label="Login"
+          :on-click-method="redirectToLogin"
+          class="green-btn"/>
+      <StyledButton
+          label="Registrieren"
+          :on-click-method="redirectToRegister"
+          class="green-btn"/>
+      <StyledButton
+          label="Anonym beantworten"
+          :on-click-method="respondAnonymous"
+          class="green-btn"/>
+    </div>
+  </BoxWrapper>
 </template>
 
 <script>
-import GroupedButtons from "@/components/general/buttons/GroupedButtons.vue";
+import BoxWrapper from "@/components/general/BoxWrapper.vue";
+import StyledButton from "@/components/general/buttons/StyledButton.vue";
 
 export default {
   components: {
-    GroupedButtons,
-  },
-  computed: {
-    buttons() {
-      return [
-        {text: 'Login', clickHandler: this.redirectToLogin, class: 'green-btn'},
-        {text: 'Registrieren', clickHandler: this.redirectToRegister, class: 'green-btn'},
-        {text: 'Anonym beantworten', clickHandler: this.respondAnonymous, class: 'green-btn'},
-      ];
-    },
+    StyledButton,
+    BoxWrapper,
   },
   methods: {
     redirectToLogin() {
@@ -45,7 +51,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
 }
 
 </style>
