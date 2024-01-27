@@ -1,7 +1,7 @@
 <template>
   <BoxWrapper
-      height="300px"
-      width="300px">
+      height="400px"
+      width="400px">
     <div class="login-page">
       <div class="login-form">
         <h2>Login</h2>
@@ -16,6 +16,12 @@
             @update:response="updatePassword"/>
 
         <div class="button-container">
+          <FeedbackMessageWrapper>
+            <FeedbackMessage
+                v-if="loginAttempted"
+                :message="loginError ? loginError : 'Login erfolgreich!'"
+                :messageType="loginError ? 'error' : 'success'"/>
+          </FeedbackMessageWrapper>
           <StyledButton
               :on-click-method="login"
               :label="'Login'"
@@ -23,10 +29,6 @@
               :class="'green-btn'"/>
         </div>
 
-        <FeedbackMessage
-            v-if="loginAttempted"
-            :message="loginError ? loginError : 'Login erfolgreich!'"
-            :messageType="loginError ? 'error' : 'success'"/>
       </div>
     </div>
   </BoxWrapper>
@@ -39,9 +41,11 @@ import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import InputField from "@/components/general/InputField.vue";
 import {login} from "@/scripts/api/userApi";
 import BoxWrapper from "@/components/general/BoxWrapper.vue";
+import FeedbackMessageWrapper from "@/components/general/FeedbackMessageWrapper.vue";
 
 export default {
   components: {
+    FeedbackMessageWrapper,
     BoxWrapper,
     InputField,
     StyledButton,
@@ -116,7 +120,7 @@ export default {
   text-align: center;
 }
 
-h2{
+h2 {
   margin-bottom: 20px;
 }
 
