@@ -10,15 +10,11 @@
           :label="'Beschreibung:'"
           :response="description"
           @update:response="updateDescription"/>
-
       <DropdownMenu
           :label="'Sichtbarkeit'"
           :options="visibilityOptions"
           :selectedOption="selectedVisibility"
           @update:selectedOption="updateVisibility"/>
-
-
-
 
     </div>
     <StyledButton
@@ -26,7 +22,6 @@
         :label="'Umfrage erstellen'"
         :isDisabled=" !title || !description || !selectedVisibility"
         :class="'green-btn'"/>
-
   </div>
 </template>
 
@@ -57,7 +52,7 @@ export default {
     updateDescription(newVal) {
       this.description = newVal
     },
-    updateVisibility(newVal){
+    updateVisibility(newVal) {
       this.selectedVisibility = newVal
       this.isPublic = newVal === 'Öffentlich'
     },
@@ -75,11 +70,9 @@ export default {
 
 <style scoped>
 
-.input{
+.input {
   margin-bottom: 5px;
 }
-
-
 
 .create-survey-form {
   display: flex;
