@@ -63,7 +63,7 @@ const router = createRouter({
             path: '/response/',
             name: 'ResponsePage',
             component: ResponsePage,
-            meta: { showLogout: true},
+            meta: { showLogout: true, showGoBack: true},
         },
     ]
 })

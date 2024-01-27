@@ -1,19 +1,13 @@
 <template>
-
-  <v-container
-
-      fluid>
+  <v-container fluid>
     <v-select
         style="width: 250px;"
         v-model="selectedOption"
         :items="options"
         :label="label"
         @update:modelValue="updateSelectedOption"/>
-
   </v-container>
-
 </template>
-
 
 <script>
 export default {
@@ -41,13 +35,3 @@ export default {
   },
 };
 </script>
-
-
-
-<style scoped>
-.custom-select .v-select__selection {
-  width: 300px; /* Passen Sie die Breite nach Bedarf an */
-}
-
-
-</style>

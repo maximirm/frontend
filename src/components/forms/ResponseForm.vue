@@ -53,8 +53,6 @@ export default {
       required: true,
     },
   },
-
-
   data() {
     return {
       responseText: [],
@@ -75,16 +73,16 @@ export default {
     submitResponse() {
       this.saveResponse();
       this.$emit("responseTextSubmitted");
-
     },
     async saveResponse() {
-
       try {
         const response = {
           question_id: this.question.id,
           respondent_id: this.$store.state.userId !== null ? this.$store.state.userId : null,
           response_text: this.responseText,
         };
+        this.responseText = [];
+        this.response= '';
         await postResponse(response);
 
       } catch (error) {
@@ -96,6 +94,7 @@ export default {
 </script>
 
 <style scoped>
+
 .response-form {
   display: flex;
   flex-direction: column;

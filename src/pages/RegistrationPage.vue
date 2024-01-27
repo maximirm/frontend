@@ -1,52 +1,62 @@
 <template>
-  <div class="login-page">
-    <div class="registration-form">
-    <h2>Registrierung</h2>
-    <InputField
-        :label="'Benutzername:'"
-        :response="username"
-        @update:response="updateName"/>
-    <InputField
-        :label="'Passwort:'"
-        :response="password"
-        :inputType="'password'"
-        @update:response="updatePassword"/>
-    <DropdownMenu
-        :label="dropdownTitle"
-        :options="dropdownOptions"
-        :selectedOption="role"
-        @update:selectedOption="handleRoleChange"/>
-      <div class="button-container">
-    <StyledButton
-        :onClickMethod="register"
-        :label="'Registrieren'"
-        :isDisabled="username === '' || password===''"
-        :class="'green-btn'"/>
-    <LogoutButton
-        :label="'Zur Startseite'"/>
+  <BoxWrapper
+      height="400px"
+      width="400px">
+
+    <div class="registration-page">
+      <div class="registration-form">
+        <h2>Registrierung</h2>
+        <InputField
+            :label="'Benutzername:'"
+            :response="username"
+            @update:response="updateName"/>
+        <InputField
+            :label="'Passwort:'"
+            :response="password"
+            :inputType="'password'"
+            @update:response="updatePassword"/>
+        <DropdownMenu
+            :label="dropdownTitle"
+            :options="dropdownOptions"
+            :selectedOption="role"
+            @update:selectedOption="handleRoleChange"/>
+
+        <div class="button-container">
+          <FeedbackMessageWrapper>
+            <FeedbackMessage
+                v-if="registrationAttempted"
+                :message="registrationError ? registrationError : 'Registrierung Erfolgreich'"
+                :messageType="registrationError ? 'error' : 'success'"/>
+          </FeedbackMessageWrapper>
+          <StyledButton
+              :label="'Registrieren'"
+              :onClickMethod="register"
+              :isDisabled="username === '' || password===''"
+              :class="'green-btn'"/>
+        </div>
+
+
       </div>
-    <FeedbackMessage
-        v-if="registrationAttempted"
-        :message="registrationError ? registrationError : 'Registrierung Erfolgreich'"
-        :messageType="registrationError ? 'error' : 'success'"/>
-  </div>
-  </div>
+    </div>
+  </BoxWrapper>
 </template>
 
 <script>
 import DropdownMenu from "@/components/general/DropdownMenu.vue";
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import InputField from "@/components/general/InputField.vue";
 import {registerUser} from "@/scripts/api/userApi";
+import BoxWrapper from "@/components/general/BoxWrapper.vue";
+import FeedbackMessageWrapper from "@/components/general/FeedbackMessageWrapper.vue";
 
 export default {
   components: {
+    FeedbackMessageWrapper,
+    BoxWrapper,
     InputField,
     StyledButton,
     FeedbackMessage,
-    LogoutButton,
     DropdownMenu,
   },
   data() {
@@ -108,12 +118,13 @@ export default {
 
 <style scoped>
 
-.login-page {
+.registration-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
+  overflow: hidden;
 }
 
 .registration-form {
@@ -127,4 +138,5 @@ export default {
   justify-content: center;
   margin: 10px;
 }
+
 </style>
