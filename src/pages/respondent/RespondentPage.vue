@@ -1,32 +1,38 @@
 <template>
-  <div class="respondent-page">
+  <BoxWrapper
+      height="600px"
+      width="500px">
+    <div class="respondent-page">
+      <div class="respondent-form">
+        <h2>Umfragen</h2>
+      </div>
 
-    <SurveyCatalog
-        :surveys="surveys"
-        :selectedSurvey="selectedSurvey"
-        @surveySelected="selectSurvey"/>
-    <StyledButton
-        :label="'Umfrage beantworten'"
-        :onClickMethod="respondToSurvey"
-        :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
-        :class="'green-btn'"/>
-    <div class="button-container">
-      <LogoutButton
-          :label="'Zur Startseite'"/>
+      <SurveyCatalog
+          :surveys="surveys"
+          :selectedSurvey="selectedSurvey"
+          @surveySelected="selectSurvey"/>
+
+      <div class="button-container">
+        <StyledButton
+            :label="'Umfrage beantworten'"
+            :onClickMethod="respondToSurvey"
+            :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
+            :class="'green-btn'"/>
+      </div>
     </div>
-  </div>
+  </BoxWrapper>
 </template>
 
 <script>
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import SurveyCatalog from "@/components/catalogs/SurveyCatalog.vue";
 import {fetchAllSurveys} from "@/scripts/api/surveyApi";
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
+import BoxWrapper from "@/components/general/BoxWrapper.vue";
 
 export default {
   name: "RespondentPage",
   components: {
-    LogoutButton,
+    BoxWrapper,
     SurveyCatalog,
     StyledButton,
   },
@@ -81,17 +87,20 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-
+  height: 80vh;
+  overflow: hidden;
 }
 
+.respondent-form {
+  text-align: center;
+}
 
 .button-container {
   display: flex;
-
-  gap: 10px;
-
-
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 </style>
