@@ -1,19 +1,16 @@
 <template>
-  <h2>Nutzer</h2>
-  <v-card class="mx-auto" max-height="500" style="overflow-y: auto;">
-    <v-list
-        density="compact"
-        style="margin: 0; padding: 0;">
-
-    <UserCard
-        v-for="(user, index) in users"
-        :key="index"
-        :user="user"
-        :isSelected="selectedUser && user.id === selectedUser.id"
-        @userSelected="selectUser(user)"
-    />
-    </v-list>
-  </v-card>
+  <v-container>
+    <v-card class="user-catalog" outlined>
+      <v-list dense class="user-list">
+        <UserCard
+            v-for="(user, index) in users"
+            :key="index"
+            :user="user"
+            :isSelected="selectedUser && user.id === selectedUser.id"
+            @userSelected="selectUser(user)"/>
+      </v-list>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -32,7 +29,7 @@ export default {
       type: Object,
     },
   },
-  computed:{
+  computed: {
     label() {
       return this.users.length > 0 ? 'Benutzer' : ''
     }
@@ -45,11 +42,22 @@ export default {
 };
 </script>
 <style scoped>
-.v-card::-webkit-scrollbar {
-  width: 0; /* Breite der Scrollleiste auf 0 setzen */
+.user-catalog {
+  height: 400px;
+  overflow-y: auto;
 }
 
-.v-card::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Daumen (Thumb) der Scrollleiste transparent machen */
+.user-list {
+  padding: 0;
+}
+
+.user-catalog::-webkit-scrollbar {
+  width: 10px;
+}
+
+.user-catalog::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+
 }
 </style>
