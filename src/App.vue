@@ -1,6 +1,11 @@
 <template>
   <div id="outer-box">
     <header class="top-bar">
+      <p
+          style="font-size: 20px"
+          v-if="!showLogout && !showGoBack">
+        Umfragen generieren, beantworten und auswerten.
+      </p>
       <BackButton
           v-if="showGoBack"/>
       <LogoutButton
@@ -60,10 +65,12 @@ body, html {
 
 .top-bar {
   height: 60px;
-  background-color: #bad6ee;
-  display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid #1A237E;
+  background-image: url('styling/pics/ice_age.webp');
+  background-repeat: repeat;
+  background-position: top left;
 }
 
 </style>
