@@ -1,7 +1,7 @@
 <template>
   <div
       :class="messageType"
-      v-if="message">
+      v-show="message">
     {{ message }}
   </div>
 </template>
@@ -20,16 +20,15 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 
 .error {
   color: red;
-  margin-top: 10px;
 }
 
 .success {
-  color: green;
-  margin-top: 10px;
+  color: #1A237E;
 }
 
 </style>
