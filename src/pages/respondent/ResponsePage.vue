@@ -20,8 +20,8 @@
 
 <script>
 import ResponseForm from "@/components/forms/ResponseForm.vue";
-import ProgressBar from "@/components/general/ProgressBar.vue";
-import BoxWrapper from "@/components/general/BoxWrapper.vue";
+import ProgressBar from "@/components/generic/ProgressBar.vue";
+import BoxWrapper from "@/components/generic/BoxWrapper.vue";
 
 export default {
   components: {

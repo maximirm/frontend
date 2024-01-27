@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import BarChart from "@/components/general/analysis/BarChart.vue";
-import PieChart from "@/components/general/analysis/PieChart.vue";
+import BarChart from "@/components/analysis/BarChart.vue";
+import PieChart from "@/components/analysis/PieChart.vue";
 
 export default {
   name: "AnalysisPanel",
@@ -63,4 +63,10 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
+h2 {
+  margin-bottom: 20px;
+  color: #3E5A71;
+}
+
 </style>

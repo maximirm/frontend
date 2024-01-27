@@ -21,8 +21,8 @@
 
 <script>
 
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
-import BackButton from "@/components/general/buttons/BackButton.vue";
+import LogoutButton from "@/components/buttons/LogoutButton.vue";
+import BackButton from "@/components/buttons/BackButton.vue";
 
 export default {
   name: "App",

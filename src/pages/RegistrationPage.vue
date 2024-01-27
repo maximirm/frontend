@@ -42,13 +42,13 @@
 </template>
 
 <script>
-import DropdownMenu from "@/components/general/DropdownMenu.vue";
-import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
-import StyledButton from "@/components/general/buttons/StyledButton.vue";
-import InputField from "@/components/general/InputField.vue";
+import DropdownMenu from "@/components/generic/DropdownMenu.vue";
+import FeedbackMessage from "@/components/generic/FeedbackMessage.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
+import InputField from "@/components/generic/InputField.vue";
 import {registerUser} from "@/scripts/api/userApi";
-import BoxWrapper from "@/components/general/BoxWrapper.vue";
-import FeedbackMessageWrapper from "@/components/general/FeedbackMessageWrapper.vue";
+import BoxWrapper from "@/components/generic/BoxWrapper.vue";
+import FeedbackMessageWrapper from "@/components/generic/FeedbackMessageWrapper.vue";
 
 export default {
   components: {

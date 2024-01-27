@@ -5,12 +5,14 @@
       <SurveyCatalogWithExport
           :surveys="surveys"
           :selectedSurvey="selectedSurvey"
-          :selectFunction="selectSurvey"/>
+          :selectFunction="selectSurvey"
+          class="scaled-component"/>
       <QuestionCatalog
           v-if="selectedSurvey && selectedSurvey.questions.length > 0"
           :questions="questions"
           :selectedQuestion="selectedQuestion"
-          @questionSelected="selectQuestion"/>
+          @questionSelected="selectQuestion"
+          class="scaled-component"/>
       <div class="fixed-panel">
         <AnalysePanel
             v-if="analysisComplete"
@@ -19,16 +21,17 @@
             :bar-chart-is-disabled="isFreeTextQuestion"
             :pieChartData="respondentsAnalysis"
             :pieChartLabel="'Befragte'"
-            :analysisIsComplete="analysisComplete"/>
+            :analysisIsComplete="analysisComplete"
+            class="scaled-component"/>
 
       </div>
     </div>
+    <FeedbackMessageWrapper>
     <FeedbackMessage
         v-if="message"
         :messageType="'success'"
         :message="message"/>
-
-    <div class="button-container">
+    </FeedbackMessageWrapper>
       <StyledButton
           :label="'Umfrage löschen'"
           :onClickMethod="deleteSelectedSurvey"
@@ -40,31 +43,25 @@
           :isDisabled="!selectedQuestion || selectedQuestion.responses.length === 0"
           :class="'green-btn'"/>
     </div>
-    <StyledButton
-        :onClickMethod="redirectToEditorPage"
-        :label="'Zurück'"
-        :class="'red-btn'"/>
-    <LogoutButton/>
-  </div>
 </template>
 
 <script>
-import AnalysePanel from "@/components/general/analysis/AnalysisPanel.vue";
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
-import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
+import AnalysePanel from "@/components/analysis/AnalysisPanel.vue";
+import FeedbackMessage from "@/components/generic/FeedbackMessage.vue";
 import {deleteSurvey, fetchSurveysByCreatorId} from "@/scripts/api/surveyApi";
 import {fetchAnalysedQuestion} from "@/scripts/api/analysisApi";
-import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 import SurveyCatalogWithExport from "@/components/catalogs/SurveyCatalogWithExport.vue";
 import QuestionCatalog from "@/components/catalogs/QuestionCatalog.vue";
+import FeedbackMessageWrapper from "@/components/generic/FeedbackMessageWrapper.vue";
 
 export default {
   components: {
+    FeedbackMessageWrapper,
     QuestionCatalog,
     SurveyCatalogWithExport,
     StyledButton,
     FeedbackMessage,
-    LogoutButton,
     AnalysePanel,
   },
   data() {
@@ -161,13 +158,12 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
 
 }
 
-h2 {
-  margin-bottom: 20px;
-}
+
+
 
 
 .list-container {
@@ -189,6 +185,11 @@ h2 {
 
 .button-container {
   display: flex;
+}
+
+.scaled-component {
+  transform: scale(0.8); /* Ändere den Skalierungsfaktor nach Bedarf */
+  transform-origin: center; /* Ändere den Ursprung der Transformation nach Bedarf */
 }
 
 </style>

@@ -59,20 +59,20 @@ export default {
           text: this.label,
           left: 'center',
           textStyle: {
-            color: '#ffffff', // Ändere die Textfarbe des Titels
+            color: '#3E5A71', // Ändere die Textfarbe des Titels
             fontSize: 24,    // Ändere die Textgröße des Titels
           },
         },
         xAxis: {
           data: xAxisData,
           axisLabel: {
-            color: '#ffffff',  // Ändere die Textfarbe der Achsentexte
+            color: '#3E5A71',  // Ändere die Textfarbe der Achsentexte
             fontSize: 20,   // Ändere die Textgröße der Achsentexte
           },
         },
         yAxis: {
           axisLabel: {
-            color: '#ffffff',  // Ändere die Textfarbe der Achsentexte
+            color: '#3E5A71',  // Ändere die Textfarbe der Achsentexte
             fontSize: 15,   // Ändere die Textgröße der Achsentexte
           },
         },
@@ -108,6 +108,6 @@ export default {
 <style scoped>
 .chart-container {
   width: 500px;
-  height: 300px;
+  height: 250px;
 }
 </style>

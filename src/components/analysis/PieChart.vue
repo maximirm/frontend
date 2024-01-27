@@ -61,7 +61,7 @@ export default {
           text: this.label,
           left: 'center', // Zentriere den Titel horizontal
           textStyle: {
-            color: '#ffffff', // Ändere die Textfarbe des Titels
+            color: '#3E5A71', // Ändere die Textfarbe des Titels
             fontSize: 24, // Ändere die Textgröße des Titels
           },
         },
@@ -69,7 +69,7 @@ export default {
           orient: 'bottom',
           left: 'left',
           textStyle: {
-            color: '#ffffff', // Ändere die Textfarbe
+            color: '#3E5A71', // Ändere die Textfarbe
             fontSize: 15, // Ändere die Schriftgröße
           },
         },
@@ -95,7 +95,7 @@ export default {
               show: true,
               formatter: '({d}%)',
               textStyle: {
-                color: '#ffffff', // Ändere die Textfarbe
+                color: '#3E5A71', // Ändere die Textfarbe
                 fontSize: 14, // Ändere die Schriftgröße
                 fontWeight: 'bold', // Ändere die Schriftart
               },
@@ -115,6 +115,6 @@ export default {
 <style scoped>
 .chart-container {
   width: 500px;
-  height: 400px;
+  height: 350px;
 }
 </style>

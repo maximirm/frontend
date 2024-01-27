@@ -14,7 +14,7 @@
 
 <script>
 import SurveyCatalog from "@/components/catalogs/SurveyCatalog.vue";
-import FileExportContainer from "@/components/general/export/FileExportContainer.vue";
+import FileExportContainer from "@/components/export/FileExportContainer.vue";
 
 export default {
   components: {

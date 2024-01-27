@@ -47,13 +47,13 @@
 <script>
 
 import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/scripts/api/surveyApi";
-import BoxWrapper from "@/components/general/BoxWrapper.vue";
+import BoxWrapper from "@/components/generic/BoxWrapper.vue";
 import CreateSurveyForm from "@/components/forms/CreateSurveyForm.vue";
 import CreateQuestionForm from "@/components/forms/CreateQuestionForm.vue";
 import QuestionCatalog from "@/components/catalogs/QuestionCatalog.vue";
-import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
-import StyledButton from "@/components/general/buttons/StyledButton.vue";
-import FeedbackMessageWrapper from "@/components/general/FeedbackMessageWrapper.vue";
+import FeedbackMessage from "@/components/generic/FeedbackMessage.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
+import FeedbackMessageWrapper from "@/components/generic/FeedbackMessageWrapper.vue";
 
 export default {
   components: {

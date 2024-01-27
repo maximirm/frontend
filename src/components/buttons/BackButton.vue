@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 
 export default {
   name: "LogoutButton",

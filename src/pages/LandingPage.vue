@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import BoxWrapper from "@/components/general/BoxWrapper.vue";
-import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import BoxWrapper from "@/components/generic/BoxWrapper.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 
 export default {
   components: {

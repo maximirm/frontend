@@ -35,13 +35,13 @@
 </template>
 
 <script>
-import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
+import FeedbackMessage from "@/components/generic/FeedbackMessage.vue";
 import {deleteUser, fetchAllUsers} from "@/scripts/api/userApi";
 import {fetchSurveysByCreatorId} from "@/scripts/api/surveyApi";
-import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 import UserCatalogWithExport from "@/components/catalogs/UserCatalogWithExport.vue";
-import BoxWrapper from "@/components/general/BoxWrapper.vue";
-import FeedbackMessageWrapper from "@/components/general/FeedbackMessageWrapper.vue";
+import BoxWrapper from "@/components/generic/BoxWrapper.vue";
+import FeedbackMessageWrapper from "@/components/generic/FeedbackMessageWrapper.vue";
 
 export default {
   components: {

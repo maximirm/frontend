@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import StyledButton from "@/components/general/buttons/StyledButton.vue";
+import StyledButton from "@/components/buttons/StyledButton.vue";
 import {exportDataToPDF} from "@/scripts/export/pdfExport";
 
 export default {
