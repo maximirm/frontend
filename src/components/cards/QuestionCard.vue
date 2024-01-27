@@ -3,23 +3,15 @@
     <v-card
         :class="{ 'selected': isSelected }"
         @click="selectQuestion"
-        width="500"
-        elevation="20">
-      <v-card-item>
-        <v-card-title>
-          Fragestellung: {{ question.question_text }}
-        </v-card-title>
-      </v-card-item>
-
-      <div class="content">
-        <v-card-text>
-          Art: {{ questionTypeText }}
-        </v-card-text>
-        <v-card-text>
-          Anzahl Antworten: {{ question.responses.length }}
-        </v-card-text>
-
-      </div>
+        class="question-card"
+        flat>
+      <v-card-text>
+        <div class="card-content">
+          <h2>{{ question.question_text }}</h2>
+          <p class="caption">Art: {{ questionTypeText }}</p>
+          <p class="caption">Anzahl Antworten: {{ question.responses.length }}</p>
+        </div>
+      </v-card-text>
     </v-card>
   </div>
 </template>
@@ -61,21 +53,31 @@ export default {
 
 <style scoped>
 
-.content {
+.question-card {
+  width: 400px;
+  height: 80px;
+  transition: background-color 0.3s;
+  background-color: rgba(67, 154, 217, 0.15);
+}
 
+.selected {
+  background-color: rgba(67, 154, 217, 0.5);
+  color: #1A237E;
+}
+
+.card-content h2 {
   display: flex;
-
+  justify-content: start;
+  align-items: center;
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-size: 1em;
 }
 
-.v-card {
-  background-color: rgba(124, 139, 152, 0.4); /* Helles, gedämpftes Blau */
-  color: #333333; /* Dunkelgrau für bessere Lesbarkeit */
-}
-
-
-.v-card.selected {
-  background-color: #3E5A71; /* Dunkles Blau */
-  color: #FFFFFF; /* Weiß */
+.caption {
+  font-size: 0.8rem;
+  color: #1A237E;
+  margin: 0;
 }
 
 </style>
