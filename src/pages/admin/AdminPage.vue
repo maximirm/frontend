@@ -1,7 +1,7 @@
 <template>
   <BoxWrapper
-      height="800px"
-      width="800px">
+      height="700px"
+      width="500px">
     <div class="admin-page">
       <div class="admin-form">
         <h2>Nutzer</h2>
@@ -14,7 +14,10 @@
           :selectFunction="selectUser"
           :selectedUser="selectedUser"
           :users="users"/>
-
+      <FeedbackMessage
+          v-if="feedbackMessage"
+          :messageType="'success'"
+          :message="feedbackMessage"/>
       <div class="button-container">
         <StyledButton
             :label="'Delete Selected User'"
@@ -23,10 +26,7 @@
             :class="'red-btn'"/>
       </div>
 
-      <FeedbackMessage
-          v-if="feedbackMessage"
-          :messageType="'success'"
-          :message="feedbackMessage"/>
+
     </div>
   </BoxWrapper>
 </template>

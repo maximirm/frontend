@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card class="user-catalog" outlined>
-      <v-list dense class="user-list">
+      <v-list class="user-list">
         <UserCard
             v-for="(user, index) in users"
             :key="index"
@@ -43,7 +43,7 @@ export default {
 </script>
 <style scoped>
 .user-catalog {
-  height: 400px;
+  max-height: 400px;
   overflow-y: auto;
 }
 
