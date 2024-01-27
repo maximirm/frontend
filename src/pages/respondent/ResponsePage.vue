@@ -73,7 +73,10 @@ export default {
 
 .response-form{
   text-align: center;
+}
 
+h3{
+ margin-bottom: 50px;
 }
 
 </style>
