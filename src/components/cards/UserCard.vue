@@ -3,30 +3,20 @@
     <v-card
         :class="{ 'selected': isSelected }"
         @click="selectUser"
-        width="700"
-        elevation="16">
-      <v-card-item>
-        <v-card-title>
-          Username: {{ user.name }}
-        </v-card-title>
-      </v-card-item>
+        class="user-card"
+        flat>
 
-      <div class="content">
-        <v-card-text>
-          ID: {{ user.id }}
-        </v-card-text>
-        <v-card-text>
-          Rolle: {{ user.role }}
-        </v-card-text>
-        <v-card-text>
-          Anzahl Umfragen: {{ user.numberOfSurveys }}
-        </v-card-text>
+      <v-card-text>
+        <div class="card-content">
+          <h2>{{ user.name }}</h2>
+          <p class="caption">Rolle: {{ user.role }}</p>
+          <p class="caption">Anzahl Umfragen: {{ user.numberOfSurveys }}</p>
+        </div>
 
-      </div>
+      </v-card-text>
     </v-card>
   </div>
 </template>
-
 
 <script>
 
@@ -52,22 +42,31 @@ export default {
 </script>
 
 <style scoped>
+.user-card {
+  width: 400px;
+  height: 80px;
+  transition: background-color 0.3s;
+  background-color: rgba(67, 154, 217, 0.15);
+}
 
-.content {
+.selected {
+  background-color: rgba(67, 154, 217, 0.5);
+  color: #1A237E;
+}
 
+.card-content h2 {
   display: flex;
-
+  justify-content: start;
+  align-items: center;
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-size: 1em;
 }
 
-.v-card {
-  background-color: rgba(124, 139, 152, 0.6); /* Helles, gedämpftes Blau */
-  color: #333333; /* Dunkelgrau für bessere Lesbarkeit */
+.caption {
+  font-size: 0.8rem;
+  color: #1A237E;
+  margin: 0;
 }
-
-
-.v-card.selected {
-  background-color: #3E5A71; /* Dunkles Blau */
-  color: #FFFFFF; /* Weiß */
-}
-
 </style>
+
