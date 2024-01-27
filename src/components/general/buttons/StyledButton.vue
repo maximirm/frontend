@@ -42,9 +42,11 @@ export default {
 
 .button {
   margin: 5px;
+  color: #1A237E;
 }
 .button:hover {
   background-color: #444;
+
 
 }
 
@@ -55,7 +57,15 @@ export default {
 
 
 .green-btn:hover {
-  background-color: #508a53;
+  background-color: rgba(67, 154, 217);;
+}
+
+.logout-btn {
+  background-color: rgba(67, 154, 217);;
+}
+
+.logout-btn:hover {
+  background-color: rgba(67, 154, 217);;
 }
 
 .green-btn:disabled {
@@ -64,12 +74,12 @@ export default {
 }
 
 .green-btn {
-  background-color: rgba(80, 138, 83, 0.5);
+  background-color: rgba(67, 154, 217, 0.5);
 
 }
 
 .red-btn {
-  background-color: rgba(199, 69, 69, 0.5);
+  background-color: rgba(67, 154, 217, 0.5);
 }
 
 .red-btn:hover {
