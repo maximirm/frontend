@@ -1,63 +1,84 @@
 <template>
-  <div class="survey-page">
-      <div class="input-form">
-        <CreateSurveyForm
-            v-if="surveyFormVisible"
-            :title="title"
-            :description="description"
-            @createSurvey="createSurvey"/>
+  <BoxWrapper
+      height="650px"
+      width="850px">
+    <div class="create-survey-page">
+      <div class="wrapper">
 
-        <div v-if="!surveyFormVisible">
-          <CreateQuestionForm
-              @createQuestion="createQuestion"/>
+        <div class="input-form">
+          <CreateSurveyForm
+              v-if="surveyFormVisible"
+              :title="title"
+              :description="description"
+              @createSurvey="createSurvey"
+          />
+          <div v-if="!surveyFormVisible">
+            <CreateQuestionForm
+                @createQuestion="createQuestion"/>
+
+          </div>
 
         </div>
+
+
+
         <div class="fixed-panel">
-        <QuestionCatalog
+          <h2 v-if="questions.length > 0">Fragestellungen</h2>
 
-            :questions="questions"
-            :selectedQuestion="selectedQuestion"
-            @questionSelected="selectQuestion"/>
+          <QuestionCatalog
+
+              :questions="questions"
+              :selectedQuestion="selectedQuestion"
+              @questionSelected="selectQuestion"/>
+
+          <div class="button-container">
+            <FeedbackMessageWrapper>
+            <FeedbackMessage
+                v-if="feedbackMessage"
+                :messageType="'success'"
+                :message="feedbackMessage"/>
+            </FeedbackMessageWrapper>
+            <StyledButton
+                v-if="questions.length > 0"
+                :label="'Frage löschen'"
+                :onClickMethod="deleteSelectedQuestion"
+                :isDisabled="!selectedQuestion"
+                :class="'red-btn'"/>
+          </div>
         </div>
-      </div>
-      <div class="button-container">
-        <FeedbackMessage
-            v-if="feedbackMessage"
-            :messageType="'success'"
-            :message="feedbackMessage"/>
 
-        <StyledButton
-            v-if="selectedQuestion"
-            :label="'Frage löschen'"
-            :onClickMethod="deleteSelectedQuestion"
-            :isDisabled="!selectedQuestion"
-            :class="'red-btn'"/>
-        <StyledButton
-            :onClickMethod="redirectToEditorPage"
-            :label="'Zurück'"
-            :class="'red-btn'"/>
-        <LogoutButton/>
       </div>
+
+
     </div>
+
+
+  </BoxWrapper>
+
+
 </template>
 
 <script>
+
+import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/scripts/api/surveyApi";
+import BoxWrapper from "@/components/general/BoxWrapper.vue";
 import CreateSurveyForm from "@/components/forms/CreateSurveyForm.vue";
 import CreateQuestionForm from "@/components/forms/CreateQuestionForm.vue";
-import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import QuestionCatalog from "@/components/catalogs/QuestionCatalog.vue";
+import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
-import {deleteQuestion, fetchSurvey, postQuestion, postSurvey} from "@/scripts/api/surveyApi";
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
+import FeedbackMessageWrapper from "@/components/general/FeedbackMessageWrapper.vue";
 
 export default {
   components: {
-    LogoutButton,
+    FeedbackMessageWrapper,
     StyledButton,
-    QuestionCatalog,
     FeedbackMessage,
-    CreateSurveyForm,
+    QuestionCatalog,
     CreateQuestionForm,
+    CreateSurveyForm,
+    BoxWrapper
+
   },
   data() {
     return {
@@ -156,41 +177,47 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+}
 
-.survey-page {
+.create-survey-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  gap: 10px;
+  height: 80vh;
+  overflow: hidden;
+  width: 100%
 
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 .input-form {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
-
-
-.button-container {
-  display: flex;
-  gap: 10px;
-}
-
-
 
 .fixed-panel {
   position: sticky;
-  top: 0;
-  right: 0;
-  width: 500px;
-  height: 600px;
-  overflow-y: auto;
-  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 </style>
