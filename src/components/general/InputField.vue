@@ -3,7 +3,6 @@
       class="mx-auto"
       width="250">
     <v-text-field
-
         v-model="response"
         :label="label"
         hide-details="auto"
@@ -38,5 +37,3 @@ export default {
   },
 };
 </script>
-
-
