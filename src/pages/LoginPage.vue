@@ -1,7 +1,7 @@
 <template>
   <BoxWrapper
-      height="400px"
-      width="400px">
+      height="300px"
+      width="300px">
     <div class="login-page">
       <div class="login-form">
         <h2>Login</h2>
@@ -114,6 +114,10 @@ export default {
 
 .login-form {
   text-align: center;
+}
+
+h2{
+  margin-bottom: 20px;
 }
 
 .button-container {
