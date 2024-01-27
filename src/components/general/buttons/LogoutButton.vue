@@ -1,8 +1,9 @@
 <template>
   <StyledButton
       :onClickMethod="logoutUser"
-      :label="label"
-      :class="'red-btn'"/>
+      width="100"
+      label="Logout"
+      :class="'logout-btn'"/>
 </template>
 
 <script>
@@ -12,12 +13,6 @@ export default {
   name: "LogoutButton",
   components: {
     StyledButton
-  },
-  props: {
-    label: {
-      type: String,
-      default: 'Logout',
-    }
   },
   methods: {
     logoutUser() {
@@ -29,7 +24,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-
-
-</style>
