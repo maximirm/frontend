@@ -1,40 +1,49 @@
 <template>
-  <div class="admin-page">
-    <h2>Nutzer</h2>
-    <UserCatalogWithExport
-        :label="catalogLabel"
-        :mappedUserData="mappedUserData"
-        :pdfColumnDefinition="pdfColumnDefinition"
-        :selectFunction="selectUser"
-        :selectedUser="selectedUser"
-        :users="users"/>
-    <FeedbackMessage
-        v-if="feedbackMessage"
-        :messageType="'success'"
-        :message="feedbackMessage"/>
-    <StyledButton
-        :label="'Delete Selected User'"
-        :onClickMethod="deleteSelectedUser"
-        :isDisabled="!selectedUser || selfSelected"
-        :class="'red-btn'"/>
-    <LogoutButton/>
+  <BoxWrapper
+      height="800px"
+      width="800px">
+    <div class="admin-page">
+      <div class="admin-form">
+        <h2>Nutzer</h2>
+      </div>
 
-  </div>
+      <UserCatalogWithExport
+          :label="catalogLabel"
+          :mappedUserData="mappedUserData"
+          :pdfColumnDefinition="pdfColumnDefinition"
+          :selectFunction="selectUser"
+          :selectedUser="selectedUser"
+          :users="users"/>
+
+      <div class="button-container">
+        <StyledButton
+            :label="'Delete Selected User'"
+            :onClickMethod="deleteSelectedUser"
+            :isDisabled="!selectedUser || selfSelected"
+            :class="'red-btn'"/>
+      </div>
+
+      <FeedbackMessage
+          v-if="feedbackMessage"
+          :messageType="'success'"
+          :message="feedbackMessage"/>
+    </div>
+  </BoxWrapper>
 </template>
 
 <script>
-import LogoutButton from "@/components/general/buttons/LogoutButton.vue";
 import FeedbackMessage from "@/components/general/FeedbackMessage.vue";
 import {deleteUser, fetchAllUsers} from "@/scripts/api/userApi";
 import {fetchSurveysByCreatorId} from "@/scripts/api/surveyApi";
 import StyledButton from "@/components/general/buttons/StyledButton.vue";
 import UserCatalogWithExport from "@/components/catalogs/UserCatalogWithExport.vue";
+import BoxWrapper from "@/components/general/BoxWrapper.vue";
 
 export default {
   components: {
+    BoxWrapper,
     StyledButton,
     FeedbackMessage,
-    LogoutButton,
     UserCatalogWithExport
   },
   data() {
@@ -122,8 +131,21 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
+  overflow: hidden;
 
+}
+
+.admin-form {
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 </style>
