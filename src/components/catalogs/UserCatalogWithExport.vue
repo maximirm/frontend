@@ -2,7 +2,8 @@
   <FileExportContainer
       :exportData="mappedUserData"
       :label="label"
-      :pdfColumnDefinition="pdfColumnDefinition">
+      :pdfColumnDefinition="pdfColumnDefinition"
+      :header="header">
     <UserCatalog
         :users="users"
         :selectedUser="selectedUser"
@@ -20,18 +21,6 @@ export default {
     UserCatalog
   },
   props: {
-    label: {
-      type: String,
-      required: true,
-    },
-    mappedUserData: {
-      type: Array,
-      required: true,
-    },
-    pdfColumnDefinition: {
-      type: Array,
-      required: true,
-    },
     selectFunction: {
       type: Function,
       required: true,
@@ -44,6 +33,35 @@ export default {
       type: Array,
       required: true,
     }
-  }
+  },
+  data(){
+    return {
+      label: "Benutzerliste",
+      pdfColumnDefinition: [
+        {header: "ID", dataKey: "id", width: 40},
+        {header: "Name", dataKey: "name", width: 30},
+        {header: "Rolle", dataKey: "role", width: 50},
+        {header: "Anzahl der Umfragen", dataKey: "numberOfSurveys", width: 50}
+      ],
+    }
+  },
+  computed: {
+    header() {
+      return this.selectedUser ? this.selectedUser.name : '';
+    },
+    mappedUserData() {
+      const data = [];
+      this.users.forEach((user) => {
+        const userData = {
+          id: user.id.toString(),
+          name: user.name,
+          role: user.role,
+          numberOfSurveys: user.numberOfSurveys.toString(),
+        };
+        data.push(userData);
+      });
+      return data;
+    },
+  },
 }
 </script>

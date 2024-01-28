@@ -8,12 +8,10 @@
       </div>
 
       <UserCatalogWithExport
-          :label="catalogLabel"
-          :mappedUserData="mappedUserData"
-          :pdfColumnDefinition="pdfColumnDefinition"
-          :selectFunction="selectUser"
+          :users="users"
           :selectedUser="selectedUser"
-          :users="users"/>
+          :selectFunction="selectUser"/>
+
 
       <div class="button-container">
         <FeedbackMessageWrapper>
@@ -28,8 +26,6 @@
             :isDisabled="!selectedUser || selfSelected"
             :class="'red-btn'"/>
       </div>
-
-
     </div>
   </BoxWrapper>
 </template>
@@ -57,33 +53,13 @@ export default {
       selectedUser: null,
       feedbackMessage: '',
       selfSelected: false,
-      pdfColumnDefinition: [
-        {header: "ID", dataKey: "id", width: 40},
-        {header: "Name", dataKey: "name", width: 30},
-        {header: "Rolle", dataKey: "role", width: 50},
-        {header: "Anzahl der Umfragen", dataKey: "numberOfSurveys", width: 50}
-      ],
-      catalogLabel: "Benutzerliste"
+
     };
   },
   mounted() {
     this.displayListOfUsers();
   },
-  computed: {
-    mappedUserData() {
-      const data = [];
-      this.users.forEach((user) => {
-        const userData = {
-          id: user.id.toString(),
-          name: user.name,
-          role: user.role,
-          numberOfSurveys: user.numberOfSurveys.toString(),
-        };
-        data.push(userData);
-      });
-      return data;
-    },
-  },
+
   methods: {
     async displayListOfUsers() {
       try {
@@ -99,7 +75,8 @@ export default {
             })
         );
       } catch (error) {
-        alert("Fehler im Laden der Nutzer - Bitte neu einloggen");
+        //TODO
+        alert("Fehler beim Laden der Nutzer - Bitte neu einloggen");
         this.redirectToLandingPage();
       }
     },
