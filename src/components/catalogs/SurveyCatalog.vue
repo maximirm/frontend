@@ -59,6 +59,6 @@ export default {
 .survey-catalog::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
-}
+ }
 
 </style>
