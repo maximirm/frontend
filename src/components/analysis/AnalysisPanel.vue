@@ -1,16 +1,21 @@
 <template>
-  <div class="container" v-if="analysisIsComplete">
-    <h2>Umfrageanalyse</h2>
-    <BarChart
-        :analysedData="barChartData"
-        :label="barChartLabel"
-        :analysisIsComplete="analysisIsComplete"
-        :isDisabled="barChartIsDisabled"/>
-    <PieChart
-        :analysedData="pieChartData"
-        :label="pieChartLabel"
-        :analysisIsComplete="analysisIsComplete"
-        :isDisabled="pieChartIsDisabled"/>
+  <div class="analyse-panel">
+    <div v-if="analysisIsComplete">
+      <div class="bar-chart-container">
+      <BarChart
+          :analysedData="barChartData"
+          :label="barChartLabel"
+          :analysisIsComplete="analysisIsComplete"
+          :isDisabled="barChartIsDisabled"/>
+      </div>
+      <div class="pie-chart-container">
+      <PieChart
+          :analysedData="pieChartData"
+          :label="pieChartLabel"
+          :analysisIsComplete="analysisIsComplete"
+          :isDisabled="pieChartIsDisabled"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -58,15 +63,29 @@ export default {
 }
 </script>
 <style scoped>
-.container {
+
+.analyse-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+.bar-chart-container{
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  justify-content: center;
+  max-width: 50%;
 
-h2 {
-  margin-bottom: 20px;
-  color: #3E5A71;
+}
+.pie-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
 }
 
 </style>

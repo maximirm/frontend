@@ -107,7 +107,7 @@ export default {
 
 <style scoped>
 .chart-container {
-  width: 500px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
 }
 </style>
