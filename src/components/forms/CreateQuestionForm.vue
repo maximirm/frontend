@@ -7,20 +7,24 @@
         :selectedOption="questionTypeText"
         @update:selectedOption="updateQuestionType"/>
     <InputField
+        :key="key"
         :label="'Fragestellung:'"
         :response="questionText"
         @update:response="updateText"/>
 
     <div v-if="questionType === 2 || questionType === 3">
       <InputField
+          :key="key"
           :label="'Option 1:'"
           :response="option1"
           @update:response="updateO1"/>
       <InputField
+          :key="key"
           :label="'Option 2:'"
           :response="option2"
           @update:response="updateO2"/>
       <InputField
+          :key="key"
           :label="'Option 3:'"
           :response="option3"
           @update:response="updateO3"/>
@@ -76,6 +80,7 @@ export default {
       creationError: null,
       creationSuccess: null,
       creationAttempted: false,
+      key: 0,
     };
   },
   methods: {
@@ -97,6 +102,7 @@ export default {
       }
 
       this.$emit("create-question", questionData);
+      this.key++;
       this.setCreationFeedback(true);
     },
     setCreationFeedback(success) {

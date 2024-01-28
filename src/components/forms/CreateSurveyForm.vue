@@ -3,14 +3,17 @@
     <div class="input">
       <h2>Umfrage Erstellen</h2>
       <InputField
+          :key="key"
           :label="'Titel:'"
           :response="title"
           @update:response="updateTitle"/>
       <InputField
+          :key="key"
           :label="'Beschreibung:'"
           :response="description"
           @update:response="updateDescription"/>
       <DropdownMenu
+          :key="key"
           :label="'Sichtbarkeit'"
           :options="visibilityOptions"
           :selectedOption="selectedVisibility"
@@ -42,7 +45,8 @@ export default {
       description: null,
       isPublic: false,
       selectedVisibility: null,
-      visibilityOptions: ['Angemeldete Nutzer', 'Öffentlich']
+      visibilityOptions: ['Angemeldete Nutzer', 'Öffentlich'],
+      key: 0,
     };
   },
   methods: {
@@ -63,6 +67,7 @@ export default {
         description: this.description,
         isPublic: this.isPublic
       });
+      this.key++
     },
   },
 };

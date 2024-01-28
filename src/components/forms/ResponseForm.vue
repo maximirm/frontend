@@ -3,6 +3,7 @@
     <div class="response-form">
       <template v-if="question.type === 1">
         <InputField
+            :key="key"
             :label="question.question_text"
             :response="response"
             @update:response="updateFreeTextResponse"/>
@@ -10,6 +11,7 @@
 
       <template v-else-if="question.type === 2">
         <DropdownMenu
+            :key="key"
             :label="question.question_text"
             :options="question.options"
             :selectedOption="responseText"
@@ -18,6 +20,7 @@
 
       <template v-else-if="question.type === 3">
         <CheckBox
+            :key="key"
             :title="question.question_text"
             :options="question.options"
             :selectedOptions="responseText"
@@ -57,6 +60,7 @@ export default {
     return {
       responseText: [],
       response: '',
+      key: 0,
     };
   },
   methods: {
@@ -84,6 +88,7 @@ export default {
         this.responseText = [];
         this.response= '';
         await postResponse(response);
+        this.key++;
 
       } catch (error) {
         console.error(error);
