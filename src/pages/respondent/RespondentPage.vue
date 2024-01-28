@@ -60,6 +60,7 @@ export default {
 
       } catch (error) {
         this.surveys = [];
+        console.error('Fehler beim Abrufen der Umfragen:', error);
       }
     },
     filterSurveysWithQuestions(surveys) {
@@ -69,9 +70,8 @@ export default {
       return surveys.filter(survey => survey.is_public === true);
     },
     respondToSurvey() {
-      const selectedSurvey = this.selectedSurvey;
-      this.$store.commit('setSelectedSurvey', selectedSurvey);
-      this.$router.push({name: 'ResponsePage',});
+      this.$store.commit('setSelectedSurvey', this.selectedSurvey);
+      this.$router.push({name: 'ResponsePage'});
     }
   }
 }
