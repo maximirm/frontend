@@ -24,7 +24,7 @@
             :title="question.question_text"
             :options="question.options"
             :selectedOptions="responseText"
-            @update:selectedOptions="handleCheckBoxResponse"/>
+            @update:selectedOptions="updateCheckBoxResponse"/>
       </template>
 
       <StyledButton
@@ -71,12 +71,8 @@ export default {
     updateDropdownResponse(newResponse) {
       this.responseText = [newResponse];
     },
-    handleCheckBoxResponse(newResponse) {
+    updateCheckBoxResponse(newResponse) {
       this.responseText = newResponse;
-    },
-    submitResponse() {
-      this.saveResponse();
-      this.$emit("responseTextSubmitted");
     },
     async saveResponse() {
       try {
@@ -93,6 +89,10 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    submitResponse() {
+      this.saveResponse();
+      this.$emit("responseTextSubmitted");
     },
   },
 };

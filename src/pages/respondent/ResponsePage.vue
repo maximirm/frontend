@@ -29,6 +29,10 @@ export default {
     ProgressBar,
     ResponseForm
   },
+  created() {
+    this.selectedSurvey = this.$store.state.selectedSurvey;
+    this.questions = this.selectedSurvey.questions.sort((a, b) => a.order - b.order);
+  },
   data() {
     return {
       selectedSurvey: null,
@@ -52,10 +56,6 @@ export default {
         this.$router.push({name: 'RespondentPage'});
       }
     },
-  },
-  created() {
-    this.selectedSurvey = this.$store.state.selectedSurvey;
-    this.questions = this.selectedSurvey.questions.sort((a, b) => a.order - b.order);
   },
 };
 </script>

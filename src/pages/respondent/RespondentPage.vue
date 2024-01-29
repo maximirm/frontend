@@ -54,9 +54,9 @@ export default {
         let surveys = await fetchAllSurveys();
         surveys = this.filterSurveysWithQuestions(surveys);
         if (!this.$store.state.userId) {
-          surveys = this.filterSurveysByVisibility(surveys)
+          surveys = this.filterSurveysByVisibility(surveys);
         }
-        this.surveys = surveys
+        this.surveys = surveys;
 
       } catch (error) {
         this.surveys = [];

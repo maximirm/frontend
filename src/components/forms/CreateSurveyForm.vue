@@ -51,16 +51,15 @@ export default {
   },
   methods: {
     updateTitle(newVal) {
-      this.title = newVal
+      this.title = newVal;
     },
     updateDescription(newVal) {
-      this.description = newVal
+      this.description = newVal;
     },
     updateVisibility(newVal) {
-      this.selectedVisibility = newVal
-      this.isPublic = newVal === 'Öffentlich'
+      this.selectedVisibility = newVal;
+      this.isPublic = newVal === 'Öffentlich';
     },
-
     emitCreateSurveyEvent() {
       this.$emit('create-survey', {
         title: this.title,

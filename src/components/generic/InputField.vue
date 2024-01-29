@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     updateResponse(newVal) {
-      this.response = newVal
+      this.response = newVal;
       this.$emit('update:response', this.response);
     },
   },

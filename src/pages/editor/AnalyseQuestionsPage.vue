@@ -80,8 +80,6 @@ export default {
       this.analysisComplete = false;
       this.selectedQuestion = question;
     },
-
-
     async analyseQuestion() {
       if (!this.selectedQuestion) {
         return;

@@ -91,7 +91,7 @@ export default {
       this.registrationAttempted = true;
       this.registrationError = null;
       if (this.username === '' && this.password === '') {
-        this.registrationError = `Fehler bei der Registrierung: Bitte Benutzername und Passwort eingeben`;
+        this.registrationError = `Bitte Benutzername und Passwort eingeben`;
         return;
       }
       try {
@@ -109,7 +109,7 @@ export default {
       }
     },
     redirectToLoginPage() {
-      this.$store.commit('setUserName', this.username)
+      this.$store.commit('setUserName', this.username);
       this.$router.push({name: 'LoginPage'});
     },
   },

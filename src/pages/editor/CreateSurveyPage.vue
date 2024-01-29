@@ -81,6 +81,17 @@ export default {
     };
   },
   methods: {
+    async getSurvey() {
+      try {
+        const token = this.$store.state.userToken;
+        const surveyData = await fetchSurvey(token, this.createdSurveyId);
+        this.surveyTitle = surveyData.title;
+        this.surveyDescription = surveyData.description;
+        this.questions = surveyData.questions;
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Umfrage:', error);
+      }
+    },
     async createSurvey(data) {
       try {
         const token = this.$store.state.userToken;
@@ -140,17 +151,6 @@ export default {
       } catch (error) {
         alert("Fehler beim Löschen der Frage");
         this.redirectToLandingPage();
-      }
-    },
-    async getSurvey() {
-      try {
-        const token = this.$store.state.userToken;
-        const surveyData = await fetchSurvey(token, this.createdSurveyId);
-        this.surveyTitle = surveyData.title;
-        this.surveyDescription = surveyData.description;
-        this.questions = surveyData.questions;
-      } catch (error) {
-        console.error('Fehler beim Abrufen der Umfrage:', error);
       }
     },
     redirectToLandingPage() {

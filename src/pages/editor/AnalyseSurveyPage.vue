@@ -26,7 +26,7 @@
             :class="'red-btn'"/>
         <StyledButton
             :label="'Frageanalyse'"
-            :onClickMethod="showQuestions"
+            :onClickMethod="displayQuestions"
             :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
             :class="'green-btn'"/>
       </div>
@@ -51,6 +51,9 @@ export default {
     StyledButton,
     FeedbackMessage,
   },
+  mounted() {
+    this.displaySurveys();
+  },
   data() {
     return {
       surveys: [],
@@ -58,13 +61,7 @@ export default {
       message: '',
     };
   },
-  mounted() {
-    this.displaySurveys();
-  },
   methods: {
-    selectQuestion(question) {
-      this.selectedQuestion = question;
-    },
     async displaySurveys() {
       try {
         const creatorId = this.$store.state.userId;
@@ -83,20 +80,13 @@ export default {
         console.error('Fehler beim Abrufen der Umfragen:', error);
       }
     },
-
     selectSurvey(survey) {
       this.analysisComplete = false;
       this.selectedSurvey = survey;
       this.questions = this.selectedSurvey.questions;
     },
-
-    showQuestions() {
-      this.$store.commit('setSelectedSurvey', this.selectedSurvey);
-      this.$router.push({name: 'AnalyseQuestionsPage'});
-    },
     async deleteSelectedSurvey() {
       if (!this.selectedSurvey) return;
-
       try {
         const token = this.$store.state.userToken;
         await deleteSurvey(token, this.selectedSurvey.id);
@@ -107,6 +97,13 @@ export default {
       } catch (error) {
         this.message = "Fehler beim Löschen der Umfrage";
       }
+    },
+    displayQuestions() {
+      this.$store.commit('setSelectedSurvey', this.selectedSurvey);
+      this.$router.push({name: 'AnalyseQuestionsPage'});
+    },
+    selectQuestion(question) {
+      this.selectedQuestion = question;
     },
     redirectToEditorPage() {
       this.$router.push({name: 'EditorPage'});

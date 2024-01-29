@@ -51,6 +51,9 @@ export default {
     StyledButton,
     FeedbackMessage,
   },
+  created() {
+    this.name = this.$store.state.username ? this.$store.state.username : '';
+  },
   data() {
     return {
       name: '',
@@ -58,9 +61,6 @@ export default {
       loginError: null,
       loginAttempted: false,
     };
-  },
-  created() {
-    this.name = this.$store.state.username ? this.$store.state.username : '';
   },
   methods: {
     updateName(newVal) {
@@ -97,6 +97,7 @@ export default {
           this.$router.push({name: 'RespondentPage'});
           break;
         default:
+          this.$router.push({name: 'LandingPage'});
           console.error('Unbekannte Rolle:', role);
       }
     },

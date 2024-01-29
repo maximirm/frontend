@@ -10,24 +10,24 @@
         :key="key"
         :label="'Fragestellung:'"
         :response="questionText"
-        @update:response="updateText"/>
+        @update:response="updateQuestionText"/>
 
     <div v-if="questionType === 2 || questionType === 3">
       <InputField
           :key="key"
           :label="'Option 1:'"
-          :response="option1"
-          @update:response="updateO1"/>
+          :response="firstOption"
+          @update:response="updateFirstOption"/>
       <InputField
           :key="key"
           :label="'Option 2:'"
-          :response="option2"
-          @update:response="updateO2"/>
+          :response="secondOption"
+          @update:response="updateSecondOption"/>
       <InputField
           :key="key"
           :label="'Option 3:'"
-          :response="option3"
-          @update:response="updateO3"/>
+          :response="thirdOption"
+          @update:response="updateThirdOption"/>
     </div>
 
     <div class="button-container">
@@ -74,9 +74,9 @@ export default {
       questionType: 1,
       questionTypeText: 'Freitext',
       questionText: "",
-      option1: "",
-      option2: "",
-      option3: "",
+      firstOption: "",
+      secondOption: "",
+      thirdOption: "",
       creationError: null,
       creationSuccess: null,
       creationAttempted: false,
@@ -84,36 +84,21 @@ export default {
     };
   },
   methods: {
-    emitCreateQuestionEvent() {
-      this.creationAttempted = true;
-      if (!this.inputIsValid()) {
-        this.setCreationFeedback(false);
-        return;
-      }
-
-      const questionData = {
-        questionType: this.questionType,
-        questionText: this.questionText,
-        options: [],
-      };
-
-      if (!this.isFreetextQuestion()) {
-        questionData.options.push(this.option1, this.option2, this.option3);
-      }
-
-      this.$emit("create-question", questionData);
-      this.key++;
-      this.setCreationFeedback(true);
+    updateQuestionText(newVal) {
+      this.questionText = newVal;
+      this.resetMessage();
     },
-    setCreationFeedback(success) {
-      success ?
-          this.creationSuccess = `Frage erfolgreich erstellt` :
-          this.creationError = "Bitte alle Felder ausfüllen";
-      setTimeout(() => {
-        this.creationAttempted = false;
-        this.creationSuccess = '';
-        this.creationError = '';
-      }, 2000);
+    updateFirstOption(newVal) {
+      this.firstOption = newVal;
+      this.resetMessage();
+    },
+    updateSecondOption(newVal) {
+      this.secondOption = newVal;
+      this.resetMessage();
+    },
+    updateThirdOption(newVal) {
+      this.thirdOption = newVal;
+      this.resetMessage();
     },
     updateQuestionType(selectedOption) {
       this.questionTypeText = selectedOption;
@@ -128,7 +113,7 @@ export default {
           this.questionType = 3;
           break;
         default:
-          console.error('error updating question type')
+          console.error('error updating question type');
       }
     },
     isFreetextQuestion() {
@@ -143,36 +128,48 @@ export default {
           (this.questionTextIsEmpty() || this.optionsAreEmpty()));
     },
     optionsAreEmpty() {
-      return this.option1.trim() === "" ||
-          this.option2.trim() === "" ||
-          this.option3.trim() === "";
+      return this.firstOption.trim() === "" ||
+          this.secondOption.trim() === "" ||
+          this.thirdOption.trim() === "";
     },
     questionTextIsEmpty() {
       return this.questionText.trim() === "";
     },
-    goToEditorPage() {
-      this.$router.push({name: 'EditorPage'});
-    },
-    updateText(newVal) {
-      this.questionText = newVal;
-      this.resetMessage();
-    },
-    updateO1(newVal) {
-      this.option1 = newVal;
-      this.resetMessage();
-    },
-    updateO2(newVal) {
-      this.option2 = newVal;
-      this.resetMessage();
-    },
-    updateO3(newVal) {
-      this.option3 = newVal;
-      this.resetMessage();
+    setCreationFeedback(success) {
+      success ?
+          this.creationSuccess = `Frage erfolgreich erstellt` :
+          this.creationError = "Bitte alle Felder ausfüllen";
+      setTimeout(() => {
+        this.creationAttempted = false;
+        this.creationSuccess = '';
+        this.creationError = '';
+      }, 2000);
     },
     resetMessage() {
       this.creationAttempted = false;
       this.creationError = null;
       this.creationSuccess = null;
+    },
+    emitCreateQuestionEvent() {
+      this.creationAttempted = true;
+      if (!this.inputIsValid()) {
+        this.setCreationFeedback(false);
+        return;
+      }
+      const questionData = {
+        questionType: this.questionType,
+        questionText: this.questionText,
+        options: [],
+      };
+      if (!this.isFreetextQuestion()) {
+        questionData.options.push(this.firstOption, this.secondOption, this.thirdOption);
+      }
+      this.$emit("create-question", questionData);
+      this.key++;
+      this.setCreationFeedback(true);
+    },
+    goToEditorPage() {
+      this.$router.push({name: 'EditorPage'});
     },
   },
 };
