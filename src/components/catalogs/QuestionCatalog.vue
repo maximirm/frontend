@@ -43,6 +43,7 @@ export default {
 </script>
 
 <style scoped>
+
 .question-catalog {
   max-height: 400px;
   overflow-y: auto;
@@ -60,5 +61,6 @@ export default {
   background: #ccc;
   border-radius: 10px;
 }
+
 </style>
 

@@ -75,7 +75,6 @@ export default {
             })
         );
       } catch (error) {
-        //TODO
         alert("Fehler beim Laden der Nutzer - Bitte neu einloggen");
         this.redirectToLandingPage();
       }

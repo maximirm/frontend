@@ -57,20 +57,12 @@ export default {
       }));
 
       const option = {
-        title: {
-          text: this.label,
-          left: 'center', // Zentriere den Titel horizontal
-          textStyle: {
-            color: '#3E5A71', // Ändere die Textfarbe des Titels
-            fontSize: 24, // Ändere die Textgröße des Titels
-          },
-        },
         legend: {
-          orient: 'bottom',
-          left: 'left',
+          orient: 'top',
+          left: 'right',
           textStyle: {
-            color: '#3E5A71', // Ändere die Textfarbe
-            fontSize: 15, // Ändere die Schriftgröße
+            color: '#3E5A71',
+            fontSize: 15,
           },
         },
         tooltip: {
@@ -79,9 +71,8 @@ export default {
         },
         series: [
           {
-            name: this.label,
             type: 'pie',
-            radius: '65%', // Ändere die Größe des Pie-Charts
+            radius: '50%',
             center: ['50%', '55%'],
             data,
             itemStyle: {
@@ -95,9 +86,9 @@ export default {
               show: true,
               formatter: '({d}%)',
               textStyle: {
-                color: '#3E5A71', // Ändere die Textfarbe
-                fontSize: 14, // Ändere die Schriftgröße
-                fontWeight: 'bold', // Ändere die Schriftart
+                color: '#3E5A71',
+                fontSize: 14,
+                fontWeight: 'bold',
               },
             },
             color: ['#3E5A71', 'rgba(124, 139, 152, 0.6)'],
@@ -105,7 +96,6 @@ export default {
 
         ],
       };
-
       myChart.setOption(option);
     },
   },

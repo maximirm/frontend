@@ -56,24 +56,23 @@ export default {
 
       const option = {
         title: {
-          text: this.label,
           left: 'center',
           textStyle: {
-            color: '#3E5A71', // Ändere die Textfarbe des Titels
-            fontSize: 24,    // Ändere die Textgröße des Titels
+            color: '#3E5A71',
+            fontSize: 24,
           },
         },
         xAxis: {
           data: xAxisData,
           axisLabel: {
-            color: '#3E5A71',  // Ändere die Textfarbe der Achsentexte
-            fontSize: 20,   // Ändere die Textgröße der Achsentexte
+            color: '#3E5A71',
+            fontSize: 15,
           },
         },
         yAxis: {
           axisLabel: {
-            color: '#3E5A71',  // Ändere die Textfarbe der Achsentexte
-            fontSize: 15,   // Ändere die Textgröße der Achsentexte
+            color: '#3E5A71',
+            fontSize: 15,
           },
         },
         tooltip: {
@@ -106,8 +105,10 @@ export default {
 </script>
 
 <style scoped>
+
 .chart-container {
   width: 300px;
   height: 300px;
 }
+
 </style>

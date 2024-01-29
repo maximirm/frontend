@@ -62,7 +62,6 @@ export default {
           Typ: '',
           Fragestellung: '',
           Antwort: '',
-
         }]
       }
       const data = [];
@@ -71,17 +70,16 @@ export default {
           data.push({
             Titel: this.selectedSurvey.title,
             Sichtbarkeit: this.selectedSurvey.isPublic ? "Öffentlich" : "Angemeldete Nutzer",
-            Typ: question.type,
+            Typ: this.getQuestionTypeText(question.type),
             Fragestellung: question.question_text,
             Antwort: '',
-
           })
         } else {
           question.responses.forEach((response) => {
             data.push({
               Titel: this.selectedSurvey.title,
-              Sichtbarkeit: this.selectedSurvey.isPublic ? "Öffentlich" : "Angemeldete Nutzer",
-              Typ: question.type,
+              Sichtbarkeit: this.selectedSurvey.isPublic ? "Öffentlich" : "Angemeldet",
+              Typ: this.getQuestionTypeText(question.type),
               Fragestellung: question.question_text,
               Antwort: response.response_text,
             });
@@ -91,5 +89,19 @@ export default {
       return data;
     },
   },
+  methods: {
+    getQuestionTypeText(type) {
+      switch (type) {
+        case 1:
+          return "Freitext";
+        case 2:
+          return "Dropdown";
+        case 3:
+          return "Checkbox";
+        default:
+          return "unknown";
+      }
+    }
+  }
 }
 </script>

@@ -41,7 +41,9 @@ export default {
   },
 };
 </script>
+
 <style scoped>
+
 .user-catalog {
   max-height: 400px;
   overflow-y: auto;
@@ -58,6 +60,6 @@ export default {
 .user-catalog::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
-
 }
+
 </style>

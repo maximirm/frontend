@@ -25,7 +25,7 @@
             :isDisabled="!selectedSurvey"
             :class="'red-btn'"/>
         <StyledButton
-            :label="'Fragen anzeigen'"
+            :label="'Frageanalyse'"
             :onClickMethod="showQuestions"
             :isDisabled="!selectedSurvey || selectedSurvey.questions.length === 0"
             :class="'green-btn'"/>

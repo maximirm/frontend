@@ -1,5 +1,5 @@
 <template>
-  <BoxWrapper height="650px" width="1400px">
+  <BoxWrapper height="650px" width="1000px">
     <div class="analyse-questions-page">
       <div class="question-panel-container">
             <h2 v-if="questions.length > 0">
@@ -18,16 +18,19 @@
       </div>
 
       <div class="analysis-panel-container">
-          <h2 v-if="analysisComplete">
-            Analyse
-          </h2>
-          <AnalysisPanel
-              :barChartData="responseAnalysis"
-              :barChartLabel="'Antworten'"
-              :bar-chart-is-disabled="isFreeTextQuestion"
-              :pieChartData="respondentsAnalysis"
-              :pieChartLabel="'Befragte'"
+        <div v-if="analysisComplete">
+        <BarChart
+            :analysedData="responseAnalysis"
+            :label="'Antworten'"
+            :analysisIsComplete="analysisComplete"
+            :isDisabled="isFreeTextQuestion"/>
+          <div v-if="analysisComplete">
+          <PieChart
+              :analysedData="respondentsAnalysis"
+              :label="'Befragte'"
               :analysisIsComplete="analysisComplete"/>
+      </div>
+      </div>
       </div>
     </div>
   </BoxWrapper>
@@ -39,14 +42,16 @@ import BoxWrapper from "@/components/generic/BoxWrapper.vue";
 import {fetchAnalysedQuestion} from "@/scripts/api/analysisApi";
 import QuestionCatalog from "@/components/catalogs/QuestionCatalog.vue";
 import StyledButton from "@/components/buttons/StyledButton.vue";
-import AnalysisPanel from "@/components/analysis/AnalysisPanel.vue";
+import BarChart from "@/components/analysis/BarChart.vue";
+import PieChart from "@/components/analysis/PieChart.vue";
 
 export default {
   components: {
+    PieChart,
+    BarChart,
     StyledButton,
     QuestionCatalog,
     BoxWrapper,
-    AnalysisPanel
   },
   data() {
     return {
@@ -124,7 +129,5 @@ export default {
   align-items: center;
   justify-content: center;
   width: 50%;
-  height: 80vh;
 }
-
 </style>
