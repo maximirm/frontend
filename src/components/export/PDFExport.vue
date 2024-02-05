@@ -25,7 +25,7 @@ export default {
     },
     header: {
       type: String,
-      default: 'PDF Export'
+      default: 'PDF Export',
     },
     columnDefinition: {
       type: Array,

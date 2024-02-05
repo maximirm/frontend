@@ -103,7 +103,8 @@ export default {
 
       } catch (error) {
         if (error.response && error.response.data && error.response.data.detail) {
-          this.registrationError = `Fehler bei der Registrierung: ${error.response.status} - ${error.response.data.detail}`;
+          this.registrationError =
+              `Fehler bei der Registrierung: ${error.response.status} - ${error.response.data.detail}`;
         }
         this.registrationSuccess = false;
       }

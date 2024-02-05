@@ -64,9 +64,9 @@ export default {
       this.$emit('create-survey', {
         title: this.title,
         description: this.description,
-        isPublic: this.isPublic
+        isPublic: this.isPublic,
       });
-      this.key++
+      this.key++;
     },
   },
 };

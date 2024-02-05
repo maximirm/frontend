@@ -11,11 +11,11 @@ export default {
   props: {
     message: {
       type: String,
-      required: true
+      required: true,
     },
     messageType: {
       type: String,
-      required: true
+      required: true,
     }
   }
 };

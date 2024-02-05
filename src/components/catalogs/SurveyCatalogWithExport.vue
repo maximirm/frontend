@@ -53,7 +53,7 @@ export default {
     },
     mappedSurveyDataForExport() {
       if (!this.selectedSurvey) {
-        return []
+        return [];
       }
       if (this.selectedSurvey.questions.length === 0) {
         return [{
@@ -73,7 +73,7 @@ export default {
             Typ: this.getQuestionTypeText(question.type),
             Fragestellung: question.question_text,
             Antwort: '',
-          })
+          });
         } else {
           question.responses.forEach((response) => {
             data.push({
@@ -83,7 +83,7 @@ export default {
               Fragestellung: question.question_text,
               Antwort: response.response_text,
             });
-          })
+          });
         }
       })
       return data;

@@ -100,7 +100,7 @@ export default {
           creator_id: creatorId,
           title: data.title,
           description: data.description,
-          is_public: data.isPublic
+          is_public: data.isPublic,
         }
         const response = await postSurvey(token, survey);
 
@@ -164,6 +164,7 @@ export default {
 </script>
 
 <style>
+
 .wrapper {
   display: flex;
   justify-content: center;

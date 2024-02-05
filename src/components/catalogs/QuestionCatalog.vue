@@ -23,7 +23,7 @@ export default {
   props: {
     questions: {
       type: Array,
-      required: true
+      required: true,
     },
     selectedQuestion: {
       type: Object,
@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     label() {
-      return this.questions.length > 0 ? 'Fragestellungen' : ''
+      return this.questions.length > 0 ? 'Fragestellungen' : '';
     }
   },
   methods: {

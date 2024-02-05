@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     dropdownOptions() {
-      return ['Freitext', 'Dropdown', 'Checkbox']
+      return ['Freitext', 'Dropdown', 'Checkbox'];
     },
   },
   data() {

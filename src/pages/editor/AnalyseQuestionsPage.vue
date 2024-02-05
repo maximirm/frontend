@@ -99,8 +99,8 @@ export default {
   },
 };
 </script>
-<style scoped>
 
+<style scoped>
 
 .analyse-questions-page {
   display: flex;
@@ -128,4 +128,5 @@ export default {
   justify-content: center;
   width: 50%;
 }
+
 </style>

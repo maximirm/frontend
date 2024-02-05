@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     label() {
-      return this.users.length > 0 ? 'Benutzer' : ''
+      return this.users.length > 0 ? 'Benutzer' : '';
     }
   },
   methods: {

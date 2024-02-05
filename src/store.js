@@ -12,13 +12,13 @@ const store = createStore({
             state.selectedSurvey = survey;
         },
         setUserToken(state, token) {
-            state.userToken = token
+            state.userToken = token;
         },
         setUserId(state, userId) {
-            state.userId = userId
+            state.userId = userId;
         },
         setUserName(state, username) {
-            state.username = username
+            state.username = username;
         },
     },
     actions: {

@@ -27,7 +27,6 @@ export default {
     },
     isSelected: {
       type: Boolean,
-      required: false,
       default: false,
     },
   },
@@ -40,6 +39,7 @@ export default {
 </script>
 
 <style scoped>
+
 .user-card {
   width: 400px;
   height: 80px;
@@ -66,5 +66,6 @@ export default {
   color: #1A237E;
   margin: 0;
 }
+
 </style>
 

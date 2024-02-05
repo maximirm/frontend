@@ -74,7 +74,7 @@ export default {
                 numberOfQuestions: survey.questions.length,
               }
             })
-        )
+        );
       } catch (error) {
         this.surveys = [];
         console.error('Fehler beim Abrufen der Umfragen:', error);

@@ -22,7 +22,6 @@ export default {
     analysisIsComplete: {
       type: Boolean,
       required: true,
-      default: false,
     },
     isDisabled: {
       type: Boolean,
@@ -97,7 +96,6 @@ export default {
           },
         ],
       };
-
       chart.setOption(option);
     },
   },

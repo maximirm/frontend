@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     label() {
-      return this.surveys.length > 0 ? 'Umfragen' : ''
+      return this.surveys.length > 0 ? 'Umfragen' : '';
     }
   },
   methods: {

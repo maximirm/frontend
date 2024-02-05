@@ -41,7 +41,7 @@ export default {
         {header: "ID", dataKey: "id", width: 40},
         {header: "Name", dataKey: "name", width: 30},
         {header: "Rolle", dataKey: "role", width: 50},
-        {header: "Anzahl der Umfragen", dataKey: "numberOfSurveys", width: 50}
+        {header: "Anzahl der Umfragen", dataKey: "numberOfSurveys", width: 50},
       ],
     }
   },

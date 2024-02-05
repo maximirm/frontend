@@ -26,7 +26,6 @@ export default {
     },
     isSelected: {
       type: Boolean,
-      required: false,
       default: false,
     },
   },
