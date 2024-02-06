@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'http://127.0.0.1:8002';
+const BASE_URL = 'http://localhost:8002';
 const ANALYSIS_ENDPOINT = '/analyze';
 
 const headers = (token) => ({
