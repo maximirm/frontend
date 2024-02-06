@@ -9,7 +9,7 @@
         <div class="card-content">
           <h2>{{ user.name }}</h2>
           <p class="caption">Rolle: {{ user.role }}</p>
-          <p class="caption">Anzahl Umfragen: {{ user.numberOfSurveys }}</p>
+          <p class="caption" v-if="user.role === 'editor'">Anzahl Umfragen: {{ user.numberOfSurveys }}</p>
         </div>
       </v-card-text>
     </v-card>
